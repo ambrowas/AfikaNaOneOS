@@ -1,0 +1,56 @@
+const { onDatabaseWrite } = require("firebase-functions/v2/database");
+const logger = require("firebase-functions/logger");
+const admin = require("firebase-admin");
+
+admin.initializeApp();
+const db = admin.database();
+
+// Function to update leaderboard positions
+exports.updateLeaderboardPositions = onDatabaseWrite(
+  "/users/{userId}",
+  async (event) => {
+    const usersRef = db.ref("/users");
+
+    try {
+      logger.info("Triggered updateLeaderboardPositions function.");
+
+      // Fetch all users ordered by `accumulatedPuntuacion`
+      const snapshot = await usersRef
+        .orderByChild("accumulatedPuntuacion")
+        .once("value");
+
+      const users = [];
+      snapshot.forEach((user) => {
+        const data = user.val();
+        if (data.accumulatedPuntuacion !== undefined) {
+          users.push({
+            id: user.key,
+            ...data,
+          });
+        } else {
+          logger.warn(`User ${user.key} missing accumulatedPuntuacion.`);
+        }
+      });
+
+      // Sort users by `accumulatedPuntuacion` and break ties with `scoreAchievedAt`
+      users.sort((a, b) => {
+        if (b.accumulatedPuntuacion === a.accumulatedPuntuacion) {
+          return (b.scoreAchievedAt || 0) - (a.scoreAchievedAt || 0);
+        }
+        return b.accumulatedPuntuacion - a.accumulatedPuntuacion;
+      });
+
+      // Update leaderboard positions
+      const updates = {};
+      users.forEach((user, index) => {
+        updates[`${user.id}/leaderboardPosition`] = index + 1;
+      });
+
+      await usersRef.update(updates);
+
+      logger.info("Leaderboard positions updated successfully.");
+    } catch (error) {
+      logger.error("Error updating leaderboard positions:", error);
+    }
+  },
+);Untitled.swift
