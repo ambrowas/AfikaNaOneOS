@@ -2,6 +2,7 @@ import SwiftUI
 import AVFAudio
 
 
+
 struct JugarModoLibre: View {
     @StateObject private var quizState = QuizState()
     @State private var isShowingResultadoView = false
@@ -10,7 +11,6 @@ struct JugarModoLibre: View {
     @State private var activeAlert: ActiveAlert? // Local state to manage alerts
     @State private var hasPlayedSoundForAlert = false // Tracks if sound has been played
     @State private var rotationAngle: Double = 0
-
 
     // Enum for alerts
     enum ActiveAlert: Identifiable {
@@ -30,180 +30,199 @@ struct JugarModoLibre: View {
     }
 
     var body: some View {
-          ZStack {
-              Image("neon")
-                  .resizable()
-                  .edgesIgnoringSafeArea(.all)
-              
-              VStack(spacing: 5) {
-                  // Score Section
-                  HStack {
-                      Text("CORRECT ANSWERS: \(quizState.score)")
-                          .foregroundColor(.black)
-                          .fontWeight(.bold)
-                          .frame(maxWidth: .infinity, alignment: .leading)
-                          .padding([.top, .leading], 20)
-                  }
-                  HStack {
-                      Text("SCORE: \(quizState.totalScore)")
-                          .foregroundColor(.black)
-                          .fontWeight(.bold)
-                          .padding(.leading, 21.0)
-                          .frame(maxWidth: .infinity, alignment: .leading)
-                  }
-                  HStack {
-                      Text("QUESTION: \(quizState.preguntaCounter)/\(quizState.randomQuestions.count)")
-                          .foregroundColor(.black)
-                          .fontWeight(.bold)
-                          .padding(.leading, 20)
-                          .frame(maxWidth: .infinity, alignment: .leading)
-                  }
-                  
-                  Spacer()
-                  
-                  // Timer
-                  HStack {
-                      Spacer()
-                      Text("\(quizState.timeRemaining)")
-                          .foregroundColor(quizState.timeRemaining <= 5 ? Color(hue: 1.0, saturation: 0.984, brightness: 0.699) : .black)
-                          .fontWeight(.bold)
-                          .font(.system(size: 60))
-                          .padding(.trailing, 20.0)
-                          .shadow(color: .black, radius: 1, x: 1, y: 1)
-                  }
-                  .padding(.top, -250)
-             // Logo under the timer
-                  Image("logo")
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 80, height: 80)
-                      .padding(.top, -150)
-                      .rotation3DEffect(
-                              .degrees(rotationAngle),
-                              axis: (x: 0, y: 1, z: 0) // Rotate along the Y-axis
-                          )
-                      
+        ZStack {
+            // Background Image
+            Image("neon")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 5) {
+                // Score Section
+                HStack {
+                    Text("CORRECT ANSWERS: \(quizState.score)")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding([.top, .leading], 20)
+                }
+                HStack {
+                    Text("SCORE: \(quizState.totalScore)")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .padding(.leading, 21.0)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                HStack {
+                    Text("QUESTION: \(quizState.preguntaCounter)/\(quizState.randomQuestions.count)")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .padding(.leading, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
+                Spacer()
+                
+                // Timer Section
+                HStack {
+                    Spacer()
+                    Text("\(quizState.timeRemaining)")
+                        .foregroundColor(quizState.timeRemaining <= 5 ? Color.red : .black)
+                        .fontWeight(.bold)
+                        .font(.system(size: 60))
+                        .padding(.trailing, 20.0)
+                        .shadow(color: .black, radius: 1, x: 1, y: 1)
+                }
+                .padding(.top, -250)
+                
+                // Logo Under Timer
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 80, height: 80)
+                    .padding(.top, -150)
+                    .rotation3DEffect(
+                        .degrees(rotationAngle),
+                        axis: (x: 0, y: 1, z: 0) // Rotate along the Y-axis
+                    )
+                
+                // Question Text Section
+                Text(quizState.isAnswered ? quizState.answerStatusMessage : quizState.currentQuestion.question)
+                    .foregroundColor(quizState.questionTextColor)
+                    .font(.headline)
+                    .padding(.horizontal, 20)
+                    .padding(.top, -50)
+                    .padding(.bottom, 20)
+                
+                // Options Section
+                VStack(alignment: .leading, spacing: 10) {
+                    let optionValues = Array(quizState.currentQuestion.options.values)
+                    ForEach(0..<optionValues.count, id: \.self) { index in
+                        RadioButton(
+                            text: optionValues[index],
+                            selectedOptionIndex: $quizState.selectedOptionIndex,
+                            optionIndex: index,
+                            quizState: quizState
+                        )
+                    }
+                }
+                .padding(.bottom, 200)
+                
+                // Action Button
+                Button(action: handleButtonTap) {
+                    Text(quizState.buttonText)
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding()
+                        .frame(width: 300, height: 75)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.black, lineWidth: 3)
+                        )
+                }
+                .padding(.top, -180)
+                .fullScreenCover(isPresented: $isShowingResultadoView) {
+                    if #available(iOS 16.0, *) {
+                        ResultadoView(aciertos: quizState.score, puntuacion: quizState.totalScore, errores: quizState.mistakes)
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                }
+            }
+            .padding(.horizontal, 12)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            handleScenePhaseChange(newPhase)
+        }
+        .onAppear {
+            quizState.startCountdownTimer()
+        }
+        .alert(item: $activeAlert) { alert in
+            alertView(for: alert)
+        }
+        .onChange(of: activeAlert) { newAlert in
+            handleAlertSound(for: newAlert)
+        }
+    }
 
-                  // Question text under the logo
-                  Text(quizState.isAnswered ? quizState.answerStatusMessage : quizState.currentQuestion.question)
-                      .foregroundColor(quizState.questionTextColor)
-                      .font(.headline)
-                      .padding(.horizontal, 20)
-                      .padding(.top, -50)
-                      .padding(.bottom, 20)
-                     
-                  VStack(alignment: .leading, spacing: 10) {
-                      let optionValues = Array(quizState.currentQuestion.options.values)
-                      
-                      ForEach(0..<optionValues.count, id: \.self) { index in
-                          RadioButton(
-                              text: optionValues[index],
-                              selectedOptionIndex: $quizState.selectedOptionIndex,
-                              optionIndex: index,
-                              quizState: quizState
-                          )
-                      }
-                  }
-                  .padding(.bottom, 200)
-                  
-                  // Action Button
-                  Button(action: handleButtonTap) {
-                      Text(quizState.buttonText)
-                          .font(.headline)
-                          .foregroundColor(.black)
-                          .padding()
-                          .frame(width: 300, height: 75)
-                          .background(Color.white)
-                          .cornerRadius(10)
-                          .overlay(
-                              RoundedRectangle(cornerRadius: 10)
-                                  .stroke(Color.black, lineWidth: 3)
-                          )
-                  }
-                  .padding(.top, -180)
-                  .fullScreenCover(isPresented: $isShowingResultadoView) {
-                      ResultadoView(aciertos: quizState.score, puntuacion: quizState.totalScore, errores: quizState.mistakes)
-                  }
-              }
-              .padding(.horizontal, 12)
-          }
-          .onChange(of: scenePhase) { newPhase in
-              if newPhase == .active && !quizState.isAnswered && !quizState.hasBeenPenalized {
-                  activeAlert = .resumeWarning // Show the alert
-              } else if newPhase == .active && quizState.hasBeenPenalized {
-                  print("User returned after already being penalized. No further action.")
-              }
-          }
-          .onAppear {
-              quizState.startCountdownTimer()
-          }
-          .alert(item: $activeAlert) { alert in
-              switch alert {
-              case .noSelection:
-                  resetSoundFlag() // Reset sound flag when alert is triggered
-                  return Alert(
-                      title: Text("WARNING"),
-                      message: Text("Fear not, make a choice"),
-                      dismissButton: .default(Text("OK"))
-                  )
-              case .resumeWarning:
-                  resetSoundFlag() // Reset sound flag when alert is triggered
-                  return Alert(
-                      title: Text("Attention!"),
-                      message: Text("Don't leave the app while the timer is running. You will be penalized."),
-                      dismissButton: .default(Text("OK")) {
-                          quizState.penalizeForLeavingApp()
-                      }
-                  )
-              }
-          }
-          .onChange(of: activeAlert) { newAlert in
-              if let _ = newAlert, !hasPlayedSoundForAlert {
-                  SoundManager.shared.playWarningSound()
-                  hasPlayedSoundForAlert = true // Mark sound as played
-              }
-          }
-      }
+    // MARK: - Helper Methods
+    private func resetSoundFlag() {
+        hasPlayedSoundForAlert = false
+    }
 
-      // Reset the sound flag whenever a new alert is triggered
-      private func resetSoundFlag() {
-          hasPlayedSoundForAlert = false
-      }
-    
     private func flipImage() {
         withAnimation(.easeInOut(duration: 0.6)) {
             rotationAngle += 360 // Rotate the image by 360 degrees
         }
     }
 
-      // MARK: - Handle Button Tap
-      private func handleButtonTap() {
-          switch quizState.buttonText {
-          case "CONFIRM":
-              if quizState.selectedOptionIndex == -1 {
-                  print("No option selected, showing alert.")
-                  activeAlert = .noSelection // Show the no selection alert
-                  return
-              }
-              quizState.checkAnswer()
-              quizState.buttonText = "NEXT"
-          case "NEXT":
-              SoundManager.shared.playSoundEffect(quizState.swooshSoundEffect, name: "Swoosh")
-              if quizState.currentQuestionIndex < quizState.randomQuestions.count - 1 {
-                  flipImage()
-                  quizState.showNextQuestion()
-              } else {
-                  quizState.finishQuiz()
-                  isShowingResultadoView = true
-              }
-          case "FINISH":
-              quizState.finishQuiz()
-              isShowingResultadoView = true
-          default:
-              break
-          }
-      }
-  }
+    private func handleScenePhaseChange(_ newPhase: ScenePhase) {
+        if newPhase == .active && !quizState.isAnswered && !quizState.hasBeenPenalized {
+            activeAlert = .resumeWarning // Show the alert
+        } else if newPhase == .active && quizState.hasBeenPenalized {
+            print("User returned after already being penalized. No further action.")
+        }
+    }
+
+    private func handleButtonTap() {
+        switch quizState.buttonText {
+        case "CONFIRM":
+            if quizState.selectedOptionIndex == -1 {
+                print("No option selected, showing alert.")
+                activeAlert = .noSelection // Show the no-selection alert
+                return
+            }
+            quizState.checkAnswer()
+            quizState.buttonText = "NEXT"
+        case "NEXT":
+            SoundManager.shared.playSoundEffect(quizState.swooshSoundEffect, name: "Swoosh")
+            if quizState.currentQuestionIndex < quizState.randomQuestions.count - 1 {
+                flipImage()
+                quizState.showNextQuestion()
+            } else {
+                quizState.finishQuiz()
+                isShowingResultadoView = true
+            }
+        case "FINISH":
+            quizState.finishQuiz()
+            isShowingResultadoView = true
+        default:
+            break
+        }
+    }
+
+    private func handleAlertSound(for alert: ActiveAlert?) {
+        if alert != nil, !hasPlayedSoundForAlert {
+            SoundManager.shared.playWarningSound()
+            hasPlayedSoundForAlert = true // Mark sound as played
+        }
+    }
+    
+    private func alertView(for alert: ActiveAlert) -> Alert {
+        resetSoundFlag() // Ensure the sound can be played again when the alert appears
+        switch alert {
+        case .noSelection:
+            return Alert(
+                title: Text("WARNING"),
+                message: Text("Fear not, make a choice"),
+                dismissButton: .default(Text("OK")) {
+                    resetSoundFlag() // Reset sound flag on dismissal
+                }
+            )
+        case .resumeWarning:
+            return Alert(
+                title: Text("Attention!"),
+                message: Text("Don't leave the app while the timer is running. You will be penalized."),
+                dismissButton: .default(Text("OK")) {
+                    quizState.penalizeForLeavingApp()
+                    resetSoundFlag() // Reset sound flag on dismissal
+                }
+            )
+        }
+    }
+    
+}
 
 struct JugarModoLibre_Previews: PreviewProvider {
     @State static var mockPlayer: AVAudioPlayer? = nil // Provide a mock AVAudioPlayer

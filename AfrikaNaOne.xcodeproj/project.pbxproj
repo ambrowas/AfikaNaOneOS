@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75157DAB2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 75157DAA2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */; };
 		752F4E0F2D0011F0001FE0EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */; };
 		755220132CFED18900B167A3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75521FE12CFED18700B167A3 /* AuthService.swift */; };
 		755220142CFED18900B167A3 /* CheckCodigo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75521FE22CFED18700B167A3 /* CheckCodigo.swift */; };
@@ -76,7 +77,6 @@
 		7552208B2D0006D500B167A3 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7552208A2D0006D500B167A3 /* FirebaseStorageCombine-Community */; };
 		7552208D2D0006D500B167A3 /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7552208C2D0006D500B167A3 /* FirebaseVertexAI */; };
 		7552208F2D00094600B167A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7552208E2D00094600B167A3 /* UIKit.framework */; platformFilters = (ios, xros, ); };
-		756428D72D0D39B400B9DE76 /* DevelopmentProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 756428D62D0D39B400B9DE76 /* DevelopmentProfile.mobileprovision */; };
 		7567C8172D065C31005EA62F /* quiz_questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 755220432CFED1A800B167A3 /* quiz_questions.json */; };
 		7567C8182D065C34005EA62F /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8052D0659DD005EA62F /* whatsapp.png */; };
 		7567C8192D065C36005EA62F /* neon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8062D0659DD005EA62F /* neon.png */; };
@@ -96,6 +96,7 @@
 		7567C82B2D067A4A005EA62F /* warning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7567C82A2D067A4A005EA62F /* warning.mp3 */; };
 		7567C82D2D06AB8E005EA62F /* FirebaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */; };
 		7567C82F2D07F6E1005EA62F /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7567C82E2D07F6E1005EA62F /* magic.mp3 */; };
+		757E8B9B2D0D41F000DAADD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */; };
 		75833F392D0AB4B800FEEE76 /* darkblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 75833F382D0AB4B700FEEE76 /* darkblue.png */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75157DAA2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AfrikaNaOne_Provisioning_Profile_II.mobileprovision; sourceTree = "<group>"; };
 		752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75521FB02CFED0B100B167A3 /* AfrikaNaOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfrikaNaOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75521FC12CFED0B200B167A3 /* AfrikaNaOneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfrikaNaOneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,7 +178,6 @@
 		7552204F2CFED1A900B167A3 /*  MenuModoLibre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " MenuModoLibre.swift"; sourceTree = "<group>"; };
 		7552208E2D00094600B167A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		756428D22D0D2D5400B9DE76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		756428D62D0D39B400B9DE76 /* DevelopmentProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = DevelopmentProfile.mobileprovision; sourceTree = "<group>"; };
 		7567C8052D0659DD005EA62F /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whatsapp.png; path = AfrikaNaOne/Assets.xcassets/whatsapp.imageset/whatsapp.png; sourceTree = "<group>"; };
 		7567C8062D0659DD005EA62F /* neon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = neon.png; path = AfrikaNaOne/Assets.xcassets/neon.imageset/neon.png; sourceTree = "<group>"; };
 		7567C8082D0659DD005EA62F /* expert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = expert.png; path = AfrikaNaOne/Assets.xcassets/expert.imageset/expert.png; sourceTree = "<group>"; };
@@ -186,8 +187,8 @@
 		7567C82A2D067A4A005EA62F /* warning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = warning.mp3; sourceTree = "<group>"; };
 		7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageView.swift; sourceTree = "<group>"; };
 		7567C82E2D07F6E1005EA62F /* magic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = magic.mp3; sourceTree = "<group>"; };
+		757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75833F382D0AB4B700FEEE76 /* darkblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = darkblue.png; path = ../../Downloads/darkblue.png; sourceTree = "<group>"; };
-		75D6212D2D0D098B009FA59D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -8957,9 +8958,9 @@
 				75521FF32CFED18700B167A3 /* SoundManager.swift */,
 				7552200D2CFED18900B167A3 /* UserManager.swift */,
 				755220102CFED18900B167A3 /* UserViewModel.swift */,
-				756428D62D0D39B400B9DE76 /* DevelopmentProfile.mobileprovision */,
 				755220432CFED1A800B167A3 /* quiz_questions.json */,
-				75D6212D2D0D098B009FA59D /* GoogleService-Info.plist */,
+				75157DAA2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */,
+				757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */,
 				756428D22D0D2D5400B9DE76 /* Info.plist */,
 				7567C8052D0659DD005EA62F /* whatsapp.png */,
 				75833F382D0AB4B700FEEE76 /* darkblue.png */,
@@ -9176,6 +9177,7 @@
 				7567C82B2D067A4A005EA62F /* warning.mp3 in Resources */,
 				7567C8212D065C58005EA62F /* bikutsi.mp3 in Resources */,
 				7567C8172D065C31005EA62F /* quiz_questions.json in Resources */,
+				75157DAB2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */,
 				7567C8222D065C5A005EA62F /* expert.mp3 in Resources */,
 				7567C8252D065C60005EA62F /* countdown.wav in Resources */,
 				7567C8272D065C63005EA62F /* swoosh.wav in Resources */,
@@ -9184,8 +9186,8 @@
 				7567C81A2D065C3E005EA62F /* logo.png in Resources */,
 				7567C8232D065C5C005EA62F /* gameover.mp3 in Resources */,
 				7567C8192D065C36005EA62F /* neon.png in Resources */,
+				757E8B9B2D0D41F000DAADD7 /* GoogleService-Info.plist in Resources */,
 				7567C8182D065C34005EA62F /* whatsapp.png in Resources */,
-				756428D72D0D39B400B9DE76 /* DevelopmentProfile.mobileprovision in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9413,10 +9415,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AfrikaNaOne/Preview Content\"";
-				DEVELOPMENT_TEAM = B5X8QR4N34;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B5X8QR4N34;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -9443,6 +9447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AfrikaNaOne Provisioning Profile II";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -9460,10 +9465,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AfrikaNaOne/Preview Content\"";
-				DEVELOPMENT_TEAM = B5X8QR4N34;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B5X8QR4N34;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -9490,6 +9497,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AfrikaNaOne Provisioning Profile II";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
