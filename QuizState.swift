@@ -36,6 +36,7 @@ class QuizState: ObservableObject {
     @Published var hasBeenPenalized: Bool = false
     @Published var activeAlert: ActiveAlert?
     var swooshSoundEffect: AVAudioPlayer?
+    @Published var hasPlayedSoundForAlert = false
     
 
     enum ActiveAlert: Identifiable {
@@ -258,6 +259,7 @@ class QuizState: ObservableObject {
            answerStatusMessage = ""
            questionTextColor = .black
            buttonText = "CONFIRM"
+            hasPlayedSoundForAlert = false
            startCountdownTimer()
 
            print("Moved to question \(preguntaCounter).")
