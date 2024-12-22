@@ -22,7 +22,7 @@ struct GameOver: View {
     
     var body: some View {
         ZStack {
-            Image("darkblue")
+            Image("neon")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
@@ -35,7 +35,7 @@ struct GameOver: View {
                 }) {
                     Text("GAME OVER")
                         .scaledToFit()
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.white)
                         .frame(width: 100, height: 100)
                         .scaleEffect(scale)
                         .rotationEffect(.degrees(rotation))

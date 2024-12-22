@@ -24,6 +24,7 @@ struct Profile: View {
     
     
     
+    
     @Environment(\.presentationMode) var presentationMode
     
     var alertTypeBinding: Binding<Bool> {
@@ -111,7 +112,9 @@ struct Profile: View {
                     }
                 }
                 .frame(width: 300, height: 400)
+                .padding(.top, 50)
                 .padding(.horizontal, 3)
+                .padding(.bottom, -50)
                 
                 Button(action: {
                     if profileViewModel.profileImage == nil {
@@ -188,7 +191,7 @@ struct Profile: View {
                         
                     case .imageChangeSuccess:
                         return Alert(
-                            title: Text("BLACK MAGIC"),
+                            title: Text("DJUDJU BLACK MAGIC"),
                             message: Text("¡Your profile pic has been updated!"),
                             dismissButton: .default(Text("OK")){
                                 SoundManager.shared.playTransitionSound()
@@ -226,7 +229,7 @@ struct Profile: View {
             }
             .fullScreenCover(isPresented: $showMenuModoCompeticion) {
                 MenuModoCompeticion(userId: "DummyuserId", userData: UserData(), viewModel: MenuModoCompeticionViewModel())
-            }   
+            }
             
             .sheet(isPresented: $isImagePickerDisplayed) {
                 ImagePicker(
@@ -253,35 +256,50 @@ struct Profile: View {
             }
         }
     }
+    
+    struct TextRowView: View {
+        let title: String
+        let content: String
         
-        struct TextRowView: View {
-            let title: String
-            let content: String
-            
-            var body: some View {
-                HStack(alignment: .center, spacing: 10) {
-                    Text(title)
-                        .font(.subheadline)
-                        .bold()
-                        .foregroundColor(.black)
-                    
-                    Text(content)
-                        .font(.system(size: 14))
-                        .padding(3)
-                        .foregroundColor(.black)
-                        
-                    Spacer()
-                }
-                .padding([.leading, .trailing])
-                .environment(\.colorScheme, .light)
+        var body: some View {
+            HStack(alignment: .center, spacing: 10) {
+                Text(title)
+                    .font(.subheadline)
+                    .bold()
+                    .foregroundColor(.white)
+                
+                Text(content)
+                    .font(.system(size: 14))
+                    .padding(3)
+                    .foregroundColor(.white)
+                
+                Spacer()
             }
+            .padding([.leading, .trailing])
+            .environment(\.colorScheme, .light)
         }
-        
-        struct Profile_Previews: PreviewProvider {
-            static var previews: some View {
-                Profile()
-            }
-        }
-        
     }
-
+    
+    struct Profile_Previews: PreviewProvider {
+        static var previews: some View {
+            // Set up mock data for the preview
+            let profileViewModel = ProfileViewModel.shared
+            profileViewModel.fullname = "John Doe"
+            profileViewModel.email = "john.doe@example.com"
+            profileViewModel.telefono = "+1234567890"
+            profileViewModel.ciudad = "New York"
+            profileViewModel.pais = "USA"
+            profileViewModel.highestScore = 9999
+            profileViewModel.accumulatedPuntuacion = 25000
+            profileViewModel.accumulatedAciertos = 150
+            profileViewModel.accumulatedFallos = 20
+            profileViewModel.positionInLeaderboard = 1
+            profileViewModel.profileImage = UIImage(systemName: "person.fill") // Mock image
+            
+            return Profile()
+                .environmentObject(profileViewModel) // Inject mock data into the environment
+                .previewLayout(.sizeThatFits)
+                .previewDisplayName("Profile Preview")
+        }
+    }
+}

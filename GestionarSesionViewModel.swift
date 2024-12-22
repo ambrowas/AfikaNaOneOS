@@ -56,6 +56,7 @@ class GestionarSesionViewModel: ObservableObject {
             
         
             if let error = error as NSError? {
+                SoundManager.shared.playWarningSound()
                 self?.estaAutenticado = false
                 self?.errorDeAutenticacion = error
                 
@@ -94,6 +95,7 @@ class GestionarSesionViewModel: ObservableObject {
         guard emailTest.evaluate(with: correoElectronico) else {
             self.errorDeAutenticacion = SessionError.invalidEmailFormat
             self.ensenarAlerta(type: .mistake(SessionError.invalidEmailFormat.localizedDescription))
+            SoundManager.shared.playWarningSound()
             return false
         }
       
@@ -108,6 +110,7 @@ class GestionarSesionViewModel: ObservableObject {
 
     func logoutUsuario() {
             try? Auth.auth().signOut()
+        SoundManager.shared.playWarningSound()
             self.estaAutenticado = false
         
         clearUserData()

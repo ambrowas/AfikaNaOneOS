@@ -9,14 +9,16 @@ final class LeadersProfileViewModel: ObservableObject {
     private let userId: String
     @Published var profileImageData: Data?
     
+    
+    
    
     init(userId: String) {
            self.userId = userId
            fetchUserDataFromRealtimeDatabase()
        }
-      
-
     
+    
+      
     func fetchUserDataFromRealtimeDatabase() {
         let ref = Database.database().reference().child("user").child(userId)
         ref.observeSingleEvent(of: .value) { snapshot in
@@ -72,4 +74,6 @@ final class LeadersProfileViewModel: ObservableObject {
             }
         }.resume()
     }
+    
+    
 }

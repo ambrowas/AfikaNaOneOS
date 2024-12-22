@@ -79,7 +79,6 @@
 		7552208F2D00094600B167A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7552208E2D00094600B167A3 /* UIKit.framework */; platformFilters = (ios, xros, ); };
 		7567C8172D065C31005EA62F /* quiz_questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 755220432CFED1A800B167A3 /* quiz_questions.json */; };
 		7567C8182D065C34005EA62F /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8052D0659DD005EA62F /* whatsapp.png */; };
-		7567C8192D065C36005EA62F /* neon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8062D0659DD005EA62F /* neon.png */; };
 		7567C81A2D065C3E005EA62F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8152D065B7D005EA62F /* logo.png */; };
 		7567C81B2D065C4A005EA62F /* expert.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8082D0659DD005EA62F /* expert.png */; };
 		7567C81D2D065C50005EA62F /* beginer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C80A2D0659DD005EA62F /* beginer.png */; };
@@ -97,7 +96,7 @@
 		7567C82D2D06AB8E005EA62F /* FirebaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */; };
 		7567C82F2D07F6E1005EA62F /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7567C82E2D07F6E1005EA62F /* magic.mp3 */; };
 		757E8B9B2D0D41F000DAADD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */; };
-		75833F392D0AB4B800FEEE76 /* darkblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 75833F382D0AB4B700FEEE76 /* darkblue.png */; };
+		75B93C5A2D11525200E5859B /* neon.png in Resources */ = {isa = PBXBuildFile; fileRef = 75B93C582D11525200E5859B /* neon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,7 +178,6 @@
 		7552208E2D00094600B167A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		756428D22D0D2D5400B9DE76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7567C8052D0659DD005EA62F /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whatsapp.png; path = AfrikaNaOne/Assets.xcassets/whatsapp.imageset/whatsapp.png; sourceTree = "<group>"; };
-		7567C8062D0659DD005EA62F /* neon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = neon.png; path = AfrikaNaOne/Assets.xcassets/neon.imageset/neon.png; sourceTree = "<group>"; };
 		7567C8082D0659DD005EA62F /* expert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = expert.png; path = AfrikaNaOne/Assets.xcassets/expert.imageset/expert.png; sourceTree = "<group>"; };
 		7567C80A2D0659DD005EA62F /* beginer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beginer.png; path = AfrikaNaOne/Assets.xcassets/beginer.imageset/beginer.png; sourceTree = "<group>"; };
 		7567C80B2D0659DD005EA62F /* average.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = average.png; path = AfrikaNaOne/Assets.xcassets/average.imageset/average.png; sourceTree = "<group>"; };
@@ -188,7 +186,7 @@
 		7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageView.swift; sourceTree = "<group>"; };
 		7567C82E2D07F6E1005EA62F /* magic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = magic.mp3; sourceTree = "<group>"; };
 		757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		75833F382D0AB4B700FEEE76 /* darkblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = darkblue.png; path = ../../Downloads/darkblue.png; sourceTree = "<group>"; };
+		75B93C582D11525200E5859B /* neon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -8963,8 +8961,7 @@
 				757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */,
 				756428D22D0D2D5400B9DE76 /* Info.plist */,
 				7567C8052D0659DD005EA62F /* whatsapp.png */,
-				75833F382D0AB4B700FEEE76 /* darkblue.png */,
-				7567C8062D0659DD005EA62F /* neon.png */,
+				75B93C582D11525200E5859B /* neon.png */,
 				7567C8152D065B7D005EA62F /* logo.png */,
 				7567C8082D0659DD005EA62F /* expert.png */,
 				7567C80A2D0659DD005EA62F /* beginer.png */,
@@ -9169,8 +9166,8 @@
 			files = (
 				7567C82F2D07F6E1005EA62F /* magic.mp3 in Resources */,
 				7567C81B2D065C4A005EA62F /* expert.png in Resources */,
-				75833F392D0AB4B800FEEE76 /* darkblue.png in Resources */,
 				7567C81D2D065C50005EA62F /* beginer.png in Resources */,
+				75B93C5A2D11525200E5859B /* neon.png in Resources */,
 				7567C81E2D065C52005EA62F /* average.png in Resources */,
 				7567C81F2D065C54005EA62F /* average.mp3 in Resources */,
 				7567C8202D065C56005EA62F /* beginner.mp3 in Resources */,
@@ -9185,7 +9182,6 @@
 				7567C8242D065C5F005EA62F /* notright.wav in Resources */,
 				7567C81A2D065C3E005EA62F /* logo.png in Resources */,
 				7567C8232D065C5C005EA62F /* gameover.mp3 in Resources */,
-				7567C8192D065C36005EA62F /* neon.png in Resources */,
 				757E8B9B2D0D41F000DAADD7 /* GoogleService-Info.plist in Resources */,
 				7567C8182D065C34005EA62F /* whatsapp.png in Resources */,
 			);

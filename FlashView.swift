@@ -34,7 +34,7 @@ struct FlashView: View {
     var body: some View {
         ZStack {
             // Background Image
-            Image("darkblue")
+            Image("neon")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
@@ -54,7 +54,7 @@ struct FlashView: View {
                 if showProverb {
                     Text(randomProverb)
                         .font(.headline)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .multilineTextAlignment(.center) // Center text
                         .lineLimit(nil) // Allow multiple lines
                         .frame(maxWidth: 300) // Restrict the width for text wrapping
@@ -63,9 +63,9 @@ struct FlashView: View {
 
                 // Flashing Navigation Text
                           if showTextView {
-                              Text("CLICK HERE, LET'S GO")
+                              Text("CLICK HERE. LET'S GO")
                                   .font(.headline)
-                                  .foregroundColor(.black)
+                                  .foregroundColor(.white)
                                   .multilineTextAlignment(.center)
                                   .opacity(isFlashing ? 1.0 : 0.2)
                                   .animation(Animation.linear(duration: 0.5).repeatForever(autoreverses: true), value: isFlashing)

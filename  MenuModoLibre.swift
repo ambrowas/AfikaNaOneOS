@@ -2,6 +2,10 @@ import SwiftUI
 import AVFAudio
 import AVFoundation
 
+extension Notification.Name {
+    static let newHighScore = Notification.Name("newHighScore")
+}
+
 struct MenuModoLibre: View {
     @State private var playerName: String = ""
     @State private var jugadorGuardado: String = ""
@@ -15,9 +19,11 @@ struct MenuModoLibre: View {
     @State private var isShowingMenuPrincipal = false
     @State private var showNoQuestionsLeftAlert = false
     @State private var dbHelper = QuizDBHelper.shared
-    
+    @State private var showHighScoreAlert = false
     private let playerNameKey = "PlayerName"
     private let highScoreKey = "HighScore"
+    @State private var isNewHighScore: Bool = false //
+    @State private var highScoreMessage: String = "No high score yet"
     
     init() {
         loadPlayerName()
@@ -38,8 +44,11 @@ struct MenuModoLibre: View {
                     .padding(.top, 40)
                     .shadow(color: glowColor.opacity(0.8), radius: 10, x: 0.0, y: 0.0)
                     .onReceive(timer) { _ in updateGlowColor() }
-                
+       
+
+
                 if jugadorGuardado.isEmpty {
+                    // When no player is saved, show the input field
                     TextField("ENTER YOUR NAME", text: $playerName)
                         .foregroundColor(.black)
                         .font(.system(size: 18))
@@ -48,29 +57,33 @@ struct MenuModoLibre: View {
                         .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.black, lineWidth: 2))
                         .background(RoundedRectangle(cornerRadius: 1).fill(Color.white))
                 } else {
-                    Text("Karibu \(jugadorGuardado)!")
-                        .foregroundColor(.black)
+                    // Show a greeting if a player name is saved
+                    Text("Ambolan \(jugadorGuardado)!")
+                        .foregroundColor(.white)
                         .font(.headline)
                         .padding(.horizontal, 20)
                         .padding(.top, 200)
-                    
                 }
-                
-                Text("Current highscore is \(highScore) points")
+
+                Text(highScoreMessage)
                     .foregroundColor(getFlashingColor())
                     .font(.headline)
                     .padding(.horizontal, 20)
                     .padding(.top, -10)
-                
                 Button(action: {
                     if jugadorGuardado.isEmpty {
-                        SoundManager.shared.playMagicalSound() // Play sound only when saving the name for the first time
+                        // Play magical sound only when saving the name for the first time
+                        SoundManager.shared.playMagicalSound()
                     } else {
-                        SoundManager.shared.playTransitionSound() // Play transition sound if changing the player
+                        // Play transition sound if changing the player
+                        SoundManager.shared.playTransitionSound()
+                        UserDefaults.standard.removeObject(forKey: "HighScore") // Clear high score
+                        print("High Score cleared for previous user: \(jugadorGuardado).") // Debug log
                     }
                     savePlayerName()
-                    jugadorGuardado = playerName
+                    jugadorGuardado = playerName // Update the saved player name
                     playerName = "" // Clear the text field after saving
+                    print("Player name saved/changed to: \(jugadorGuardado).") // Debug log
                 }) {
                     Text(jugadorGuardado.isEmpty ? "SAVE" : "CHANGE PLAYER")
                         .font(.headline)
@@ -127,28 +140,77 @@ struct MenuModoLibre: View {
         .fullScreenCover(isPresented: $jugarModoLibreActive) {
             JugarModoLibre(player: .constant(nil))
         }
-        .alert(isPresented: $showNoQuestionsLeftAlert) {
-            Alert(
-                title: Text("Congrats champ"),
-                message: Text("You have completed the Single Mode. How about you try Competition Mode?"),
-                dismissButton: .default(Text("OK"), action: {
-                    dbHelper.resetShownQuestions()
-                    isShowingMenuPrincipal = true
-                })
-            )
+        .alert(isPresented: Binding(
+            get: { showNoQuestionsLeftAlert || showHighScoreAlert },
+            set: { _ in
+                showNoQuestionsLeftAlert = false
+                showHighScoreAlert = false
+            }
+        )) {
+            if showNoQuestionsLeftAlert {
+                return Alert(
+                    title: Text("Congrats champ"),
+                    message: Text("You have completed the Single Mode. You should try Competition?"),
+                    dismissButton: .default(Text("OK"), action: {
+                        dbHelper.resetShownQuestions()
+                        DispatchQueue.main.async {
+                            isShowingMenuPrincipal = true
+                        }
+                    })
+                )
+            } else {
+                return Alert(
+                              title: Text("Congratulations !"),
+                              message: Text("You set a new HighScore of : \(highScore)"),
+                              dismissButton: .default(Text("OK"))
+                )
+            }
         }
+        .onAppear {
+            // Ensure the correct high score message is set when the view appears
+                   if isNewHighScore {
+                       showHighScoreAlert = true // Trigger the alert for new high score
+                   }
+               }
         .navigationBarBackButtonHidden(true)
         .onAppear {
             loadPlayerName()
             loadHighScore()
+
+            let lastScore = UserDefaults.standard.integer(forKey: "LastScore")
+                   print("onAppear: Last Score Loaded: \(lastScore)") // Debug log
+
+                   if UserDefaults.standard.isNewHighScore {
+                       // Update the high score and message
+                       highScore = lastScore
+                       highScoreMessage = "New HighScore is \(highScore) points"
+                       isNewHighScore = true
+                       showHighScoreAlert = true // Trigger the alert
+                       UserDefaults.standard.isNewHighScore = false // Reset the flag
+                       print("onAppear: Detected new high score in MenuModoLibre.") // Debug log
+                   } else {
+                       // Default to current high score
+                       highScoreMessage = "Current HighScore is \(highScore) points"
+                       isNewHighScore = false
+                       print("onAppear: No new high score in MenuModoLibre. High Score remains: \(highScore)") // Debug log
+                   }
+               }
+    }
+    private func updateHighScore(newScore: Int) {
+        if newScore > highScore {
+            highScore = newScore
+            UserDefaults.standard.set(highScore, forKey: highScoreKey)
+            print("New high score: \(highScore)")
         }
     }
     
     private func checkForQuestionsBeforePlaying() {
         if let unusedQuestions = dbHelper.getRandomQuestions(count: 10), !unusedQuestions.isEmpty {
             jugarModoLibreActive = true
+            print("Enough questions available. Starting Single Mode.")
         } else {
             showNoQuestionsLeftAlert = true
+            print("No questions available. Triggering alert.")
         }
     }
     
@@ -159,11 +221,15 @@ struct MenuModoLibre: View {
     private func loadPlayerName() {
         if let savedPlayerName = UserDefaults.standard.string(forKey: playerNameKey) {
             jugadorGuardado = savedPlayerName
+            print("Player Name Loaded: \(jugadorGuardado)")
+        } else {
+            print("No Player Name Found in UserDefaults.")
         }
     }
     
     private func loadHighScore() {
         highScore = UserDefaults.standard.integer(forKey: highScoreKey)
+        print("High Score Loaded: \(highScore)") // Debug print
     }
     
     private func getFlashingColor() -> Color {

@@ -9,7 +9,6 @@ class NuevoUsuarioViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var telefono: String = ""
     @Published var ciudad: String = ""
-    @Published var estado: String = ""
     @Published var selectedCountry: String = ""
     @Published var selectedDevice: String = "Android"
     @Published var error: NuevoUsuarioError?
@@ -136,7 +135,6 @@ class NuevoUsuarioViewModel: ObservableObject {
             "email": email,
             "telefono": telefono,
             "ciudad": ciudad,
-            "estado": estado,
             "pais": selectedCountry, //  Use selected country
             "dispositivo": selectedDevice,
             "accumulatedAciertos": 0,
@@ -226,9 +224,6 @@ class NuevoUsuarioViewModel: ObservableObject {
         if ciudad.isEmpty {
             errors.append(.emptyField(fieldName: "City"))
         }
-        if estado.isEmpty {
-            errors.append(.emptyField(fieldName: "State/Province"))
-        }
         if selectedCountry == "Choose your country of residence" { // Replace with your default or placeholder value
                 errors.append(.emptyField(fieldName: "Country"))
         }
@@ -258,9 +253,7 @@ class NuevoUsuarioViewModel: ObservableObject {
         if !ciudad.isLessRestrictiveAlphanumeric {
             errors.append(.invalidCharacters(fieldName: "City"))
         }
-        if !estado.isLessRestrictiveAlphanumeric {
-            errors.append(.invalidCharacters(fieldName: "Estado"))
-        }
+     
         if !selectedCountry.isLessRestrictiveAlphanumeric {
             errors.append(.invalidCharacters(fieldName: "Country"))
         }
@@ -279,10 +272,9 @@ class NuevoUsuarioViewModel: ObservableObject {
         self.fullname = sanitizeString(fullname, forFieldType: .name)
         self.telefono = sanitizeString(telefono, forFieldType: .phoneNumber)
         self.ciudad = sanitizeString(ciudad, forFieldType: .address)
-        self.estado = sanitizeString(ciudad, forFieldType: .address)
       
         // Email is not sanitized to maintain format
-        print("Sanitization complete: full name, telephone, city, state and country.")
+        print("Sanitization complete: full name, telephone, city and country.")
     }
 
 

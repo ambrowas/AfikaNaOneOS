@@ -1,0 +1,66 @@
+[debug] [2024-12-08T20:51:56.444Z] ----------------------------------------------------------------------
+[debug] [2024-12-08T20:51:56.444Z] Command:       /Users/elebi/.nvm/versions/node/v18.20.5/bin/node /opt/homebrew/bin/firebase init functions
+[debug] [2024-12-08T20:51:56.444Z] CLI Version:   13.28.0
+[debug] [2024-12-08T20:51:56.444Z] Platform:      darwin
+[debug] [2024-12-08T20:51:56.445Z] Node Version:  v18.20.5
+[debug] [2024-12-08T20:51:56.449Z] Time:          Sun Dec 08 2024 15:51:56 GMT-0500 (Eastern Standard Time)
+[debug] [2024-12-08T20:51:56.449Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-12-08T20:51:56.475Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-08T20:51:56.475Z] > authorizing via signed-in user (eleelavm@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/elebi/Documents/AfrikaNaOne
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-12-08T20:51:56.476Z] Using project from CLI flag: afrikanaone
+[debug] [2024-12-08T20:51:56.476Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:56.477Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:56.477Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/afrikanaone [none]
+[debug] [2024-12-08T20:51:56.906Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/afrikanaone 200
+[debug] [2024-12-08T20:51:56.907Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/afrikanaone {"projectId":"afrikanaone","projectNumber":"964624085160","displayName":"AfrikaNaOne","name":"projects/afrikanaone","resources":{"hostingSite":"afrikanaone","realtimeDatabaseInstance":"afrikanaone-default-rtdb"},"state":"ACTIVE","etag":"1_7861546a-daf8-459d-bc6e-bb5c23931a0a"}
+[info] i  Using project afrikanaone (AfrikaNaOne) 
+[info] 
+=== Functions Setup
+[debug] [2024-12-08T20:51:56.915Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-08T20:51:56.915Z] > authorizing via signed-in user (eleelavm@gmail.com)
+[debug] [2024-12-08T20:51:56.915Z] [iam] checking project afrikanaone for permissions ["firebase.projects.get"]
+[debug] [2024-12-08T20:51:56.916Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:56.916Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:56.916Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone:testIamPermissions [none]
+[debug] [2024-12-08T20:51:56.916Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone:testIamPermissions x-goog-quota-user=projects/afrikanaone
+[debug] [2024-12-08T20:51:56.916Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-12-08T20:51:57.078Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone:testIamPermissions 200
+[debug] [2024-12-08T20:51:57.078Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-12-08T20:51:57.079Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:57.079Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:57.079Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:57.079Z] Checked if tokens are valid: true, expires at: 1733694636077
+[debug] [2024-12-08T20:51:57.079Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-12-08T20:51:57.079Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/afrikanaone
+[debug] [2024-12-08T20:51:57.080Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-12-08T20:51:57.080Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/afrikanaone
+[debug] [2024-12-08T20:51:57.399Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/cloudfunctions.googleapis.com 200
+[debug] [2024-12-08T20:51:57.399Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2024-12-08T20:51:57.502Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/runtimeconfig.googleapis.com 200
+[debug] [2024-12-08T20:51:57.502Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/afrikanaone/services/runtimeconfig.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+

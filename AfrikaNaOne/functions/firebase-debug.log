@@ -1,0 +1,85 @@
+[debug] [2024-12-08T07:45:13.747Z] ----------------------------------------------------------------------
+[debug] [2024-12-08T07:45:13.748Z] Command:       /Users/elebi/.nvm/versions/node/v18.20.5/bin/node /opt/homebrew/bin/firebase emulators:start
+[debug] [2024-12-08T07:45:13.748Z] CLI Version:   13.28.0
+[debug] [2024-12-08T07:45:13.748Z] Platform:      darwin
+[debug] [2024-12-08T07:45:13.748Z] Node Version:  v18.20.5
+[debug] [2024-12-08T07:45:13.752Z] Time:          Sun Dec 08 2024 02:45:13 GMT-0500 (Eastern Standard Time)
+[debug] [2024-12-08T07:45:13.752Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-12-08T07:45:13.800Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-12-08T07:45:13.800Z] > authorizing via signed-in user (eleelavm@gmail.com)
+[info] i  emulators: Starting emulators: functions, dataconnect, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, dataconnect, extensions"}}
+[debug] [2024-12-08T07:45:13.802Z] Checked if tokens are valid: true, expires at: 1733645360111
+[debug] [2024-12-08T07:45:13.802Z] Checked if tokens are valid: true, expires at: 1733645360111
+[debug] [2024-12-08T07:45:13.802Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone [none]
+[debug] [2024-12-08T07:45:14.004Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone 200
+[debug] [2024-12-08T07:45:14.005Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/afrikanaone {"projectNumber":"964624085160","projectId":"afrikanaone","lifecycleState":"ACTIVE","name":"AfrikaNaOne","labels":{"firebase":"enabled"},"createTime":"2024-10-06T01:41:35.048640Z"}
+[debug] [2024-12-08T07:45:14.373Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T07:45:14.373Z] [dataconnect.postgres] postgres server for dataconnect only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T07:45:14.373Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"dataconnect":[{"address":"127.0.0.1","family":"IPv4","port":9399},{"address":"::1","family":"IPv6","port":9399}],"dataconnect.postgres":[{"address":"127.0.0.1","family":"IPv4","port":5432}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project afrikanaone. This may result in unexpected behavior. 
+[debug] [2024-12-08T07:45:14.376Z] [hub] writing locator at /var/folders/xm/zg06ydf54z11rj07wz42dh6c0000gn/T/hub-afrikanaone.json
+[debug] [2024-12-08T07:45:14.378Z] [Extensions] Started Extensions emulator, this is a noop.
+[debug] [2024-12-08T07:45:14.668Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T07:45:14.668Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T07:45:14.668Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-12-08T07:45:14.668Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"dataconnect":[{"address":"127.0.0.1","family":"IPv4","port":9399},{"address":"::1","family":"IPv6","port":9399}],"dataconnect.postgres":[{"address":"127.0.0.1","family":"IPv4","port":5432}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, auth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
+[debug] [2024-12-08T07:45:14.670Z] defaultcredentials: writing to file /Users/elebi/.config/firebase/eleelavm_gmail_com_application_default_credentials.json
+[debug] [2024-12-08T07:45:14.671Z] Setting GAC to /Users/elebi/.config/firebase/eleelavm_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/elebi/.config/firebase/eleelavm_gmail_com_application_default_credentials.json"}}
+[debug] [2024-12-08T07:45:14.672Z] Checked if tokens are valid: true, expires at: 1733645360111
+[debug] [2024-12-08T07:45:14.672Z] Checked if tokens are valid: true, expires at: 1733645360111
+[debug] [2024-12-08T07:45:14.672Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/afrikanaone/adminSdkConfig [none]
+[debug] [2024-12-08T07:45:15.119Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/afrikanaone/adminSdkConfig 200
+[debug] [2024-12-08T07:45:15.119Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/afrikanaone/adminSdkConfig {"projectId":"afrikanaone","databaseURL":"https://afrikanaone-default-rtdb.firebaseio.com","storageBucket":"afrikanaone.firebasestorage.app"}
+[debug] [2024-12-08T07:45:16.192Z] I1208 02:45:16.181731   76483 control.go:45] [engine.Service /emulator/AfrikaNaOne 03ce] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+I1208 02:45:16.189488   76483 control.go:73] [engine.Service /emulator/AfrikaNaOne 03ce] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.181731   76483 control.go:45] [engine.Service /emulator/AfrikaNaOne 03ce] UpdateSchema(): done sources: schema/schema.gql [1384B] \nI1208 02:45:16.189488   76483 control.go:73] [engine.Service /emulator/AfrikaNaOne 03ce] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] \n"}}
+[debug] [2024-12-08T07:45:16.193Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-12-08T07:45:16.193Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-12-08T07:45:16.193Z] Starting Data Connect Emulator with command {"binary":"/Users/elebi/.cache/firebase/emulators/dataconnect-emulator-1.7.4","args":["--logtostderr","-v=2","dev","--listen=127.0.0.1:9399,[::1]:9399","--config_dir=/Users/elebi/Documents/AfrikaNaOne/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/Users/elebi/.cache/firebase/emulators/dataconnect-emulator-1.7.4\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=127.0.0.1:9399,[::1]:9399\",\"--config_dir=/Users/elebi/Documents/AfrikaNaOne/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to \u001b[1mdataconnect-debug.log\u001b[22m"}}
+[info] i  dataconnect: Started up Postgres server, listening on {"address":"127.0.0.1","family":"IPv4","port":5432} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Started up Postgres server, listening on {\"address\":\"127.0.0.1\",\"family\":\"IPv4\",\"port\":5432}"}}
+[debug] [2024-12-08T07:45:16.227Z] [Data Connect] Connecting to postgres://127.0.0.1:5432/fdcdb?sslmode=disable}...
+[debug] [2024-12-08T07:45:16.227Z] >>> [apiv2][query] POST http://127.0.0.1:9399/emulator/configure [none]
+[debug] [2024-12-08T07:45:16.227Z] >>> [apiv2][body] POST http://127.0.0.1:9399/emulator/configure {"connectionString":"postgres://127.0.0.1:5432/fdcdb?sslmode=disable","database":"fdcdb","serviceId":"AfrikaNaOne","maxOpenConnections":1}
+[debug] [2024-12-08T07:45:16.228Z] *** [apiv2] error from fetch(http://127.0.0.1:9399/emulator/configure, {"headers":{},"method":"POST","body":"{\"connectionString\":\"postgres://127.0.0.1:5432/fdcdb?sslmode=disable\",\"database\":\"fdcdb\",\"serviceId\":\"AfrikaNaOne\",\"maxOpenConnections\":1}"}): FetchError: request to http://127.0.0.1:9399/emulator/configure failed, reason: connect ECONNREFUSED 127.0.0.1:9399
+[debug] [2024-12-08T07:45:16.228Z] [Data Connect] Retrying connectToPostgress call (1 of 3 attempts): FirebaseError: Data Connect emulator: undefined
+[debug] [2024-12-08T07:45:16.357Z] I1208 02:45:16.355676   76486 load.go:37] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.355676   76486 load.go:37] Reloading schema and connectors...\n"}}
+[debug] [2024-12-08T07:45:16.367Z] I1208 02:45:16.367472   76486 control.go:45] [engine.Service /emulator/AfrikaNaOne 37c4] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.367472   76486 control.go:45] [engine.Service /emulator/AfrikaNaOne 37c4] UpdateSchema(): done sources: schema/schema.gql [1384B] \n"}}
+[debug] [2024-12-08T07:45:16.374Z] I1208 02:45:16.374263   76486 control.go:73] [engine.Service /emulator/AfrikaNaOne 37c4] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.374263   76486 control.go:73] [engine.Service /emulator/AfrikaNaOne 37c4] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] \n"}}
+[debug] [2024-12-08T07:45:16.386Z] I1208 02:45:16.386544   76486 codegen.go:82] [connector "default" swiftSdk] Generating sources into "/Users/elebi/Documents/AfrikaNaOne/dataconnect-generated/swift/DefaultConnector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.386544   76486 codegen.go:82] [connector \"default\" swiftSdk] Generating sources into \"/Users/elebi/Documents/AfrikaNaOne/dataconnect-generated/swift/DefaultConnector\"\n"}}
+[debug] [2024-12-08T07:45:16.394Z] I1208 02:45:16.394038   76486 collector.go:107] schema extensions wrote into "/Users/elebi/Documents/AfrikaNaOne/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [65151B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.394038   76486 collector.go:107] schema extensions wrote into \"/Users/elebi/Documents/AfrikaNaOne/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [65151B] \n"}}
+[debug] [2024-12-08T07:45:16.395Z] I1208 02:45:16.395304   76486 collector.go:107] connector "default" swiftSdk wrote into "/Users/elebi/Documents/AfrikaNaOne/dataconnect-generated/swift/DefaultConnector"
+Generated sources: README.md [688B] Package.swift [819B] Sources/DefaultClient.swift [840B] Sources/DefaultKeys.swift [48B] Sources/DefaultOperations.swift [239B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.395304   76486 collector.go:107] connector \"default\" swiftSdk wrote into \"/Users/elebi/Documents/AfrikaNaOne/dataconnect-generated/swift/DefaultConnector\"\nGenerated sources: README.md [688B] Package.swift [819B] Sources/DefaultClient.swift [840B] Sources/DefaultKeys.swift [48B] Sources/DefaultOperations.swift [239B] \n"}}
+[debug] [2024-12-08T07:45:16.395Z] I1208 02:45:16.395404   76486 load.go:115] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.395404   76486 load.go:115] Finished reloading\n"}}
+[debug] [2024-12-08T07:45:16.399Z] I1208 02:45:16.399078   76486 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.399078   76486 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399\n"}}
+[debug] [2024-12-08T07:45:16.400Z] I1208 02:45:16.400302   76486 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1208 02:45:16.400302   76486 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399\n"}}
+[debug] [2024-12-08T07:45:18.230Z] [Data Connect] Connecting to postgres://127.0.0.1:5432/fdcdb?sslmode=disable}...
+[debug] [2024-12-08T07:45:18.230Z] >>> [apiv2][query] POST http://127.0.0.1:9399/emulator/configure [none]
+[debug] [2024-12-08T07:45:18.230Z] >>> [apiv2][body] POST http://127.0.0.1:9399/emulator/configure {"connectionString":"postgres://127.0.0.1:5432/fdcdb?sslmode=disable","database":"fdcdb","serviceId":"AfrikaNaOne","maxOpenConnections":1}
+[debug] [2024-12-08T07:45:18.269Z] Frontend message 
+[debug] [2024-12-08T07:45:18.270Z] Backend message AuthenticationResponse
+[debug] [2024-12-08T07:45:18.271Z] Backend message ParameterStatus
+[debug] [2024-12-08T07:45:18.271Z] Backend message ReadyForQuery
+[debug] [2024-12-08T07:45:18.272Z] Frontend message Query
+[debug] [2024-12-08T07:45:18.297Z] Error: ENOENT: no such file or directory, mkdir '/Users/elebi/Documents/AfrikaNaOne/AfrikaNaOne/functions/dataconnect/.dataconnect/pgliteData'
+    at Object.mkdirSync (node:fs:1391:3)
+    at new Qe (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/@electric-sql/pglite/dist/index.cjs:1:16589)
+    at ma (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/@electric-sql/pglite/dist/index.cjs:10:7287)
+    at async eE.ua (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/@electric-sql/pglite/dist/index.cjs:12:2426480)
+    at async eE.create (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/@electric-sql/pglite/dist/index.cjs:12:2423415)
+    at async PostgresServer.getDb (/opt/homebrew/lib/node_modules/firebase-tools/lib/emulator/dataconnect/pgliteServer.js:93:23)
+    at async Object.onMessage (/opt/homebrew/lib/node_modules/firebase-tools/lib/emulator/dataconnect/pgliteServer.js:52:32)
+[error] 
+[error] Error: An unexpected error has occurred.

@@ -148,7 +148,7 @@ struct CheckCodigo: View {
                     .padding(.bottom, 200)
                 
                 Text("ENTER A GAMECODE")
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.subheadline)
                     .fontWeight(.bold)
                 
@@ -220,7 +220,7 @@ struct CheckCodigo: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        .frame(width: 300, height: 55)
+                        .frame(width: 300, height: 75)
                         .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
                         .cornerRadius(10)
                         .overlay(

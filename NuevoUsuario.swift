@@ -32,7 +32,6 @@ struct NuevoUsuario: View {
                     password: $viewModel.password,
                     telefono: $viewModel.telefono,
                     ciudad: $viewModel.ciudad,
-                    estado: $viewModel.estado,
                     selectedCountry: $viewModel.selectedCountry,
                     selectedDevice: $viewModel.selectedDevice,
                     viewModel: viewModel
@@ -40,7 +39,7 @@ struct NuevoUsuario: View {
                 
                 Button(action: {
                     viewModel.crearUsuario()
-                    SoundManager.shared.playMagicalSound()
+                    
                 }) {
                     Text("REGISTER")
                         .font(.headline)
@@ -85,6 +84,7 @@ struct NuevoUsuario: View {
         .alert(item: $viewModel.alertaTipo) { alertaTipo in
             switch alertaTipo {
             case .exito(let message):
+                SoundManager.shared.playMagicalSound()
                 return Alert(
                     title: Text("Success"),
                     message: Text(message),
@@ -96,6 +96,7 @@ struct NuevoUsuario: View {
                     })
                 )
             case .error(let message):
+                SoundManager.shared.playWarningSound()
                 return Alert(
                     title: Text("Error"),
                     message: Text(message),

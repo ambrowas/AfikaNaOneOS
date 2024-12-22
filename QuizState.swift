@@ -113,23 +113,23 @@ class QuizState: ObservableObject {
     }
     
     private func handleTimeout() {
-          guard !isAnswered else { return }
-          print("Handling timeout for question.")
+        guard !isAnswered else { return }
+        print("Handling timeout for question.")
 
-          // Stop the timer
-          timer?.invalidate()
-          timer = nil
+        // Stop the timer
+        timer?.invalidate()
+        timer = nil
 
-          // Mark question as incorrect
-          mistakes += 1
-          wrongSoundEffect?.play()
-          answerStatusMessage = "SORRY, YOUR TIME IS UP!"
-          questionTextColor = .red
-          buttonText = "NEXT"
-          isAnswered = true
+        // Mark question as incorrect
+        mistakes += 1
+        wrongSoundEffect?.play()
+        answerStatusMessage = "SORRY, YOUR TIME IS UP!"
+        questionTextColor = Color(hue: 1.0, saturation: 0.984, brightness: 0.699)
+        buttonText = "NEXT"
+        isAnswered = true
 
-          print("Timeout handled. Mistakes: \(mistakes).")
-      }
+        print("Timeout handled. Mistakes: \(mistakes). Question text color updated to dark red.")
+    }
     
     func checkAnswer(isTimeout: Bool = false) {
         guard !isAnswered else { return }
@@ -169,10 +169,10 @@ class QuizState: ObservableObject {
             handleIncorrectAnswer()
         }
 
-        buttonText = "NEXT"
+        // Check if this is the last question
+        buttonText = currentQuestionIndex == randomQuestions.count - 1 ? "FINISH" : "NEXT"
     }
    
-    
     func handleTimerExpiry() {
         print("Timer expired. Marking question as incorrect.")
 
@@ -187,11 +187,10 @@ class QuizState: ObservableObject {
         }
     }
     
-
     func playCountdownSound() {
         countdownSound?.play()
     }
-    
+   
     private func handleCorrectAnswer() {
         score += 1
         totalScore += 500
@@ -200,9 +199,9 @@ class QuizState: ObservableObject {
         answerStatusMessage = "YEP, YOU'RE RIGHT"
         answerIsCorrect = true
         selectedIncorrectAnswer = false
-        questionTextColor = Color(hue: 0.315, saturation: 0.953, brightness: 0.335)
+        questionTextColor = Color(hue: 0.315, saturation: 0.953, brightness: 0.335) // Green for correct
+        print("Correct answer handled. Text color updated to green.")
     }
-
     
     func handleIncorrectAnswer(isTimeout: Bool = false) {
         mistakes += 1
@@ -212,10 +211,10 @@ class QuizState: ObservableObject {
         answerIsCorrect = false
         selectedIncorrectAnswer = true
         shouldFlashCorrectAnswer = true
-        questionTextColor = .red
-        print("Mistake count updated to \(mistakes). Timeout: \(isTimeout)")
+        questionTextColor =  Color(hue: 1.0, saturation: 0.984, brightness: 0.699) // Dark red for both
+        print("Mistake count updated to \(mistakes). Timeout: \(isTimeout). Text color updated to dark red.")
     }
-    
+   
     func penalizeForLeavingApp() {
           guard !isAnswered else { return }
           guard !hasBeenPenalized else { return }
@@ -235,7 +234,6 @@ class QuizState: ObservableObject {
     private func updateButtonTextForNextAction() {
         buttonText = preguntaCounter < randomQuestions.count ? "NEXT" : "FINISH"
     }
-    
     
     private func updateButtonTextPostAnswer() {
         if preguntaCounter >= 10 {
@@ -265,7 +263,6 @@ class QuizState: ObservableObject {
            print("Moved to question \(preguntaCounter).")
        }
    
-    
     private func resetForNewQuestion() {
         timeRemaining = 15
         answerIsCorrect = nil
@@ -298,15 +295,20 @@ class QuizState: ObservableObject {
 
     func finishQuiz() {
         let aciertos = score
-        let puntuacion = totalScore
         let errores = mistakes
+        totalScore = aciertos * 500 // Remove penalty for mistakes
+
+        // Save the results to UserDefaults
         UserDefaults.standard.set(aciertos, forKey: "aciertos")
-        UserDefaults.standard.set(puntuacion, forKey: "puntuacion")
+        UserDefaults.standard.set(totalScore, forKey: "puntuacion")
         UserDefaults.standard.set(errores, forKey: "errores")
         isQuizCompleted = true
+
+        // Mark questions as shown
         let roundQuestionIDs = randomQuestions.map { $0.id }
-           QuizDBHelper.shared.markQuestionsAsShown(with: roundQuestionIDs)
-        print("Quiz finished. Correct Answers: \(aciertos), Total Score: \(puntuacion), Mistakes: \(errores), Quiz Completed: \(isQuizCompleted)")
+        QuizDBHelper.shared.markQuestionsAsShown(with: roundQuestionIDs)
+
+        print("Quiz finished. Correct Answers: \(aciertos), Total Score: \(totalScore), Mistakes: \(errores), Quiz Completed: \(isQuizCompleted)")
     }
 
     private func loadSoundEffects(player: Binding<AVAudioPlayer?>) {

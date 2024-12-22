@@ -1,0 +1,11 @@
+I1208 02:45:16.355676   76486 load.go:37] Reloading schema and connectors...
+I1208 02:45:16.367472   76486 control.go:45] [engine.Service /emulator/AfrikaNaOne 37c4] UpdateSchema(): done sources: schema/schema.gql [1384B] 
+I1208 02:45:16.374263   76486 control.go:73] [engine.Service /emulator/AfrikaNaOne 37c4] UpdateConnector(default): done sources: connector/mutations.gql [1163B] connector/queries.gql [1855B] 
+I1208 02:45:16.386544   76486 codegen.go:82] [connector "default" swiftSdk] Generating sources into "/Users/elebi/Documents/AfrikaNaOne/dataconnect-generated/swift/DefaultConnector"
+I1208 02:45:16.394038   76486 collector.go:107] schema extensions wrote into "/Users/elebi/Documents/AfrikaNaOne/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [65151B] 
+I1208 02:45:16.395304   76486 collector.go:107] connector "default" swiftSdk wrote into "/Users/elebi/Documents/AfrikaNaOne/dataconnect-generated/swift/DefaultConnector"
+Generated sources: README.md [688B] Package.swift [819B] Sources/DefaultClient.swift [840B] Sources/DefaultKeys.swift [48B] Sources/DefaultOperations.swift [239B] 
+I1208 02:45:16.395404   76486 load.go:115] Finished reloading
+I1208 02:45:16.399078   76486 dev.go:95] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I1208 02:45:16.400302   76486 dev.go:95] Listening on address (HTTP + gRPC): [::1]:9399

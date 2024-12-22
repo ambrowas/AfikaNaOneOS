@@ -66,9 +66,20 @@ class JugarModoCompeticionViewModel: ObservableObject {
         return currentQuestion?.number // Or however you access the number in your Question type
         }
     @Published var shouldHideUI: Bool = false
+    @Published var scale: CGFloat = 1.0
+    private var isGrowing = true
+    private var timerCancellable: AnyCancellable?
+    @Published var displayAlertMessage: String? // Holds the alert message to display
+    @Published var isAlertVisible: Bool = false // Tracks if an alert is active
+    @Published var isMessageBlockingNext: Bool = false // Prevents moving to the next question if a message is displayed
+    @Published var isPenaltyPending: Bool = false
+    @Published var shouldNavigateToResults: Bool = false
+    
+
+   
     
     
-    enum ActiveAlert: Identifiable {
+        enum ActiveAlert: Identifiable {
         case showAlert, showEndGameAlert, showGameOverAlert, showManyMistakesAlert, showReturnToAppAlert, showTimeIsUpAlert
 
         var id: Int {
@@ -97,7 +108,7 @@ class JugarModoCompeticionViewModel: ObservableObject {
 options.shuffled()
 }
     
-    init(userId: String, userData: UserData) {
+            init(userId: String, userData: UserData) {
         // Initialize your other properties
         self.userId = userId
         self.userData = userData
@@ -133,6 +144,8 @@ options.shuffled()
             print("Sound effect files not found in the bundle.")
         }
     }
+    
+           
     
             func fetchNextQuestion() {
             let unusedQuestionsCount = DatabaseManager.shared.countUnusedQuestions()
@@ -312,55 +325,81 @@ options.shuffled()
 
             func checkAnswer() {
             // Check if an option has been selected
+            if selectedOptionIndex == nil {
+                // No option has been selected, show an alert
+                print("checkAnswer - No option selected. Showing alert.")
+                triggerMakeAChoiceAlert()
+                return
+            }
+            
+            // Unwrap the selected option safely
             if let selectedOptionIndex = selectedOptionIndex {
                 let selectedOption = options[selectedOptionIndex]
                 
                 if selectedOption == correctAnswer {
-                    // Correct answer logic
-                    playRightSoundEffect()
-                    score += 1
-                    totalScore += 500
-                    answerIsCorrect = true
-                    print("checkAnswer - Correct answer selected.")
+                    handleCorrectAnswer()
                 } else {
-                    // Incorrect answer logic
-                    playWrongSoundEffect()
-                    mistakes += 1
-                    totalScore -= 500
-                    print("checkAnswer - Incorrect answer selected.")
-                    
-                    // Check for game over condition
-                    if mistakes >= 5 {
-                        print("checkAnswer - Game over condition met. Navigating to game over.")
-                        terminar {}
-                        return
-                    }
-                    answerIsCorrect = false
+                    handleIncorrectAnswer()
                 }
                 
-                questionProcessed = true // Mark the question as processed
-                
+                startGrowShrinkAnimation()
+                // Common logic for both correct and incorrect answers
+                questionProcessed = true
+                answerChecked = true
+                resetTimer()
+                buttonText = "NEXT"
+                shouldShowTerminar = true
+
                 // Attempt to mark the question as used
                 if let questionNumber = currentQuestion?.number {
-                    print("checkAnswer - Attempting to mark question NUMBER: \(questionNumber) as used.")
+                    print("checkAnswer - Marking question NUMBER: \(questionNumber) as used.")
                     DatabaseManager.shared.markQuestionAsUsed(questionNumber: questionNumber)
                 } else {
                     print("checkAnswer - Error: currentQuestionNumber is nil. Unable to mark question as used.")
                 }
                 
-                // Proceed with post-answer logic
-                answerChecked = true
-                resetTimer()
-                buttonText = "NEXT"
-                shouldShowTerminar = true
-            } else {
-                // No option has been selected, show an alert
-                print("checkAnswer - No option selected. Showing alert.")
-                showAlert = true
+                // Reset the selected option after checking the answer
+                self.selectedOptionIndex = nil
             }
+        }
+    
+            private func handleCorrectAnswer() {
+            playRightSoundEffect()
+            score += 1
+            totalScore += 500
+            answerIsCorrect = true
+            print("handleCorrectAnswer - Correct answer selected.")
+        }
+    
+            private func handleIncorrectAnswer() {
+            playWrongSoundEffect()
+            mistakes += 1
+            totalScore -= 500
+            answerIsCorrect = false
+            print("handleIncorrectAnswer - Incorrect answer selected.")
             
-            // Reset the selected option after checking the answer
-            selectedOptionIndex = nil
+            // Check for game over condition
+            if mistakes >= 5 {
+                print("handleIncorrectAnswer - Game over condition met.")
+                terminar {}
+            }
+        }
+    
+            func startGrowShrinkAnimation() {
+            timerCancellable = Timer.publish(every: 0.5, on: .main, in: .common)
+                .autoconnect()
+                .sink { [weak self] _ in
+                    guard let self = self else { return }
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        self.scale = self.isGrowing ? 1.2 : 1.0
+                        self.isGrowing.toggle()
+                    }
+                }
+        }
+
+            func stopGrowShrinkAnimation() {
+            timerCancellable?.cancel()
+            timerCancellable = nil
         }
     
             func startTimer() {
@@ -417,33 +456,68 @@ options.shuffled()
         timerIsActive = false // Timer is no longer active
     }
     
-            func handleAlerts() {
-            // Check for "Too Many Mistakes" alert
-            if mistakes == 4 && !hasShownManyMistakesAlert {
-                print("Preparing to show 'Too Many Mistakes' alert...")
-                activeAlert = .showManyMistakesAlert
-                hasShownManyMistakesAlert = true
-                return // Stop further execution
-            }
-            
-            // Check for "Game Over" alert
-            if mistakes >= 5 {
-                print("Preparing to show 'Game Over' alert...")
-                activeAlert = .showGameOverAlert
-                return // Stop further execution
-            }
+    func handleAlerts() {
+        // Avoid re-triggering alerts if one is already displayed
+        guard !isAlertBeingDisplayed else { return }
+
+        // High-priority: Check for "Too Many Mistakes Alert" first
+        if mistakes == 4 && !hasShownManyMistakesAlert {
+            print("Handling alerts: Preparing to show 'Too Many Mistakes' alert.")
+            triggerManyMistakesAlert()
+            hasShownManyMistakesAlert = true
+            return // Exit to prevent triggering lower-priority alerts
         }
+
+        // Medium-priority: Check for "Game Over Alert"
+        if mistakes >= 5 {
+            print("Handling alerts: Preparing to show 'Game Over' alert.")
+            triggerGameOverAlert()
+            return
+        }
+
+        // Low-priority: Check for "Return to App Alert"
+        if activeAlert == .showReturnToAppAlert {
+            print("Handling alerts: Showing 'Return to App' alert.")
+            triggerReturnToAppAlert()
+            return
+        }
+
+        // No alerts to handle
+        print("No alerts to handle.")
+        activeAlert = nil
+        isAlertBeingDisplayed = false
+    }
+    
+            func triggerMakeAChoiceAlert() {
+            print("Triggering 'Make a Choice' alert...")
+            playWarningSound()
+            displayAlertMessage = "Fear not, make a choice"
+            isAlertVisible = true
+            isMessageBlockingNext = true
+        }
+
+    func clearAlertAndProceed() {
+        print("Alert dismissed, resetting alert state.")
+        activeAlert = nil
+        isAlertBeingDisplayed = false
+
+        // Recheck alerts to handle any pending ones
+        handleAlerts()
+    }
  
-            func triggerGameOverAlert() {
-                print("Triggering Game Overalert...")
-                isAlertBeingDisplayed = true
-                activeAlert = .showGameOverAlert
-                objectWillChange.send() // If needed, trigger a manual view update
-            }
+    func triggerGameOverAlert() {
+            print("Triggering Game Overalert...")
+            
+            isAlertBeingDisplayed = true
+            activeAlert = .showGameOverAlert
+            objectWillChange.send() // If needed, trigger a manual view update
+        }
             
             func triggerManyMistakesAlert() {
+                
             guard mistakes == 4 else { return } // Ensure it only triggers at the 4th mistake
             print("Triggering 'Too Many Mistakes' alert...")
+           // playWarningSound()
             isAlertBeingDisplayed = true
             activeAlert = .showManyMistakesAlert
             objectWillChange.send()
@@ -451,66 +525,100 @@ options.shuffled()
             
             func triggerEndGameAlert() {
                 print("Triggering end game alert...")
+               playWarningSound()
                 isAlertBeingDisplayed = true
                 activeAlert = .showEndGameAlert
                 objectWillChange.send() // If needed, trigger a manual view update
             }
     
-            func triggerReturnToAppAlert() {
-            print("Triggering Return to App Alert...")
-            playWarningSound()
-            isAlertBeingDisplayed = true
-            activeAlert = .showReturnToAppAlert
-            objectWillChange.send() // Trigger a UI update
-        }
-    
-            func appMovedToBackground() {
-    
+    func triggerReturnToAppAlert() {
+        print("Triggering Return to App Alert...")
+
+        // Priority Check: Too Many Mistakes Alert
+        if mistakes == 4 && !hasShownManyMistakesAlert {
+            print("User returned on 4th mistake. Prioritizing 'Too Many Mistakes' alert.")
+            triggerManyMistakesAlert()
+            return // Do not show Return to App Alert
         }
 
-            func appReturnsToForeground() {
-        if timerIsActive && !questionProcessed && !isAlertBeingDisplayed {
-            print("App returned to foreground. Showing alert but not penalizing yet.")
-            triggerReturnToAppAlert() // Show alert first
+        // Default behavior for Return to App Alert
+        if !isAlertBeingDisplayed {
+            print("No higher-priority alerts. Showing Return to App alert.")
+            activeAlert = .showReturnToAppAlert
+            playWarningSound()
+            isAlertBeingDisplayed = true
+            objectWillChange.send()
+        }
+    }
+    
+    func appMovedToBackground() {
+        print("App moved to the background. Checking state...")
+        if timerIsActive && !questionProcessed {
+            print("User left the app during an active question.")
+
+            // Priority Check: Too Many Mistakes Alert
+            if mistakes == 4 && !hasShownManyMistakesAlert {
+                print("User is at 4 mistakes. Prioritizing 'Too Many Mistakes' alert.")
+                triggerManyMistakesAlert()
+                return
+            }
+
+            // Default behavior for Return to App Alert
+            activeAlert = .showReturnToAppAlert
+        } else {
+            print("No active question. No penalty applied.")
+        }
+    }
+
+    func appReturnsToForeground() {
+        if timerIsActive && !questionProcessed {
+            print("App returned to foreground. Checking alert priority...")
+
+            // Delay alert check to ensure UI reflects updated mistakes count
+            DispatchQueue.main.async {
+                // Prioritize Too Many Mistakes Alert
+                if self.mistakes == 4 && !self.hasShownManyMistakesAlert {
+                    print("Mistakes reached 4. Triggering 'Too Many Mistakes' alert.")
+                    self.triggerManyMistakesAlert()
+                    self.hasShownManyMistakesAlert = true // Ensure it doesn't trigger again
+                    self.isAlertBeingDisplayed = true
+                    return // Exit to prevent other alerts
+                }
+
+                // If not at 4 mistakes, proceed with Return to App Alert
+                if !self.isAlertBeingDisplayed {
+                    print("Preparing penalty for leaving app. Triggering 'Return to App' alert.")
+                    self.activeAlert = .showReturnToAppAlert
+                    self.isAlertBeingDisplayed = true
+                    self.playWarningSound() // Play warning sound here
+                }
+            }
         } else {
             print("App returned to foreground but no penalty or alert needed.")
         }
     }
     
-            func penalizeForLeavingApp() {
-            print("Penalizing user for leaving the app...")
-
-            // Apply the penalty
-            playWrongSoundEffect()
-            mistakes += 1
-            totalScore -= 500
-
-            // Check if the game should end
-            if mistakes >= 5 {
-                terminar {}
-                return
-            }
-
-            // Mark the question as incorrect
-            answerIsCorrect = false
-
-            // Mark the current question as used
-            if let questionNumber = currentQuestion?.number {
-                DatabaseManager.shared.markQuestionAsUsed(questionNumber: questionNumber)
-            } else {
-                print("Error: currentQuestionNumber is nil")
-            }
-
-            // Prepare for the next question
-            answerChecked = true
-            resetTimer()
-            buttonText = "NEXT"
-            shouldShowTerminar = true
-
-            // Reset the selected option index as no option was actually selected
-            selectedOptionIndex = nil
-            timerIsActive = false
+    func penalizeForLeavingApp() {
+        guard isAlertBeingDisplayed else {
+            print("Penalty already applied or no alert is active.")
+            return
         }
+
+        print("Applying penalty for leaving the app...")
+        playWrongSoundEffect()
+        mistakes += 1
+        totalScore -= 500
+
+        // Reset question state
+        answerIsCorrect = false
+        resetTimer()
+        buttonText = "NEXT"
+        shouldShowTerminar = true
+        selectedOptionIndex = nil
+        timerIsActive = false
+
+        print("Penalty applied. Mistakes: \(mistakes), Total Score: \(totalScore)")
+    }
     
             func penalizeForTimeExpiry() {
             playWrongSoundEffect()
@@ -545,10 +653,12 @@ options.shuffled()
             }
             
             func playWarningSound() {
-            warning?.stop()
-            warning?.currentTime = 0
-            warning?.play()
-            print("Warning sound played.")
+            if let warning = warning, !warning.isPlaying {
+                warning.stop()
+                warning.currentTime = 0
+                warning.play()
+                print("Warning sound played.")
+            }
         }
             
             func prepareCountdownSound() {
@@ -594,10 +704,19 @@ options.shuffled()
             func playWrongSoundEffect() {
                 wrongSoundEffect?.play()
             }
+    
+    func setButtons() {
+        guard !options.isEmpty else { return }
+        DispatchQueue.main.async {
+            self.buttonBackgroundColors = Array(repeating: Color(hue: 0.664, saturation: 0.935, brightness: 0.604), count: self.options.count)
+            print("Set buttons with default colors: \(self.buttonBackgroundColors)")
+        }
+    }
             
-            func resetButtonColors() {
-                buttonBackgroundColors = Array(repeating: defaultButtonColor, count: options.count)
-            }
+    func resetButtonColors() {
+        print("Resetting button colors to default")
+        buttonBackgroundColors = Array(repeating: defaultButtonColor, count: options.count)
+    }
             
             func updateButtonBackgroundColors() {
                 var colors = [Color]()
@@ -696,20 +815,26 @@ options.shuffled()
     }
 }
     
-            func terminar(completion: @escaping () -> Void) {
-            timer?.invalidate()
-            timer = nil
-            
-            updateCurrentGameValues(aciertos: score, fallos: mistakes, puntuacion: totalScore)
-            updateAccumulatedValues(newAciertos: score, newFallos: mistakes, newPuntuacion: totalScore)
-            updateHighestScore(newScore: totalScore)
-            
-    
-            
-            shouldNavigateToGameOver = true
-            print("terminar function completed")
-            completion()
+    func terminar(navigateToResults: Bool = false, completion: @escaping () -> Void) {
+        timer?.invalidate()
+        timer = nil
+        
+        // Process game stats
+        updateCurrentGameValues(aciertos: score, fallos: mistakes, puntuacion: totalScore)
+        updateAccumulatedValues(newAciertos: score, newFallos: mistakes, newPuntuacion: totalScore)
+        updateHighestScore(newScore: totalScore)
+        
+        if navigateToResults {
+            shouldNavigateToGameOver = false // Avoid navigating to Game Over
+            shouldNavigateToResults = true // Trigger navigation to results
+        } else {
+            shouldNavigateToGameOver = true // Navigate to Game Over if not voluntary termination
         }
+        
+        print("terminar function completed. Navigation to results: \(navigateToResults)")
+        completion()
+    }
+    
             
             func calculateNewPosition() -> Int {
                 let sortedUsers = userData.users.sorted { $0.accumulatedPuntuacion > $1.accumulatedPuntuacion }
@@ -721,4 +846,3 @@ options.shuffled()
             
         }
         
-

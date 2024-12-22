@@ -10,13 +10,10 @@ struct LeadersProfile: View {
     @State private var showSheet: Bool = false
     @State private var goToMenuCompeticion: Bool = false
 
-    
     init(userId: String) {
-           _viewModel = StateObject(wrappedValue: LeadersProfileViewModel(userId: userId))
-       }
+        _viewModel = StateObject(wrappedValue: LeadersProfileViewModel(userId: userId))
+    }
 
-
-    
     var body: some View {
         ZStack {
             Image("neon")
@@ -51,7 +48,7 @@ struct LeadersProfile: View {
                                 }
                             )
                     }
-                    
+
                     if #available(iOS 16.0, *) {
                         Circle()
                             .stroke(Color.black, lineWidth: 2) // black border
@@ -60,7 +57,7 @@ struct LeadersProfile: View {
                             .padding(.leading, 200)
                             .padding(.top, -70)
                             .overlay(
-                                FlashingText(text: "\(viewModel.user?.positionInLeaderboard ?? 0)", shouldFlash: true)
+                                FlashingText(text: "\(viewModel.user?.positionInLeaderboard ?? 0)", shouldFlash: true, flashingColor: $userData.flashingColor)
                                     .foregroundColor(.white)
                                     .font(.largeTitle)
                                     .bold()
@@ -71,24 +68,22 @@ struct LeadersProfile: View {
                         // Fallback on earlier versions
                     }
                 }
-                
+
                 ScrollView {
                     VStack(spacing: 10) {
                         if let user = viewModel.user {
-                            TextRowView(title: "NAME", value: user.fullname)
-                            TextRowView(title: "CITY", value: user.ciudad)
-                            TextRowView(title: "COUNTRY", value: user.pais)
-                            TextRowView(title: "TOTAL SCORE", value: "\(user.accumulatedPuntuacion)")
-                            TextRowView(title: "TOTAL CORRECT ANSWERS", value: "\(user.accumulatedAciertos)")
-                            TextRowView(title: "TOTAL WRONG ANSWERS", value: "\(user.accumulatedFallos)")
-                            TextRowView(title: "RECORD", value: "\(user.highestScore)")
-                            TextRowView(title: "TOTAL CASH", value: "\(user.accumulatedPuntuacion ) AFROS")
+                            UpdatedTextRowView(title: "NAME", value: user.fullname)
+                            UpdatedTextRowView(title: "CITY", value: user.ciudad)
+                            UpdatedTextRowView(title: "COUNTRY", value: user.pais)
+                            UpdatedTextRowView(title: "TOTAL SCORE", value: "\(user.accumulatedPuntuacion)")
+                            UpdatedTextRowView(title: "TOTAL CORRECT ANSWERS", value: "\(user.accumulatedAciertos)")
+                            UpdatedTextRowView(title: "TOTAL WRONG ANSWERS", value: "\(user.accumulatedFallos)")
+                            UpdatedTextRowView(title: "RECORD", value: "\(user.highestScore)")
+                            UpdatedTextRowView(title: "TOTAL CASH", value: "\(user.accumulatedPuntuacion) AFROS")
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 50)
-                    
-                    
+                    .padding(.horizontal, 20) // Adjust padding for better alignment
                 }
                 .padding(.top, 10)
                 
@@ -96,7 +91,6 @@ struct LeadersProfile: View {
                 Button(action: {
                     SoundManager.shared.playTransitionSound()
                     presentationMode.wrappedValue.dismiss()
-                    
                 }) {
                     Text("RETURN")
                         .font(.headline)
@@ -114,40 +108,66 @@ struct LeadersProfile: View {
             }
             .onAppear {
                 self.viewModel.fetchUserDataFromRealtimeDatabase()
-
             }
         }
     }
-    
-    struct LeadersProfile_Previews: PreviewProvider {
-        static var previews: some View {
-            LeadersProfile(userId: "DummyUserId")
-            
-        }
-    }
-    
+}
+// MARK: - Updated TextRowView
+struct UpdatedTextRowView: View {
+    var title: String
+    var value: String
 
-    
-    struct TextRowView: View {
-        var title: String
-        var value: String
-        
-        var body: some View {
-            HStack {
-                Text(title)
-                    .bold()
-                    .foregroundColor(Color.black)
-                Spacer()
-                Text(value)
-                    .foregroundColor(Color.white)
-                    .bold()
-            }
-          
+    var body: some View {
+        HStack(alignment: .center, spacing: 10) {
+            Text(title)
+                .font(.subheadline)
+                .bold()
+                .foregroundColor(.black) // White text for title
+                .lineLimit(nil) // Allow text to wrap
+                .minimumScaleFactor(0.8) // Scale down if needed
+                .fixedSize(horizontal: false, vertical: true) // Prevent truncation
             
+            Spacer()
+            
+            Text(value)
+                .font(.subheadline)
+                .foregroundColor(.white) // White text for value
+                .multilineTextAlignment(.trailing) // Align text to the trailing edge
+                .lineLimit(nil)
+                .minimumScaleFactor(0.8)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        
+        .padding(.vertical, 5) // Adds spacing for better appearance
+        .frame(maxWidth: .infinity)
     }
-    
-   
-    
+}
+
+// MARK: - Preview
+struct LeadersProfile_Previews: PreviewProvider {
+    static var previews: some View {
+        LeadersProfile(userId: "DummyUserId")
+            .environmentObject(LeadersProfileViewModel.mock())
+            .previewLayout(.sizeThatFits)
+            .previewDisplayName("LeadersProfile Preview")
+    }
+}
+
+// MARK: - Mock Extension
+extension LeadersProfileViewModel {
+    static func mock() -> LeadersProfileViewModel {
+        let mockViewModel = LeadersProfileViewModel(userId: "DummyUserId")
+        mockViewModel.user = ProfileUser(
+            id: "MockId",
+            fullname: "John Doe",
+            barrio: "New York",
+            ciudad: "USA",
+            pais: "https://example.com/mock-profile-picture.png",
+            positionInLeaderboard: 10000,
+            accumulatedPuntuacion: 150,
+            accumulatedAciertos: 20,
+            accumulatedFallos: 999,
+            highestScore: 1, profilePictureURL: "https://example.com/mock-profile-picture.png"
+        )
+        return mockViewModel
+    }
 }

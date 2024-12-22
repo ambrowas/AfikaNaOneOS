@@ -51,7 +51,7 @@ struct MenuModoCompeticion: View {
                         
                 }
                 Text(viewModel.userFullName)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.headline)
                     .padding(.horizontal, 20)
                     .padding(.top, 60)
@@ -118,7 +118,8 @@ struct MenuModoCompeticion: View {
                             )
                     }
                     .alert(isPresented: $showAlert) {
-                        Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                        SoundManager.shared.playWarningSound()
+                        return Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                     }
                     .fullScreenCover(isPresented: $jugarModoCompeticionActive) {
                         // Your destination view here, for example:
@@ -131,6 +132,7 @@ struct MenuModoCompeticion: View {
                         SoundManager.shared.playTransitionSound()
                         showClasificacion = true
                     } else {
+                        SoundManager.shared.playWarningSound()
                         alertMessage = "You must log in first"
                         showAlert = true
                     }
@@ -160,6 +162,7 @@ struct MenuModoCompeticion: View {
                         SoundManager.shared.playTransitionSound()
                         showProfile = true
                     } else {
+                        SoundManager.shared.playWarningSound()
                         alertMessage = "You must log in first."
                         showAlert = true
                     }

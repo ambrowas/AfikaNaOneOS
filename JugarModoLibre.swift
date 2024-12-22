@@ -32,7 +32,7 @@ struct JugarModoLibre: View {
     var body: some View {
         ZStack {
             // Background Image
-            Image("neon")
+            Image("libre")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
@@ -66,7 +66,9 @@ struct JugarModoLibre: View {
                 HStack {
                     Spacer()
                     Text("\(quizState.timeRemaining)")
-                        .foregroundColor(quizState.timeRemaining <= 5 ? Color.red : .black)
+                        .foregroundColor(quizState.timeRemaining <= 5
+                                ? Color(hue: 1.0, saturation: 0.984, brightness: 0.699)
+                                : .black)
                         .fontWeight(.bold)
                         .font(.system(size: 60))
                         .padding(.trailing, 20.0)
@@ -92,7 +94,6 @@ struct JugarModoLibre: View {
                     .padding(.horizontal, 20)
                     .padding(.top, -50)
                     .padding(.bottom, 20)
-                
                 // Options Section
                 VStack(alignment: .leading, spacing: 10) {
                     let optionValues = Array(quizState.currentQuestion.options.values)
@@ -174,23 +175,30 @@ struct JugarModoLibre: View {
                 return
             }
             quizState.checkAnswer()
-            quizState.buttonText = "NEXT"
+            // Update button text depending on the question index
+            quizState.buttonText = quizState.isLastQuestion ? "FINISH" : "NEXT"
+
         case "NEXT":
             SoundManager.shared.playSoundEffect(quizState.swooshSoundEffect, name: "Swoosh")
             if quizState.currentQuestionIndex < quizState.randomQuestions.count - 1 {
                 flipImage()
                 quizState.showNextQuestion()
             } else {
+                print("Quiz completed. Preparing to finish...")
                 quizState.finishQuiz()
                 isShowingResultadoView = true
             }
+
         case "FINISH":
             quizState.finishQuiz()
-            isShowingResultadoView = true
+            print("Quiz completed. Preparing to finish...")
+            isShowingResultadoView = true // Transition to ResultadoView
+
         default:
-            break
+            print("Unhandled button text: \(quizState.buttonText)") // Debug log
         }
     }
+   
 
     private func handleAlertSound(for alert: ActiveAlert?) {
         if alert != nil, !hasPlayedSoundForAlert {

@@ -7,7 +7,6 @@ struct InputFieldsView: View {
     @Binding var password: String
     @Binding var telefono: String
     @Binding var ciudad: String
-    @Binding var estado: String
     @Binding var selectedCountry: String
     @Binding var selectedDevice: String
     
@@ -85,8 +84,7 @@ struct InputFieldsView: View {
                    SingleInputFieldView(text: $ciudad, placeholder: "City")
                        .styledInput()
                    
-                   SingleInputFieldView(text: $estado, placeholder: "State/Province")
-                       .styledInput()
+        
                }
 
                           // Country and Device Picker
@@ -214,7 +212,6 @@ struct InputFieldsView: View {
                password: .constant("password123"),
                telefono: .constant("123-456-7890"),
                ciudad: .constant("Los Angeles"),
-               estado: .constant("California"),
                selectedCountry: .constant("United States"),
                selectedDevice: .constant("Android"),
                viewModel: NuevoUsuarioViewModel()
