@@ -195,27 +195,28 @@ struct ResultadoCompeticion: View {
                             }
                         )
                     case .esperaNecesaria:
+                        playWarningSoundOnce() // Play the warning sound
                         return Alert(
                             title: Text(""),
-                            message: Text("This code has already been cashed out."),
+                            message: Text("This code has already been processed."),
                             dismissButton: .default(Text("OK")) {
                                 resetWarningSoundState() // Reset state after dismissing the alert
                             }
                         )
                     case .confirmarSalida:
                         return Alert(
-                            title: Text("CONFIRM"),
+                            title: Text("CONFIRM EXIT"),
                             message: Text("Yo, you out??"),
-                            primaryButton: .default(Text("YEP")) {
-                                goToMenuPrincipal = true // Navigate to the main menu
-                                resetWarningSoundState() // Reset state after confirming the action
-                            },
-                            secondaryButton: .cancel {
+                            primaryButton: .cancel(Text("NOPE")) {
                                 resetWarningSoundState() // Reset state if the user cancels
+                            },
+                            secondaryButton: .destructive(Text("YEP")) {
+                                goToMenuPrincipal = true // Navigate to the main menu
+                                SoundManager.shared.playTransitionSound()
+                                resetWarningSoundState() // Reset state after confirming the action
                             }
                         )
                     }
-                
                     
                     func playWarningSoundOnce() {
                         DispatchQueue.main.async {
@@ -240,7 +241,7 @@ struct ResultadoCompeticion: View {
                                 // If necessary, perform any actions following a successful data fetch.
                             case .failure(let error):
                                 // Handle and/or display the error to the user.
-                                print("Error while fetching user data: \(error.localizedDescription)")
+                               print("Error while fetching user data: \(error.localizedDescription)")
                             }
                         }
                     }

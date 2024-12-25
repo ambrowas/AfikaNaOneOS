@@ -84,7 +84,6 @@ struct NuevoUsuario: View {
         .alert(item: $viewModel.alertaTipo) { alertaTipo in
             switch alertaTipo {
             case .exito(let message):
-                SoundManager.shared.playMagicalSound()
                 return Alert(
                     title: Text("Success"),
                     message: Text(message),

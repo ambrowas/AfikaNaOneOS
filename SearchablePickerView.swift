@@ -58,10 +58,10 @@ struct SearchablePickerView: View {
                     }
                 }
             }
-            .navigationTitle("Selecciona un país")
+            .navigationTitle("Select a country")
             .searchable(text: $searchText)
             .toolbar {
-                Button("Cancelar") {
+                Button("Cancel") {
                     isPresented = false
                 }
             }

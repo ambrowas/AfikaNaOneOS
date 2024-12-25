@@ -105,8 +105,13 @@ struct InputFieldsView: View {
                                       Text(selectedCountry.isEmpty ? "Select Country" : selectedCountry)
                                           .foregroundColor(.black)
                                           .frame(width: 160, height: 30)
-                                          .border(Color.black, width: 2)
                                           .background(Color.white)
+                                          .cornerRadius(5)
+                                          .overlay(
+                                              RoundedRectangle(cornerRadius: 5)
+                                                  .stroke(Color.black, lineWidth: 2)
+                                          )
+                                          .fixedSize(horizontal: true, vertical: true) // Prevent resizing
                                   }
                                   .sheet(isPresented: $isPresentingCountryPicker) {
                                       CountryPickerView(
@@ -116,7 +121,6 @@ struct InputFieldsView: View {
                                       )
                                   }
                               }
-
                               VStack(alignment: .leading, spacing: 5) {
                                   Text("Device:")
                                       .font(.headline)

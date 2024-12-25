@@ -21,10 +21,10 @@ struct Profile: View {
     @State private var showCambiodeFotoAlert: Bool = false
     @State private var alertMessage: String = ""
     @State private var currentAlertType: AlertType? = nil
+    @State private var scaleEffect: CGFloat = 1.0 // For the shrink-and-grow effect
+    @State private var borderColor: Color = .black // Border color
     
-    
-    
-    
+
     @Environment(\.presentationMode) var presentationMode
     
     var alertTypeBinding: Binding<Bool> {
@@ -44,8 +44,6 @@ struct Profile: View {
             }
         )
     }
-    
-    
     
     var body: some View {
         ZStack {
@@ -69,6 +67,12 @@ struct Profile: View {
                             .frame(width: 200, height: 150)
                             .border(Color.black, width: 3)
                             .foregroundColor(.gray)
+                            .scaleEffect(scaleEffect)
+                                                        .animation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: scaleEffect)
+                                                        .onAppear {
+                                                            scaleEffect = 1.2 // Start the shrink-and-grow effect
+                                                            borderColor = Color(hue: 1.0, saturation: 0.984, brightness: 0.699) 
+                                                        }
                             .overlay(
                                 VStack {
                                     Text("Profile pic")
@@ -163,7 +167,7 @@ struct Profile: View {
                         return Alert(
                             title: Text("HOLD UP"),
                             message: Text("¿You sure you want to do this? This acction cannot be undone."),
-                            primaryButton: .destructive(Text("Borrar")) {
+                            primaryButton: .destructive(Text("Delete")) {
                                 
                                 profileViewModel.deleteUserAndNotify()
                             },
@@ -190,9 +194,10 @@ struct Profile: View {
                         )
                         
                     case .imageChangeSuccess:
+                        SoundManager.shared.playMagicalSound()
                         return Alert(
                             title: Text("DJUDJU BLACK MAGIC"),
-                            message: Text("¡Your profile pic has been updated!"),
+                            message: Text("Your profile pic has been updated!"),
                             dismissButton: .default(Text("OK")){
                                 SoundManager.shared.playTransitionSound()
                                 showMenuModoCompeticion = true

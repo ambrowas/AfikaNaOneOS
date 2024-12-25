@@ -58,19 +58,19 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func showNotificationPermissionAlert() {
         print("Presenting notification permission alert")
         let alertController = UIAlertController(
-            title: "Atención",
-            message: "Activa las notificaciones para recibir códigos de juego y otros mensajes importantes. ¿Quieres activarlo?",
+            title: "Attention",
+            message: "Activate notifications to receive game codes and other important communications.Would you like to activate notifications now?",
             preferredStyle: .alert
         )
 
-        let settingsAction = UIAlertAction(title: "Si", style: .default) { (_) in
+        let settingsAction = UIAlertAction(title: "YES", style: .default) { (_) in
             // Open app settings
             if let appSettings = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(appSettings) {
                 UIApplication.shared.open(appSettings)
             }
         }
 
-        let cancelAction = UIAlertAction(title: "No", style: .cancel)
+        let cancelAction = UIAlertAction(title: "NO", style: .cancel)
 
         alertController.addAction(settingsAction)
         alertController.addAction(cancelAction)

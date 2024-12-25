@@ -106,9 +106,6 @@ struct CodigoQR: View {
         }
     }
     
-    
-    
-    
          func generateQRCodeKey() -> String {
         let allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let length = 18
@@ -164,20 +161,21 @@ struct CodigoQR: View {
                 return nil
             }
         }
-        
-        func guardarButtonPressed() {
-        
-            if isGuardarButtonDisabled {
-                   isShowingAlert = true
-                   alertMessage = "This code has already been saved."
-                   return
-               }
-        
-        
-        guard let userId = Auth.auth().currentUser?.uid else {
+    func guardarButtonPressed() {
+        if isGuardarButtonDisabled {
+            // Play warning sound and show alert if the button is disabled
+            SoundManager.shared.playWarningSound()
+            isShowingAlert = true
+            alertMessage = "This code has already been saved."
             return
         }
         
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Error: No user ID found.")
+            return
+        }
+        
+        // Prepare the QR code data to be saved
         let qrCodeData: [String: Any] = [
             "base64QRCode": "iVBORw0KGgoAAAANSUhEUgAA",
             "lastGamePuntuacion": userViewModel.currentGamePuntuacion,
@@ -189,18 +187,22 @@ struct CodigoQR: View {
             "email": userViewModel.email
         ]
         
+        // Save the QR code data to the Firebase database
         let ref = Database.database().reference(withPath: "qrCodes").child(userId)
         ref.setValue(qrCodeData) { error, _ in
             if error == nil {
+                // Play magical sound and show success alert
+                SoundManager.shared.playMagicalSound()
                 isShowingAlert = true
-                SoundManager.shared.playTransitionSound()
                 alertMessage = "QRCode saved. Go get your money."
             } else {
+                // Play warning sound and show error alert
+                SoundManager.shared.playWarningSound()
                 isShowingAlert = true
-                alertMessage = "Error while saving QR Code. Try again"
+                alertMessage = "Error while saving QR Code. Try again."
             }
             
-            // Start the cooldown timer irrespective of whether there was an error
+            // Start the cooldown timer irrespective of the outcome
             startCooldown()
         }
     }

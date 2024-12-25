@@ -13,7 +13,7 @@
     {
         "Question Number": "10",
         "Category": "Africa",
-        "Question": "Which Nigerian city's airport has recently been renamed in honor of the late Chief Obafemi Jeremiah Ayenyi Awolowo?",
+        "Question": "Which Nigerian city's airport has recently been renamed after the late Chief Obafemi Jeremiah Ayenyi Awolowo?",
         "Options": {
             "A": "Lagos",
             "B": "Calabar",
@@ -35,7 +35,7 @@
     {
         "Question Number": "11",
         "Category": "Africa",
-        "Question": "Which river forms a large part of the border between Zimbabwe and South Africa?",
+        "Question": "Which river conforms most of the border between Zimbabwe and South Africa?",
         "Options": {
             "A": "Zambezi",
             "B": "Limpopo",
@@ -46,7 +46,7 @@
     {
         "Question Number": "12",
         "Category": "Africa",
-        "Question": "Which Central African capital was founded in 1900 and called Fort Lamy until 1973?",
+        "Question": "Which central African capital was founded in 1900 and called Fort Lamy until 1973?",
         "Options": {
             "A": "N'djamena",
             "B": "Brazaville",
@@ -57,7 +57,7 @@
     {
         "Question Number": "13",
         "Category": "Africa",
-        "Question": "Which young and charismatic military man became the Head of State of Guinea through a coup d'\u00e9tat in October 2021?",
+        "Question": "What young and charismatic military man became the Head of State of Guinea through a coup d'etat in October 2021?",
         "Options": {
             "A": "Colonel assimi goita",
             "B": "Captain ibrahim traore",
@@ -112,7 +112,7 @@
     {
         "Question Number": "18",
         "Category": "Africa",
-        "Question": "Which Franco-algerian philosopher, playwright, journalist, and author received the Nobel Prize in Literature in 1957?",
+        "Question": "Which Franco-algerian philosopher, playwright, journalist, and author received the Nobel Prize of Literature in 1957?",
         "Options": {
             "A": "Albert camus",
             "B": "Aime cesaire",
@@ -145,7 +145,7 @@
     {
         "Question Number": "20",
         "Category": "Africa",
-        "Question": "His Majesty King Mswati iii is the current monarch of Eswatini (swaziland). To which dynasty does he belong?",
+        "Question": "His Majesty King Mswati III is the current monarch of Eswatini (Swaziland). To which dynasty does he belong?",
         "Options": {
             "A": "Shobuza",
             "B": "Mtetwa",
@@ -178,18 +178,18 @@
     {
         "Question Number": "23",
         "Category": "Africa",
-        "Question": "Which Nigerian First Lady visited Equatorial Guinea and opened a school in Malabo during the 1990s?",
+        "Question": "On which Basque La Liga team do the Williams brothers, Inaki & Nico, play?",
         "Options": {
-            "A": "Maryam babangida",
-            "B": "Maryam abacha",
-            "C": "Margaret shonekan"
+            "A": "Athletic de Bilbao",
+            "B": "Real Sociedad",
+            "C": "Atletico de Madrid"
         },
-        "Correct Answer": "MARYAM BABANGIDA"
+        "Correct Answer": "ATHLETIC DE BILBAO"
     },
     {
         "Question Number": "24",
         "Category": "Africa",
-        "Question": "Antoine Christophe Agbepa Mumba, originally from Kisangani, drc, is one of the most prolific and successful African artists, better known by the nickname...",
+        "Question": "Antoine Christophe Agbepa Mumba, from Kisangani, DRC, is one of the most successful African artists, better known by the stagename...",
         "Options": {
             "A": "Papa wemba",
             "B": "Fali ipupa",
@@ -200,7 +200,7 @@
     {
         "Question Number": "25",
         "Category": "Africa",
-        "Question": "Born in Bamako (1995), Vanity Fair magazine described her in 2019 as \"the most influential French artist in the world.\"",
+        "Question": "Born in Bamako in 1995, Vanity Fair magazine described her in 2019 as \"the most influential French artist in the world.\"",
         "Options": {
             "A": "Nej",
             "B": "Aya nakamura",
@@ -233,7 +233,7 @@
     {
         "Question Number": "28",
         "Category": "Africa",
-        "Question": "In which southern African country would you locate the famous Okavango Delta?",
+        "Question": "In which southern African country would you place the famous Okavango Delta?",
         "Options": {
             "A": "Namibia",
             "B": "South africa",
@@ -277,7 +277,7 @@
     {
         "Question Number": "31",
         "Category": "Africa",
-        "Question": "Nadia Nakai is a rapper half from South Africa, half from Zimbabwe who was dating which also South African rapper?",
+        "Question": "Nadia Nakai is a rapper half from South Africa, half from Zimbabwe, who was dating which South African rapper?",
         "Options": {
             "A": "Hip hop pantsula",
             "B": "Aka",
@@ -288,7 +288,7 @@
     {
         "Question Number": "32",
         "Category": "Africa",
-        "Question": "In 1993, this businessman won nigeria's first democratic elections, but the military regime of Sani Abacha imprisoned him.",
+        "Question": "In 1993, this businessman won Nigeria's first democratic elections but he was imprisoned instead.",
         "Options": {
             "A": "Olosegun obasanjo",
             "B": "Ibrahim badamasi babangida",
@@ -299,7 +299,7 @@
     {
         "Question Number": "33",
         "Category": "Africa",
-        "Question": "Tippu Tip was an extraordinarily wealthy and powerful 19th-century slave trader originally from...",
+        "Question": "Tippu Tip was an extraordinarily wealthy and powerful 19th-century slave trader from...",
         "Options": {
             "A": "Mali",
             "B": "Zanzibar",
@@ -332,7 +332,7 @@
     {
         "Question Number": "36",
         "Category": "Africa",
-        "Question": "Which Cameroonian artist had an international hit titled \"you must calculer\" in 1987?",
+        "Question": "Which Cameroonian artist had an international hit titled \"You Must Calculer\" in 1987?",
         "Options": {
             "A": "Lapiro de mbanga",
             "B": "Prince eyango",
@@ -343,7 +343,7 @@
     {
         "Question Number": "37",
         "Category": "Africa",
-        "Question": "Which organization is fighting for the independence of Western Sahara against Morocco?",
+        "Question": "Which organization is fighting for the independence of Western Sahara from Morocco?",
         "Options": {
             "A": "Salafist group",
             "B": "Muslim brotherhood",
@@ -354,7 +354,7 @@
     {
         "Question Number": "38",
         "Category": "Africa",
-        "Question": "Which Italian-senegalese influencer is one of the biggest celebrities to emerge from tiktok?",
+        "Question": "Which senegalese-italian influencer is one of the biggest celebrities to emerge from Tiktok?",
         "Options": {
             "A": "Khabi lame",
             "B": "Sadio mane",
@@ -365,7 +365,7 @@
     {
         "Question Number": "39",
         "Category": "Africa",
-        "Question": "Basirou Diomaye Fay\u00e9 has become africa's youngest president by winning elections in which country?",
+        "Question": "Basirou Diomaye Fay\u00e9 became Africa's youngest President by winning elections in which country?",
         "Options": {
             "A": "Mali",
             "B": "Conakry",
@@ -376,7 +376,7 @@
     {
         "Question Number": "4",
         "Category": "Africa",
-        "Question": "Which country has a larger population?",
+        "Question": "Which of these countries has a larger population?",
         "Options": {
             "A": "Tanzania",
             "B": "Ghana",
@@ -387,7 +387,7 @@
     {
         "Question Number": "40",
         "Category": "Africa",
-        "Question": "Which island located between Madagascar and Mauritius in the Indian Ocean, with its capital at Saint-dennis, is a French department?",
+        "Question": "Which island located between Madagascar and Mauritius, with its capital in Saint-dennis, is a French department?",
         "Options": {
             "A": "Mayotte",
             "B": "Reunion",
@@ -409,7 +409,7 @@
     {
         "Question Number": "42",
         "Category": "Africa",
-        "Question": "Which president of Nigeria was deposed while attending the African Union Summit in Kampala, 1975?",
+        "Question": "Which president of Nigeria was deposed in 1975 while attending the African Union Summit in Kampala?",
         "Options": {
             "A": "Johnson aguiyi-ironsi",
             "B": "Yakubu gowon",
@@ -431,7 +431,7 @@
     {
         "Question Number": "44",
         "Category": "Africa",
-        "Question": "In addition to being an influencer with half a million followers, Tunde Onakoya is an extraordinary...",
+        "Question": "Beyond being an influencer with half a million followers, Tunde Onakoya is an extraordinary...",
         "Options": {
             "A": "Master chef",
             "B": "Fashion designer",
@@ -464,7 +464,7 @@
     {
         "Question Number": "47",
         "Category": "Africa",
-        "Question": "Which radical political party was founded and is led by Julius Malema in South Africa?",
+        "Question": "Which radical political party was founded by Julius Malema in South Africa?",
         "Options": {
             "A": "Umkhonto we sizwe",
             "B": "Inkatha freedom party",
@@ -486,7 +486,7 @@
     {
         "Question Number": "49",
         "Category": "Africa",
-        "Question": "Besides Kofi Annan, which other African has served as Secretary-general of the un?",
+        "Question": "Besides Kofi Annan, which other African statesman has served as Secretary-general of the UN?",
         "Options": {
             "A": "Boutros boutros ghali",
             "B": "Diallo telli boubacar",
@@ -497,7 +497,7 @@
     {
         "Question Number": "5",
         "Category": "Africa",
-        "Question": "Which is the second most populous country on the continent?",
+        "Question": "What is the second most populous country on the continent?",
         "Options": {
             "A": "Egypt",
             "B": "South africa",
@@ -519,7 +519,7 @@
     {
         "Question Number": "51",
         "Category": "Africa",
-        "Question": "Which African city is nicknamed \"the Mother City\"?",
+        "Question": "Which African city is known as \"the Mother City\"?",
         "Options": {
             "A": "Agadir, morocco",
             "B": "Cape town, south africa",
@@ -530,18 +530,18 @@
     {
         "Question Number": "52",
         "Category": "Africa",
-        "Question": "Which geographical feature at the southern tip of the continent names a neighborhood in Malabo?",
+        "Question": "Ouham, Lobaye and Kemo are three of the twenty prefectures of which country?",
         "Options": {
-            "A": "Cape san juan",
-            "B": "Point europe",
-            "C": "Cape of good hope"
+            "A": "CENTRAL AFRICAN REPUBLIC",
+            "B": "TCHAD",
+            "C": "GABON"
         },
-        "Correct Answer": "CAPE OF GOOD HOPE"
+        "Correct Answer": "CENTRAL AFRICAN REPUBLIC"
     },
     {
         "Question Number": "53",
         "Category": "Africa",
-        "Question": "In which island country is the picturesque Avenue of the Baobabs located?",
+        "Question": "In which island nation is the picturesque Avenue of the Baobabs located?",
         "Options": {
             "A": "Cabo verde",
             "B": "Seychelles",
@@ -554,11 +554,11 @@
         "Category": "Africa",
         "Question": "What is the highest peak in Africa?",
         "Options": {
-            "A": "Atlas",
-            "B": "Table mountain",
-            "C": "Kilimanjaro"
+            "A": "Atlas Mountain",
+            "B": "Table Mountain",
+            "C": "Mount Kilimanjaro"
         },
-        "Correct Answer": "KILIMANJARO"
+        "Correct Answer": "MOUNT KILIMANJARO"
     },
     {
         "Question Number": "55",
@@ -585,7 +585,7 @@
     {
         "Question Number": "57",
         "Category": "Africa",
-        "Question": "What is the indigenous name also known for Lake Victoria?",
+        "Question": "Which on these is one of Lake Victoria's indigenous names?",
         "Options": {
             "A": "Nyanza",
             "B": "Uhuru",
@@ -607,7 +607,7 @@
     {
         "Question Number": "59",
         "Category": "Africa",
-        "Question": "In which southern country is the pula the official currency?",
+        "Question": "In which southern country is the Pula the official currency?",
         "Options": {
             "A": "Zimbabwe",
             "B": "Malawi",
@@ -651,7 +651,7 @@
     {
         "Question Number": "62",
         "Category": "Africa",
-        "Question": "Which infamous Sierra Leonean warlord founded and led the barbaric Revolutionary United Front (ruf)?",
+        "Question": "Which infamous Sierra Leonean warlord founded and led the barbaric Revolutionary United Front (RUF)?",
         "Options": {
             "A": "Sam bockarie (general mosquito)",
             "B": "Foday sankoh",
@@ -662,7 +662,7 @@
     {
         "Question Number": "63",
         "Category": "Africa",
-        "Question": "What is the largest football stadium in Africa?",
+        "Question": "Which is the largest football stadium in Africa?",
         "Options": {
             "A": "Stade des martyrs (kinshasa)",
             "B": "Soccer city/fnb stadium (johannesburg)",
@@ -728,7 +728,7 @@
     {
         "Question Number": "69",
         "Category": "Africa",
-        "Question": "Which of these Guineas is not on the African continent?",
+        "Question": "Which of these Guineas is not part of our continent?",
         "Options": {
             "A": "Bissau",
             "B": "Papua",
@@ -783,7 +783,7 @@
     {
         "Question Number": "73",
         "Category": "Africa",
-        "Question": "Which 2002 song by Magic System went viral internationally?",
+        "Question": "Which 2002 song by Magic System is one of Africa's biggest international hits?",
         "Options": {
             "A": "Wakalome",
             "B": "Premier gaou",
@@ -794,7 +794,7 @@
     {
         "Question Number": "74",
         "Category": "Africa",
-        "Question": "In which country is the political landscape dominated by the zanu-pf?",
+        "Question": "In which country is the political landscape still dominated by the zanu-pf?",
         "Options": {
             "A": "Zaire",
             "B": "Zimbabwe",
@@ -805,7 +805,7 @@
     {
         "Question Number": "75",
         "Category": "Africa",
-        "Question": "What is now the name of Zaire?",
+        "Question": "What do we call Zaire these days?",
         "Options": {
             "A": "Republic of congo",
             "B": "Democratic republic of congo",
@@ -816,7 +816,7 @@
     {
         "Question Number": "76",
         "Category": "Africa",
-        "Question": "Which country is home to the Gio, Mano, Kru, Mende, and Krahn ethnic groups, among others?",
+        "Question": "The Gio, Mano, Kru, Mende, and Krahn, among other ethnic groups live here",
         "Options": {
             "A": "Liberia",
             "B": "Kenya",
@@ -893,7 +893,7 @@
     {
         "Question Number": "82",
         "Category": "Africa",
-        "Question": "In which country is the infamous Darfur region located?",
+        "Question": "In which country is the Darfur region located?",
         "Options": {
             "A": "Sudan",
             "B": "South sudan",
@@ -904,7 +904,7 @@
     {
         "Question Number": "83",
         "Category": "Africa",
-        "Question": "Who won the 2024 edition of the Africa Cup of Nations?",
+        "Question": "Who won the 2024 edition of the African Cup of Nations?",
         "Options": {
             "A": "Nigeria",
             "B": "Senegal",
@@ -926,7 +926,7 @@
     {
         "Question Number": "85",
         "Category": "Africa",
-        "Question": "Which english-speaking region of Cameroon is waging a war of independence against the Government?",
+        "Question": "Which English-speaking region of Cameroon is waging a war of independence against the Government?",
         "Options": {
             "A": "Tigray",
             "B": "Ambazonia",
@@ -937,7 +937,7 @@
     {
         "Question Number": "86",
         "Category": "Africa",
-        "Question": "During which years did the Nigerian Civil War, also known as the Biafra War, take place?",
+        "Question": "During which years did the Nigerian Civil War take place?",
         "Options": {
             "A": "1960-1963",
             "B": "1964-1967",
@@ -961,9 +961,9 @@
         "Category": "Africa",
         "Question": "What is the largest supermarket chain in Africa?",
         "Options": {
-            "A": "Safari",
+            "A": "Spar",
             "B": "Shoprite",
-            "C": "Mtn"
+            "C": "Checkers"
         },
         "Correct Answer": "SHOPRITE"
     },
@@ -1047,13 +1047,13 @@
     {
         "Question Number": "95",
         "Category": "Africa",
-        "Question": "Who is it supposed that Charles Taylor tried to woo with blood diamonds in 1997?",
+        "Question": "Whom did Charles Taylor tried to woo with blood diamonds at a peace conference in 1997?",
         "Options": {
-            "A": "To tyra banks",
-            "B": "To naomi campbell",
-            "C": "To iman"
+            "A": "tyra banks",
+            "B": "naomi campbell",
+            "C": "iman"
         },
-        "Correct Answer": "TO NAOMI CAMPBELL"
+        "Correct Answer": "NAOMI CAMPBELL"
     },
     {
         "Question Number": "96",
@@ -1091,7 +1091,7 @@
     {
         "Question Number": "99",
         "Category": "Africa",
-        "Question": "Who was the first woman elected to a head of state in Africa?",
+        "Question": "Who was the first woman elected as head of state in Africa?",
         "Options": {
             "A": "Joyce banda",
             "B": "Ellen johnson sirleaf",

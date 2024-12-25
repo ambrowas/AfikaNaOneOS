@@ -327,7 +327,7 @@ import FirebaseStorage
                         message: Text("Sure you want to end the game?"),
                         primaryButton: .destructive(Text("YEP")) {
                             viewModel.terminar(navigateToResults: true) {
-                                SoundManager.shared.playMagicalSound()
+                                SoundManager.shared.playTransitionSound()
                                 print("Voluntary termination: Navigating to results.")
                             }
                         },
@@ -392,7 +392,7 @@ import FirebaseStorage
                     }
                     .onChange(of: viewModel.activeAlert) { newAlert in
                         if newAlert == nil {
-                            print("Alert dismissed, resetting isAlertBeingDisplayed.")
+                      //      print("Alert dismissed, resetting isAlertBeingDisplayed.")
                             viewModel.isAlertBeingDisplayed = false
                         }
                     }
@@ -452,13 +452,13 @@ struct IconView: View {
             fetchImage()
         }
         .onChange(of: categoryImage) { newValue in
-            print("IconView received new image URL: \(newValue)")
+     //       print("IconView received new image URL: \(newValue)")
             fetchImage() // Fetch the new image when categoryImage changes
         }
     }
 
     private func fetchImage() {
-        print("fetchImage called with categoryImage: \(categoryImage)")
+     //   print("fetchImage called with categoryImage: \(categoryImage)")
 
         isLoading = true
         guard !categoryImage.isEmpty else {
@@ -482,10 +482,10 @@ struct IconView: View {
         let storageRef = Storage.storage().reference(forURL: categoryImage)
         storageRef.downloadURL { url, error in
             if let url = url {
-                print("Fetched download URL: \(url)")
+               // print("Fetched download URL: \(url)")
                 self.downloadImage(from: url)
             } else {
-                print("Failed to fetch download URL: \(error?.localizedDescription ?? "Unknown error")")
+             //   print("Failed to fetch download URL: \(error?.localizedDescription ?? "Unknown error")")
                 self.isLoading = false
             }
         }
@@ -501,7 +501,7 @@ struct IconView: View {
                     self.isLoading = false
                 }
             } else {
-                print("Failed to download image: \(error?.localizedDescription ?? "Unknown error")")
+               // print("Failed to download image: \(error?.localizedDescription ?? "Unknown error")")
                 DispatchQueue.main.async {
                     self.isLoading = false
                 }

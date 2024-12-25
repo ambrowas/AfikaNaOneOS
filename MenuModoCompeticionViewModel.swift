@@ -3,10 +3,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-
-
-
-
 class MenuModoCompeticionViewModel: ObservableObject {
     
     @Published var userFullName = ""

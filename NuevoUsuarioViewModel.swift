@@ -115,6 +115,8 @@ class NuevoUsuarioViewModel: ObservableObject {
 
             // Save additional user information
             strongSelf.guardarUsuario(userId: userID)
+            SoundManager.shared.playMagicalSound()
+                    
 
             // Show success alert and navigate to profile setup
             strongSelf.alertaTipo = .exito(message: "New user has been created. Set up a profile pic")
@@ -227,7 +229,7 @@ class NuevoUsuarioViewModel: ObservableObject {
         if selectedCountry == "Choose your country of residence" { // Replace with your default or placeholder value
                 errors.append(.emptyField(fieldName: "Country"))
         }
-        if selectedDevice == "Selecct you    device" { // Replace with your default or placeholder value
+        if selectedDevice == "Select your device" { // Replace with your default or placeholder value
                 errors.append(.emptyField(fieldName: "Device"))
         }
 

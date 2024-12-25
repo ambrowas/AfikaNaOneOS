@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		75157DAB2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 75157DAA2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */; };
 		752F4E0F2D0011F0001FE0EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */; };
+		75450E7E2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 75450E7D2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */; };
 		755220132CFED18900B167A3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75521FE12CFED18700B167A3 /* AuthService.swift */; };
 		755220142CFED18900B167A3 /* CheckCodigo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75521FE22CFED18700B167A3 /* CheckCodigo.swift */; };
 		755220162CFED18900B167A3 /* SearchablePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75521FE42CFED18700B167A3 /* SearchablePickerView.swift */; };
@@ -117,8 +117,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		75157DAA2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AfrikaNaOne_Provisioning_Profile_II.mobileprovision; sourceTree = "<group>"; };
 		752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		75450E7D2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AfrikaNaOne_Provisioning_Profile_II.mobileprovision; sourceTree = "<group>"; };
 		75521FB02CFED0B100B167A3 /* AfrikaNaOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfrikaNaOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75521FC12CFED0B200B167A3 /* AfrikaNaOneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfrikaNaOneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75521FCB2CFED0B200B167A3 /* AfrikaNaOneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AfrikaNaOneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8957,8 +8957,8 @@
 				7552200D2CFED18900B167A3 /* UserManager.swift */,
 				755220102CFED18900B167A3 /* UserViewModel.swift */,
 				755220432CFED1A800B167A3 /* quiz_questions.json */,
-				75157DAA2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */,
 				757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */,
+				75450E7D2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */,
 				756428D22D0D2D5400B9DE76 /* Info.plist */,
 				7567C8052D0659DD005EA62F /* whatsapp.png */,
 				75B93C582D11525200E5859B /* neon.png */,
@@ -9069,8 +9069,6 @@
 				75521FC42CFED0B200B167A3 /* AfrikaNaOneTests */,
 			);
 			name = AfrikaNaOneTests;
-			packageProductDependencies = (
-			);
 			productName = AfrikaNaOneTests;
 			productReference = 75521FC12CFED0B200B167A3 /* AfrikaNaOneTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -9092,8 +9090,6 @@
 				75521FCE2CFED0B200B167A3 /* AfrikaNaOneUITests */,
 			);
 			name = AfrikaNaOneUITests;
-			packageProductDependencies = (
-			);
 			productName = AfrikaNaOneUITests;
 			productReference = 75521FCB2CFED0B200B167A3 /* AfrikaNaOneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -9174,9 +9170,9 @@
 				7567C82B2D067A4A005EA62F /* warning.mp3 in Resources */,
 				7567C8212D065C58005EA62F /* bikutsi.mp3 in Resources */,
 				7567C8172D065C31005EA62F /* quiz_questions.json in Resources */,
-				75157DAB2D0E4743000A3E1D /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */,
 				7567C8222D065C5A005EA62F /* expert.mp3 in Resources */,
 				7567C8252D065C60005EA62F /* countdown.wav in Resources */,
+				75450E7E2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */,
 				7567C8272D065C63005EA62F /* swoosh.wav in Resources */,
 				7567C8262D065C62005EA62F /* right.wav in Resources */,
 				7567C8242D065C5F005EA62F /* notright.wav in Resources */,
@@ -9411,12 +9407,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"AfrikaNaOne/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B5X8QR4N34;
+				DEVELOPMENT_TEAM = B5X8QR4N34;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -9443,7 +9438,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AfrikaNaOne Provisioning Profile II";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -9461,12 +9455,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AfrikaNaOne/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B5X8QR4N34;
+				DEVELOPMENT_TEAM = B5X8QR4N34;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -9493,7 +9485,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AfrikaNaOne Provisioning Profile II";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

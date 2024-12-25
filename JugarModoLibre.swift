@@ -162,7 +162,7 @@ struct JugarModoLibre: View {
         if newPhase == .active && !quizState.isAnswered && !quizState.hasBeenPenalized {
             activeAlert = .resumeWarning // Show the alert
         } else if newPhase == .active && quizState.hasBeenPenalized {
-            print("User returned after already being penalized. No further action.")
+            //print("User returned after already being penalized. No further action.")
         }
     }
 
@@ -251,7 +251,7 @@ struct JugarModoLibre_Previews: PreviewProvider {
         var body: some View {
             Button(action: {
                 self.selectedOptionIndex = self.optionIndex
-                print("Selected option index is now \(self.selectedOptionIndex)")
+              //  print("Selected option index is now \(self.selectedOptionIndex)")
             }) {
                 Text(text.uppercased())
                     .font(.headline)

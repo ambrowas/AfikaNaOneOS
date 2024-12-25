@@ -92,7 +92,7 @@ struct ResultadoView: View {
         .alert(isPresented: $showNoQuestionsLeftAlert) {
             Alert(
                 title: Text("CONGRATS CHAMP"),
-                message: Text("You've completed Single Mode. How about you try Competition Mode"),
+                message: Text("You've completed Single Mode. You should try Competition Mode"),
                 dismissButton: .default(Text("OK")) {
                     print("Alert dismissed")
                     dbHelper.resetShownQuestions()
@@ -136,20 +136,20 @@ struct ResultadoView: View {
     private func saveLastScore() {
         UserDefaults.standard.set(puntuacion, forKey: "LastScore")
         UserDefaults.standard.synchronize()
-        print("saveLastScore: Last Score Saved: \(puntuacion)")
+       // print("saveLastScore: Last Score Saved: \(puntuacion)")
     }
 
     
     private func saveHighScore() {
         let currentHighScore = UserDefaults.standard.integer(forKey: "HighScore")
-        print("Current High Score Before Update: \(currentHighScore)") // Debug log
+     //   print("Current High Score Before Update: \(currentHighScore)") // Debug log
 
         if puntuacion > currentHighScore {
             UserDefaults.standard.set(puntuacion, forKey: "HighScore")
             UserDefaults.standard.isNewHighScore = true // Mark it as a new high score
-            print("New High Score Saved: \(puntuacion)") // Debug log
+        //    print("New High Score Saved: \(puntuacion)") // Debug log
         } else {
-            print("No new high score. High Score remains: \(currentHighScore)") // Debug log
+         //   print("No new high score. High Score remains: \(currentHighScore)") // Debug log
         }
     }
     
@@ -166,14 +166,14 @@ struct ResultadoView: View {
     
     private func playSound(named fileName: String) {
         guard let url = Bundle.main.url(forResource: fileName, withExtension: nil) else {
-            print("Sound file \(fileName) not found")
+          //  print("Sound file \(fileName) not found")
             return
         }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.play()
         } catch {
-            print("Error playing sound: \(error)")
+           // print("Error playing sound: \(error)")
         }
     }
 

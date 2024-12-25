@@ -3,11 +3,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-import SwiftUI
-import Firebase
-import FirebaseAuth
-import FirebaseDatabase
-
 struct MenuModoCompeticion: View {
     @State private var userFullName = ""
     @State private var highestScore = 0
@@ -33,7 +28,7 @@ struct MenuModoCompeticion: View {
     @State private var shouldPresentProfile = false
     @State private var showMenuPrincipalSheet = false
     @State private var isFlashing = false
-    
+    @State private var hasPlayedWarningSound = false // State to manage warning sound
     
     var body: some View {
         ZStack {
@@ -42,19 +37,17 @@ struct MenuModoCompeticion: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 15) {
-                // Display a message if the user is not logged in
                 if viewModel.userFullName.isEmpty {
                     Text("LOG IN OR REGISTER")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        
                 }
                 Text(viewModel.userFullName)
                     .foregroundColor(.white)
                     .font(.headline)
                     .padding(.horizontal, 20)
-                    .padding(.top, 60)
+                   
                 
                 if !viewModel.userFullName.isEmpty {
                     Text("Your HighScore is \(viewModel.highestScore) puntos")
@@ -65,7 +58,6 @@ struct MenuModoCompeticion: View {
                 }
                 
                 if viewModel.validateCurrentGameFallos() {
-                    
                     Button(action: {
                         SoundManager.shared.playTransitionSound()
                         showCheckCodigo = true
@@ -86,15 +78,12 @@ struct MenuModoCompeticion: View {
                         CheckCodigo()
                     }
                     .onAppear {
-                        // Start a timer to toggle the flashing effect repeatedly
                         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
                             withAnimation {
                                 isFlashing.toggle()
                             }
                         }
                     }
-                    
-                    
                 } else {
                     Button(action: {
                         if Auth.auth().currentUser != nil {
@@ -102,7 +91,8 @@ struct MenuModoCompeticion: View {
                             jugarModoCompeticionActive = true
                         } else {
                             alertMessage = "You must log in to play."
-                            showAlert = true
+                            showAlert = true // Trigger the alert
+                            playWarningSound() // Play warning sound
                         }
                     }) {
                         Text("PLAY")
@@ -117,70 +107,74 @@ struct MenuModoCompeticion: View {
                                     .stroke(Color.black, lineWidth: 3)
                             )
                     }
-                    .alert(isPresented: $showAlert) {
-                        SoundManager.shared.playWarningSound()
-                        return Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                    }
                     .fullScreenCover(isPresented: $jugarModoCompeticionActive) {
-                        // Your destination view here, for example:
                         JugarModoCompeticion(userId: userId, userData: userData)
                     }
-                }
-                
-                Button(action: {
-                    if Auth.auth().currentUser != nil {
-                        SoundManager.shared.playTransitionSound()
-                        showClasificacion = true
-                    } else {
-                        SoundManager.shared.playWarningSound()
-                        alertMessage = "You must log in first"
-                        showAlert = true
+                    
+                    Button(action: {
+                        if Auth.auth().currentUser != nil {
+                            SoundManager.shared.playTransitionSound()
+                            showClasificacion = true
+                        } else {
+                            alertMessage = "You must log in first."
+                            showAlert = true
+                            playWarningSound()
+                        }
+                    }) {
+                        Text("SCOREBOARD")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .padding()
+                            .frame(width: 300, height: 75)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 3)
+                            )
                     }
-                }) {
-                    Text("SCOREBOARD")
-                        .font(.headline)
-                        .foregroundColor(.black)
-                        .padding()
-                        .frame(width: 300, height: 75)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.black, lineWidth: 3)
+                    .fullScreenCover(isPresented: $showClasificacion) {
+                        if let currentUser = Auth.auth().currentUser {
+                            ClasificacionView(userId: currentUser.uid)
+                        } else {
+                            Text("Loading...")
+                        }
+                    }
+                    
+                    Button(action: {
+                        if Auth.auth().currentUser != nil {
+                            SoundManager.shared.playTransitionSound()
+                            showProfile = true
+                        } else {
+                            alertMessage = "You must log in first."
+                            showAlert = true
+                            playWarningSound()
+                        }
+                    }) {
+                        Text("PROFILE")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: 300, height: 75)
+                            .background(Color(hue: 0.315, saturation: 0.953, brightness: 0.335))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 3)
+                            )
+                    }
+                    .fullScreenCover(isPresented: $showProfile) {
+                        Profile()
+                    }
+                    
+                    // Alert Modifier
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("ATTENTION"),
+                            message: Text(alertMessage),
+                            dismissButton: .default(Text("OK"))
                         )
-                }
-                .fullScreenCover(isPresented: $showClasificacion) {
-                    if let currentUser = Auth.auth().currentUser {
-                        ClasificacionView(userId: currentUser.uid)
-                    } else {
-                        Text("Loading...")
                     }
-                }
-                
-                Button(action: {
-                    if Auth.auth().currentUser != nil {
-                        SoundManager.shared.playTransitionSound()
-                        showProfile = true
-                    } else {
-                        SoundManager.shared.playWarningSound()
-                        alertMessage = "You must log in first."
-                        showAlert = true
-                    }
-                }) {
-                    Text("PROFILE")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: 300, height: 75)
-                        .background(Color(hue: 0.315, saturation: 0.953, brightness: 0.335))
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.black, lineWidth: 3)
-                        )
-                }
-                .fullScreenCover(isPresented: $showProfile) {
-                    Profile ()
                 }
                 
                 Button(action: {
@@ -194,9 +188,7 @@ struct MenuModoCompeticion: View {
                             viewModel.userFullName = ""
                             viewModel.highestScore = 0
                             viewModel.currentGameFallos = 0
-                        } catch _ as NSError {
-                            
-                        }
+                        } catch _ as NSError {}
                     }
                 }) {
                     Text(viewModel.userFullName.isEmpty ? "LOGIN/REGISTRATION" : "LOG OUT")
@@ -213,48 +205,54 @@ struct MenuModoCompeticion: View {
                 }
                 .fullScreenCover(isPresented: $showIniciarSesion) {
                     GestionarSesion()
-                        .onDisappear{
+                        .onDisappear {
                             viewModel.fetchCurrentUserData()
                         }
                 }
                 
-                
                 Button {
                     SoundManager.shared.playTransitionSound()
-                    self.showMenuPrincipalSheet = true
+                    showMenuPrincipalSheet = true
                 } label: {
                     Text("RETURN")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        .frame(width: 300, height: 75) // Match the size of other buttons
+                        .frame(width: 300, height: 75)
                         .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.black, lineWidth: 3) // Add black border
+                                .stroke(Color.black, lineWidth: 3)
                         )
                 }
                 .fullScreenCover(isPresented: $showMenuPrincipalSheet) {
                     MenuPrincipal(player: .constant(nil))
                 }
             }
-            .alert(isPresented: $showAlert) {
-                () -> Alert in
-                return Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
             .onAppear {
                 viewModel.checkAndStartBatchProcess()
                 if viewModel.userFullName.isEmpty {
                     viewModel.fetchCurrentUserData()
-                    
-                    
                 }
+                resetWarningSoundState()
             }
-            
         }
-        
     }
+    
+    // Functions to manage warning sound state
+    func playWarningSound() {
+        DispatchQueue.main.async {
+            SoundManager.shared.playWarningSound()
+        }
+    }
+    
+    func resetWarningSoundState() {
+        DispatchQueue.main.async {
+            hasPlayedWarningSound = false
+        }
+    }
+}
     
     struct MenuModoCompeticionNavigation: Identifiable {
         let id = UUID()
@@ -267,8 +265,7 @@ struct MenuModoCompeticion: View {
                 viewModel: MenuModoCompeticionViewModel() // Provide a mock ViewModel
             )
         }
-    }}
-
+    }
 
 
 
