@@ -1,6 +1,7 @@
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseFirestore
+import FirebaseStorage
 
 
 class NuevoUsuarioViewModel: ObservableObject {
@@ -77,9 +78,8 @@ class NuevoUsuarioViewModel: ObservableObject {
             self.questionManager = QuestionManager(realTimeDatabaseReference: realTimeDatabaseReference, firestore: firestore, userID: userID)
         }
 
-
     func crearUsuario() {
-        print("Starting registratrion process.")
+        print("Starting registration process.")
         
         // Validate user input
         let validationResult = validarCampos()
@@ -90,106 +90,204 @@ class NuevoUsuarioViewModel: ObservableObject {
             // Update the alertaTipo to communicate the error(s) to the user
             alertaTipo = .error(message: "Error: \(errorMessage)")
             mostrarAlerta = true  // Trigger the alert
+            
+            // Play warning sound only once
+            if !SoundManager.shared.isPlaying {
+                SoundManager.shared.playWarningSound()
+            }
+            
             return
         }
-        print("Fiedl validation ok.")
+        print("Field validation OK.")
         
         // Proceed with Firebase user creation
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             if let error = error {
                 print("Firebase Auth error: \(error.localizedDescription)")
-                strongSelf.alertaTipo = .error(message: error.localizedDescription)
-                strongSelf.mostrarAlerta = true
+                self.alertaTipo = .error(message: error.localizedDescription)
+                self.mostrarAlerta = true
+                
+                // Play warning sound only once
+                if !SoundManager.shared.isPlaying {
+                    SoundManager.shared.playWarningSound()
+                }
+                
                 return
             }
             
             guard let userID = authResult?.user.uid else {
                 print("Error: Failed to obtain a valid user ID from Firebase Auth.")
-                strongSelf.alertaTipo = .error(message: "Error: Failed to obtain a valid user ID.")
-                strongSelf.mostrarAlerta = true
+                self.alertaTipo = .error(message: "Error: Failed to obtain a valid user ID.")
+                self.mostrarAlerta = true
+                
+                // Play warning sound only once
+                if !SoundManager.shared.isPlaying {
+                    SoundManager.shared.playWarningSound()
+                }
+                
                 return
             }
             print("User created in Firebase Auth.")
-
+            
             // Save additional user information
-            strongSelf.guardarUsuario(userId: userID)
+            self.guardarUsuario(userId: userID)
             SoundManager.shared.playMagicalSound()
-                    
-
+            
             // Show success alert and navigate to profile setup
-            strongSelf.alertaTipo = .exito(message: "New user has been created. Set up a profile pic")
-            strongSelf.mostrarAlerta = true
-            strongSelf.navegarAlPerfil = true
+            self.alertaTipo = .exito(message: "New user has been created. Set up a profile pic")
+            self.mostrarAlerta = true
+            self.navegarAlPerfil = true
         }
     }
 
     private func guardarUsuario(userId: String) {
-        // Define date format and get the current formatted date
+        let storageBaseURL = "https://firebasestorage.googleapis.com/v0/b/afrikanaone.firebasestorage.app/o/flags%2F"
+        let storageSuffix = "?alt=media"
+
+        // Prepare date format
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let formattedDate = dateFormatter.string(from: Date())
 
-        // Prepare user data for saving
+        // Create the flag URL
+        let countryFileName = selectedCountry.replacingOccurrences(of: " ", with: "%20") + ".png"
+        let flagUrl = "\(storageBaseURL)\(countryFileName)\(storageSuffix)"
+
+        // Prepare user data
         let userData: [String: Any] = [
             "fullname": fullname,
             "email": email,
             "telefono": telefono,
             "ciudad": ciudad,
-            "pais": selectedCountry, //  Use selected country
+            "pais": selectedCountry,
             "dispositivo": selectedDevice,
             "accumulatedAciertos": 0,
             "accumulatedFallos": 0,
             "accumulatedPuntuacion": 0,
             "highestScore": 0,
-            "FechadeCreacion": formattedDate
+            "FechadeCreacion": formattedDate,
+            "flagUrl": flagUrl
         ]
 
         // Reference to Firebase database
         let ref = Database.database().reference()
-
-        // Save user data in Firebase
         ref.child("user").child(userId).setValue(userData) { [weak self] error, _ in
             guard let self = self else { return }
 
-            // Handle any error during saving
             if let error = error {
-                print("Error saving data on Firebase: \(error.localizedDescription)")
-                self.error = .signInError(description: error.localizedDescription)
-                self.alertaTipo = .error(message: "Error al guardar datos del usuario: \(error.localizedDescription)")
+                print("Error saving user data: \(error.localizedDescription)")
+                self.alertaTipo = .error(message: "Error saving user data: \(error.localizedDescription)")
                 self.mostrarAlerta = true
+                if !SoundManager.shared.isPlaying {
+                    SoundManager.shared.playWarningSound()
+                }
                 return
             }
 
-            print("Addtional data saved correctly in Firebase.")
+            print("User data saved successfully in Firebase.")
+            self.alertaTipo = .exito(message: "User created successfully!")
+            self.mostrarAlerta = true
 
-            // Set user default values
-            UserDefaults.standard.set(self.fullname, forKey: "fullname")
-            UserDefaults.standard.set(0, forKey: "highestScore")
-            UserDefaults.standard.set(0, forKey: "currentGameFallos")
-            
-            // Create the local table in the database
-            let dbManager = DatabaseManager()
-            dbManager.createTable()
-
-            // Assign a random batch to the user
-            self.questionManager?.setNumeroDeBatch(userId: userId) { success, error in
-                if let error = error {
-                    print("Error in setNumeroDeBatch: \(error.localizedDescription)")
-                    // Handle error in setting batch number
-                    return
-                }
-                if success {
-                    print("Batch number successfully set for user.")
-                    // Handle successful batch number assignment
-                    
-                    self.updateUserDeviceTokenInDatabase()
-                }
-            }
+            // Play magical sound on success
+            SoundManager.shared.playMagicalSound()
         }
     }
+    
+    func fetchFlagUrls(completion: @escaping ([String: String]?) -> Void) {
+        let firestore = Firestore.firestore()
+        firestore.collection("flags").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching flag URLs: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+
+            var flagUrlMap = [String: String]()
+            snapshot?.documents.forEach { document in
+                if let country = document.documentID as? String,
+                   let flagUrl = document.get("url") as? String {
+                    flagUrlMap[country] = flagUrl
+                }
+            }
+
+            completion(flagUrlMap)
+        }
+    }
+    
  
+    func getCountryAbbreviation(for countryName: String) -> String {
+        let countryAbbreviationMap: [String: String] = [
+            "Algeria": "DZA",
+            "Angola": "AGO",
+            "Benin": "BEN",
+            "Botswana": "BWA",
+            "Burkina Faso": "BFA",
+            "Burundi": "BDI",
+            "Cameroon": "CMR",
+            "Cape Verde": "CPV",
+            "Central African Republic": "CAF",
+            "Chad": "TCD",
+            "Comoros": "COM",
+            "Democratic Republic of Congo": "COD",
+            "Republic of the Congo": "COG",
+            "Côte d'Ivoire": "CIV",
+            "Djibouti": "DJI",
+            "Egypt": "EGY",
+            "Equatorial Guinea": "GNQ",
+            "Eritrea": "ERI",
+            "Eswatini": "SWZ",
+            "Ethiopia": "ETH",
+            "Gabon": "GAB",
+            "Gambia": "GMB",
+            "Ghana": "GHA",
+            "Guinea": "GIN",
+            "Guinea-Bissau": "GNB",
+            "Kenya": "KEN",
+            "Lesotho": "LSO",
+            "Liberia": "LBR",
+            "Libya": "LBY",
+            "Madagascar": "MDG",
+            "Malawi": "MWI",
+            "Mali": "MLI",
+            "Mauritania": "MRT",
+            "Mauritius": "MUS",
+            "Morocco": "MAR",
+            "Mozambique": "MOZ",
+            "Namibia": "NAM",
+            "Niger": "NER",
+            "Nigeria": "NGA",
+            "Rwanda": "RWA",
+            "Sao Tome and Principe": "STP",
+            "Senegal": "SEN",
+            "Seychelles": "SYC",
+            "Sierra Leone": "SLE",
+            "Somalia": "SOM",
+            "South Africa": "ZAF",
+            "South Sudan": "SSD",
+            "Sudan": "SDN",
+            "Tanzania": "TZA",
+            "Togo": "TGO",
+            "Tunisia": "TUN",
+            "Uganda": "UGA",
+            "Zambia": "ZMB",
+            "Zimbabwe": "ZWE",
+            "United States": "USA",
+            "Canada": "CAN",
+            "Brazil": "BRA",
+            "China": "CHN",
+            "India": "IND",
+            "United Kingdom": "GBR",
+            "Germany": "DEU",
+            "France": "FRA",
+            "Japan": "JPN",
+            "Australia": "AUS",
+            "Other": "XXX"
+        ]
+        return countryAbbreviationMap[countryName] ?? "XXX"
+    }
+
     func updateUserDeviceTokenInDatabase() {
         if let userID = Auth.auth().currentUser?.uid,
            let token = UserDefaults.standard.string(forKey: "deviceToken") {
@@ -205,7 +303,6 @@ class NuevoUsuarioViewModel: ObservableObject {
             }
         }
     }
-
 
     private func validarCampos() -> (isValid: Bool, errors: [NuevoUsuarioError]) {
         var errors = [NuevoUsuarioError]()
@@ -279,7 +376,6 @@ class NuevoUsuarioViewModel: ObservableObject {
         print("Sanitization complete: full name, telephone, city and country.")
     }
 
-
     private func sanitizeString(_ input: String, forFieldType type: FieldType) -> String {
         let allowedCharacters: CharacterSet
 
@@ -305,7 +401,6 @@ class NuevoUsuarioViewModel: ObservableObject {
     }
     
 }
-    
     
    extension String {
     var isValidEmail: Bool {

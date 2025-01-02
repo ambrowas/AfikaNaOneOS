@@ -5,7 +5,6 @@ import Foundation
 struct ProfileUser: Equatable {
     let id: String
     let fullname: String
-    let barrio: String
     let ciudad: String
     let pais: String
     let positionInLeaderboard: Int

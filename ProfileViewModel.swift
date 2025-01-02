@@ -4,10 +4,29 @@ import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
 
+extension ProfileViewModel {
+    static var mock: ProfileViewModel {
+        let mockViewModel = ProfileViewModel()
+        mockViewModel.fullname = "John Doe"
+        mockViewModel.email = "johndoe@example.com"
+        mockViewModel.telefono = "+1234567890"
+        mockViewModel.ciudad = "New York"
+        mockViewModel.pais = "USA"
+        mockViewModel.highestScore = 10000
+        mockViewModel.positionInLeaderboard = 1
+        mockViewModel.accumulatedPuntuacion = 50000
+        mockViewModel.accumulatedAciertos = 250
+        mockViewModel.accumulatedFallos = 50
+        return mockViewModel
+    }
+    
+}
+
 class ProfileViewModel: ObservableObject {
     static let shared = ProfileViewModel()
     
-    private init() {}
+    
+    init() {}
     
     @Published var fullname: String = ""
     @Published var email: String = ""
@@ -29,7 +48,12 @@ class ProfileViewModel: ObservableObject {
     @Published var alertMessage: String = ""
     @Published var showAlert: Bool = false
     @Published var alertType: AlertType?
-   
+    @Published var flagUrl: String? = nil
+    @Published var userId: String = ""
+    @Published var userData: UserData = UserData() // Replace `UserData` with the correct type
+    @Published var showReauthenticationCard: Bool = false
+    
+    
     
     enum AlertType: Identifiable, Equatable {
         case deleteConfirmation
@@ -38,8 +62,9 @@ class ProfileViewModel: ObservableObject {
         case imageChangeSuccess
         case imageChangeError(String)
         case volveratras
-
-        // This computed property will give a unique ID for each alert type
+        case reauthenticateRequired // Add this case
+        
+        // Unique ID for each alert type
         var id: Int {
             switch self {
             case .deleteConfirmation:
@@ -54,10 +79,14 @@ class ProfileViewModel: ObservableObject {
                 return 5
             case .volveratras:
                 return 6
+            case .reauthenticateRequired:
+                return 7
             }
         }
     }
-
+    
+    
+    
     
     private var ref = Database.database().reference()
     private var storageRef = Storage.storage().reference(forURL: "gs://afrikanaone.firebasestorage.app")
@@ -71,7 +100,11 @@ class ProfileViewModel: ObservableObject {
         case failure(String)
         case noImage
         case none
+        case reauthenticateRequired
     }
+    
+    
+    
     
     
     func fetchProfileImage(url: String) {
@@ -139,6 +172,7 @@ class ProfileViewModel: ObservableObject {
                     self.accumulatedPuntuacion = userData["accumulatedPuntuacion"] as? Int ?? 0
                     self.accumulatedAciertos = userData["accumulatedAciertos"] as? Int ?? 0
                     self.accumulatedFallos = userData["accumulatedFallos"] as? Int ?? 0
+                    self.flagUrl = userData["flagUrl"] as? String
                     
                     if let profileImageURL = userData["profilePicture"] as? String, !profileImageURL.isEmpty {
                         self.fetchProfileImage(url: profileImageURL)
@@ -161,87 +195,104 @@ class ProfileViewModel: ObservableObject {
     
     func deleteUser(completion: @escaping (Bool) -> Void) {
         guard let userID = Auth.auth().currentUser?.uid else {
+            print("Error: User ID not found.")
             completion(false)
             return
         }
-        
-        // Delete user from Firebase Authentication
-        Auth.auth().currentUser?.delete { error in
+
+        let userRef = Database.database().reference().child("user").child(userID)
+        userRef.removeValue { error, _ in
             if let error = error {
-                print("Error deleting user from Firebase Authentication: \(error.localizedDescription)")
+                print("Error deleting user data: \(error.localizedDescription)")
                 completion(false)
-                return
-            }
-            
-            // Delete user data from Realtime Database
-            let ref = Database.database().reference().child("user").child(userID)
-            ref.removeValue { error, _ in
-                if let error = error {
-                    print("Error deleting user from Realtime Database: \(error.localizedDescription)")
-                    completion(false)
-                } else {
-                    print("User deleted successfully from Firebase and Realtime Database.")
-                    
-                    // Log deleted user
-                    self.logDeletedUser(userFullName: self.fullname, email: self.email)
-
-
-
-                    
-                    // Notify success and perform further actions if needed
-                    completion(true)
-                }
+            } else {
+                print("User data deleted successfully.")
+                self.logDeletedUser(userFullName: self.fullname, email: self.email)
+                completion(true)
             }
         }
     }
     
-
-
-     private func logDeletedUser(userFullName: String, email: String) {
-            let deletedUsersRef = Database.database().reference().child("deleted_users")
-            let userRef = deletedUsersRef.childByAutoId()
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "ddMMyy HHmmss"
-            let currentTimestamp = dateFormatter.string(from: Date())
-            
-            let calendar = Calendar.current
-            if let finalDeletionDate = calendar.date(byAdding: .hour, value: 48, to: Date()) {
-                let finalDeletionTimestamp = dateFormatter.string(from: finalDeletionDate)
-                
-                userRef.setValue([
-                    "fullName": userFullName,
-                    "email": email,
-                    "currentTimestamp": currentTimestamp,
-                    "Final Deletion": finalDeletionTimestamp
-                ]) { (error, ref) in
-                    if let error = error {
-                        print("Failed to save user to database:", error.localizedDescription)
-                        return
-                    }
-                    print("Successfully saved user to the database.")
-                }
-            }
+    func performReauthentication(email: String, password: String) {
+        guard let user = Auth.auth().currentUser else {
+            self.alertType = .deletionFailure("User not authenticated.")
+            return
         }
 
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        user.reauthenticate(with: credential) { [weak self] result, error in
+            guard let self = self else { return }
 
+            if let error = error {
+                // Handle reauthentication failure
+                print("Reauthentication failed: \(error.localizedDescription)")
+                self.alertType = .deletionFailure("Reauthentication failed. Please check your credentials.")
+            } else {
+                // Reauthentication successful, proceed with deletion
+                print("Reauthentication successful.")
+                print("Retrying user deletion after reauthentication.") // Debug log
+                self.alertType = nil
+                self.showReauthenticationCard = false
+                self.deleteUserAndNotify()
+            }
+        }
+    }
+    
+    
+    private func logDeletedUser(userFullName: String, email: String) {
+        let deletedUsersRef = Database.database().reference().child("deleted_users").childByAutoId()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        
+        let logData: [String: Any] = [
+            "fullName": userFullName,
+            "email": email,
+            "deletionTime": dateFormatter.string(from: Date())
+        ]
+        
+        deletedUsersRef.setValue(logData) { error, _ in
+            if let error = error {
+                print("Failed to log deleted user: \(error.localizedDescription)")
+            } else {
+                print("User deletion logged successfully.")
+            }
+        }
+    }
     
     func deleteUserAndNotify() {
-        if Auth.auth().currentUser != nil {
-            // User is authenticated, proceed with deletion
-            deleteUser { success in
-                if success {
-                    self.alertType = .deletionSuccess
+        guard let user = Auth.auth().currentUser else {
+            self.alertType = .deletionFailure("User not authenticated.")
+            return
+        }
+
+        user.delete { error in
+            if let error = error as NSError? {
+                print("Error deleting user: \(error.localizedDescription)")
+                if error.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                    // Reauthentication required
+                    print("Reauthentication required.")
+                    DispatchQueue.main.async {
+                        self.alertType = .reauthenticateRequired
+                    }
                 } else {
-                    self.alertType = .deletionFailure("Error al borrar el usuario.")
+                    // Handle other errors
+                    DispatchQueue.main.async {
+                        self.alertType = .deletionFailure("An error occurred: \(error.localizedDescription)")
+                    }
+                }
+            } else {
+                // User deleted successfully, proceed to delete data
+                print("User account deleted successfully.")
+                self.deleteUser { success in
+                    DispatchQueue.main.async {
+                        if success {
+                            self.alertType = .deletionSuccess
+                        } else {
+                            self.alertType = .deletionFailure("Failed to delete user data from the database.")
+                        }
+                    }
                 }
             }
-        } else {
-            // User is not authenticated, show an alert asking the user to log in
-            // before deleting their account
-            self.alertType = .deletionFailure("Usuario no autenticado.")
         }
     }
 }
-
-

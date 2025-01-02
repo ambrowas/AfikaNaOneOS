@@ -2,6 +2,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 struct MenuModoCompeticion: View {
     @State private var userFullName = ""
@@ -13,7 +14,7 @@ struct MenuModoCompeticion: View {
     @State private var currentGameFallos = 0
     @State private var showCheckCodigo = false
     @State private var showClasificacion = false
-    @State private var showProfile = false
+  // @State private var showProfile = false
     @State private var showIniciarSesion = false
     @State private var colorIndex: Int = 0
     var userId: String
@@ -28,6 +29,7 @@ struct MenuModoCompeticion: View {
     @State private var shouldPresentProfile = false
     @State private var showMenuPrincipalSheet = false
     @State private var isFlashing = false
+    @State private var isShowingProfile = false
     @State private var hasPlayedWarningSound = false // State to manage warning sound
     
     var body: some View {
@@ -144,7 +146,7 @@ struct MenuModoCompeticion: View {
                     Button(action: {
                         if Auth.auth().currentUser != nil {
                             SoundManager.shared.playTransitionSound()
-                            showProfile = true
+                            isShowingProfile = true
                         } else {
                             alertMessage = "You must log in first."
                             showAlert = true
@@ -163,8 +165,8 @@ struct MenuModoCompeticion: View {
                                     .stroke(Color.black, lineWidth: 3)
                             )
                     }
-                    .fullScreenCover(isPresented: $showProfile) {
-                        Profile()
+                    .fullScreenCover(isPresented: $isShowingProfile) {
+                        Profile(profileViewModel: ProfileViewModel.shared)
                     }
                     
                     // Alert Modifier

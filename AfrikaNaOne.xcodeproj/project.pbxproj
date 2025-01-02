@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		751CFF222D237BA000A4AA0A /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF202D237BA000A4AA0A /* magic.mp3 */; };
+		751CFF232D237BA000A4AA0A /* warning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF212D237BA000A4AA0A /* warning.mp3 */; };
+		751CFF382D237CF100A4AA0A /* average.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF372D237CF100A4AA0A /* average.mp3 */; };
+		751CFF3A2D237CF900A4AA0A /* beginner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF392D237CF900A4AA0A /* beginner.mp3 */; };
+		751CFF3C2D237D0100A4AA0A /* bikutsi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF3B2D237D0100A4AA0A /* bikutsi.mp3 */; };
+		751CFF3E2D237D0A00A4AA0A /* expert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF3D2D237D0A00A4AA0A /* expert.mp3 */; };
+		751CFF402D237D1300A4AA0A /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF3F2D237D1300A4AA0A /* gameover.mp3 */; };
+		751CFF462D2387D200A4AA0A /* swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 751CFF452D2387D200A4AA0A /* swoosh.wav */; };
+		751CFF4A2D266BE200A4AA0A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751CFF492D266BD900A4AA0A /* AudioManager.swift */; };
 		752F4E0F2D0011F0001FE0EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */; };
 		75450E7E2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 75450E7D2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */; };
 		755220132CFED18900B167A3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75521FE12CFED18700B167A3 /* AuthService.swift */; };
@@ -83,19 +92,9 @@
 		7567C81B2D065C4A005EA62F /* expert.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C8082D0659DD005EA62F /* expert.png */; };
 		7567C81D2D065C50005EA62F /* beginer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C80A2D0659DD005EA62F /* beginer.png */; };
 		7567C81E2D065C52005EA62F /* average.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C80B2D0659DD005EA62F /* average.png */; };
-		7567C81F2D065C54005EA62F /* average.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75521FFE2CFED18800B167A3 /* average.mp3 */; };
-		7567C8202D065C56005EA62F /* beginner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7552200A2CFED18800B167A3 /* beginner.mp3 */; };
-		7567C8212D065C58005EA62F /* bikutsi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 755220012CFED18800B167A3 /* bikutsi.mp3 */; };
-		7567C8222D065C5A005EA62F /* expert.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7552200E2CFED18900B167A3 /* expert.mp3 */; };
-		7567C8232D065C5C005EA62F /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 755220002CFED18800B167A3 /* gameover.mp3 */; };
-		7567C8242D065C5F005EA62F /* notright.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75521FEA2CFED18700B167A3 /* notright.wav */; };
 		7567C8252D065C60005EA62F /* countdown.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75521FE02CFED18700B167A3 /* countdown.wav */; };
-		7567C8262D065C62005EA62F /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75521FF22CFED18700B167A3 /* right.wav */; };
-		7567C8272D065C63005EA62F /* swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75521FFD2CFED18800B167A3 /* swoosh.wav */; };
-		7567C82B2D067A4A005EA62F /* warning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7567C82A2D067A4A005EA62F /* warning.mp3 */; };
 		7567C82D2D06AB8E005EA62F /* FirebaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */; };
-		7567C82F2D07F6E1005EA62F /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7567C82E2D07F6E1005EA62F /* magic.mp3 */; };
-		757E8B9B2D0D41F000DAADD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */; };
+		757505122D274D8C000139C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 756428D22D0D2D5400B9DE76 /* GoogleService-Info.plist */; };
 		75B93C5A2D11525200E5859B /* neon.png in Resources */ = {isa = PBXBuildFile; fileRef = 75B93C582D11525200E5859B /* neon.png */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +116,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		751CFF202D237BA000A4AA0A /* magic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = magic.mp3; sourceTree = "<group>"; };
+		751CFF212D237BA000A4AA0A /* warning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = warning.mp3; sourceTree = "<group>"; };
+		751CFF372D237CF100A4AA0A /* average.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = average.mp3; sourceTree = "<group>"; };
+		751CFF392D237CF900A4AA0A /* beginner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beginner.mp3; sourceTree = "<group>"; };
+		751CFF3B2D237D0100A4AA0A /* bikutsi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bikutsi.mp3; sourceTree = "<group>"; };
+		751CFF3D2D237D0A00A4AA0A /* expert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = expert.mp3; sourceTree = "<group>"; };
+		751CFF3F2D237D1300A4AA0A /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
+		751CFF452D2387D200A4AA0A /* swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = swoosh.wav; sourceTree = "<group>"; };
+		751CFF492D266BD900A4AA0A /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75450E7D2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = AfrikaNaOne_Provisioning_Profile_II.mobileprovision; sourceTree = "<group>"; };
 		75521FB02CFED0B100B167A3 /* AfrikaNaOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AfrikaNaOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,11 +138,9 @@
 		75521FE62CFED18700B167A3 /* MenuModoCompeticionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModoCompeticionViewModel.swift; sourceTree = "<group>"; };
 		75521FE72CFED18700B167A3 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		75521FE82CFED18700B167A3 /* ProfileAlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlertType.swift; sourceTree = "<group>"; };
-		75521FEA2CFED18700B167A3 /* notright.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notright.wav; path = ../AfrikaNaOneX/AfrikaNaOne/Sounds/notright.wav; sourceTree = "<group>"; };
 		75521FED2CFED18700B167A3 /* InputFieldViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldViews.swift; sourceTree = "<group>"; };
 		75521FF02CFED18700B167A3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		75521FF12CFED18700B167A3 /* NuevoUsuarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NuevoUsuarioViewModel.swift; sourceTree = "<group>"; };
-		75521FF22CFED18700B167A3 /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = right.wav; path = ../AfrikaNaOneX/AfrikaNaOne/Sounds/right.wav; sourceTree = "<group>"; };
 		75521FF32CFED18700B167A3 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		75521FF42CFED18800B167A3 /* CodigoQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodigoQR.swift; sourceTree = "<group>"; };
 		75521FF52CFED18800B167A3 /* ProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUser.swift; sourceTree = "<group>"; };
@@ -144,11 +150,7 @@
 		75521FFA2CFED18800B167A3 /* QuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionManager.swift; sourceTree = "<group>"; };
 		75521FFB2CFED18800B167A3 /* ResultadoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoView.swift; sourceTree = "<group>"; };
 		75521FFC2CFED18800B167A3 /* JugarModoCompeticionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JugarModoCompeticionViewModel.swift; sourceTree = "<group>"; };
-		75521FFD2CFED18800B167A3 /* swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = swoosh.wav; path = ../AfrikaNaOneX/AfrikaNaOne/Sounds/swoosh.wav; sourceTree = "<group>"; };
-		75521FFE2CFED18800B167A3 /* average.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = average.mp3; path = ../AfrikaNaOneX/AfrikaNaOne/Sounds/average.mp3; sourceTree = "<group>"; };
 		75521FFF2CFED18800B167A3 /* GestionarSesion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionarSesion.swift; sourceTree = "<group>"; };
-		755220002CFED18800B167A3 /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = gameover.mp3; path = ../AfrikaNaOneX/AfrikaNaOne/gameover.mp3; sourceTree = "<group>"; };
-		755220012CFED18800B167A3 /* bikutsi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bikutsi.mp3; path = ../AfrikaNaOneX/AfrikaNaOne/bikutsi.mp3; sourceTree = "<group>"; };
 		755220022CFED18800B167A3 /* LeadersProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadersProfileViewModel.swift; sourceTree = "<group>"; };
 		755220032CFED18800B167A3 /* QuestionII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionII.swift; sourceTree = "<group>"; };
 		755220042CFED18800B167A3 /* GestionarSesionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionarSesionViewModel.swift; sourceTree = "<group>"; };
@@ -156,11 +158,9 @@
 		755220072CFED18800B167A3 /* JugarModoCompeticion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JugarModoCompeticion.swift; sourceTree = "<group>"; };
 		755220082CFED18800B167A3 /* ResultadoCompeticion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultadoCompeticion.swift; sourceTree = "<group>"; };
 		755220092CFED18800B167A3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		7552200A2CFED18800B167A3 /* beginner.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beginner.mp3; path = ../AfrikaNaOneX/AfrikaNaOne/Sounds/beginner.mp3; sourceTree = "<group>"; };
 		7552200B2CFED18800B167A3 /* AlertTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTypes.swift; sourceTree = "<group>"; };
 		7552200C2CFED18900B167A3 /* LeadersProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadersProfile.swift; sourceTree = "<group>"; };
 		7552200D2CFED18900B167A3 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		7552200E2CFED18900B167A3 /* expert.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = expert.mp3; path = ../AfrikaNaOneX/AfrikaNaOne/expert.mp3; sourceTree = "<group>"; };
 		7552200F2CFED18900B167A3 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		755220102CFED18900B167A3 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		755220432CFED1A800B167A3 /* quiz_questions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = quiz_questions.json; sourceTree = "<group>"; };
@@ -176,16 +176,13 @@
 		7552204E2CFED1A900B167A3 /* AfrikaNaOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfrikaNaOneApp.swift; sourceTree = "<group>"; };
 		7552204F2CFED1A900B167A3 /*  MenuModoLibre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " MenuModoLibre.swift"; sourceTree = "<group>"; };
 		7552208E2D00094600B167A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		756428D22D0D2D5400B9DE76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		756428D22D0D2D5400B9DE76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7567C8052D0659DD005EA62F /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whatsapp.png; path = AfrikaNaOne/Assets.xcassets/whatsapp.imageset/whatsapp.png; sourceTree = "<group>"; };
 		7567C8082D0659DD005EA62F /* expert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = expert.png; path = AfrikaNaOne/Assets.xcassets/expert.imageset/expert.png; sourceTree = "<group>"; };
 		7567C80A2D0659DD005EA62F /* beginer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beginer.png; path = AfrikaNaOne/Assets.xcassets/beginer.imageset/beginer.png; sourceTree = "<group>"; };
 		7567C80B2D0659DD005EA62F /* average.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = average.png; path = AfrikaNaOne/Assets.xcassets/average.imageset/average.png; sourceTree = "<group>"; };
 		7567C8152D065B7D005EA62F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		7567C82A2D067A4A005EA62F /* warning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = warning.mp3; sourceTree = "<group>"; };
 		7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImageView.swift; sourceTree = "<group>"; };
-		7567C82E2D07F6E1005EA62F /* magic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = magic.mp3; sourceTree = "<group>"; };
-		757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75B93C582D11525200E5859B /* neon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -8911,6 +8908,7 @@
 		75521FA72CFED0B100B167A3 = {
 			isa = PBXGroup;
 			children = (
+				751CFF492D266BD900A4AA0A /* AudioManager.swift */,
 				7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */,
 				752F4E0E2D0011F0001FE0EA /* AppDelegate.swift */,
 				7552204E2CFED1A900B167A3 /* AfrikaNaOneApp.swift */,
@@ -8957,26 +8955,23 @@
 				7552200D2CFED18900B167A3 /* UserManager.swift */,
 				755220102CFED18900B167A3 /* UserViewModel.swift */,
 				755220432CFED1A800B167A3 /* quiz_questions.json */,
-				757E8B9A2D0D41F000DAADD7 /* GoogleService-Info.plist */,
 				75450E7D2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision */,
-				756428D22D0D2D5400B9DE76 /* Info.plist */,
+				756428D22D0D2D5400B9DE76 /* GoogleService-Info.plist */,
 				7567C8052D0659DD005EA62F /* whatsapp.png */,
 				75B93C582D11525200E5859B /* neon.png */,
 				7567C8152D065B7D005EA62F /* logo.png */,
 				7567C8082D0659DD005EA62F /* expert.png */,
 				7567C80A2D0659DD005EA62F /* beginer.png */,
 				7567C80B2D0659DD005EA62F /* average.png */,
-				7567C82E2D07F6E1005EA62F /* magic.mp3 */,
-				7567C82A2D067A4A005EA62F /* warning.mp3 */,
-				75521FFE2CFED18800B167A3 /* average.mp3 */,
-				7552200A2CFED18800B167A3 /* beginner.mp3 */,
-				755220012CFED18800B167A3 /* bikutsi.mp3 */,
-				7552200E2CFED18900B167A3 /* expert.mp3 */,
-				755220002CFED18800B167A3 /* gameover.mp3 */,
-				75521FEA2CFED18700B167A3 /* notright.wav */,
+				751CFF372D237CF100A4AA0A /* average.mp3 */,
+				751CFF392D237CF900A4AA0A /* beginner.mp3 */,
+				751CFF3B2D237D0100A4AA0A /* bikutsi.mp3 */,
+				751CFF3D2D237D0A00A4AA0A /* expert.mp3 */,
+				751CFF3F2D237D1300A4AA0A /* gameover.mp3 */,
+				751CFF202D237BA000A4AA0A /* magic.mp3 */,
+				751CFF452D2387D200A4AA0A /* swoosh.wav */,
+				751CFF212D237BA000A4AA0A /* warning.mp3 */,
 				75521FE02CFED18700B167A3 /* countdown.wav */,
-				75521FF22CFED18700B167A3 /* right.wav */,
-				75521FFD2CFED18800B167A3 /* swoosh.wav */,
 				75521FB22CFED0B100B167A3 /* AfrikaNaOne */,
 				75521FC42CFED0B200B167A3 /* AfrikaNaOneTests */,
 				75521FCE2CFED0B200B167A3 /* AfrikaNaOneUITests */,
@@ -9160,26 +9155,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7567C82F2D07F6E1005EA62F /* magic.mp3 in Resources */,
 				7567C81B2D065C4A005EA62F /* expert.png in Resources */,
+				751CFF3A2D237CF900A4AA0A /* beginner.mp3 in Resources */,
 				7567C81D2D065C50005EA62F /* beginer.png in Resources */,
 				75B93C5A2D11525200E5859B /* neon.png in Resources */,
+				751CFF3C2D237D0100A4AA0A /* bikutsi.mp3 in Resources */,
 				7567C81E2D065C52005EA62F /* average.png in Resources */,
-				7567C81F2D065C54005EA62F /* average.mp3 in Resources */,
-				7567C8202D065C56005EA62F /* beginner.mp3 in Resources */,
-				7567C82B2D067A4A005EA62F /* warning.mp3 in Resources */,
-				7567C8212D065C58005EA62F /* bikutsi.mp3 in Resources */,
+				751CFF382D237CF100A4AA0A /* average.mp3 in Resources */,
+				751CFF3E2D237D0A00A4AA0A /* expert.mp3 in Resources */,
 				7567C8172D065C31005EA62F /* quiz_questions.json in Resources */,
-				7567C8222D065C5A005EA62F /* expert.mp3 in Resources */,
 				7567C8252D065C60005EA62F /* countdown.wav in Resources */,
+				751CFF462D2387D200A4AA0A /* swoosh.wav in Resources */,
 				75450E7E2D1A577600079E6C /* AfrikaNaOne_Provisioning_Profile_II.mobileprovision in Resources */,
-				7567C8272D065C63005EA62F /* swoosh.wav in Resources */,
-				7567C8262D065C62005EA62F /* right.wav in Resources */,
-				7567C8242D065C5F005EA62F /* notright.wav in Resources */,
+				751CFF222D237BA000A4AA0A /* magic.mp3 in Resources */,
+				751CFF232D237BA000A4AA0A /* warning.mp3 in Resources */,
+				751CFF402D237D1300A4AA0A /* gameover.mp3 in Resources */,
 				7567C81A2D065C3E005EA62F /* logo.png in Resources */,
-				7567C8232D065C5C005EA62F /* gameover.mp3 in Resources */,
-				757E8B9B2D0D41F000DAADD7 /* GoogleService-Info.plist in Resources */,
 				7567C8182D065C34005EA62F /* whatsapp.png in Resources */,
+				757505122D274D8C000139C4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9216,6 +9209,7 @@
 				755220262CFED18900B167A3 /* CodigoQR.swift in Sources */,
 				755220272CFED18900B167A3 /* ProfileUser.swift in Sources */,
 				755220282CFED18900B167A3 /* NuevoUsuario.swift in Sources */,
+				751CFF4A2D266BE200A4AA0A /* AudioManager.swift in Sources */,
 				755220292CFED18900B167A3 /* MenuModoCompeticion.swift in Sources */,
 				7552202A2CFED18900B167A3 /* GameOver.swift in Sources */,
 				7552202C2CFED18900B167A3 /* QuestionManager.swift in Sources */,
@@ -9408,7 +9402,7 @@
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"AfrikaNaOne/Preview Content\"";
 				DEVELOPMENT_TEAM = B5X8QR4N34;
@@ -9416,7 +9410,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = /Users/elebi/Documents/AfrikaNaOne/Info.plist;
+				INFOPLIST_FILE = "/Users/elebi/Documents/AfrikaNaOneOS/GoogleService-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Afrika Na One";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -9434,7 +9428,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -9456,14 +9450,14 @@
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"AfrikaNaOne/Preview Content\"";
 				DEVELOPMENT_TEAM = B5X8QR4N34;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = /Users/elebi/Documents/AfrikaNaOne/Info.plist;
+				INFOPLIST_FILE = "/Users/elebi/Documents/AfrikaNaOneOS/GoogleService-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Afrika Na One";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -9481,7 +9475,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

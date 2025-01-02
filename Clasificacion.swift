@@ -8,6 +8,8 @@ struct User: Identifiable {
     var accumulatedPuntuacion: Int
     var leaderboardPosition: Int
     var scoreAchievedAt: Date? // making this optional
+    var flagUrl: String? // URL for the flag or abbreviation
+    var countryAbbreviation: String?
 }
 
 class UserData: ObservableObject {
@@ -85,11 +87,51 @@ extension User {
         self.fullname = fullname
         self.accumulatedPuntuacion = accumulatedPuntuacion
         self.leaderboardPosition = 0 // Placeholder value, it will be updated later
+        self.flagUrl = value["flagUrl"] as? String // Parse flag URL or abbreviation
+        self.countryAbbreviation = value["countryAbbreviation"] as? String
 
         if let scoreAchievedAt = value["scoreAchievedAt"] as? Double {
             self.scoreAchievedAt = Date(timeIntervalSince1970: scoreAchievedAt)
         } else {
             self.scoreAchievedAt = nil
+        }
+    }
+}
+
+struct AlternatingFlagView: View {
+    let flagUrl: String?
+    let abbreviation: String?
+    @State private var showFlag: Bool = true
+
+    var body: some View {
+        ZStack {
+            if showFlag, let urlString = flagUrl, let url = URL(string: urlString) {
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .border(Color.black, width: 2)
+                } placeholder: {
+                    Image("other")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .border(Color.black, width: 2)
+                }
+            } else if let abbreviation = abbreviation {
+                Text(abbreviation)
+                    .font(.system(size: 14))
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding(5)
+                    .cornerRadius(5)
+            }
+        }
+        .onAppear {
+            withAnimation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
+                showFlag.toggle()
+            }
         }
     }
 }
@@ -120,7 +162,7 @@ struct ClasificacionView: View {
             VStack(spacing: 10) {
                 Spacer()
 
-                Text("GLOBAL AFRIKA NA ONE LEADERBOARD")
+                Text("GLOBAL AFRIKANAONE SCOREBOARD")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -137,32 +179,40 @@ struct ClasificacionView: View {
                                     SoundManager.shared.playTransitionSound()
                                     self.selectedUser = user
                                 }) {
-                                    HStack {
+                                    HStack(spacing: 10) {
+                                        // Leaderboard Position
                                         FlashingText(
                                             text: "\(user.leaderboardPosition)",
                                             shouldFlash: user.id == userId,
                                             flashingColor: $userData.flashingColor
                                         )
                                         .font(.system(size: 12))
+                                        .frame(width: 40, alignment: .leading)
 
-                                        Spacer()
-
+                                        // Full Name
                                         FlashingText(
                                             text: user.fullname,
                                             shouldFlash: user.id == userId,
                                             flashingColor: $userData.flashingColor
                                         )
                                         .font(.system(size: 12))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .frame(maxWidth: 150, alignment: .leading) // Responsive width
 
-                                        Spacer()
+                                        // Flag or Abbreviation Column
+                                        AlternatingFlagView(
+                                            flagUrl: user.flagUrl,
+                                            abbreviation: user.countryAbbreviation
+                                        )
+                                        .frame(width: 50)
 
+                                        // Accumulated Score
                                         FlashingText(
                                             text: "\(user.accumulatedPuntuacion)",
                                             shouldFlash: user.id == userId,
                                             flashingColor: $userData.flashingColor
                                         )
                                         .font(.system(size: 12))
+                                        .frame(width: 60, alignment: .trailing)
                                     }
                                     .padding(.vertical, 8)
                                 }
@@ -170,6 +220,11 @@ struct ClasificacionView: View {
                             }
                         }
                     }
+                    .id(userData.refreshID)
+                    .environment(\.colorScheme, .light)
+                    .listStyle(PlainListStyle())
+                    .background(Color.clear)
+                    .scrollContentBackground(.hidden)
                     .id(userData.refreshID)
                     .environment(\.colorScheme, .light)
                     .listStyle(PlainListStyle())

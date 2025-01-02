@@ -1,70 +1,61 @@
 import AVFoundation
 
-class SoundManager {
+
+class SoundManager: NSObject {
     static let shared = SoundManager()
     
     private var audioPlayer: AVAudioPlayer?
+    var isPlaying: Bool = false
     
-    private init() { }
+    private override init() { }
     
-    func playSoundEffect(_ sound: AVAudioPlayer?, name: String) {
-           guard let sound = sound else {
-               print("\(name) sound effect is not initialized.")
-               return
-           }
-           if sound.isPlaying {
-               sound.stop() // Stop any existing playback
-           }
-           sound.currentTime = 0 // Start from the beginning
-           sound.play()
-           print("\(name) sound effect played.")
-       }
+    private func prepareAndPlaySound(fileName: String, fileExtension: String) {
+        // Ensure only one sound plays at a time
+        if isPlaying {
+            print("A sound is already playing. Skipping playback for \(fileName).")
+            return
+        }
+
+        guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: fileExtension) else {
+            print("Sound file \(fileName).\(fileExtension) not found in the app bundle.")
+            return
+        }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.delegate = self
+            audioPlayer?.play()
+            isPlaying = true
+            print("\(fileName).\(fileExtension) sound is now playing.")
+        } catch let error as NSError {
+            print("Failed to play sound \(fileName).\(fileExtension): \(error.localizedDescription)")
+        }
+    }
     
     func playTransitionSound() {
-        // Get the URL of the sound file in the app bundle
-        if let soundURL = Bundle.main.url(forResource: "swoosh", withExtension: "wav") {
-            do {
-                // Initialize and play the audio player
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                audioPlayer?.play()
-            } catch let error as NSError {
-                // Handle and print the error
-                print("Failed to play transition sound: \(error.localizedDescription)")
-            }
-        } else {
-            print("Sound file 'swoosh.wav' not found in the app bundle.")
-        }
+        prepareAndPlaySound(fileName: "swoosh", fileExtension: "wav")
     }
     
     func playMagicalSound() {
-        // Get the URL of the sound file in the app bundle
-        if let soundURL = Bundle.main.url(forResource: "magic", withExtension: "mp3") {
-            do {
-                // Initialize and play the audio player
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                audioPlayer?.play()
-            } catch let error as NSError {
-                // Handle and print the error
-                print("Failed to play transition sound: \(error.localizedDescription)")
-            }
-        } else {
-            print("Sound file 'swoosh.wav' not found in the app bundle.")
-        }
+        prepareAndPlaySound(fileName: "magic", fileExtension: "mp3")
     }
     
     func playWarningSound() {
-        // Get the URL of the sound file in the app bundle
-        if let soundURL = Bundle.main.url(forResource: "warning", withExtension: "mp3") {
-            do {
-                // Initialize and play the audio player
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                audioPlayer?.play()
-            } catch let error as NSError {
-                // Handle and print the error
-                print("Failed to play transition sound: \(error.localizedDescription)")
-            }
-        } else {
-            print("Sound file 'swoosh.wav' not found in the app bundle.")
-        }
+        prepareAndPlaySound(fileName: "warning", fileExtension: "mp3")
+    }
+    
+    func stopCurrentSound() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+        isPlaying = false
+        print("Current sound stopped.")
+    }
+}
+
+// MARK: - AVAudioPlayerDelegate
+extension SoundManager: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        isPlaying = false
+        print("Sound playback finished.")
     }
 }

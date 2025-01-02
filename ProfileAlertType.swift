@@ -5,6 +5,7 @@ enum ProfileAlertType: Identifiable {
     case error(String)
     case profileImageUpdated
     
+    
     var id: String {
         switch self {
         case .success(let message), .error(let message):

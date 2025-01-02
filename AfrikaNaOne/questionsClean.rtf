@@ -1,0 +1,2553 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2820
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red155\green35\blue147;
+\red11\green79\blue121;\red57\green0\blue160;\red15\green104\blue160;\red28\green70\blue74;\red196\green26\blue22;
+\red108\green54\blue169;\red28\green0\blue207;\red50\green109\blue116;\red93\green108\blue121;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0\c85000;\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c60759\c13753\c57628;
+\csgenericrgb\c4314\c30980\c47451;\csgenericrgb\c22454\c0\c62803;\csgenericrgb\c5882\c40784\c62745;\csgenericrgb\c10981\c27276\c28869;\csgenericrgb\c77000\c10200\c8600;
+\csgenericrgb\c42190\c21278\c66379;\csgenericrgb\c11000\c0\c81000;\csgenericrgb\c19418\c42935\c45455;\csgenericrgb\c36526\c42188\c47515;}
+\margl1440\margr1440\vieww11520\viewh7840\viewkind0
+\deftab593
+\pard\tx593\pardeftab593\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \
+
+\f1\b \cf4 import
+\f0\b0 \cf2  SwiftUI\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  AVFoundation\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  Combine\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  FirebaseAuth\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  FirebaseStorage\
+\
+\
+\
+    
+\f1\b \cf4 struct
+\f0\b0 \cf2  \cf5 JugarModoCompeticion\cf2 : \cf6 View\cf2  \{\
+        \cf6 @StateObject\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 viewModel\cf2 : \cf8 JugarModoCompeticionViewModel\cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showAlert\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 hasShownManyMistakesAlert\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 navigationTag\cf2 : \cf6 Int\cf2 ? = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 userId\cf2 : \cf6 String\cf2  = \cf9 ""\cf2 \
+        \cf6 @ObservedObject\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 userData\cf2 : \cf8 UserData\cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 shouldPresentGameOver\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        \cf6 @Environment\cf2 (\\.\cf10 presentationMode\cf2 ) 
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 presentationMode\cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showAnswerStatus\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 scale\cf2 : \cf6 CGFloat\cf2  = \cf11 1.0\cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isGrowing\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+        \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showAnswerStatusForMistakes\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  \cf7 timer\cf2  = \cf6 Timer\cf2 .\cf10 publish\cf2 (\cf10 every\cf2 : \cf11 0.5\cf2 , \cf10 on\cf2 : .\cf10 main\cf2 , \cf10 in\cf2 : .\cf10 common\cf2 ).\cf10 autoconnect\cf2 ()\
+        
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 timerCancellable\cf2 : \cf6 AnyCancellable\cf2 ?\
+\
+        
+\f1\b \cf4 enum
+\f0\b0 \cf2  \cf5 ActiveAlert\cf2 : \cf6 Identifiable\cf2  \{\
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  \cf7 showAlert\cf2 , \cf7 showEndGameAlert\cf2 , \cf7 showGameOverAlert\cf2 , \cf7 showManyMistakesAlert\cf2 , \cf7 showReturnToAppAlert\cf2 , \cf7 showTimeIsUpAlert\cf2 \
+\
+            
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 id\cf2 : \cf6 Int\cf2  \{\
+                
+\f1\b \cf4 switch
+\f0\b0 \cf2  
+\f1\b \cf4 self
+\f0\b0 \cf2  \{\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 0\cf2 \
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showEndGameAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 1\cf2 \
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showGameOverAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 2\cf2 \
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showManyMistakesAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 3\cf2 \
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showReturnToAppAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 4\cf2 \
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showTimeIsUpAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 5\cf2 \
+                \}\
+            \}\
+        \}\
+\
+        
+\f1\b \cf4 init
+\f0\b0 \cf2 (\cf7 userId\cf2 : \cf6 String\cf2 , \cf7 userData\cf2 : \cf8 UserData\cf2 ) \{\
+            \cf12 _viewModel\cf2  = \cf6 StateObject\cf2 (\cf10 wrappedValue\cf2 : \cf8 JugarModoCompeticionViewModel\cf2 (\cf12 userId\cf2 : userId, \cf12 userData\cf2 : userData))\
+            
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 userData\cf2  = userData\
+        \}\
+\
+        
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 body\cf2 : 
+\f1\b \cf4 some
+\f0\b0 \cf2  \cf6 View\cf2  \{\
+            \cf6 ZStack\cf2  \{\
+                \cf6 Image\cf2 (\cf9 "competicion"\cf2 )\
+                    .\cf10 resizable\cf2 ()\
+                    .\cf10 edgesIgnoringSafeArea\cf2 (.\cf10 all\cf2 )\
+\
+                \cf6 VStack\cf2 (\cf10 spacing\cf2 : \cf11 20\cf2 ) \{\
+                    \cf13 // Score Section\cf2 \
+                    \cf6 HStack\cf2  \{\
+                        \cf6 VStack\cf2 (\cf10 alignment\cf2 : .\cf10 leading\cf2 , \cf10 spacing\cf2 : \cf11 5\cf2 ) \{\
+                                \cf6 Text\cf2 (\cf9 "CORRECT ANSWERS:"\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (.\cf10 black\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 system\cf2 (\cf10 size\cf2 : \cf11 16\cf2 )) \cf13 // Explicit font size\cf2 \
+                                    .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                    .\cf10 lineLimit\cf2 (\cf11 1\cf2 ) \cf13 // Prevent wrapping\cf2 \
+                                    .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 ) \cf13 // Scale down text if needed\cf2 \
+                                    .\cf10 frame\cf2 (\cf10 maxWidth\cf2 : .\cf10 infinity\cf2 , \cf10 alignment\cf2 : .\cf10 leading\cf2 )\
+                                    .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 180\cf2 , \cf10 alignment\cf2 : .\cf10 leading\cf2 )\
+\
+                                \cf6 Text\cf2 (\cf9 "WRONG ANSWERS:"\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (\cf12 viewModel\cf2 .\cf12 mistakes\cf2  >= \cf11 4\cf2  ? \cf6 Color\cf2 .\cf10 red\cf2  : .\cf10 black\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 system\cf2 (\cf10 size\cf2 : \cf11 16\cf2 )) \cf13 // Explicit font size\cf2 \
+                                    .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                    .\cf10 lineLimit\cf2 (\cf11 1\cf2 )\
+                                    .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 )\
+                                    .\cf10 frame\cf2 (\cf10 maxWidth\cf2 : .\cf10 infinity\cf2 , \cf10 alignment\cf2 : .\cf10 leading\cf2 )\
+\
+                                \cf6 Text\cf2 (\cf9 "SCORE:"\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (.\cf10 black\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 system\cf2 (\cf10 size\cf2 : \cf11 16\cf2 )) \cf13 // Explicit font size\cf2 \
+                                    .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                    .\cf10 lineLimit\cf2 (\cf11 1\cf2 )\
+                                    .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 )\
+                                    .\cf10 frame\cf2 (\cf10 maxWidth\cf2 : .\cf10 infinity\cf2 , \cf10 alignment\cf2 : .\cf10 leading\cf2 )\
+                            \}\
+                            .\cf10 frame\cf2 (\cf10 maxWidth\cf2 : .\cf10 infinity\cf2 )\
+\
+                            \cf6 VStack\cf2 (\cf10 alignment\cf2 : .\cf10 trailing\cf2 , \cf10 spacing\cf2 : \cf11 5\cf2 ) \{\
+                                \cf6 Text\cf2 (\cf9 "\cf2 \\(\cf12 viewModel\cf2 .\cf12 score\cf2 )\cf9 "\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (.\cf10 black\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 subheadline\cf2 )\
+                                    .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                    .\cf10 lineLimit\cf2 (\cf11 1\cf2 )\
+                                    .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 )\
+\
+                                \cf6 Text\cf2 (\cf9 "\cf2 \\(\cf12 viewModel\cf2 .\cf12 mistakes\cf2 )\cf9 "\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (\cf12 viewModel\cf2 .\cf12 mistakes\cf2  >= \cf11 4\cf2  ? .\cf10 red\cf2  : .\cf10 black\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 subheadline\cf2 )\
+                                    .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                    .\cf10 lineLimit\cf2 (\cf11 1\cf2 )\
+                                    .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 )\
+\
+                                \cf6 Text\cf2 (\cf9 "\cf2 \\(\cf12 viewModel\cf2 .\cf12 totalScore\cf2 )\cf9 "\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (.\cf10 black\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 subheadline\cf2 )\
+                                    .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                    .\cf10 lineLimit\cf2 (\cf11 1\cf2 )\
+                                    .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 )\
+                            \}\
+                            .\cf10 frame\cf2 (\cf10 maxWidth\cf2 : .\cf10 infinity\cf2 )\
+\
+                            \cf6 Spacer\cf2 ()\
+\
+                            \cf13 // Timer Display\cf2 \
+                            \cf6 Text\cf2 (\cf9 "\cf2 \\(\cf12 viewModel\cf2 .\cf12 timeRemaining\cf2 )\cf9 "\cf2 )\
+                            .\cf10 foregroundColor\cf2 (\cf12 viewModel\cf2 .\cf12 timeRemaining\cf2  <= \cf11 10\cf2 \
+                            ? \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 1.0\cf2 , \cf10 saturation\cf2 : \cf11 0.984\cf2 , \cf10 brightness\cf2 : \cf11 0.699\cf2 ) \cf13 // Custom Red\cf2 \
+                                : .\cf10 black\cf2 ) \cf13 // Default color\cf2 \
+                                .\cf10 font\cf2 (.\cf10 system\cf2 (\cf10 size\cf2 : \cf11 60\cf2 ))\
+                                .\cf10 fontWeight\cf2 (.\cf10 bold\cf2 )\
+                                .\cf10 lineLimit\cf2 (\cf11 1\cf2 )\
+                                .\cf10 minimumScaleFactor\cf2 (\cf11 0.7\cf2 )\
+                                .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 80\cf2 , \cf10 alignment\cf2 : .\cf10 center\cf2 ) \cf13 // Fixed width to prevent movement\cf2 \
+                                .\cf10 padding\cf2 (.\cf10 trailing\cf2 , \cf11 20\cf2 )\
+                                .\cf10 shadow\cf2 (\cf10 color\cf2 : .\cf10 black\cf2 , \cf10 radius\cf2 : \cf11 1\cf2 , \cf10 x\cf2 : \cf11 1\cf2 , \cf10 y\cf2 : \cf11 1\cf2 )\
+                        \}\
+\
+                    \cf13 // Icon and Question Section\cf2 \
+                    
+\f1\b \cf4 if
+\f0\b0 \cf2  !\cf12 viewModel\cf2 .\cf12 answerChecked\cf2  \{\
+                        \cf13 // Display the question and icon when not answered\cf2 \
+                        
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  imageUrl = \cf12 viewModel\cf2 .\cf12 currentQuestion\cf2 ?.\cf12 image\cf2 , 
+\f1\b \cf4 let
+\f0\b0 \cf2  url = \cf6 URL\cf2 (\cf10 string\cf2 : imageUrl) \{\
+                            \cf6 AsyncImage\cf2 (\cf10 url\cf2 : url) \{ phase 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                                
+\f1\b \cf4 switch
+\f0\b0 \cf2  phase \{\
+                                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf10 empty\cf2 :\
+                                    \cf6 ProgressView\cf2 () \cf13 // Show loading indicator\cf2 \
+                                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf10 success\cf2 (
+\f1\b \cf4 let
+\f0\b0 \cf2  image):\
+                                    image\
+                                        .\cf10 resizable\cf2 ()\
+                                        .\cf10 aspectRatio\cf2 (\cf10 contentMode\cf2 : .\cf10 fit\cf2 )\
+                                        .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 80\cf2 , \cf10 height\cf2 : \cf11 80\cf2 )\
+                                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf10 failure\cf2 :\
+                                    \cf6 Image\cf2 (\cf9 "logo"\cf2 ) \cf13 // Fallback image\cf2 \
+                                        .\cf10 resizable\cf2 ()\
+                                        .\cf10 aspectRatio\cf2 (\cf10 contentMode\cf2 : .\cf10 fit\cf2 )\
+                                        .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 80\cf2 , \cf10 height\cf2 : \cf11 80\cf2 )\
+                                
+\f1\b \cf4 @unknown
+\f0\b0 \cf2  
+\f1\b \cf4 default
+\f0\b0 \cf2 :\
+                                    \cf6 EmptyView\cf2 ()\
+                                \}\
+                            \}\
+                        \}\
+\
+                        \cf6 Text\cf2 (\cf12 viewModel\cf2 .\cf12 currentQuestion\cf2 ?.\cf12 questionText\cf2  ?? \cf9 "Loading question..."\cf2 )\
+                            .\cf10 foregroundColor\cf2 (.\cf10 black\cf2 )\
+                            .\cf10 font\cf2 (.\cf10 headline\cf2 )\
+                            .\cf10 padding\cf2 (.\cf10 horizontal\cf2 , \cf11 20\cf2 )\
+                            .\cf10 multilineTextAlignment\cf2 (.\cf10 center\cf2 )\
+                            .\cf10 lineLimit\cf2 (
+\f1\b \cf4 nil
+\f0\b0 \cf2 )\
+                    \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                        \cf13 // Show Feedback Icon (checkmark or xmark) with Grow-Shrink Effect\cf2 \
+                        
+\f1\b \cf4 let
+\f0\b0 \cf2  answerStatus = \cf12 viewModel\cf2 .\cf12 answerIsCorrect\cf2  ?? 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                        \cf6 Image\cf2 (\cf10 systemName\cf2 : answerStatus ? \cf9 "checkmark"\cf2  : \cf9 "xmark"\cf2 )\
+                            .\cf10 resizable\cf2 ()\
+                            .\cf10 aspectRatio\cf2 (\cf10 contentMode\cf2 : .\cf10 fit\cf2 )\
+                            .\cf10 foregroundColor\cf2 (answerStatus\
+                                ? \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.315\cf2 , \cf10 saturation\cf2 : \cf11 0.953\cf2 , \cf10 brightness\cf2 : \cf11 0.335\cf2 ) \cf13 // Green for correct\cf2 \
+                                : \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 1.0\cf2 , \cf10 saturation\cf2 : \cf11 0.984\cf2 , \cf10 brightness\cf2 : \cf11 0.699\cf2 )) \cf13 // Red for wrong\cf2 \
+                            .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 120\cf2 , \cf10 height\cf2 : \cf11 120\cf2 )\
+                            .\cf10 scaleEffect\cf2 (\cf12 viewModel\cf2 .\cf12 scale\cf2 ) \cf13 // Bind to ViewModel's scale\cf2 \
+                            .\cf10 onAppear\cf2  \{\
+                                \cf12 viewModel\cf2 .\cf12 startGrowShrinkAnimation\cf2 () \cf13 // Trigger animation\cf2 \
+                            \}\
+                            .\cf10 onDisappear\cf2  \{\
+                                \cf12 viewModel\cf2 .\cf12 stopGrowShrinkAnimation\cf2 () \cf13 // Stop animation\cf2 \
+                            \}\
+                            .\cf10 transition\cf2 (.\cf10 opacity\cf2 ) \cf13 // Smooth transition\cf2 \
+                    \}\
+                    \cf13 // Options Section\cf2 \
+                    \cf6 VStack\cf2 (\cf10 alignment\cf2 : .\cf10 leading\cf2 , \cf10 spacing\cf2 : \cf11 10\cf2 ) \{\
+                        \cf6 ForEach\cf2 (\cf12 viewModel\cf2 .\cf12 options\cf2 .\cf10 indices\cf2 , \cf10 id\cf2 : \\.
+\f1\b \cf4 self
+\f0\b0 \cf2 ) \{ index 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                            \cf6 Button\cf2 (\cf6 action\cf2 : \{\
+                                
+\f1\b \cf4 if
+\f0\b0 \cf2  !\cf12 viewModel\cf2 .\cf12 questionProcessed\cf2  \{\
+                                    \cf12 viewModel\cf2 .\cf12 selectedOptionIndex\cf2  = index\
+                                    \cf12 viewModel\cf2 .\cf12 resetButtonColors\cf2 ()\
+                                    \cf12 viewModel\cf2 .\cf12 buttonBackgroundColors\cf2 [index] = \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.315\cf2 , \cf10 saturation\cf2 : \cf11 0.953\cf2 , \cf10 brightness\cf2 : \cf11 0.335\cf2 )\
+                                \}\
+                            \}) \{\
+                                \cf6 Text\cf2 (\cf12 viewModel\cf2 .\cf12 options\cf2 [index])\
+                                    .\cf10 font\cf2 (.\cf10 headline\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (.\cf10 white\cf2 )\
+                                    .\cf10 padding\cf2 ()\
+                                    .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 300\cf2 , \cf10 height\cf2 : \cf11 75\cf2 )\
+                                    .\cf10 background\cf2 (\cf12 viewModel\cf2 .\cf12 buttonBackgroundColors\cf2 .\cf10 indices\cf2 .\cf10 contains\cf2 (index) ? \cf12 viewModel\cf2 .\cf12 buttonBackgroundColors\cf2 [index] : \cf6 Color\cf2 .\cf10 clear\cf2 )\
+                                    .\cf10 cornerRadius\cf2 (\cf11 10\cf2 )\
+                                    .\cf10 overlay\cf2 (\
+                                        \cf6 RoundedRectangle\cf2 (\cf10 cornerRadius\cf2 : \cf11 10\cf2 )\
+                                            .\cf10 stroke\cf2 (\cf6 Color\cf2 .\cf10 black\cf2 , \cf10 lineWidth\cf2 : \cf11 3\cf2 )\
+                                    )\
+                            \}\
+                        \}\
+                    \}\
+\
+                    \cf13 // Action Buttons Section\cf2 \
+                    \cf6 VStack\cf2 (\cf10 spacing\cf2 : \cf11 10\cf2 ) \{\
+                        \cf6 Button\cf2 (\cf6 action\cf2 : \{\
+                            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 viewModel\cf2 .\cf12 buttonConfirmar\cf2  == \cf9 "CONFIRM"\cf2  \{\
+                                
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 viewModel\cf2 .\cf12 selectedOptionIndex\cf2  == 
+\f1\b \cf4 nil
+\f0\b0 \cf2  \{\
+                                    \cf12 viewModel\cf2 .\cf12 activeAlert\cf2  = .\cf12 showAlert\cf2 \
+                                    \cf12 viewModel\cf2 .\cf12 triggerMakeAChoiceAlert\cf2 ()\
+                                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                                    \cf12 viewModel\cf2 .\cf12 checkAnswer\cf2 ()\
+                                    \cf12 showAnswerStatus\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                                    \cf12 viewModel\cf2 .\cf12 handleAlerts\cf2 ()\
+                                \}\
+                            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 viewModel\cf2 .\cf12 buttonConfirmar\cf2  == \cf9 "NEXT"\cf2  \{\
+                                \cf12 viewModel\cf2 .\cf12 playSwooshSound\cf2 ()\
+                                \cf12 showAnswerStatus\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                                \cf12 viewModel\cf2 .\cf12 questionProcessed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                                \cf12 viewModel\cf2 .\cf12 fetchNextQuestion\cf2 ()\
+                                \cf12 viewModel\cf2 .\cf12 answerChecked\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                            \}\
+                        \}) \{\
+                            \cf6 Text\cf2 (\cf12 viewModel\cf2 .\cf12 buttonConfirmar\cf2 )\
+                                .\cf10 font\cf2 (.\cf10 headline\cf2 )\
+                                .\cf10 foregroundColor\cf2 (.\cf10 black\cf2 )\
+                                .\cf10 padding\cf2 ()\
+                                .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 300\cf2 , \cf10 height\cf2 : \cf11 75\cf2 )\
+                                .\cf10 background\cf2 (\cf6 Color\cf2 .\cf10 white\cf2 )\
+                                .\cf10 cornerRadius\cf2 (\cf11 10\cf2 )\
+                                .\cf10 overlay\cf2 (\
+                                    \cf6 RoundedRectangle\cf2 (\cf10 cornerRadius\cf2 : \cf11 10\cf2 )\
+                                        .\cf10 stroke\cf2 (\cf6 Color\cf2 .\cf10 black\cf2 , \cf10 lineWidth\cf2 : \cf11 3\cf2 )\
+                                )\
+                        \}\
+\
+                        
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 viewModel\cf2 .\cf12 buttonConfirmar\cf2  == \cf9 "NEXT"\cf2  \{\
+                            \cf6 Button\cf2 (\cf6 action\cf2 : \{\
+                                \cf12 viewModel\cf2 .\cf12 triggerEndGameAlert\cf2 ()\
+                            \}) \{\
+                                \cf6 Text\cf2 (\cf9 "FINISH"\cf2 )\
+                                    .\cf10 font\cf2 (.\cf10 headline\cf2 )\
+                                    .\cf10 foregroundColor\cf2 (.\cf10 white\cf2 )\
+                                    .\cf10 padding\cf2 ()\
+                                    .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 300\cf2 , \cf10 height\cf2 : \cf11 75\cf2 )\
+                                    .\cf10 background\cf2 (\cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 1.0\cf2 , \cf10 saturation\cf2 : \cf11 0.984\cf2 , \cf10 brightness\cf2 : \cf11 0.699\cf2 ))\
+                                    .\cf10 cornerRadius\cf2 (\cf11 10\cf2 )\
+                                    .\cf10 overlay\cf2 (\
+                                        \cf6 RoundedRectangle\cf2 (\cf10 cornerRadius\cf2 : \cf11 10\cf2 )\
+                                            .\cf10 stroke\cf2 (\cf6 Color\cf2 .\cf10 black\cf2 , \cf10 lineWidth\cf2 : \cf11 3\cf2 )\
+                                    )\
+                            \}\
+                        \}\
+                    \}\
+                \}\
+                .\cf10 padding\cf2 (.\cf10 horizontal\cf2 , \cf11 12\cf2 )\
+            \}\
+            .\cf10 onAppear\cf2  \{\
+                \cf6 NotificationCenter\cf2 .\cf10 default\cf2 .\cf10 addObserver\cf2 (\
+                    \cf10 forName\cf2 : \cf6 UIApplication\cf2 .\cf10 didEnterBackgroundNotification\cf2 ,\
+                    \cf10 object\cf2 : 
+\f1\b \cf4 nil
+\f0\b0 \cf2 , \cf10 queue\cf2 : .\cf10 main\cf2 ) \{ _ 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                        \cf12 viewModel\cf2 .\cf12 appMovedToBackground\cf2 ()\
+                \}\
+\
+                \cf6 NotificationCenter\cf2 .\cf10 default\cf2 .\cf10 addObserver\cf2 (\
+                    \cf10 forName\cf2 : \cf6 UIApplication\cf2 .\cf10 willEnterForegroundNotification\cf2 ,\
+                    \cf10 object\cf2 : 
+\f1\b \cf4 nil
+\f0\b0 \cf2 , \cf10 queue\cf2 : .\cf10 main\cf2 ) \{ _ 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                        \cf12 viewModel\cf2 .\cf12 appReturnsToForeground\cf2 ()\
+                \}\
+\
+                \cf12 viewModel\cf2 .\cf12 resetButtonColors\cf2 ()\
+                \cf12 viewModel\cf2 .\cf12 fetchNextQuestion\cf2 ()\
+            \}\
+            .\cf10 navigationBarHidden\cf2 (
+\f1\b \cf4 true
+\f0\b0 \cf2 )\
+            .\cf10 navigationBarBackButtonHidden\cf2 (
+\f1\b \cf4 true
+\f0\b0 \cf2 )\
+            .\cf10 alert\cf2 (\cf10 item\cf2 : \cf12 $viewModel\cf2 .\cf12 activeAlert\cf2 ) \{ item -> \cf6 Alert\cf2  
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                
+\f1\b \cf4 switch
+\f0\b0 \cf2  item \{\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf6 Alert\cf2 (\
+                        \cf10 title\cf2 : \cf6 Text\cf2 (\cf9 "ATTENTION"\cf2 ),\
+                        \cf10 message\cf2 : \cf6 Text\cf2 (\cf9 "Fear not, make a choice"\cf2 ),\
+                        \cf10 dismissButton\cf2 : .\cf10 default\cf2 (\cf6 Text\cf2 (\cf9 "OK"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Reset after dismissal\cf2 \
+                        \}\
+                    )\
+\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showEndGameAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf6 Alert\cf2 (\
+                        \cf10 title\cf2 : \cf6 Text\cf2 (\cf9 "JUST CHECKING"\cf2 ),\
+                        \cf10 message\cf2 : \cf6 Text\cf2 (\cf9 "Sure you want to end the game?"\cf2 ),\
+                        \cf10 primaryButton\cf2 : .\cf10 destructive\cf2 (\cf6 Text\cf2 (\cf9 "YEP"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 terminar\cf2  \{\
+                                \cf12 shouldPresentGameOver\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                            \}\
+                        \},\
+                        \cf10 secondaryButton\cf2 : .\cf10 cancel\cf2 (\cf6 Text\cf2 (\cf9 "NOPE"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                        \}\
+                    )\
+\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showGameOverAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf6 Alert\cf2 (\
+                        \cf10 title\cf2 : \cf6 Text\cf2 (\cf9 "GAME OVER"\cf2 ),\
+                        \cf10 message\cf2 : \cf6 Text\cf2 (\cf9 "That's it. Five mistakes. You're done."\cf2 ),\
+                        \cf10 dismissButton\cf2 : .\cf10 default\cf2 (\cf6 Text\cf2 (\cf9 "OK"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 terminar\cf2  \{\
+                                \cf12 shouldPresentGameOver\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                            \}\
+                        \}\
+                    )\
+\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showManyMistakesAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf6 Alert\cf2 (\
+                        \cf10 title\cf2 : \cf6 Text\cf2 (\cf9 "WATCH OUT"\cf2 ),\
+                        \cf10 message\cf2 : \cf6 Text\cf2 (\cf9 "This is your 4th error. One more and you're done."\cf2 ),\
+                        \cf10 dismissButton\cf2 : .\cf10 default\cf2 (\cf6 Text\cf2 (\cf9 "OK"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                        \}\
+                    )\
+\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showReturnToAppAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf6 Alert\cf2 (\
+                        \cf10 title\cf2 : \cf6 Text\cf2 (\cf9 "WARNING"\cf2 ),\
+                        \cf10 message\cf2 : \cf6 Text\cf2 (\cf9 "Do not leave the app while the timer is running. You will be penalized."\cf2 ),\
+                        \cf10 dismissButton\cf2 : .\cf10 default\cf2 (\cf6 Text\cf2 (\cf9 "OK"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 penalizeForLeavingApp\cf2 ()\
+                            \cf12 viewModel\cf2 .\cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                        \}\
+                    )\
+\
+                
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showTimeIsUpAlert\cf2 :\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf6 Alert\cf2 (\
+                        \cf10 title\cf2 : \cf6 Text\cf2 (\cf9 "TIME'S UP"\cf2 ),\
+                        \cf10 message\cf2 : \cf6 Text\cf2 (\cf9 "You ran out of time."\cf2 ),\
+                        \cf10 dismissButton\cf2 : .\cf10 default\cf2 (\cf6 Text\cf2 (\cf9 "OK"\cf2 )) \{\
+                            \cf12 viewModel\cf2 .\cf12 penalizeForTimeExpiry\cf2 ()\
+                            \cf12 viewModel\cf2 .\cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                        \}\
+                    )\
+                \}\
+            \}\
+                    .\cf10 fullScreenCover\cf2 (\cf10 isPresented\cf2 : \cf12 $shouldPresentGameOver\cf2 )\{\
+                        \cf8 GameOver\cf2 (\cf8 userId\cf2 : \cf12 userId\cf2 )\
+                            .\cf10 onDisappear\cf2 \{\
+                                \cf12 presentationMode\cf2 .\cf10 wrappedValue\cf2 .dismiss()\
+                            \}\
+                    \}\
+                    .\cf10 onChange\cf2 (\cf10 of\cf2 : \cf12 viewModel\cf2 .\cf12 activeAlert\cf2 ) \{ newAlert 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                        
+\f1\b \cf4 if
+\f0\b0 \cf2  newAlert == 
+\f1\b \cf4 nil
+\f0\b0 \cf2  \{\
+                            \cf10 print\cf2 (\cf9 "Alert dismissed, resetting isAlertBeingDisplayed."\cf2 )\
+                            \cf12 viewModel\cf2 .\cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                        \}\
+                    \}\
+                    .\cf10 onDisappear\cf2  \{\
+                        \cf6 NotificationCenter\cf2 .\cf10 default\cf2 .\cf10 removeObserver\cf2 (\
+                            
+\f1\b \cf4 self
+\f0\b0 \cf2 ,\
+                            \cf10 name\cf2 : \cf6 UIApplication\cf2 .\cf10 didEnterBackgroundNotification\cf2 ,\
+                            \cf10 object\cf2 : 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+                        )\
+                        \cf6 NotificationCenter\cf2 .\cf10 default\cf2 .\cf10 removeObserver\cf2 (\
+                            
+\f1\b \cf4 self
+\f0\b0 \cf2 ,\
+                            \cf10 name\cf2 : \cf6 UIApplication\cf2 .\cf10 willEnterForegroundNotification\cf2 ,\
+                            \cf10 object\cf2 : 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+                        )\
+                    \}\
+\
+                    .\cf10 onReceive\cf2 (\cf12 viewModel\cf2 .\cf12 timeExpired\cf2 , \cf10 perform\cf2 : \{ newValue 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                        \cf12 showAnswerStatusForMistakes\cf2  = newValue\
+                        \
+                    \})\
+                    \
+                \}\
+            \}\
+\
+    
+\f1\b \cf4 struct
+\f0\b0 \cf2  \cf5 GameOverPresented\cf2 : \cf6 Identifiable\cf2  \{\
+        
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 id\cf2  = \cf6 UUID\cf2 () \cf13 // changes\cf2 \
+    \}\
+    \
+    
+\f1\b \cf4 struct
+\f0\b0 \cf2  \cf5 JugarModoCompeticion_Previews\cf2 : \cf6 PreviewProvider\cf2  \{\
+        
+\f1\b \cf4 static
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 previews\cf2 : 
+\f1\b \cf4 some
+\f0\b0 \cf2  \cf6 View\cf2  \{\
+            \cf8 JugarModoCompeticion\cf2 (\cf12 userId\cf2 : \cf9 "DummyuserId"\cf2 , \cf12 userData\cf2 : \cf8 UserData\cf2 ())\
+        \}\
+    \}\
+\
+    
+\f1\b \cf4 struct
+\f0\b0 \cf2  \cf5 IconView\cf2 : \cf6 View\cf2  \{\
+    \cf6 @Binding\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 categoryImage\cf2 : \cf6 String\cf2 \
+    \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 downloadedImage\cf2 : \cf6 UIImage\cf2 ? = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+    \cf6 @State\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isLoading\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 body\cf2 : 
+\f1\b \cf4 some
+\f0\b0 \cf2  \cf6 View\cf2  \{\
+        \cf6 Group\cf2  \{\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  downloadedImage = \cf12 downloadedImage\cf2  \{\
+                \cf6 Image\cf2 (\cf10 uiImage\cf2 : downloadedImage)\
+                    .\cf10 resizable\cf2 ()\
+                    .\cf10 aspectRatio\cf2 (\cf10 contentMode\cf2 : .\cf10 fit\cf2 )\
+                    .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 80\cf2 , \cf10 height\cf2 : \cf11 80\cf2 )\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 isLoading\cf2  \{\
+                \cf6 ProgressView\cf2 ()\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf6 Image\cf2 (\cf9 "logo"\cf2 ) \cf13 // Default fallback\cf2 \
+                    .\cf10 resizable\cf2 ()\
+                    .\cf10 aspectRatio\cf2 (\cf10 contentMode\cf2 : .\cf10 fit\cf2 )\
+                    .\cf10 frame\cf2 (\cf10 width\cf2 : \cf11 80\cf2 , \cf10 height\cf2 : \cf11 80\cf2 )\
+            \}\
+        \}\
+        .\cf10 onAppear\cf2  \{\
+            \cf12 fetchImage\cf2 ()\
+        \}\
+        .\cf10 onChange\cf2 (\cf10 of\cf2 : \cf12 categoryImage\cf2 ) \{ newValue 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            \cf10 print\cf2 (\cf9 "IconView received new image URL: \cf2 \\(newValue)\cf9 "\cf2 )\
+            \cf12 fetchImage\cf2 () \cf13 // Fetch the new image when categoryImage changes\cf2 \
+        \}\
+    \}\
+\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 fetchImage\cf2 () \{\
+        \cf12 isLoading\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2  \cf13 // Set loading state\cf2 \
+        
+\f1\b \cf4 guard
+\f0\b0 \cf2  !\cf12 categoryImage\cf2 .\cf10 isEmpty\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+            \cf10 print\cf2 (\cf9 "Category image is empty."\cf2 )\
+            \cf12 isLoading\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+            
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+        \}\
+\
+        
+\f1\b \cf4 guard
+\f0\b0 \cf2  \cf12 categoryImage\cf2 .\cf10 starts\cf2 (\cf10 with\cf2 : \cf9 "gs://"\cf2 ) 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  url = \cf6 URL\cf2 (\cf10 string\cf2 : \cf12 categoryImage\cf2 ) \{\
+                \cf12 downloadImage\cf2 (\cf12 from\cf2 : url)\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "Invalid URL: \cf2 \\(\cf12 categoryImage\cf2 )\cf9 "\cf2 )\
+                \cf12 isLoading\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+            \}\
+            
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+        \}\
+\
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  storageRef = \cf8 Storage\cf2 .\cf12 storage\cf2 ().\cf12 reference\cf2 (\cf12 forURL\cf2 : \cf12 categoryImage\cf2 )\
+        storageRef.\cf12 downloadURL\cf2  \{ url, error 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  url = url \{\
+                \cf10 print\cf2 (\cf9 "Fetched download URL: \cf2 \\(url)\cf9 "\cf2 )\
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 downloadImage\cf2 (\cf12 from\cf2 : url)\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "Failed to fetch download URL: \cf2 \\(error?.\cf10 localizedDescription\cf2  ?? \cf9 "Unknown error"\cf2 )\cf9 "\cf2 )\
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 isLoading\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+            \}\
+        \}\
+    \}\
+\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 downloadImage\cf2 (\cf7 from\cf2  url: \cf6 URL\cf2 ) \{\
+        \cf6 URLSession\cf2 .\cf10 shared\cf2 .\cf10 dataTask\cf2 (\cf10 with\cf2 : url) \{ data, _, error 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  data = data, 
+\f1\b \cf4 let
+\f0\b0 \cf2  image = \cf6 UIImage\cf2 (\cf10 data\cf2 : data) \{\
+                DispatchQueue.\cf10 main\cf2 .\cf10 async\cf2  \{\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 downloadedImage\cf2  = image\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 isLoading\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                \}\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "Failed to download image: \cf2 \\(error?.\cf10 localizedDescription\cf2  ?? \cf9 "Unknown error"\cf2 )\cf9 "\cf2 )\
+                DispatchQueue.\cf10 main\cf2 .\cf10 async\cf2  \{\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 isLoading\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+                \}\
+            \}\
+        \}.\cf10 resume\cf2 ()\
+    \}\
+\}\
+\pard\tx593\pardeftab593\partightenfactor0
+
+\f1\b \cf4 import
+\f0\b0 \cf2  SwiftUI\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  FirebaseDatabaseInternal\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  AVFoundation\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  FirebaseFirestore\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  FirebaseDatabase\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  FirebaseAuth\
+
+\f1\b \cf4 import
+\f0\b0 \cf2  Combine\
+\
+
+\f1\b \cf4 class
+\f0\b0 \cf2  \cf5 JugarModoCompeticionViewModel\cf2 : \cf6 ObservableObject\cf2  \{\
+   \cf13 // @Published var currentQuestion: String = ""\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 options\cf2 : [\cf6 String\cf2 ] = []\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 score\cf2 : \cf6 Int\cf2  = \cf11 0\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 mistakes\cf2 : \cf6 Int\cf2  = \cf11 0\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 totalScore\cf2 : \cf6 Int\cf2  = \cf11 0\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 category\cf2 : \cf6 String\cf2  = \cf9 ""\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 image\cf2 : \cf6 String\cf2  = \cf9 ""\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 correctAnswer\cf2 : \cf6 String\cf2  = \cf9 ""\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 timeRemaining\cf2 : \cf6 Int\cf2  = \cf11 15\cf2 \
+    \cf13 //@Published var selectedOptionIndex: Int? = nil\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isGamePaused\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 timer\cf2 : \cf6 Timer\cf2 ?\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 countdownSound\cf2 : \cf6 AVAudioPlayer\cf2 ?\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 warning\cf2 : \cf6 AVAudioPlayer\cf2 ?\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 rightSoundEffect\cf2 : \cf6 AVAudioPlayer\cf2 ?\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 wrongSoundEffect\cf2 : \cf6 AVAudioPlayer\cf2 ?\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  \cf7 firestore\cf2  = Firestore.firestore()\
+    \cf6 @Published\cf2  
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 buttonText\cf2 : \cf6 String\cf2  = \cf9 "CONFIRM"\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 optionSelections\cf2 : [\cf6 Bool\cf2 ] = []\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 defaultButtonColor\cf2 : \cf6 Color\cf2  = \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.664\cf2 , \cf10 saturation\cf2 : \cf11 0.935\cf2 , \cf10 brightness\cf2 : \cf11 0.604\cf2 )\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 buttonBackgroundColors\cf2 : [\cf6 Color\cf2 ] = []\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 clickCount\cf2  = \cf11 0\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showAlert\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showDoubleClickAlert\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 tapCount\cf2  = \cf11 0\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 shouldShowTerminar\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 userId\cf2 : \cf6 String\cf2 \
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 dbRef\cf2  = Database.database().\cf10 reference\cf2 ()\
+    \cf6 @ObservedObject\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 userData\cf2 : \cf8 UserData\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 shouldNavigateToGameOver\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showManyMistakesAlert\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showGameOverAlert\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 answerChecked\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 answerIsCorrect\cf2 : \cf6 Bool\cf2 ?\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showXmarkImage\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 questionProcessed\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showConfirmButton\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showNextButton\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showEndButton\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 activeAlert\cf2 : \cf8 ActiveAlert\cf2 ?\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 hasShownManyMistakesAlert\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 endGameAlertPublisher\cf2  = \cf6 PassthroughSubject\cf2 <\cf6 Void\cf2 , \cf6 Never\cf2 >()\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 manyMistakesAlertPublisher\cf2  = \cf6 PassthroughSubject\cf2 <\cf6 Void\cf2 , \cf6 Never\cf2 >()\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 gameOverAlertPublisher\cf2  = \cf6 PassthroughSubject\cf2 <\cf6 Void\cf2 , \cf6 Never\cf2 >()\
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 shownQuestionIDs\cf2 : \cf6 Set\cf2 <\cf6 String\cf2 > = []\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isAlertBeingDisplayed\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 showAnswerStatus\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 let
+\f0\b0 \cf2  \cf7 timeExpired\cf2  = \cf6 PassthroughSubject\cf2 <\cf6 Bool\cf2 , \cf6 Never\cf2 >()\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 lastDocumentSnapshot\cf2 : DocumentSnapshot?\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 questionCache\cf2 : [QueryDocumentSnapshot] = []\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 questionManager\cf2 : \cf8 QuestionManager\cf2 ?\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 currentQuestion\cf2 : \cf8 QuestionII\cf2 ?\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 selectedOptionIndex\cf2 : \cf6 Int\cf2 ?\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 timerIsActive\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 swooshSoundEffect\cf2 : \cf6 AVAudioPlayer\cf2 ?\
+    
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 currentQuestionNumber\cf2 : \cf6 String\cf2 ? \{ \cf13 // Computed property to get the question number\cf2 \
+        
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf12 currentQuestion\cf2 ?.\cf12 number\cf2  \cf13 // Or however you access the number in your Question type\cf2 \
+        \}\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 shouldHideUI\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 scale\cf2 : \cf6 CGFloat\cf2  = \cf11 1.0\cf2 \
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isGrowing\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+    
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 timerCancellable\cf2 : \cf6 AnyCancellable\cf2 ?\
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 displayAlertMessage\cf2 : \cf6 String\cf2 ? \cf13 // Holds the alert message to display\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isAlertVisible\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Tracks if an alert is active\cf2 \
+    \cf6 @Published\cf2  
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 isMessageBlockingNext\cf2 : \cf6 Bool\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Prevents moving to the next question if a message is displayed\cf2 \
+\
+   \
+    \
+    \
+        
+\f1\b \cf4 enum
+\f0\b0 \cf2  \cf5 ActiveAlert\cf2 : \cf6 Identifiable\cf2  \{\
+        
+\f1\b \cf4 case
+\f0\b0 \cf2  \cf7 showAlert\cf2 , \cf7 showEndGameAlert\cf2 , \cf7 showGameOverAlert\cf2 , \cf7 showManyMistakesAlert\cf2 , \cf7 showReturnToAppAlert\cf2 , \cf7 showTimeIsUpAlert\cf2 \
+\
+        
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 id\cf2 : \cf6 Int\cf2  \{\
+            
+\f1\b \cf4 switch
+\f0\b0 \cf2  
+\f1\b \cf4 self
+\f0\b0 \cf2  \{\
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showAlert\cf2 :\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 0\cf2 \
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showEndGameAlert\cf2 :\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 1\cf2 \
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showGameOverAlert\cf2 :\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 2\cf2 \
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showManyMistakesAlert\cf2 :\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 3\cf2 \
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showReturnToAppAlert\cf2 :\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 4\cf2 \
+            
+\f1\b \cf4 case
+\f0\b0 \cf2  .\cf12 showTimeIsUpAlert\cf2 :\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 5\cf2 \
+            \}\
+        \}\
+    \}\
+        \
+        
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 buttonConfirmar\cf2 : \cf6 String\cf2  \{\
+    \cf12 buttonText\cf2 \
+\}\
+    \
+        
+\f1\b \cf4 var
+\f0\b0 \cf2  \cf7 shuffledOptions\cf2 : [\cf6 String\cf2 ] \{\
+\cf12 options\cf2 .\cf10 shuffled\cf2 ()\
+\}\
+    \
+            
+\f1\b \cf4 init
+\f0\b0 \cf2 (\cf7 userId\cf2 : \cf6 String\cf2 , \cf7 userData\cf2 : \cf8 UserData\cf2 ) \{\
+        \cf13 // Initialize your other properties\cf2 \
+        
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 userId\cf2  = userId\
+        
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 userData\cf2  = userData\
+        \cf12 optionSelections\cf2  = \cf6 Array\cf2 (\cf10 repeating\cf2 : 
+\f1\b \cf4 false
+\f0\b0 \cf2 , \cf10 count\cf2 : \cf12 options\cf2 .\cf10 count\cf2 )\
+        \cf12 buttonBackgroundColors\cf2  = \cf6 Array\cf2 (\cf10 repeating\cf2 : \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.664\cf2 , \cf10 saturation\cf2 : \cf11 0.935\cf2 , \cf10 brightness\cf2 : \cf11 0.604\cf2 ), \cf10 count\cf2 : \cf11 3\cf2 )\
+        
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 questionManager\cf2  = \cf8 QuestionManager\cf2 (\cf12 realTimeDatabaseReference\cf2 : 
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 dbRef\cf2 , \cf12 firestore\cf2 : 
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 firestore\cf2 , \cf12 userID\cf2 : 
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 userId\cf2 )\
+\
+        \cf13 // Load and prepare the sound players\cf2 \
+        
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  countdownURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "countdown"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ),\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  rightURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "right"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ),\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  wrongURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "notright"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ),\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  warningURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "warning"\cf2 , \cf10 withExtension\cf2 : \cf9 "mp3"\cf2 ),\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  swooshURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "swoosh"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ) \{ \cf13 // Add swoosh sound URL\cf2 \
+            
+\f1\b \cf4 do
+\f0\b0 \cf2  \{\
+                \cf12 countdownSound\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : countdownURL)\
+                \cf12 countdownSound\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                \
+                \cf12 rightSoundEffect\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : rightURL)\
+                \cf12 rightSoundEffect\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                \
+                \cf12 wrongSoundEffect\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : wrongURL)\
+                \cf12 wrongSoundEffect\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                \
+                \cf12 warning\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : warningURL) \cf13 // Initialize the warning sound\cf2 \
+                \cf12 warning\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                \
+                \cf12 swooshSoundEffect\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : swooshURL) \cf13 // Initialize the swoosh sound\cf2 \
+                \cf12 swooshSoundEffect\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+            \} 
+\f1\b \cf4 catch
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "Failed to load sound effects: \cf2 \\(error)\cf9 "\cf2 )\
+            \}\
+        \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+            \cf10 print\cf2 (\cf9 "Sound effect files not found in the bundle."\cf2 )\
+        \}\
+    \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 fetchNextQuestion\cf2 () \{\
+            
+\f1\b \cf4 let
+\f0\b0 \cf2  unusedQuestionsCount = \cf8 DatabaseManager\cf2 .\cf12 shared\cf2 .\cf12 countUnusedQuestions\cf2 ()\
+            \cf10 print\cf2 (\cf9 "fetchNextQuestion - Remaining unused questions in the database: \cf2 \\(unusedQuestionsCount)\cf9 "\cf2 )\
+\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  unusedQuestionsCount > \cf11 8\cf2  \{\
+                \cf10 print\cf2 (\cf9 "fetchNextQuestion - Sufficient unused questions available, presenting random question."\cf2 )\
+                \cf12 presentRandomQuestionAndUpdateUI\cf2 ()\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  unusedQuestionsCount == \cf11 8\cf2  \{\
+                \cf12 updateBatchIfNeeded\cf2 ()\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  unusedQuestionsCount == \cf11 5\cf2  \{\
+                \cf10 print\cf2 (\cf9 "fetchNextQuestion - Exactly 5 unused questions left, starting batch process."\cf2 )\
+                \cf12 startNewBatchProcess\cf2 ()\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "fetchNextQuestion - \cf2 \\(unusedQuestionsCount)\cf9  or fewer unused questions available, presenting random question while waiting for more."\cf2 )\
+                \cf12 presentRandomQuestionAndUpdateUI\cf2 ()\
+                \cf12 questionProcessed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Reset for new question\cf2 \
+                    \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Reset timer state\cf2 \
+            \}\
+        \}\
+\
+            
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 startNewBatchProcess\cf2 () \{\
+   
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 fetchQuestionBatch\cf2 ()\
+              \
+\}\
+    \
+            
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateBatchIfNeeded\cf2 () \{\
+           \
+                
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  questionManager = \cf12 questionManager\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+        \cf10 print\cf2 (\cf9 "fetchNextQuestion - questionManager is nil."\cf2 )\
+        \cf13 // Handle the case where questionManager is nil if necessary\cf2 \
+        
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+    \}\
+\
+        questionManager.\cf12 updateCurrentBatchInRealtime\cf2  \{ (success, error) 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            DispatchQueue.\cf10 main\cf2 .\cf10 async\cf2  \{\
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  success \{\
+                    \cf10 print\cf2 (\cf9 "fetchNextQuestion - Current batch updated successfully."\cf2 )\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 presentRandomQuestionAndUpdateUI\cf2 ()\
+                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "fetchNextQuestion - Failed to update current batch."\cf2 )\
+                    
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  error = error \{\
+                        \cf10 print\cf2 (\cf9 "Error: \cf2 \\(error.\cf10 localizedDescription\cf2 )\cf9 "\cf2 )\
+                    \}\
+                    \cf13 // Consider additional error handling here if necessary\cf2 \
+                \}\
+            \}\
+        \}\
+    \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 fetchQuestionBatch\cf2 () \{\
+        \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Starting background fetch process for new questions."\cf2 )\
+\
+        \cf12 questionManager\cf2 ?.\cf12 fetchCurrentBatchForUser\cf2  \{ [
+\f1\b \cf4 weak
+\f0\b0 \cf2  
+\f1\b \cf4 self
+\f0\b0 \cf2 ] batchNumber 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  strongSelf = 
+\f1\b \cf4 self
+\f0\b0 \cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Self is nil, aborting batch fetch process."\cf2 )\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+            \}\
+\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  currentUserID = \cf8 Auth\cf2 .\cf12 auth\cf2 ().\cf12 currentUser\cf2 ?.\cf12 uid\cf2  \{\
+                \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Fetched currentBatch \cf2 \\(batchNumber)\cf9  for user with ID: \cf2 \\(currentUserID)\cf9 ."\cf2 )\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Fetched currentBatch \cf2 \\(batchNumber)\cf9  but no user is currently logged in."\cf2 )\
+            \}\
+\
+            strongSelf.\cf12 questionManager\cf2 ?.\cf12 fetchShuffledOrderForBatch\cf2 (\cf12 batchNumber\cf2 : batchNumber) \{ shuffledOrder 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Fetched shuffled order for batch successfully."\cf2 )\
+\
+                strongSelf.\cf12 questionManager\cf2 ?.\cf12 fetchQuestionsBasedOnShuffledOrder\cf2 (\cf12 shuffledOrder\cf2 : shuffledOrder) \{ fetchedDocuments 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                    \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Fetched questions based on shuffled order successfully."\cf2 )\
+\
+                    \cf8 DatabaseManager\cf2 .\cf12 shared\cf2 .\cf12 deleteAllButLastFiveUnusedQuestions\cf2  \{\
+                        \cf10 print\cf2 (\cf9 "fetchQuestionBatch - Cleaned up local database, now have at least 5 unused questions."\cf2 )\
+                    \}\
+\
+                    
+\f1\b \cf4 if
+\f0\b0 \cf2  fetchedDocuments.\cf10 isEmpty\cf2  \{\
+                        \cf10 print\cf2 (\cf9 "Adequate unused questions available."\cf2 )\
+                        \cf13 // Present the next available question\cf2 \
+                        
+\f1\b \cf4 self
+\f0\b0 \cf2 ?.\cf12 questionManager\cf2 ?.\cf12 presentNextAvailableQuestion\cf2 ()\
+                    \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                        
+\f1\b \cf4 let
+\f0\b0 \cf2  group = DispatchGroup()\
+                        
+\f1\b \cf4 var
+\f0\b0 \cf2  totalInsertedQuestions = \cf11 0\cf2 \
+\
+                        
+\f1\b \cf4 for
+\f0\b0 \cf2  document 
+\f1\b \cf4 in
+\f0\b0 \cf2  fetchedDocuments \{\
+                            group.enter()\
+                            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  question = \cf8 QuestionII\cf2 (\cf12 document\cf2 : document) \{\
+                                \cf10 print\cf2 (\cf9 "Inserting question with ID: \cf2 \\(question.\cf12 number\cf2 )\cf9 "\cf2 )\
+                                \
+                                \cf8 DatabaseManager\cf2 .\cf12 shared\cf2 .\cf12 insertQuestion\cf2 (\cf12 question\cf2 : question) \{ success 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                                    
+\f1\b \cf4 if
+\f0\b0 \cf2  success \{\
+                                        totalInsertedQuestions += \cf11 1\cf2 \
+                                    \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                                        \cf10 print\cf2 (\cf9 "Failed to insert question with ID: \cf2 \\(question.\cf12 number\cf2 )\cf9 "\cf2 )\
+                                    \}\
+                                    group.\cf10 leave\cf2 ()\
+                                \}\
+                            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                                \cf10 print\cf2 (\cf9 "Document conversion to Question failed."\cf2 )\
+                                group.\cf10 leave\cf2 ()\
+                            \}\
+                        \}\
+\
+                        group.\cf10 notify\cf2 (\cf10 queue\cf2 : .\cf10 main\cf2 ) \{\
+                            \cf10 print\cf2 (\cf9 "Insertion complete. Total inserted: \cf2 \\(totalInsertedQuestions)\cf9 "\cf2 )\
+                            \cf13 // Present the next available question\cf2 \
+                            
+\f1\b \cf4 self
+\f0\b0 \cf2 ?.\cf12 questionManager\cf2 ?.\cf12 presentNextAvailableQuestion\cf2 ()\
+                        \}\
+                    \}\
+                \}\
+            \}\
+        \}\
+    \}\
+          \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 presentRandomQuestion\cf2 () \{\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  question = \cf8 DatabaseManager\cf2 .\cf12 shared\cf2 .\cf12 fetchRandomQuestionFromLocalDatabase\cf2 () \{\
+                DispatchQueue.\cf10 main\cf2 .\cf10 async\cf2  \{\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 currentQuestion\cf2  = question\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 options\cf2  = [question.\cf12 optionA\cf2 , question.\cf12 optionB\cf2 , question.\cf12 optionC\cf2 ]\
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 correctAnswer\cf2  = question.\cf12 answer\cf2 \
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 category\cf2  = question.\cf12 category\cf2 \
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 image\cf2  = question.\cf12 image\cf2 \
+                    \cf10 print\cf2 (\cf9 "Updated image to: \cf2 \\(
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 image\cf2 )\cf9 "\cf2 ) \cf13 // Debug\cf2 \
+                    
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 startTimer\cf2 ()\
+                \}\
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 presentRandomQuestionAndUpdateUI\cf2 () \{\
+        \cf12 presentRandomQuestion\cf2 ()\
+        \cf12 updateUIForNextQuestion\cf2 ()\
+                \cf12 updateImage\cf2 ()\
+    \}\
+    \
+            
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateImage\cf2 () \{\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  currentImage = \cf12 currentQuestion\cf2 ?.\cf12 image\cf2 , !currentImage.\cf10 isEmpty\cf2  \{\
+                \cf12 image\cf2  = currentImage\
+                \cf10 print\cf2 (\cf9 "Updated image to: \cf2 \\(\cf12 image\cf2 )\cf9 "\cf2 ) \cf13 // Debug\cf2 \
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf12 image\cf2  = \cf9 "placeholder"\cf2  \cf13 // Fallback\cf2 \
+                \cf10 print\cf2 (\cf9 "Image not available, using placeholder."\cf2 ) \cf13 // Debug\cf2 \
+            \}\
+        \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateUIForNextQuestion\cf2 () \{\
+        \cf13 // Update UI elements for the next question\cf2 \
+        \cf12 buttonText\cf2  = \cf9 "CONFIRM"\cf2 \
+        \cf12 buttonBackgroundColors\cf2  = \cf6 Array\cf2 (\cf10 repeating\cf2 : \cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.664\cf2 , \cf10 saturation\cf2 : \cf11 0.935\cf2 , \cf10 brightness\cf2 : \cf11 0.604\cf2 ), \cf10 count\cf2 : \cf12 options\cf2 .\cf10 count\cf2 )\
+        \cf10 print\cf2 (\cf9 "fetchNextQuestion - UI updated with new question details."\cf2 )\
+    \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 handleQuestionDocument\cf2 (\cf7 document\cf2 : DocumentSnapshot) \{\
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  data = document.\cf10 data\cf2 ()\
+        \
+        
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  questionText = data?[\cf9 "QUESTION"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  category = data?[\cf9 "CATEGORY"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  image = data?[\cf9 "IMAGE"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  optionA = data?[\cf9 "OPTION A"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  optionB = data?[\cf9 "OPTION B"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  optionC = data?[\cf9 "OPTION C"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  answer = data?[\cf9 "ANSWER"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2 ,\
+           
+\f1\b \cf4 let
+\f0\b0 \cf2  number = data?[\cf9 "NUMBER"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 String\cf2  \{ \cf13 // Assume "NUMBER" is the key for the question number\cf2 \
+            \
+            
+\f1\b \cf4 let
+\f0\b0 \cf2  question = \cf8 QuestionII\cf2 (\cf12 answer\cf2 : answer, \cf12 category\cf2 : category, \cf12 image\cf2 : image, \cf12 number\cf2 : number, \cf12 optionA\cf2 : optionA, \cf12 optionB\cf2 : optionB, \cf12 optionC\cf2 : optionC, \cf12 questionText\cf2 : questionText)\
+            \
+            DispatchQueue.\cf10 main\cf2 .\cf10 async\cf2  \{\
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 selectedOptionIndex\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2  \cf13 // Clear all selections\cf2 \
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 currentQuestion\cf2  = question \cf13 // Assign the newly created QuestionII instance\cf2 \
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 startTimer\cf2 ()\
+            \}\
+        \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+            \cf10 print\cf2 (\cf9 "Invalid data format"\cf2 )\
+            \cf10 print\cf2 (\cf9 "Fetching question..."\cf2 )\
+            \cf10 print\cf2 (\cf9 "Data: \cf2 \\(data ?? [:])\cf9 "\cf2 )\
+            \cf10 print\cf2 (\cf9 "Fetched data: \cf2 \\(data ?? [:])\cf9 "\cf2 )\
+        \}\
+    \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 checkAnswer\cf2 () \{\
+            \cf13 // Check if an option has been selected\cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 selectedOptionIndex\cf2  == 
+\f1\b \cf4 nil
+\f0\b0 \cf2  \{\
+                \cf13 // No option has been selected, show an alert\cf2 \
+                \cf10 print\cf2 (\cf9 "checkAnswer - No option selected. Showing alert."\cf2 )\
+                \cf12 triggerMakeAChoiceAlert\cf2 ()\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+            \}\
+            \
+            \cf13 // Unwrap the selected option safely\cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  selectedOptionIndex = \cf12 selectedOptionIndex\cf2  \{\
+                
+\f1\b \cf4 let
+\f0\b0 \cf2  selectedOption = \cf12 options\cf2 [selectedOptionIndex]\
+                \
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  selectedOption == \cf12 correctAnswer\cf2  \{\
+                    \cf12 handleCorrectAnswer\cf2 ()\
+                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf12 handleIncorrectAnswer\cf2 ()\
+                \}\
+                \
+                \cf12 startGrowShrinkAnimation\cf2 ()\
+                \cf13 // Common logic for both correct and incorrect answers\cf2 \
+                \cf12 questionProcessed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf12 answerChecked\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf12 resetTimer\cf2 ()\
+                \cf12 buttonText\cf2  = \cf9 "NEXT"\cf2 \
+                \cf12 shouldShowTerminar\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+\
+                \cf13 // Attempt to mark the question as used\cf2 \
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  questionNumber = \cf12 currentQuestion\cf2 ?.\cf12 number\cf2  \{\
+                    \cf10 print\cf2 (\cf9 "checkAnswer - Marking question NUMBER: \cf2 \\(questionNumber)\cf9  as used."\cf2 )\
+                    \cf8 DatabaseManager\cf2 .\cf12 shared\cf2 .\cf12 markQuestionAsUsed\cf2 (\cf12 questionNumber\cf2 : questionNumber)\
+                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "checkAnswer - Error: currentQuestionNumber is nil. Unable to mark question as used."\cf2 )\
+                \}\
+                \
+                \cf13 // Reset the selected option after checking the answer\cf2 \
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 selectedOptionIndex\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 handleCorrectAnswer\cf2 () \{\
+            \cf12 playRightSoundEffect\cf2 ()\
+            \cf12 score\cf2  += \cf11 1\cf2 \
+            \cf12 totalScore\cf2  += \cf11 500\cf2 \
+            \cf12 answerIsCorrect\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \cf10 print\cf2 (\cf9 "handleCorrectAnswer - Correct answer selected."\cf2 )\
+        \}\
+    \
+            
+\f1\b \cf4 private
+\f0\b0 \cf2  
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 handleIncorrectAnswer\cf2 () \{\
+            \cf12 playWrongSoundEffect\cf2 ()\
+            \cf12 mistakes\cf2  += \cf11 1\cf2 \
+            \cf12 totalScore\cf2  -= \cf11 500\cf2 \
+            \cf12 answerIsCorrect\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+            \cf10 print\cf2 (\cf9 "handleIncorrectAnswer - Incorrect answer selected."\cf2 )\
+            \
+            \cf13 // Check for game over condition\cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  >= \cf11 5\cf2  \{\
+                \cf10 print\cf2 (\cf9 "handleIncorrectAnswer - Game over condition met."\cf2 )\
+                \cf12 terminar\cf2  \{\}\
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 startGrowShrinkAnimation\cf2 () \{\
+            \cf12 timerCancellable\cf2  = \cf6 Timer\cf2 .\cf10 publish\cf2 (\cf10 every\cf2 : \cf11 0.5\cf2 , \cf10 on\cf2 : .\cf10 main\cf2 , \cf10 in\cf2 : .\cf10 common\cf2 )\
+                .\cf10 autoconnect\cf2 ()\
+                .\cf10 sink\cf2  \{ [
+\f1\b \cf4 weak
+\f0\b0 \cf2  
+\f1\b \cf4 self
+\f0\b0 \cf2 ] _ 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                    
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  self = 
+\f1\b \cf4 self
+\f0\b0 \cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{ 
+\f1\b \cf4 return
+\f0\b0 \cf2  \}\
+                    \cf10 withAnimation\cf2 (.\cf10 easeInOut\cf2 (\cf10 duration\cf2 : \cf11 0.5\cf2 )) \{\
+                        self.\cf12 scale\cf2  = self.\cf12 isGrowing\cf2  ? \cf11 1.2\cf2  : \cf11 1.0\cf2 \
+                        self.\cf12 isGrowing\cf2 .\cf10 toggle\cf2 ()\
+                    \}\
+                \}\
+        \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 stopGrowShrinkAnimation\cf2 () \{\
+            \cf12 timerCancellable\cf2 ?.\cf10 cancel\cf2 ()\
+            \cf12 timerCancellable\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 startTimer\cf2 () \{\
+    \cf12 initializeTimer\cf2 ()\
+    \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2  \cf13 // Timer is now active\cf2 \
+\}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 initializeTimer\cf2 () \{\
+            \cf12 timeRemaining\cf2  = \cf11 15\cf2 \
+            \cf12 timer\cf2  = \cf6 Timer\cf2 .\cf10 scheduledTimer\cf2 (\cf10 withTimeInterval\cf2 : \cf11 1\cf2 , \cf10 repeats\cf2 : 
+\f1\b \cf4 true
+\f0\b0 \cf2 ) \{ [
+\f1\b \cf4 weak
+\f0\b0 \cf2  
+\f1\b \cf4 self
+\f0\b0 \cf2 ] _ 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 ?.\cf12 reduceTime\cf2 ()\
+            \}\
+        \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 reduceTime\cf2 () \{\
+    \cf13 // Check if the alert is being displayed\cf2 \
+    
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 isAlertBeingDisplayed\cf2  \{\
+        \cf13 // If the alert is being displayed, do not reduce the time\cf2 \
+        \cf13 // Optionally, you can set timerIsActive to false here if you want the timer to be considered inactive during alerts.\cf2 \
+        
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+    \}\
+    \
+    \cf13 // Since the timer is reducing time, we can consider it active\cf2 \
+    \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+\
+    \cf12 timeRemaining\cf2  -= \cf11 1\cf2 \
+\
+    
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 timeRemaining\cf2  <= \cf11 5\cf2  && \cf12 timeRemaining\cf2  > \cf11 0\cf2  \{\
+        \cf12 playCountdownSound\cf2 ()\
+    \}\
+\
+    
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 timeRemaining\cf2  == \cf11 0\cf2  \{\
+        \cf12 handleTimeExpiry\cf2 ()\
+        \cf13 // The timer is no longer active as the time has expired\cf2 \
+        \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+    \}\
+\}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 handleTimeExpiry\cf2 () \{\
+            \cf10 print\cf2 (\cf9 "handleTimeExpiry called"\cf2 )\
+\
+            \cf12 timer\cf2 ?.\cf10 invalidate\cf2 ()\
+            \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Timer is no longer active\cf2 \
+\
+            \cf13 // Trigger the "Time's Up" alert\cf2 \
+                \cf12 playWarningSound\cf2 ()\
+            \cf12 activeAlert\cf2  = .\cf12 showTimeIsUpAlert\cf2 \
+            \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2  \cf13 // Mark that an alert is being displayed\cf2 \
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 resetTimer\cf2 () \{\
+        \cf12 timer\cf2 ?.\cf10 invalidate\cf2 ()\
+        \cf12 timer\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+        \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2  \cf13 // Timer is no longer active\cf2 \
+    \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 handleAlerts\cf2 () \{\
+            
+\f1\b \cf4 guard
+\f0\b0 \cf2  !\cf12 isAlertBeingDisplayed\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{ 
+\f1\b \cf4 return
+\f0\b0 \cf2  \} \cf13 // Avoid re-triggering if an alert is already displayed.\cf2 \
+\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  == \cf11 4\cf2  && !\cf12 hasShownManyMistakesAlert\cf2  \{\
+                \cf10 print\cf2 (\cf9 "Preparing to show 'Too Many Mistakes' alert..."\cf2 )\
+                \cf12 playWarningSound\cf2 () \cf13 // Trigger sound only when the alert is shown.\cf2 \
+                \cf12 activeAlert\cf2  = .\cf12 showManyMistakesAlert\cf2 \
+                \cf12 hasShownManyMistakesAlert\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  >= \cf11 5\cf2  \{\
+                \cf10 print\cf2 (\cf9 "Preparing to show 'Game Over' alert..."\cf2 )\
+                \cf12 playWarningSound\cf2 () \cf13 // Trigger sound only when the alert is shown.\cf2 \
+                \cf12 activeAlert\cf2  = .\cf12 showGameOverAlert\cf2 \
+                \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf13 // Reset if no alert conditions are met\cf2 \
+                \cf12 activeAlert\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+                \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 triggerMakeAChoiceAlert\cf2 () \{\
+            \cf10 print\cf2 (\cf9 "Triggering 'Make a Choice' alert..."\cf2 )\
+            \cf12 playWarningSound\cf2 ()\
+            \cf12 displayAlertMessage\cf2  = \cf9 "Fear not, make a choice"\cf2 \
+            \cf12 isAlertVisible\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \cf12 isMessageBlockingNext\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+        \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 clearAlertAndProceed\cf2 () \{\
+           \cf12 displayAlertMessage\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+           \cf12 isAlertVisible\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+           \cf12 isMessageBlockingNext\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+       \}\
+\
+ \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 triggerGameOverAlert\cf2 () \{\
+                \cf10 print\cf2 (\cf9 "Triggering Game Overalert..."\cf2 )\
+             \
+                \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf12 activeAlert\cf2  = .\cf12 showGameOverAlert\cf2 \
+                \cf10 objectWillChange\cf2 .\cf10 send\cf2 () \cf13 // If needed, trigger a manual view update\cf2 \
+            \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 triggerManyMistakesAlert\cf2 () \{\
+            
+\f1\b \cf4 guard
+\f0\b0 \cf2  \cf12 mistakes\cf2  == \cf11 4\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{ 
+\f1\b \cf4 return
+\f0\b0 \cf2  \} \cf13 // Ensure it only triggers at the 4th mistake\cf2 \
+            \cf10 print\cf2 (\cf9 "Triggering 'Too Many Mistakes' alert..."\cf2 )\
+           \cf13 // playWarningSound()\cf2 \
+            \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \cf12 activeAlert\cf2  = .\cf12 showManyMistakesAlert\cf2 \
+            \cf10 objectWillChange\cf2 .\cf10 send\cf2 ()\
+        \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 triggerEndGameAlert\cf2 () \{\
+                \cf10 print\cf2 (\cf9 "Triggering end game alert..."\cf2 )\
+              \cf13 //  playWarningSound()\cf2 \
+                \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf12 activeAlert\cf2  = .\cf12 showEndGameAlert\cf2 \
+                \cf10 objectWillChange\cf2 .\cf10 send\cf2 () \cf13 // If needed, trigger a manual view update\cf2 \
+            \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 triggerReturnToAppAlert\cf2 () \{\
+            \cf10 print\cf2 (\cf9 "Triggering Return to App Alert..."\cf2 )\
+\
+            \cf13 // Check if the user is on their 4th mistake before showing Return to App alert\cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  == \cf11 4\cf2  && !\cf12 hasShownManyMistakesAlert\cf2  \{\
+                \cf10 print\cf2 (\cf9 "User returned on 4th mistake. Prioritizing 'Too Many Mistakes' alert."\cf2 )\
+                \cf12 triggerManyMistakesAlert\cf2 ()\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf13 // Otherwise, show the return to app alert\cf2 \
+           \cf13 //        playWarningSound()\cf2 \
+                \cf12 isAlertBeingDisplayed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf12 activeAlert\cf2  = .\cf12 showReturnToAppAlert\cf2 \
+                \cf10 objectWillChange\cf2 .\cf10 send\cf2 ()\
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 appMovedToBackground\cf2 () \{\
+            \cf10 print\cf2 (\cf9 "App moved to the background. Checking state..."\cf2 )\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 timerIsActive\cf2  && !\cf12 questionProcessed\cf2  \{\
+                \cf10 print\cf2 (\cf9 "User left the app during an active question."\cf2 )\
+                \cf12 activeAlert\cf2  = .\cf12 showReturnToAppAlert\cf2 \
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "No active question. No penalty applied."\cf2 )\
+            \}\
+        \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 appReturnsToForeground\cf2 () \{\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 timerIsActive\cf2  && !\cf12 questionProcessed\cf2  && !\cf12 isAlertBeingDisplayed\cf2  \{\
+                \cf10 print\cf2 (\cf9 "App returned to foreground. Penalizing for leaving app."\cf2 )\
+                \
+                \cf13 // Penalize for leaving the app\cf2 \
+                \cf12 penalizeForLeavingApp\cf2 ()\
+                \
+                \cf13 // Check if user is now at 4 mistakes\cf2 \
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  == \cf11 4\cf2  && !\cf12 hasShownManyMistakesAlert\cf2  \{\
+                    \cf12 triggerManyMistakesAlert\cf2 ()\
+                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  >= \cf11 5\cf2  \{\
+                    \cf12 triggerGameOverAlert\cf2 ()\
+                \}\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "App returned to foreground but no penalty or alert needed."\cf2 )\
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 penalizeForLeavingApp\cf2 () \{\
+            \cf10 print\cf2 (\cf9 "Penalizing user for leaving the app..."\cf2 )\
+            \cf12 playWrongSoundEffect\cf2 ()\
+            \cf12 mistakes\cf2  += \cf11 1\cf2 \
+            \cf12 totalScore\cf2  -= \cf11 500\cf2 \
+\
+            \cf13 // Check for alerts after penalization\cf2 \
+            \cf12 handleAlerts\cf2 ()\
+\
+            \cf13 // Mark the question as incorrect\cf2 \
+            \cf12 answerIsCorrect\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+\
+            \cf13 // Reset timer and question state\cf2 \
+            \cf12 resetTimer\cf2 ()\
+            \cf12 buttonText\cf2  = \cf9 "NEXT"\cf2 \
+            \cf12 shouldShowTerminar\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \cf12 selectedOptionIndex\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+            \cf12 timerIsActive\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 penalizeForTimeExpiry\cf2 () \{\
+            \cf12 playWrongSoundEffect\cf2 ()\
+            \cf12 answerChecked\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \cf12 answerIsCorrect\cf2  = 
+\f1\b \cf4 false
+\f0\b0 \cf2 \
+            \cf12 mistakes\cf2  += \cf11 1\cf2 \
+            \cf12 totalScore\cf2  -= \cf11 500\cf2 \
+            \cf12 timeExpired\cf2 .\cf10 send\cf2 (
+\f1\b \cf4 true
+\f0\b0 \cf2 )\
+            \cf12 questionProcessed\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2  \cf13 // Question is now processed\cf2 \
+            \cf12 buttonText\cf2  = \cf9 "NEXT"\cf2 \
+\
+            \cf13 // Check the number of mistakes and trigger additional alerts if needed\cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  == \cf11 4\cf2  \{\
+                \cf12 triggerManyMistakesAlert\cf2 ()\
+                \cf12 hasShownManyMistakesAlert\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+                \cf10 print\cf2 (\cf9 "Triggered Many Mistakes Alert"\cf2 )\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  
+\f1\b \cf4 if
+\f0\b0 \cf2  \cf12 mistakes\cf2  >= \cf11 5\cf2  \{\
+                \cf12 triggerGameOverAlert\cf2 ()\
+                \cf10 print\cf2 (\cf9 "Triggered Game Over Alert"\cf2 )\
+            \}\
+        \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 playSwooshSound\cf2 () \{\
+            \cf12 swooshSoundEffect\cf2 ?.\cf10 stop\cf2 ()\
+            \cf12 swooshSoundEffect\cf2 ?.\cf10 currentTime\cf2  = \cf11 0\cf2 \
+            \cf12 swooshSoundEffect\cf2 ?.\cf10 play\cf2 ()\
+            \cf10 print\cf2 (\cf9 "Swoosh sound played."\cf2 )\
+        \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 playCountdownSound\cf2 () \{\
+                \cf12 countdownSound\cf2 ?.\cf10 play\cf2 ()\
+            \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 playWarningSound\cf2 () \{\
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  warning = \cf12 warning\cf2 , !warning.\cf10 isPlaying\cf2  \{\
+                warning.\cf10 stop\cf2 ()\
+                warning.\cf10 currentTime\cf2  = \cf11 0\cf2 \
+                warning.\cf10 play\cf2 ()\
+                \cf10 print\cf2 (\cf9 "Warning sound played."\cf2 )\
+            \}\
+        \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 prepareCountdownSound\cf2 () \{\
+                    
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  url = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "countdown"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ) 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                        \cf10 print\cf2 (\cf9 "Countdown sound file not found"\cf2 )\
+                        
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+                    \}\
+                    \
+                    
+\f1\b \cf4 do
+\f0\b0 \cf2  \{\
+                        \cf12 countdownSound\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : url)\
+                        \cf12 countdownSound\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                    \} 
+\f1\b \cf4 catch
+\f0\b0 \cf2  \{\
+                        \cf10 print\cf2 (\cf9 "Failed to prepare countdown sound: \cf2 \\(error)\cf9 "\cf2 )\
+                    \}\
+                \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 loadSoundEffects\cf2 () \{\
+                
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  rightURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "right"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ) 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "Right sound effect file not found"\cf2 )\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+                \}\
+                \
+                
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  wrongURL = \cf6 Bundle\cf2 .\cf10 main\cf2 .\cf10 url\cf2 (\cf10 forResource\cf2 : \cf9 "notright"\cf2 , \cf10 withExtension\cf2 : \cf9 "wav"\cf2 ) 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "Wrong sound effect file not found"\cf2 )\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2 \
+                \}\
+                \
+                
+\f1\b \cf4 do
+\f0\b0 \cf2  \{\
+                    \cf12 rightSoundEffect\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : rightURL)\
+                    \cf12 rightSoundEffect\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                    \
+                    \cf12 wrongSoundEffect\cf2  = 
+\f1\b \cf4 try
+\f0\b0 \cf2  \cf6 AVAudioPlayer\cf2 (\cf10 contentsOf\cf2 : wrongURL)\
+                    \cf12 wrongSoundEffect\cf2 ?.\cf10 prepareToPlay\cf2 ()\
+                \} 
+\f1\b \cf4 catch
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "Failed to load sound effects: \cf2 \\(error)\cf9 "\cf2 )\
+                \}\
+            \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 playRightSoundEffect\cf2 () \{\
+                \cf12 rightSoundEffect\cf2 ?.\cf10 play\cf2 ()\
+            \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 playWrongSoundEffect\cf2 () \{\
+                \cf12 wrongSoundEffect\cf2 ?.\cf10 play\cf2 ()\
+            \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 resetButtonColors\cf2 () \{\
+                \cf12 buttonBackgroundColors\cf2  = \cf6 Array\cf2 (\cf10 repeating\cf2 : \cf12 defaultButtonColor\cf2 , \cf10 count\cf2 : \cf12 options\cf2 .\cf10 count\cf2 )\
+            \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateButtonBackgroundColors\cf2 () \{\
+                
+\f1\b \cf4 var
+\f0\b0 \cf2  colors = [\cf6 Color\cf2 ]()\
+                
+\f1\b \cf4 for
+\f0\b0 \cf2  index 
+\f1\b \cf4 in
+\f0\b0 \cf2  \cf12 options\cf2 .\cf10 indices\cf2  \{\
+                    
+\f1\b \cf4 if
+\f0\b0 \cf2  index == \cf12 selectedOptionIndex\cf2  \{\
+                        colors.\cf10 append\cf2 (\cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.315\cf2 , \cf10 saturation\cf2 : \cf11 0.953\cf2 , \cf10 brightness\cf2 : \cf11 0.335\cf2 ))\
+                    \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                        colors.\cf10 append\cf2 (\cf6 Color\cf2 (\cf10 hue\cf2 : \cf11 0.664\cf2 , \cf10 saturation\cf2 : \cf11 0.935\cf2 , \cf10 brightness\cf2 : \cf11 0.604\cf2 ))\
+                    \}\
+                \}\
+                \cf12 buttonBackgroundColors\cf2  = colors\
+            \}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateCurrentGameValues\cf2 (\cf7 aciertos\cf2 : \cf6 Int\cf2 , \cf7 fallos\cf2 : \cf6 Int\cf2 , \cf7 puntuacion\cf2 : \cf6 Int\cf2 ) \{\
+        
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  userId = \cf8 Auth\cf2 .\cf12 auth\cf2 ().\cf12 currentUser\cf2 ?.\cf12 uid\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{ 
+\f1\b \cf4 return
+\f0\b0 \cf2  \}\
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  userRef = \cf12 dbRef\cf2 .child(\cf9 "user"\cf2 ).child(userId)\
+        \
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  gameStats: [\cf6 String\cf2 : 
+\f1\b \cf4 Any
+\f0\b0 \cf2 ] = [\
+            \cf9 "currentGameAciertos"\cf2 : aciertos,\
+            \cf9 "currentGameFallos"\cf2 : fallos,\
+            \cf9 "currentGamePuntuacion"\cf2 : puntuacion\
+        ]\
+        \
+        userRef.updateChildValues(gameStats) \{ (error, dbRef) 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  error = error \{\
+                \cf10 print\cf2 (\cf9 "Error updating values: \cf2 \\(error)\cf9 "\cf2 )\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "Successfully updated game values"\cf2 )\
+                
+\f1\b \cf4 self
+\f0\b0 \cf2 .\cf12 updateLastPlay\cf2 (\cf12 userId\cf2 : userId) \cf13 // Call UpdateLastPlay after successfully updating game values\cf2 \
+            \}\
+        \}\
+    \}\
+\
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateLastPlay\cf2 (\cf7 userId\cf2 : \cf6 String\cf2 ) \{\
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  userRef = \cf12 dbRef\cf2 .child(\cf9 "user"\cf2 ).child(userId)\
+        
+\f1\b \cf4 let
+\f0\b0 \cf2  currentTime = \cf6 Int\cf2 (\cf6 Date\cf2 ().\cf10 timeIntervalSince1970\cf2  * \cf11 1000\cf2 ) \cf13 // Current time in milliseconds\cf2 \
+        \
+        userRef.updateChildValues([\cf9 "LastPlay"\cf2 : currentTime]) \{ (error, dbRef) 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+            
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  error = error \{\
+                \cf10 print\cf2 (\cf9 "Error updating last play: \cf2 \\(error)\cf9 "\cf2 )\
+            \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                \cf10 print\cf2 (\cf9 "Successfully updated last play time"\cf2 )\
+            \}\
+        \}\
+    \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateAccumulatedValues\cf2 (\cf7 newAciertos\cf2 : \cf6 Int\cf2 , \cf7 newFallos\cf2 : \cf6 Int\cf2 , \cf7 newPuntuacion\cf2 : \cf6 Int\cf2 ) \{\
+            
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  userId = \cf8 Auth\cf2 .\cf12 auth\cf2 ().\cf12 currentUser\cf2 ?.\cf12 uid\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{ 
+\f1\b \cf4 return
+\f0\b0 \cf2  \}\
+            
+\f1\b \cf4 let
+\f0\b0 \cf2  userRef = \cf12 dbRef\cf2 .child(\cf9 "user"\cf2 ).child(userId)\
+            \
+            userRef.observeSingleEvent(of: DataEventType.\cf10 value\cf2 ) \{ (snapshot) 
+\f1\b \cf4 in
+\f0\b0 \cf2  \cf13 // Explicitly specify DataEventType.value\cf2 \
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  userData = snapshot.\cf10 value\cf2  
+\f1\b \cf4 as
+\f0\b0 \cf2 ? [\cf6 String\cf2 : 
+\f1\b \cf4 Any
+\f0\b0 \cf2 ],\
+                
+\f1\b \cf4 let
+\f0\b0 \cf2  currentAciertos = userData[\cf9 "accumulatedAciertos"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 Int\cf2 ,\
+                
+\f1\b \cf4 let
+\f0\b0 \cf2  currentFallos = userData[\cf9 "accumulatedFallos"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 Int\cf2 ,\
+                
+\f1\b \cf4 let
+\f0\b0 \cf2  currentPuntuacion = userData[\cf9 "accumulatedPuntuacion"\cf2 ] 
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 Int\cf2  \{\
+                    \
+                    
+\f1\b \cf4 let
+\f0\b0 \cf2  updatedAciertos = currentAciertos + newAciertos\
+                    
+\f1\b \cf4 let
+\f0\b0 \cf2  updatedFallos = currentFallos + newFallos\
+                    
+\f1\b \cf4 let
+\f0\b0 \cf2  updatedPuntuacion = currentPuntuacion + newPuntuacion\
+                    \
+                    
+\f1\b \cf4 let
+\f0\b0 \cf2  updates: [\cf6 String\cf2 : 
+\f1\b \cf4 Any
+\f0\b0 \cf2 ] = [\
+                        \cf9 "accumulatedAciertos"\cf2 : updatedAciertos,\
+                        \cf9 "accumulatedFallos"\cf2 : updatedFallos,\
+                        \cf9 "accumulatedPuntuacion"\cf2 : updatedPuntuacion\
+                    ]\
+                    \
+                    userRef.updateChildValues(updates) \{ (error, _) 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                        
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  error = error \{\
+                            \cf10 print\cf2 (\cf9 "Error updating values: \cf2 \\(error.localizedDescription)\cf9 "\cf2 )\
+                        \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                            \cf10 print\cf2 (\cf9 "Successfully updated values"\cf2 )\
+                        \}\
+                    \}\
+                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "Error: Could not parse snapshot or missing fields."\cf2 )\
+                \}\
+            \}\
+        \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 updateHighestScore\cf2 (\cf7 newScore\cf2 : \cf6 Int\cf2 ) \{\
+    
+\f1\b \cf4 guard
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  userId = \cf8 Auth\cf2 .\cf12 auth\cf2 ().\cf12 currentUser\cf2 ?.\cf12 uid\cf2  
+\f1\b \cf4 else
+\f0\b0 \cf2  \{ 
+\f1\b \cf4 return
+\f0\b0 \cf2  \}\
+    
+\f1\b \cf4 let
+\f0\b0 \cf2  userRef = \cf12 dbRef\cf2 .child(\cf9 "user"\cf2 ).child(userId)\
+    \
+    userRef.child(\cf9 "highestScore"\cf2 ).observeSingleEvent(of: DataEventType.\cf10 value\cf2 ) \{ (snapshot) 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+        
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  highestScore = snapshot.\cf10 value\cf2  
+\f1\b \cf4 as
+\f0\b0 \cf2 ? \cf6 Int\cf2 , newScore > highestScore \{\
+            userRef.updateChildValues([\
+                \cf9 "highestScore"\cf2 : newScore\
+            ]) \{ (error, _) 
+\f1\b \cf4 in
+\f0\b0 \cf2 \
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  error = error \{\
+                    \cf10 print\cf2 (\cf9 "Error updating highest score: \cf2 \\(error.localizedDescription)\cf9 "\cf2 )\
+                \} 
+\f1\b \cf4 else
+\f0\b0 \cf2  \{\
+                    \cf10 print\cf2 (\cf9 "Successfully updated highest score."\cf2 )\
+                \}\
+            \}\
+        \}\
+    \}\
+\}\
+    \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 terminar\cf2 (\cf7 completion\cf2 : 
+\f1\b \cf4 @escaping
+\f0\b0 \cf2  () -> \cf6 Void\cf2 ) \{\
+            \cf12 timer\cf2 ?.\cf10 invalidate\cf2 ()\
+            \cf12 timer\cf2  = 
+\f1\b \cf4 nil
+\f0\b0 \cf2 \
+            \
+            \cf12 updateCurrentGameValues\cf2 (\cf12 aciertos\cf2 : \cf12 score\cf2 , \cf12 fallos\cf2 : \cf12 mistakes\cf2 , \cf12 puntuacion\cf2 : \cf12 totalScore\cf2 )\
+            \cf12 updateAccumulatedValues\cf2 (\cf12 newAciertos\cf2 : \cf12 score\cf2 , \cf12 newFallos\cf2 : \cf12 mistakes\cf2 , \cf12 newPuntuacion\cf2 : \cf12 totalScore\cf2 )\
+            \cf12 updateHighestScore\cf2 (\cf12 newScore\cf2 : \cf12 totalScore\cf2 )\
+            \
+    \
+            \
+            \cf12 shouldNavigateToGameOver\cf2  = 
+\f1\b \cf4 true
+\f0\b0 \cf2 \
+            \cf10 print\cf2 (\cf9 "terminar function completed"\cf2 )\
+            completion()\
+        \}\
+            \
+            
+\f1\b \cf4 func
+\f0\b0 \cf2  \cf7 calculateNewPosition\cf2 () -> \cf6 Int\cf2  \{\
+                
+\f1\b \cf4 let
+\f0\b0 \cf2  sortedUsers = \cf12 userData\cf2 .\cf12 users\cf2 .\cf10 sorted\cf2  \{ $0.\cf12 accumulatedPuntuacion\cf2  > $1.\cf12 accumulatedPuntuacion\cf2  \}\
+                
+\f1\b \cf4 if
+\f0\b0 \cf2  
+\f1\b \cf4 let
+\f0\b0 \cf2  currentUserIndex = sortedUsers.\cf10 firstIndex\cf2 (\cf10 where\cf2 : \{ $0.\cf12 id\cf2  == \cf12 userId\cf2  \}) \{\
+                    
+\f1\b \cf4 return
+\f0\b0 \cf2  currentUserIndex + \cf11 1\cf2 \
+                \}\
+                
+\f1\b \cf4 return
+\f0\b0 \cf2  \cf11 0\cf2  \cf13 // Return 0 if the current user is not found in the sorted array\cf2 \
+            \}\
+            \
+        \}\
+        \
+\
+\pard\tx593\pardeftab593\partightenfactor0
+\cf2 \
+\
+}

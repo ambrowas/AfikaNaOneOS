@@ -1,4 +1,7 @@
 import SwiftUI
+import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 
 struct NuevoUsuario: View {
     @StateObject private var viewModel = NuevoUsuarioViewModel()
@@ -54,7 +57,7 @@ struct NuevoUsuario: View {
                         )
                 }
                 .fullScreenCover(isPresented: $isShowingProfile) {
-                    Profile()
+                    Profile(profileViewModel: ProfileViewModel.shared)
                 }
                 .padding(.bottom, 5)
                 .padding(.top, 25)
@@ -95,7 +98,7 @@ struct NuevoUsuario: View {
                     })
                 )
             case .error(let message):
-                SoundManager.shared.playWarningSound()
+               // SoundManager.shared.playWarningSound()
                 return Alert(
                     title: Text("Error"),
                     message: Text(message),

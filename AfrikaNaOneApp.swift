@@ -18,10 +18,14 @@ struct AfrikaNaOneApp: App {
     @StateObject private var authService = AuthService()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-
     init() {
         FirebaseApp.configure()
-        
+
+        #if DEBUG
+        //
+        testDatabaseAccess()
+        #endif
+
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         UINavigationBar.appearance().standardAppearance = appearance
@@ -43,9 +47,11 @@ struct AfrikaNaOneApp: App {
             }
         }
     }
+
     var body: some Scene {
         WindowGroup {
             FlashView()
+                .environmentObject(authService) // Pass AuthService to all child views
         }
     }
 }

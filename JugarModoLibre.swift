@@ -179,7 +179,7 @@ struct JugarModoLibre: View {
             quizState.buttonText = quizState.isLastQuestion ? "FINISH" : "NEXT"
 
         case "NEXT":
-            SoundManager.shared.playSoundEffect(quizState.swooshSoundEffect, name: "Swoosh")
+            SoundManager.shared.playTransitionSound()
             if quizState.currentQuestionIndex < quizState.randomQuestions.count - 1 {
                 flipImage()
                 quizState.showNextQuestion()

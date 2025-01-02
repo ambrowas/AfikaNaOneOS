@@ -26,10 +26,11 @@ struct LeadersProfile: View {
                        let uiImage = UIImage(data: profileImageData) {
                         Image(uiImage: uiImage)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 200, height: 150)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 250, height: 200)
                             .border(Color.black, width: 3)
                             .background(Color.white)
+                            .clipped()
                             .padding(.top, 80)
                             .padding(.bottom, 20)
                     } else {
@@ -68,24 +69,55 @@ struct LeadersProfile: View {
                         // Fallback on earlier versions
                     }
                 }
+                // Flag Section
+                             ZStack {
+                                 // Placeholder for flag image
+                                 Rectangle()
+                                     .fill(Color.black)
+                                     .frame(width: 50, height: 47)
+
+                                 if let flagUrl = viewModel.flagUrl {
+                                     AsyncImage(url: URL(string: flagUrl)) { image in
+                                         image
+                                             .resizable()
+                                             .scaledToFit()
+                                             .frame(width: 58, height: 44)
+                                     } placeholder: {
+                                         Image("other")
+                                             .resizable()
+                                             .scaledToFit()
+                                             .frame(width: 58, height: 44)
+                                     }
+                                 } else {
+                                     // Placeholder "other" flag if no flag URL is provided
+                                     Image("other")
+                                         .resizable()
+                                         .scaledToFit()
+                                         .frame(width: 58, height: 44)
+                                 }
+                             }
+                             .position(x: 80, y: -90) // Adjust position for better layout
+                         }
+                         
 
                 ScrollView {
                     VStack(spacing: 10) {
                         if let user = viewModel.user {
-                            UpdatedTextRowView(title: "NAME", value: user.fullname)
-                            UpdatedTextRowView(title: "CITY", value: user.ciudad)
-                            UpdatedTextRowView(title: "COUNTRY", value: user.pais)
-                            UpdatedTextRowView(title: "TOTAL SCORE", value: "\(user.accumulatedPuntuacion)")
-                            UpdatedTextRowView(title: "TOTAL CORRECT ANSWERS", value: "\(user.accumulatedAciertos)")
-                            UpdatedTextRowView(title: "TOTAL WRONG ANSWERS", value: "\(user.accumulatedFallos)")
-                            UpdatedTextRowView(title: "RECORD", value: "\(user.highestScore)")
-                            UpdatedTextRowView(title: "TOTAL CASH", value: "\(user.accumulatedPuntuacion) AFROS")
+                            UpdatedTextRowView(title: "NAME", value: user.fullname.uppercased())
+                                   UpdatedTextRowView(title: "CITY", value: user.ciudad.uppercased())
+                                   UpdatedTextRowView(title: "COUNTRY", value: user.pais.uppercased())
+                                   UpdatedTextRowView(title: "TOTAL SCORE", value: "\(user.accumulatedPuntuacion)".uppercased())
+                                   UpdatedTextRowView(title: "TOTAL CORRECT ANSWERS", value: "\(user.accumulatedAciertos)".uppercased())
+                                   UpdatedTextRowView(title: "TOTAL WRONG ANSWERS", value: "\(user.accumulatedFallos)".uppercased())
+                                   UpdatedTextRowView(title: "RECORD", value: "\(user.highestScore)".uppercased())
+                                   UpdatedTextRowView(title: "TOTAL CASH", value: "\(user.accumulatedPuntuacion) AFROS".uppercased())
                         }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: 300, alignment: .leading) // Set a maximum width
                     .padding(.horizontal, 20) // Adjust padding for better alignment
                 }
-                .padding(.top, 10)
+                .frame(width: 320)
+                .padding(.top, 350)
                 
                 // Volver Button
                 Button(action: {
@@ -104,14 +136,14 @@ struct LeadersProfile: View {
                                 .stroke(Color.black, lineWidth: 3)
                         )
                 }
-                .padding(.bottom, 60)
+                .padding(.top, 650)
             }
             .onAppear {
                 self.viewModel.fetchUserDataFromRealtimeDatabase()
             }
         }
     }
-}
+
 // MARK: - Updated TextRowView
 struct UpdatedTextRowView: View {
     var title: String
@@ -159,7 +191,6 @@ extension LeadersProfileViewModel {
         mockViewModel.user = ProfileUser(
             id: "MockId",
             fullname: "John Doe",
-            barrio: "New York",
             ciudad: "USA",
             pais: "https://example.com/mock-profile-picture.png",
             positionInLeaderboard: 10000,
