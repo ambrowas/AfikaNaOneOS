@@ -18,6 +18,7 @@ class UserViewModel: ObservableObject {
     @Published var accumulatedAciertos = 0
     @Published var accumulatedFallos = 0
     @Published var positionInLeaderboard = 0
+    @Published var user: User? 
     
     
     func sanitizeUserId(_ userId: String) -> String? {

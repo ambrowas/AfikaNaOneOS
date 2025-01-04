@@ -54,10 +54,13 @@ struct CodigoQR: View {
                     QRCodeView(data: qrData)
                 } else {
                     Text("Generating QRCode...")
+                        .foregroundColor(.white)
+                        .font(.subheadline)
+                        .fontWeight(.bold)
                 }
                 
                 Text(qrCodeKey)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.subheadline)
                     .fontWeight(.bold)
                 
@@ -69,7 +72,7 @@ struct CodigoQR: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 300, height: 55)
-                            .background(Color(hue: 0.315, saturation: 0.953, brightness: 0.335))
+                            .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -86,7 +89,7 @@ struct CodigoQR: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 300, height: 55)
-                            .background(Color(hue: 0.69, saturation: 0.89, brightness: 0.706))
+                            .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)

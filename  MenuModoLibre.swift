@@ -67,10 +67,12 @@ struct MenuModoLibre: View {
                 }
                 
                 Text(highScoreMessage)
-                    .foregroundColor(getFlashingColor())
+                    .foregroundColor(Color(red: 84/255, green: 8/255, blue: 4/255)) // ✅ Dark Red (#540804)
                     .font(.headline)
+                    .fontWeight(.bold) // ✅ Makes text bold
                     .padding(.horizontal, 20)
                     .padding(.top, -10)
+                    .shadow(color: .white, radius: 3, x: 0, y: 0) // ✅ White glow for visibility
                 Button(action: {
                     if jugadorGuardado.isEmpty {
                         // Play magical sound only when saving the name for the first time
@@ -91,7 +93,7 @@ struct MenuModoLibre: View {
                         .foregroundColor(.white)
                         .frame(width: 200, height: 50)
                         .multilineTextAlignment(.center)
-                        .background(Color(hue: 0.664, saturation: 0.935, brightness: 0.604))
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -107,7 +109,7 @@ struct MenuModoLibre: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 300, height: 75)
-                        .background(Color(hue: 0.315, saturation: 0.953, brightness: 0.335))
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -119,12 +121,12 @@ struct MenuModoLibre: View {
                     SoundManager.shared.playTransitionSound()
                     isShowingMenuPrincipal = true
                 }) {
-                    Text("EXIT")
+                    Text("RETURN")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 300, height: 75)
-                        .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -179,8 +181,8 @@ struct MenuModoLibre: View {
         private func createCongratsAlert() -> Alert {
             playMagicalSoundOnce()
             return Alert(
-                title: Text("Congrats champ"),
-                message: Text("You have completed the Single Mode. You should try Competition"),
+                title: Text("Congratulations"),
+                message: Text("You have completed the Single Mode. You should try Competition Mode"),
                 dismissButton: .default(Text("OK"), action: {
                     dbHelper.resetShownQuestions()
                     SoundManager.shared.playTransitionSound()
@@ -191,14 +193,14 @@ struct MenuModoLibre: View {
             )
         }
 
-        private func createHighScoreAlert() -> Alert {
-            playMagicalSoundOnce()
-            return Alert(
-                title: Text("Congratulations!"),
-                message: Text("You've set a new HighScore of : \(highScore)"),
-                dismissButton: .default(Text("OK"))
-            )
-        }
+    private func createHighScoreAlert() -> Alert {
+        playMagicalSoundOnce()
+        return Alert(
+            title: Text("Congratulations!").foregroundColor(Color(red: 84/255, green: 8/255, blue: 4/255)), // ✅ Dark Red (#540804)
+            message: Text("You've set a new HighScore of : \(highScore)").foregroundColor(Color(red: 84/255, green: 8/255, blue: 4/255)), // ✅ Dark Red
+            dismissButton: .default(Text("OK"))
+        )
+    }
     func playMagicalSoundOnce() {
         DispatchQueue.main.async {
             if !hasPlayedMagicalSound {

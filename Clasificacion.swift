@@ -241,7 +241,7 @@ struct ClasificacionView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 300, height: 50)
-                        .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)

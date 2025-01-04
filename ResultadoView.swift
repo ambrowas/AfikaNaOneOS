@@ -37,7 +37,7 @@ struct ResultadoView: View {
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 300, height: 250)
+                    .frame(width: 500, height: 350)
                     .padding(.top, -100)
                     .opacity(isShowingImage ? 1 : 0)
                     .scaleEffect(isAnimating ? 1.1 : 1.0)
@@ -48,32 +48,49 @@ struct ResultadoView: View {
                         }
                     }
                 
-                // Dynamic Text
                 Text(textFieldText)
                     .id(forceRefresh)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
-                    .font(.headline)
+                    .font(.system(size: 18, weight: .bold)) // ✅ Adjust dynamically
+                    .lineLimit(2) // ✅ Allow up to 2 lines
+                    .minimumScaleFactor(0.5) // ✅ Shrink text if needed
+                    .truncationMode(.tail) // ✅ Add "..." if text is too long
                     .padding(.top, 10)
-                
-                // Score Boxes
-                scoreBox(title: "CORRECT ANSWERS", value: aciertos)
-                scoreBox(title: "WRONG ANSWERS", value: errores)
-                scoreBox(title: "SCORE", value: puntuacion)
-                
+                    .padding(.horizontal, 20) // ✅ Add margin on both sides
+                    .frame(maxWidth: .infinity, alignment: .center) // ✅ Ensures text stays centered
+                VStack(spacing: 0) { // ✅ No extra spacing between rows
+             
+
+                    TableRowView(title: "CORRECT ANSWERS", value: "\(aciertos)")
+                    TableRowView(title: "WRONG ANSWERS", value: "\(errores)")
+                    TableRowView(title: "SCORE", value: "\(puntuacion)")
+                }
+                .padding()
+                .background(
+                    Color(red: 121/255, green: 125/255, blue: 98/255).opacity(0.50) // ✅ 50% Transparent Background
+                        .blur(radius: 5) // ✅ Soft Blur for a Modern Look
+                )
+                .cornerRadius(15) // ✅ More Rounded Corners
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black.opacity(0.7), lineWidth: 2) // ✅ Soft White Border
+                )
+                .shadow(color: Color.white.opacity(0.15), radius: 5, x: 0, y: 5) // ✅ Subtle Glow Effect
+                .frame(width: 320)
                 // Buttons Section
                 HStack {
                     Button("PLAY") {
                         SoundManager.shared.playTransitionSound()
                         checkForQuestionsBeforePlaying()
                     }
-                    .buttonStyle(GameButtonStyle(color: Color(hue: 0.69, saturation: 0.89, brightness: 0.706)))
+                    .buttonStyle(GameButtonStyle(color: Color(red: 121/255, green: 125/255, blue: 98/255)))
                     
                     Button("EXIT") {
                         SoundManager.shared.playTransitionSound()
                         showMenuModoLibre = true
                     }
-                    .buttonStyle(GameButtonStyle(color: Color(hue: 1.0, saturation: 0.984, brightness: 0.699)))
+                    .buttonStyle(GameButtonStyle(color: Color(red: 121/255, green: 125/255, blue: 98/255)))
                 }
                 .padding(.top, 30)
             }
@@ -107,30 +124,31 @@ struct ResultadoView: View {
     }
     // MARK: - Helper Methods
     private func handleAciertos() {
+        let scorePercentage = Double(aciertos) / 10.0 * 100.0
         var updatedImageName = ""
         var updatedTextFieldText = ""
         var audioFileName = ""
 
-        if aciertos >= 9 {
-            updatedImageName = "expert"
-            updatedTextFieldText = "FANTASTIC. WE NEED MORE (PAN)AFRICANS LIKE YOU"
+        if scorePercentage >= 90 {
+            updatedImageName = "expert"  // 🏆 Expert trophy image
+            updatedTextFieldText = LevelMessages.randomSuccessMessage()
             audioFileName = "expert.mp3"
-        } else if aciertos >= 5 {
-            updatedImageName = "average"
-            updatedTextFieldText = "NOT BAD, BUT YOU COULD DO BETTER FOR THE CONTINENT"
+        } else if scorePercentage >= 51 {
+            updatedImageName = "average"  // 🏅 Average trophy image
+            updatedTextFieldText = LevelMessages.randomAverageMessage()
             audioFileName = "average.mp3"
         } else {
-            updatedImageName = "beginer"
-            updatedTextFieldText = "IT'S PEOPLE LIKE YOU HOLDING AFRICA BACK"
+            updatedImageName = "beginer"  // 🎖 Beginner trophy image
+            updatedTextFieldText = LevelMessages.randomFailureMessage()
             audioFileName = "beginner.mp3"
         }
 
         DispatchQueue.main.async {
-            self.imageName = updatedImageName
+            self.imageName = updatedImageName // ✅ Assign trophy image
             self.textFieldText = updatedTextFieldText
             self.forceRefresh.toggle()
         }
-        playSound(named: audioFileName)
+        playSound(named: audioFileName) // ✅ Play relevant sound
     }
     
     private func saveLastScore() {
@@ -198,6 +216,7 @@ struct ResultadoView: View {
         
     }
 }
+
 
 // MARK: - Custom Button Style
 struct GameButtonStyle: ButtonStyle {

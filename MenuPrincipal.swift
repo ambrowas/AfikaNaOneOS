@@ -39,7 +39,7 @@ struct MenuPrincipal: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(width: 280, height: 75)
-                .background(Color(hue: 0.315, saturation: 0.953, brightness: 0.335))
+                .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
@@ -54,7 +54,7 @@ struct MenuPrincipal: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(width: 280, height: 75)
-                .background(Color(hue: 0.69, saturation: 0.89, brightness: 0.706))
+                .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
@@ -68,7 +68,7 @@ struct MenuPrincipal: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(width: 280, height: 75)
-                .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
+                .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                 .cornerRadius(10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)

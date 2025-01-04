@@ -26,6 +26,8 @@ class MenuModoCompeticionViewModel: ObservableObject {
     @Published var isAuthenticated: Bool = false
     @Published var currentBatchNumber: Int = 0
     @Published var questionManager: QuestionManager?
+    @Published var isFlashingHighScore: Bool = false // ✅ Tracks if high score should flash
+  
 
 
     
@@ -172,29 +174,41 @@ class MenuModoCompeticionViewModel: ObservableObject {
     }
 
     func getFlashingColor() -> Color {
-       let colors: [Color] = [.red, .blue, .green, .white]
-       return colors[colorIndex]
-   }
-
+        if isFlashingHighScore {
+            let flashingColors: [Color] = [.red, .blue, .green, .white] // ✅ Flashing Colors
+            return flashingColors[colorIndex]
+        } else {
+            return Color(red: 84/255, green: 8/255, blue: 4/255) // ✅ Dark Red (#540804) when NOT flashing
+        }
+    }
+    
+    
     func startFlashing() {
-       let flashingColors: [Color] = [.red, .blue, .green, .white]
+        isFlashingHighScore = true // ✅ Start flashing
 
-       let flashingAnimation = Animation
-           .linear(duration: 0.5)
-           .repeatForever(autoreverses: true)
+        let flashingColors: [Color] = [.red, .blue, .green, .white]
+        let flashingAnimation = Animation
+            .linear(duration: 0.5)
+            .repeatForever(autoreverses: true)
 
-       withAnimation(flashingAnimation) {
-           colorIndex = 0
-       }
+        withAnimation(flashingAnimation) {
+            colorIndex = 0
+        }
 
-       for (index, _) in flashingColors.enumerated() {
-           DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.5) {
-               withAnimation(flashingAnimation) {
-                   self.colorIndex = index
-               }
-           }
-       }
-   }
+        for (index, _) in flashingColors.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.5) {
+                withAnimation(flashingAnimation) {
+                    self.colorIndex = index
+                }
+            }
+        }
+
+        // ✅ **Stop Flashing After 3 Seconds**
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.isFlashingHighScore = false // ✅ Stop flashing
+            self.colorIndex = 0 // ✅ Reset to default Dark Red
+        }
+    }
     
     func handlePlayButtonJugar() {
            if Auth.auth().currentUser != nil {

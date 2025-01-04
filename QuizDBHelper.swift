@@ -26,18 +26,47 @@ class QuizDBHelper {
 
     func loadQuestionsFromJSON() -> [QuizQuestion]? {
         guard let url = Bundle.main.url(forResource: jsonFileName, withExtension: "json") else {
-            print("Error: \(jsonFileName).json file not found in the app bundle.")
+            print("❌ Error: \(jsonFileName).json file not found in the app bundle.")
             return nil
         }
 
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            let questions = try decoder.decode([QuizQuestion].self, from: data)
-            print("Successfully decoded \(questions.count) questions from JSON.")
+
+            // ✅ Decode JSON with the correct format
+            let jsonDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            guard let jsonQuestions = jsonDictionary else {
+                print("❌ Error: JSON format is invalid.")
+                return nil
+            }
+
+            // ✅ Convert JSON dictionary to QuizQuestion objects
+            let questions: [QuizQuestion] = jsonQuestions.compactMap { (key, value) in
+                guard let questionData = value as? [String: Any],
+                      let question = questionData["question"] as? String,
+                      let answer = questionData["answer"] as? String,
+                      let options = questionData["options"] as? [String: String],
+                      let category = questionData["category"] as? String,
+                      let explanation = questionData["explanation"] as? String else {
+                    print("⚠️ Skipping invalid question entry: \(key)")
+                    return nil
+                }
+
+                return QuizQuestion(
+                    id: key,  // ✅ Use the key as the ID
+                    category: category,
+                    question: question,
+                    options: options,
+                    answer: answer,
+                    explanation: explanation  // ✅ Include explanation
+                )
+            }
+
+            print("✅ Successfully decoded \(questions.count) questions from JSON.")
             return questions
         } catch {
-            print("Error decoding JSON: \(error.localizedDescription)")
+            print("❌ Error decoding JSON: \(error.localizedDescription)")
             return nil
         }
     }
@@ -84,7 +113,6 @@ class QuizDBHelper {
             print("Failed to encode shown question numbers.")
         }
     }
-
 
     func resetShownQuestions() {
         print("Resetting shown questions. Before reset, shownQuestionIds: \(shownQuestionIds)")

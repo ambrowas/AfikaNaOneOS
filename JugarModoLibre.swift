@@ -11,7 +11,12 @@ struct JugarModoLibre: View {
     @State private var activeAlert: ActiveAlert? // Local state to manage alerts
     @State private var hasPlayedSoundForAlert = false // Tracks if sound has been played
     @State private var rotationAngle: Double = 0
-
+    @State private var isConfirmed: Bool = false // New state variable to track if "CONFIRM" is
+    var shouldFlashConfirm = false // Tracks if CONFIRM should flashpressed
+    @State private var scale: CGFloat = 1.0
+    @State private var finishButtonTiltAngle: Double = 0 // 🔄 Tracks tilt rotation
+    @State private var shouldTiltFinish = false // ✅ Ensures tilt runs once
+   
     // Enum for alerts
     enum ActiveAlert: Identifiable {
         case noSelection
@@ -35,56 +40,47 @@ struct JugarModoLibre: View {
             Image("libre")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
-            
             VStack(spacing: 5) {
-                // Score Section
+                // Score Section with Timer
                 HStack {
-                    Text("CORRECT ANSWERS: \(quizState.score)")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.top, .leading], 20)
-                }
-                HStack {
-                    Text("SCORE: \(quizState.totalScore)")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                        .padding(.leading, 21.0)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                HStack {
-                    Text("QUESTION: \(quizState.preguntaCounter)/\(quizState.randomQuestions.count)")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
-                        .padding(.leading, 20)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                
-                Spacer()
-                
-                // Timer Section
-                HStack {
-                    Spacer()
+                    // Left-aligned Score Texts
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("CORRECT ANSWERS: \(quizState.score)")
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                        Text("SCORE: \(quizState.totalScore)")
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                        Text("QUESTION: \(quizState.preguntaCounter)/\(quizState.randomQuestions.count)")
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                    }
+                    .padding(.leading, 10)
+                    
+                    Spacer() // Pushes the timer to the right
+                    
+                    // Timer Section
                     Text("\(quizState.timeRemaining)")
                         .foregroundColor(quizState.timeRemaining <= 5
-                                ? Color(hue: 1.0, saturation: 0.984, brightness: 0.699)
+                                ? Color(red: 84/255, green: 8/255, blue: 4/255)
                                 : .black)
                         .fontWeight(.bold)
                         .font(.system(size: 60))
-                        .padding(.trailing, 20.0)
+                        .padding(.trailing, 20)
                         .shadow(color: .black, radius: 1, x: 1, y: 1)
                 }
-                .padding(.top, -250)
+              
+              
                 
                 // Logo Under Timer
                 Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80, height: 80)
-                    .padding(.top, -150)
+                    
                     .rotation3DEffect(
                         .degrees(rotationAngle),
-                        axis: (x: 0, y: 1, z: 0) // Rotate along the Y-axis
+                        axis: (x: 1, y: 0, z: 0) // ✅ Rotate along the X-axis instead of Y-axis
                     )
                 
                 // Question Text Section
@@ -92,46 +88,59 @@ struct JugarModoLibre: View {
                     .foregroundColor(quizState.questionTextColor)
                     .font(.headline)
                     .padding(.horizontal, 20)
-                    .padding(.top, -50)
-                    .padding(.bottom, 20)
-                // Options Section
-                VStack(alignment: .leading, spacing: 10) {
-                    let optionValues = Array(quizState.currentQuestion.options.values)
-                    ForEach(0..<optionValues.count, id: \.self) { index in
-                        RadioButton(
-                            text: optionValues[index],
-                            selectedOptionIndex: $quizState.selectedOptionIndex,
-                            optionIndex: index,
-                            quizState: quizState
-                        )
+                    .padding(.bottom, 40)
+                
+                // Conditional Section for Radio Buttons or Explanation
+                VStack {
+                    if !isConfirmed {
+                        // Options Section
+                        VStack(alignment: .leading, spacing: 10) {
+                            let optionValues = Array(quizState.currentQuestion.options.values)
+                            ForEach(0..<optionValues.count, id: \.self) { index in
+                                RadioButton(
+                                    text: optionValues[index],
+                                    selectedOptionIndex: $quizState.selectedOptionIndex,
+                                    optionIndex: index,
+                                    quizState: quizState
+                                )
+                            }
+                        }
+                        .frame(height: 200) // Fixed height for radio buttons
+                    } else {
+                        // Explanation Section
+                        Text(quizState.currentQuestion.explanation)
+                            .foregroundColor(.black)
+                            .font(.headline)
+                            .padding(.horizontal, 20)
+                            .frame(height: 200) // Fixed height for explanation
                     }
                 }
-                .padding(.bottom, 200)
-                
-                // Action Button
-                Button(action: handleButtonTap) {
+                .padding(.bottom, 200) // Maintain consistent padding
+                Button(action: {
+                    handleButtonTap() // ✅ Handles all button logic
+                }) {
                     Text(quizState.buttonText)
                         .font(.headline)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .padding()
                         .frame(width: 300, height: 75)
-                        .background(Color.white)
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.black, lineWidth: 3)
                         )
+                        .scaleEffect(quizState.shouldFlashConfirm && quizState.buttonText == "CONFIRM" ? quizState.scale : 1.0) // ✅ Flash only CONFIRM
+                        .opacity(quizState.shouldFlashConfirm && quizState.buttonText == "CONFIRM" ? 0.5 : 1.0) // ✅ Flash only CONFIRM
+                        .rotationEffect(.degrees(quizState.shouldTiltFinish && quizState.buttonText == "FINISH" ? quizState.finishButtonTiltAngle : 0)) // ✅ Tilt only FINISH
+                        .animation(quizState.shouldFlashConfirm && quizState.buttonText == "CONFIRM" ? Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true) : nil, value: quizState.shouldFlashConfirm)
                 }
-                .padding(.top, -180)
-                .fullScreenCover(isPresented: $isShowingResultadoView) {
-                    if #available(iOS 16.0, *) {
-                        ResultadoView(aciertos: quizState.score, puntuacion: quizState.totalScore, errores: quizState.mistakes)
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                }
-            }
-            .padding(.horizontal, 12)
+                              .padding(.top, -120)
+                              .fullScreenCover(isPresented: $isShowingResultadoView) {
+                                  ResultadoView(aciertos: quizState.score, puntuacion: quizState.totalScore, errores: quizState.mistakes)
+                              }
+                          }
+                          .padding(.horizontal, 12)
         }
         .onChange(of: scenePhase) { newPhase in
             handleScenePhaseChange(newPhase)
@@ -148,13 +157,15 @@ struct JugarModoLibre: View {
     }
 
     // MARK: - Helper Methods
+    
+
     private func resetSoundFlag() {
         hasPlayedSoundForAlert = false
     }
 
     private func flipImage() {
         withAnimation(.easeInOut(duration: 0.6)) {
-            rotationAngle += 360 // Rotate the image by 360 degrees
+            rotationAngle += 360 // ✅ Keep full rotation
         }
     }
 
@@ -171,34 +182,51 @@ struct JugarModoLibre: View {
         case "CONFIRM":
             if quizState.selectedOptionIndex == -1 {
                 print("No option selected, showing alert.")
-                activeAlert = .noSelection // Show the no-selection alert
+                activeAlert = .noSelection
                 return
             }
             quizState.checkAnswer()
-            // Update button text depending on the question index
+            quizState.shouldFlashConfirm = false // ✅ STOP FLASHING ON CONFIRM PRESS
+            quizState.scale = 1.0 // ✅ RESET SCALE
             quizState.buttonText = quizState.isLastQuestion ? "FINISH" : "NEXT"
+            isConfirmed = true // Show explanation
+
+            if quizState.buttonText == "FINISH" {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    quizState.tiltFinishButton() // ✅ Start tilting "FINISH"
+                }
+            }
 
         case "NEXT":
             SoundManager.shared.playTransitionSound()
+            flipImage()
+            quizState.shouldFlashConfirm = false // ✅ STOP FLASHING ON NEXT
+            quizState.scale = 1.0 // ✅ RESET SCALE
+
             if quizState.currentQuestionIndex < quizState.randomQuestions.count - 1 {
-                flipImage()
                 quizState.showNextQuestion()
+                isConfirmed = false
             } else {
-                print("Quiz completed. Preparing to finish...")
-                quizState.finishQuiz()
-                isShowingResultadoView = true
+                quizState.buttonText = "FINISH"
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    quizState.tiltFinishButton() // ✅ Start tilting "FINISH"
+                }
             }
 
         case "FINISH":
+            quizState.shouldFlashConfirm = false // ✅ STOP FLASHING
+            quizState.scale = 1.0 // ✅ RESET SCALE
+            quizState.shouldTiltFinish = false // ✅ STOP TILTING
+            withAnimation(.easeOut(duration: 0.3)) {
+                quizState.finishButtonTiltAngle = 0 // ✅ RESET TILT TO 0
+            }
             quizState.finishQuiz()
-            print("Quiz completed. Preparing to finish...")
-            isShowingResultadoView = true // Transition to ResultadoView
+            isShowingResultadoView = true
 
-        default:
-            print("Unhandled button text: \(quizState.buttonText)") // Debug log
+            default:
+                print("Unhandled button text: \(quizState.buttonText)")
         }
     }
-   
 
     private func handleAlertSound(for alert: ActiveAlert?) {
         if alert != nil, !hasPlayedSoundForAlert {
@@ -229,7 +257,6 @@ struct JugarModoLibre: View {
             )
         }
     }
-    
 }
 
 struct JugarModoLibre_Previews: PreviewProvider {
@@ -240,98 +267,107 @@ struct JugarModoLibre_Previews: PreviewProvider {
             .previewDevice("iPhone 13") // Specify a device for the preview
     }
 }
-    struct RadioButton: View {
-        var text: String
-        @Binding var selectedOptionIndex: Int
-        var optionIndex: Int
-        @ObservedObject var quizState: QuizState
-        @State private var isFlashing = false
-        @State private var flashCount = 0  // To manage the number of flashes
 
-        var body: some View {
-            Button(action: {
-                self.selectedOptionIndex = self.optionIndex
-              //  print("Selected option index is now \(self.selectedOptionIndex)")
-            }) {
-                Text(text.uppercased())
-                    .font(.headline)
-                    .foregroundColor(.white)  // White text for better contrast
-                    .padding()
-                    .frame(width: 300, height: 75)
-                    .background(backgroundForOption())
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 3))
-            }
-            .opacity(isFlashing ? 0.5 : 1) // Apply flashing effect
-            .animation(isFlashing ? Animation.easeInOut(duration: 0.5).repeatCount(6, autoreverses: true) : nil, value: isFlashing)
-            .onChange(of: selectedOptionIndex) { _ in
-                updateFlashing()
-            }
-            .onAppear {
-                stopFlashing()
-            }
-            .onReceive(quizState.$shouldFlashCorrectAnswer) { shouldFlash in
-                if shouldFlash && shouldFlashCondition {
-                    startFlashing()
-                } else {
-                    stopFlashing()
-                }
-            }
+struct RadioButton: View {
+    var text: String
+    @Binding var selectedOptionIndex: Int
+    var optionIndex: Int
+    @ObservedObject var quizState: QuizState
+    @State private var isFlashing = false
+    @State private var flashCount = 0  // To manage the number of flashes
+
+    var body: some View {
+        Button(action: {
+            self.selectedOptionIndex = self.optionIndex
+            quizState.shouldFlashConfirm = true
+            quizState.startFlashingConfirmButton()
+        }) {
+            Text(text.uppercased())
+                .font(.headline)
+                .foregroundColor(.white)  // White text for better contrast
+                .padding()
+                .frame(width: 300, height: 75)
+                .background(backgroundForOption()) // Updated colors
+                .cornerRadius(10)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 3))
         }
-
-        private func backgroundForOption() -> Color {
-            if selectedOptionIndex == optionIndex {
-                return Color(hue: 0.315, saturation: 0.953, brightness: 0.335)  // Green when selected
-            } else {
-                return Color(hue: 0.69, saturation: 0.89, brightness: 0.706)  // Default blue background
-            }
+        .opacity(isFlashing ? 0.5 : 1) // Apply flashing effect
+        .animation(isFlashing ? Animation.easeInOut(duration: 0.5).repeatCount(6, autoreverses: true) : nil, value: isFlashing)
+        .onChange(of: selectedOptionIndex) { _ in
+            updateFlashing()
         }
-        
-        private func startFlashing() {
-            guard !isFlashing else { return }
-            isFlashing = true
-            flashCount = 6  // Set the desired number of flashes
-
-            // After flashes are complete, reset isFlashing
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {  // 3 seconds, adjust as needed
-                self.isFlashing = false
-            }
+        .onAppear {
+            stopFlashing()
         }
-        
-        private var shouldFlashCondition: Bool {
-            guard let correctAnswerKey = quizState.currentQuestion.correctAnswerKey else {
-                print("Error: Correct answer key is missing.")
-                return false
-            }
-
-            guard quizState.selectedOptionIndex >= 0 else {
-                print("No option selected. Flashing condition not met.")
-                return false // Return false directly for no selection
-            }
-
-            let optionKeys = Array(quizState.currentQuestion.options.keys)
-            guard quizState.selectedOptionIndex < optionKeys.count else {
-                print("Error: selectedOptionIndex (\(quizState.selectedOptionIndex)) is out of bounds.")
-                return false
-            }
-
-            let selectedOptionKey = optionKeys[quizState.selectedOptionIndex]
-            return selectedOptionKey == correctAnswerKey && quizState.selectedIncorrectAnswer
-        }
-        
-        private func stopFlashing() {
-            isFlashing = false
-            flashCount = 0
-        }
-        
-        private func updateFlashing() {
-            if shouldFlashCondition {
-                startFlashing()
+        .onReceive(quizState.$shouldFlashCorrectAnswer) { shouldFlash in
+            if shouldFlash && shouldFlashCondition {
+                quizState.startFlashingConfirmButton()
             } else {
                 stopFlashing()
             }
         }
     }
+    
+    
 
+    // **Updated Background Colors**
+    private func backgroundForOption() -> Color {
+        if selectedOptionIndex == optionIndex {
+            return Color(red: 84/255, green: 8/255, blue: 4/255)  // **Selected: #540804**
+        } else {
+            return Color(red: 88/255, green: 81/255, blue: 35/255)  // **Normal: #585123**
+        }
+    }
+    
+    
+    private var shouldFlashCondition: Bool {
+        guard let correctAnswerKey = quizState.currentQuestion.correctAnswerKey else {
+            print("Error: Correct answer key is missing.")
+            return false
+        }
 
+        guard quizState.selectedOptionIndex >= 0 else {
+            print("No option selected. Flashing condition not met.")
+            return false // Return false directly for no selection
+        }
+
+        let optionKeys = Array(quizState.currentQuestion.options.keys)
+        guard quizState.selectedOptionIndex < optionKeys.count else {
+            print("Error: selectedOptionIndex (\(quizState.selectedOptionIndex)) is out of bounds.")
+            return false
+        }
+
+        let selectedOptionKey = optionKeys[quizState.selectedOptionIndex]
+        return selectedOptionKey == correctAnswerKey && quizState.selectedIncorrectAnswer
+    }
+    
+    private func stopFlashing() {
+        isFlashing = false
+        flashCount = 0
+    }
+    
+    private func updateFlashing() {
+        if shouldFlashCondition {
+            quizState.startFlashingConfirmButton()
+        } else {
+            stopFlashing()
+        }
+    }
+}
+
+// **Confirm/Next Button**
+struct ConfirmNextButton: View {
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text("NEXT")
+                .font(.headline)
+                .padding()
+                .frame(width: 200, height: 50)
+                .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // **#797D62**
+                .cornerRadius(10)
+        }
+    }
+}
 

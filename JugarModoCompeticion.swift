@@ -70,7 +70,7 @@ import FirebaseStorage
                                     .frame(width: 180, alignment: .leading)
 
                                 Text("WRONG ANSWERS:")
-                                    .foregroundColor(viewModel.mistakes >= 4 ? Color.red : .black)
+                                .foregroundColor(viewModel.mistakes >= 4 ? Color(red: 84/255, green: 8/255, blue: 4/255) : .black)
                                     .font(.system(size: 16)) // Explicit font size
                                     .fontWeight(.bold)
                                     .lineLimit(1)
@@ -96,7 +96,7 @@ import FirebaseStorage
                                     .minimumScaleFactor(0.7)
 
                                 Text("\(viewModel.mistakes)")
-                                    .foregroundColor(viewModel.mistakes >= 4 ? .red : .black)
+                                    .foregroundColor(viewModel.mistakes >= 4 ? Color(red: 84/255, green: 8/255, blue: 4/255) : .black)
                                     .font(.subheadline)
                                     .fontWeight(.bold)
                                     .lineLimit(1)
@@ -116,7 +116,7 @@ import FirebaseStorage
                             // Timer Display
                             Text("\(viewModel.timeRemaining)")
                             .foregroundColor(viewModel.timeRemaining <= 10
-                            ? Color(hue: 1.0, saturation: 0.984, brightness: 0.699) // Custom Red
+                                ? Color(red: 84/255, green: 8/255, blue: 4/255)
                                 : .black) // Default color
                                 .font(.system(size: 60))
                                 .fontWeight(.bold)
@@ -132,11 +132,11 @@ import FirebaseStorage
                             // Display the category
                             if let category = viewModel.currentQuestion?.category, !category.isEmpty {
                                 Text(category.uppercased())
-                                    .font(.headline)
-                                    .foregroundColor(Color(hue: 0.664, saturation: 0.935, brightness: 0.604)) // Style as needed
+                                    .foregroundColor(Color(red: 0/255, green: 69/255, blue: 38/255)) // ✅ Always Dark Green (#004526)
+                                    .font(.headline) // ✅ Set font size
+                                        .fontWeight(.bold) // ✅ Make it bold
                                     .padding(.bottom, 10)
                             }
-
                             // Display the icon/image
                             if let imageUrl = viewModel.currentQuestion?.image, !imageUrl.isEmpty {
                                 if imageUrl.starts(with: "http") {
@@ -201,8 +201,9 @@ import FirebaseStorage
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .foregroundColor(answerStatus
-                                ? Color(hue: 0.315, saturation: 0.953, brightness: 0.335) // Green for correct
-                                : Color(hue: 1.0, saturation: 0.984, brightness: 0.699)) // Red for wrong
+                                ? Color(red: 0/255, green: 69/255, blue: 38/255) // ✅ Dark Green (#004526) for correct
+                                   : Color(red: 84/255, green: 8/255, blue: 4/255) // ✅ Dark Red for incorrect
+                               )
                             .frame(width: 120, height: 120)
                             .scaleEffect(viewModel.scale)
                             .onAppear {
@@ -219,8 +220,8 @@ import FirebaseStorage
                             Button(action: {
                                 if !viewModel.questionProcessed {
                                     viewModel.selectedOptionIndex = index
-                                    viewModel.resetButtonColors()
-                                    viewModel.buttonBackgroundColors[index] = Color(hue: 0.315, saturation: 0.953, brightness: 0.335)
+                                    viewModel.updateButtonBackgroundColors()
+                                    viewModel.startFlashingConfirmButton()
                                 }
                             }) {
                                 Text(viewModel.options[index])
@@ -235,6 +236,7 @@ import FirebaseStorage
                                             .stroke(Color.black, lineWidth: 3)
                                     )
                             }
+                            .tint(Color(red: 96/255, green: 108/255, blue: 56/255)) // ✅ Explicitly apply tint
                         }
                     }
 
@@ -252,6 +254,7 @@ import FirebaseStorage
                                 }
                             } else if viewModel.buttonConfirmar == "NEXT" {
                                 viewModel.playSwooshSound()
+                                viewModel.resetButtonColors()
                                 showAnswerStatus = false
                                 viewModel.questionProcessed = false
                                 viewModel.fetchNextQuestion()
@@ -260,16 +263,20 @@ import FirebaseStorage
                         }) {
                             Text(viewModel.buttonConfirmar)
                                 .font(.headline)
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                                 .padding()
                                 .frame(width: 300, height: 75)
-                                .background(Color.white)
+                                .background(Color(red: 121/255, green: 125/255, blue: 98/255)) //
                                 .cornerRadius(10)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.black, lineWidth: 3)
                                 )
                         }
+                        .opacity(viewModel.shouldFlashConfirmButton ? 0.5 : 1.0) // ✅ Flash Effect
+                        .animation(viewModel.shouldFlashConfirmButton
+                            ? Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true)
+                            : nil, value: viewModel.shouldFlashConfirmButton)
 
                         if viewModel.buttonConfirmar == "NEXT" {
                             Button(action: {
@@ -280,7 +287,7 @@ import FirebaseStorage
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(width: 300, height: 75)
-                                    .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
+                                    .background(Color(red: 121/255, green: 125/255, blue: 98/255))
                                     .cornerRadius(10)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
@@ -297,6 +304,7 @@ import FirebaseStorage
                     forName: UIApplication.didEnterBackgroundNotification,
                     object: nil, queue: .main) { _ in
                         viewModel.appMovedToBackground()
+                        viewModel.resetButtonColors()
                 }
 
                 NotificationCenter.default.addObserver(
@@ -350,7 +358,7 @@ import FirebaseStorage
                 case .showManyMistakesAlert:
                     return Alert(
                         title: Text("WATCH OUT"),
-                        message: Text("You're on your fourth error. One more and you're done."),
+                        message: Text("Fourth error. One more and you're done."),
                         dismissButton: .default(Text("OK")) {
                             viewModel.isAlertBeingDisplayed = false
                         }

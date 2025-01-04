@@ -1,8 +1,7 @@
 import SwiftUI
 import FirebaseAuth
 
-
-
+// MARK: - ResultadoCompeticion
 struct ResultadoCompeticion: View {
     @StateObject var userViewModel = UserViewModel()
     @State private var isButtonDisabled = false
@@ -10,12 +9,9 @@ struct ResultadoCompeticion: View {
     @State private var showCodigo = false
     let userId: String
     @Environment(\.presentationMode) var presentationMode
-    @State private var goToMenuModoCompeticion: Bool = false
     @State private var goToMenuPrincipal: Bool = false
     @State private var goToClasificacion: Bool = false
     @State private var isButtonCoolingDown = false
-    @State private var hasPlayedWarningSound = false // Track if sound has been played
-    
     
     enum ActiveAlert: Identifiable {
         case minimoCobro, esperaNecesaria, confirmarSalida
@@ -33,15 +29,11 @@ struct ResultadoCompeticion: View {
     }
     
     private func initiateCooldown() {
-        // Indicate the button is in its cooldown period.
         isButtonCoolingDown = true
-        
-        // Schedule the end of the cooldown period.
         DispatchQueue.main.asyncAfter(deadline: .now() + 180) {
             self.isButtonCoolingDown = false
         }
     }
-    
     
     var body: some View {
         ZStack {
@@ -50,240 +42,200 @@ struct ResultadoCompeticion: View {
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
-            // Main Content
-            VStack(spacing: 10) {
-                // Trivial Logo
+            VStack(spacing: 20) {
+                // Logo
                 Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(.top, -50)
                     .frame(width: 100, height: 150)
                 
                 // Title
                 Text("SCORECARD FOR \(userViewModel.fullname)")
                     .textCase(.uppercase)
                     .foregroundColor(.white)
-                    .font(.subheadline)
-                    .font(.system(size: 14, weight: .bold)) // Explicitly set size and weight
-                    .padding(.top, -20)
+                    .font(.system(size: 14, weight: .bold))
                 
-                // Data List
-                List {
-                    TextRowView(title: "CORRECT ANS.", value: "\(userViewModel.currentGameAciertos)")
-                    TextRowView(title: "WRONG ANS.", value: "\(userViewModel.currentGameFallos)")
-                    TextRowView(title: "SCORE", value: "\(userViewModel.currentGamePuntuacion)")
-                    TextRowView(title: "CASH", value: "\(userViewModel.currentGamePuntuacion) AFROS")
-                    TextRowView(title: "GLOBAL RANKING", value: "\(userViewModel.positionInLeaderboard)")
-                    TextRowView(title: "RECORD", value: "\(userViewModel.highestScore)")
-                    TextRowView(title: "TOTAL CASH", value: "\(userViewModel.accumulatedPuntuacion) AFROS")
+                // **Table Layout**
+                VStack(spacing: 0) {
+                    
+                    // Table Rows
+                    TableRowView(title: "CORRECT ANSWERS", value: "\(userViewModel.currentGameAciertos)")
+                    TableRowView(title: "INCORRECT ANSWERS", value: "\(userViewModel.currentGameFallos)")
+                    TableRowView(title: "SCORE", value: "\(userViewModel.currentGamePuntuacion)")
+                    TableRowView(title: "CASH", value: "\(userViewModel.currentGamePuntuacion) AFROS")
+                    TableRowView(title: "GLOBAL RANKING", value: "\(userViewModel.positionInLeaderboard)")
+                    TableRowView(title: "HIGHSCORE", value: "\(userViewModel.highestScore)")
+                    TableRowView(title: "TOTAL CASH", value: "\(userViewModel.accumulatedPuntuacion) AFROS")
                 }
-                .listStyle(PlainListStyle())
-                .frame(width: 300, height: 310)
-                .background(Color.white)
-                .cornerRadius(5)
+                .padding()
+                .background(Color(red: 121/255, green: 125/255, blue: 98/255).opacity(0.50))
+                .cornerRadius(15)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.black, lineWidth: 3)
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black.opacity(0.7), lineWidth: 2)
                 )
-                .environment(\.colorScheme, .light)
+                .shadow(color: Color.white.opacity(0.15), radius: 5, x: 0, y: 5)
+                .frame(width: 320)
                 
                 // Buttons
                 VStack(spacing: 10) {
-                    Button(action: {
-                        // Check if the button is actively cooling down.
-                        if isButtonCoolingDown {
-                            // If it's cooling down, trigger the alert and do nothing else.
-                            activeAlert = .esperaNecesaria
-                        } else {
-                            // If it's not cooling down, proceed with the GENERAR COBRO action.
-                            SoundManager.shared.playTransitionSound()
-                            
-                            // Check the user's points.
-                            if userViewModel.currentGamePuntuacion >= 2500 {
-                                showCodigo = true
-                            } else {
-                                // If user doesn't have enough points, show the appropriate alert.
-                                activeAlert = .minimoCobro
-                            }
-                            
-                            // Initiate the cooldown period.
-                            initiateCooldown()
+                    ActionButton(title: "CASH OUT", action: handleCashOutButton)
+                        .disabled(isButtonDisabled)
+                        .fullScreenCover(isPresented: $showCodigo) {
+                            CodigoQR()
                         }
-                    }) {
-                        Text("CASH OUT")
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .padding()
-                            .frame(width: 300, height: 55)
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 3)
-                            )
-                    }
-                    .disabled(isButtonDisabled)
-                    .fullScreenCover(isPresented: $showCodigo) {
-                        // Present the full-screen cover view to display the QR code or cobro details
-                        // Make sure to define this view or replace with the correct view you have for QR/cobro
-                        CodigoQR()
-                    }
                     
-                    // CLASIFICACION Button
-                    Button(action: {
-                        if Auth.auth().currentUser != nil {
-                            SoundManager.shared.playTransitionSound()
-                            goToClasificacion = true
-                        } else {
-                            // Handle unauthenticated user case
+                    ActionButton(title: "LEADERBOARD", action: handleLeaderboardButton)
+                        .fullScreenCover(isPresented: $goToClasificacion) {
+                            ClasificacionView(userId: Auth.auth().currentUser?.uid ?? "")
                         }
-                    }) {
-                        Text("LEADERBOARD")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 300, height: 75)
-                            .background(Color(hue: 0.69, saturation: 0.89, brightness: 0.706))
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 3)
-                            )
-                    }
-                    .fullScreenCover(isPresented: $goToClasificacion) {
-                        ClasificacionView(userId: Auth.auth().currentUser?.uid ?? "")
-                    }
-                    // MENU PRINCIPAL Button
-                    Button(action: {
-                        SoundManager.shared.playTransitionSound()
-                        activeAlert = .confirmarSalida
-                        
-                    }) {
-                        Text("MAIN MENU")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 300, height: 75)
-                            .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 3)
-                            )
-                    }
-                    .fullScreenCover(isPresented: $goToMenuPrincipal) {
-                        MenuPrincipal(player: .constant(nil))
-                    }
                     
+                    ActionButton(title: "MAIN MENU", action: handleMainMenuButton)
+                        .fullScreenCover(isPresented: $goToMenuPrincipal) {
+                            MenuPrincipal(player: .constant(nil))
+                        }
                 }
+            }
+            .padding(.top, 50)
+            .environment(\.colorScheme, .light)
+            .alert(item: $activeAlert) { alertType in
+                handleAlert(alertType)
+            }
+            .onAppear {
+                SoundManager.shared.playRandomLoopedSound()
                 
-                // Alerts
-                .alert(item: $activeAlert) { alertType in
-                    // Play the warning sound once when the alert is triggered
-                    if !hasPlayedWarningSound {
-                        playWarningSoundOnce()
-                    }
-                    
-                    // Handle different alert types
-                    switch alertType {
-                    case .minimoCobro:
-                        return Alert(
-                            title: Text(""),
-                            message: Text("2500 AFROS CASH OUT MINIMUM"),
-                            dismissButton: .default(Text("OK")) {
-                                resetWarningSoundState() // Reset state after dismissing the alert
-                            }
-                        )
-                    case .esperaNecesaria:
-                        playWarningSoundOnce() // Play the warning sound
-                        return Alert(
-                            title: Text(""),
-                            message: Text("This code has already been processed."),
-                            dismissButton: .default(Text("OK")) {
-                                resetWarningSoundState() // Reset state after dismissing the alert
-                            }
-                        )
-                    case .confirmarSalida:
-                        return Alert(
-                            title: Text("CONFIRM EXIT"),
-                            message: Text("Yo, you out??"),
-                            primaryButton: .cancel(Text("NOPE")) {
-                                resetWarningSoundState() // Reset state if the user cancels
-                            },
-                            secondaryButton: .destructive(Text("YEP")) {
-                                goToMenuPrincipal = true // Navigate to the main menu
-                                SoundManager.shared.playTransitionSound()
-                                resetWarningSoundState() // Reset state after confirming the action
-                            }
-                        )
-                    }
-                    
-                    func playWarningSoundOnce() {
-                        DispatchQueue.main.async {
-                            if !hasPlayedWarningSound {
-                                SoundManager.shared.playWarningSound()
-                                hasPlayedWarningSound = true
-                            }
-                        }
-                    }
-                    
-                    func resetWarningSoundState() {
-                        DispatchQueue.main.async {
-                            hasPlayedWarningSound = false
-                        }
-                    }
-                }
-                .onAppear {
-                    userViewModel.fetchUserData { result in
-                        DispatchQueue.main.async {
-                            switch result {
-                            case .success(): break
-                                // If necessary, perform any actions following a successful data fetch.
-                            case .failure(let error):
-                                // Handle and/or display the error to the user.
-                               print("Error while fetching user data: \(error.localizedDescription)")
-                            }
-                        }
+                userViewModel.fetchUserData { result in
+                    if case .failure(let error) = result {
+                        print("Error fetching user data: \(error.localizedDescription)")
                     }
                 }
             }
-        }
-    }
-    
-    // Helper View for Text Rows
-    struct TextRowView: View {
-        var title: String
-        var value: String
-        
-        var body: some View {
-            HStack {
-                Text(title)
-                    .font(.subheadline) // Smaller font for title
-                    .foregroundColor(Color.black)
-                    .frame(maxWidth: .infinity, alignment: .leading) // Align text to the leading edge
-                    .lineLimit(1) // Ensure title is in a single line
-                    .padding(.vertical, 4) // Adjust padding for smaller content
-                
-                
-                Spacer() // Use a spacer to push content to opposite ends
-                
-                Text(value)
-                    .font(.subheadline) // Smaller font for value
-                    .foregroundColor(Color.blue)
-                    .frame(maxWidth: .infinity, alignment: .trailing) // Align text to the trailing edge
-                    .padding(.vertical, 4) // Adjust padding for smaller content
+            .onDisappear {
+                SoundManager.shared.stopLoopedSound() // ✅ Stop looped sound properly
             }
         }
     }
+    // MARK: - Button Handlers
     
     
-    
-    
-    
-    
-    struct ResultadoCompeticion_Previews: PreviewProvider {
-        static var previews: some View {
-            ResultadoCompeticion(userId: "exampleUserId")
+    private func handleCashOutButton() {
+        SoundManager.shared.stopLoopedSound()
+        if isButtonCoolingDown {
+            SoundManager.shared.playWarningSound()
+            activeAlert = .esperaNecesaria
+        } else {
+            if userViewModel.currentGamePuntuacion >= 2500 {
+                SoundManager.shared.playTransitionSound()
+                showCodigo = true
+            } else {
+                SoundManager.shared.playWarningSound()
+                activeAlert = .minimoCobro
+            }
+            initiateCooldown()
         }
+    }
+    
+    private func handleLeaderboardButton() {
+        SoundManager.shared.stopLoopedSound()
+        SoundManager.shared.playTransitionSound()
+        goToClasificacion = true
+    }
+    
+    private func handleMainMenuButton() {
+        SoundManager.shared.stopLoopedSound()
+        SoundManager.shared.playWarningSound()
+        activeAlert = .confirmarSalida
+    }
+    
+    // MARK: - Alert Handlers
+    private func handleAlert(_ alertType: ActiveAlert) -> Alert {
+        switch alertType {
+        case .minimoCobro:
+            return Alert(
+                title: Text(""),
+                message: Text("2500 AFROS CASH OUT MINIMUM"),
+                dismissButton: .default(Text("OK"))
+            )
+        case .esperaNecesaria:
+            return Alert(
+                title: Text(""),
+                message: Text("This code has already been processed."),
+                dismissButton: .default(Text("OK"))
+            )
+        case .confirmarSalida:
+            return Alert(
+                title: Text("CONFIRM EXIT"),
+                message: Text("Yo, you out??"),
+                primaryButton: .cancel(Text("NOPE"), action: {
+                    SoundManager.shared.playTransitionSound() // ✅ Correct placement inside action closure
+                }),
+                secondaryButton: .destructive(Text("YEP")) {
+                    SoundManager.shared.playTransitionSound()
+                    goToMenuPrincipal = true
+                }
+            
+            )
+        }
+    }
+}
+
+// MARK: - UI Components
+
+struct TableRowView: View {
+    let title: String
+    let value: String
+
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.white)
+                .lineLimit(1) // ✅ Prevents title from wrapping
+                .minimumScaleFactor(0.8) // ✅ Scales text down if needed
+                .truncationMode(.tail) // ✅ Ensures long text is cut off properly
+                .frame(width: 180, alignment: .leading) // ✅ Fixed width for consistency
+
+            Spacer() // ✅ Adds flexible spacing between title and value
+
+            Text(value)
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .lineLimit(1) // ✅ Keeps value in a single line
+                .minimumScaleFactor(0.8)
+                .truncationMode(.tail)
+                .frame(width: 100, alignment: .trailing) // ✅ Ensures proper alignment
+        }
+        .padding(.vertical, 8) // ✅ Better spacing
+        .padding(.horizontal, 12)
+        .background(Color.black.opacity(0.3)) // ✅ Keeps contrast high
+        .cornerRadius(5) // ✅ Slightly rounded edges for aesthetics
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.white.opacity(0.7), lineWidth: 1) // ✅ Subtle border
+        )
+    }
+}
+
+struct ActionButton: View {
+    let title: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: 300, height: 55)
+                .background(Color(red: 121/255, green: 125/255, blue: 98/255))
+                .cornerRadius(10)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 3))
+        }
+    }
+}
+
+struct ResultadoCompeticion_Previews: PreviewProvider {
+    static var previews: some View {
+        ResultadoCompeticion(userId: "exampleUserId")
     }
 }

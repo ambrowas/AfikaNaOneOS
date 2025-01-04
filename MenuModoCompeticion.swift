@@ -52,11 +52,13 @@ struct MenuModoCompeticion: View {
                    
                 
                 if !viewModel.userFullName.isEmpty {
-                    Text("Your HighScore is \(viewModel.highestScore) puntos")
-                        .foregroundColor(viewModel.getFlashingColor())
+                    Text("Your HighScore is \(viewModel.highestScore) AFROS")
+                        .foregroundColor(viewModel.getFlashingColor()) // ✅ Uses Dark Red when not flashing
                         .font(.headline)
+                        .fontWeight(.bold)
                         .padding(.horizontal, 20)
                         .padding(.top, -10)
+                        .shadow(color: .white, radius: 0.5, x: 0, y: 0) // ✅ Adds white glow effect
                 }
                 
                 if viewModel.validateCurrentGameFallos() {
@@ -69,7 +71,7 @@ struct MenuModoCompeticion: View {
                             .foregroundColor(.black)
                             .padding()
                             .frame(width: 300, height: 75)
-                            .background(isFlashing ? Color.white : Color.red)
+                            .background(isFlashing ? Color(red: 84/255, green: 8/255, blue: 4/255) : Color(red: 121/255, green: 125/255, blue: 98/255)) 
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -102,7 +104,7 @@ struct MenuModoCompeticion: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 300, height: 75)
-                            .background(isFlashing ? Color.white : Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
+                            .background(isFlashing ? Color.white : Color(red: 121/255, green: 125/255, blue: 98/255)) // #797D62
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -125,10 +127,10 @@ struct MenuModoCompeticion: View {
                     }) {
                         Text("SCOREBOARD")
                             .font(.headline)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .padding()
                             .frame(width: 300, height: 75)
-                            .background(Color.white)
+                            .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -158,7 +160,7 @@ struct MenuModoCompeticion: View {
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 300, height: 75)
-                            .background(Color(hue: 0.315, saturation: 0.953, brightness: 0.335))
+                            .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                             .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
@@ -198,7 +200,7 @@ struct MenuModoCompeticion: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 300, height: 75)
-                        .background(Color(hue: 0.69, saturation: 0.89, brightness: 0.706))
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -221,7 +223,7 @@ struct MenuModoCompeticion: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 300, height: 75)
-                        .background(Color(hue: 1.0, saturation: 0.984, brightness: 0.699))
+                        .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)

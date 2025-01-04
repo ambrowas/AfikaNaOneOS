@@ -37,6 +37,12 @@ class QuizState: ObservableObject {
     @Published var activeAlert: ActiveAlert?
     var swooshSoundEffect: AVAudioPlayer?
     @Published var hasPlayedSoundForAlert = false
+    var shouldShowOptions: Bool {
+        return !isAnswered
+    }
+    var shouldFlashConfirm = false // Tracks if CONFIRM should flashpressed
+    @State var scale: CGFloat = 1.0
+
     
 
     enum ActiveAlert: Identifiable {
@@ -89,6 +95,37 @@ class QuizState: ObservableObject {
          randomQuestions[currentQuestionIndex]
      }
     
+    @Published var shouldTiltFinish = false
+    @Published var finishButtonTiltAngle: Double = 0
+
+   
+    
+    func tiltFinishButton() {
+        DispatchQueue.main.async {
+            guard self.buttonText == "FINISH" else { return } // ✅ Tilt ONLY on "FINISH"
+
+            self.shouldTiltFinish = true
+
+            withAnimation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
+                self.finishButtonTiltAngle = 10 // Start tilting
+            }
+        }
+    }
+    
+    func startFlashingConfirmButton() {
+        DispatchQueue.main.async {
+            guard self.buttonText == "CONFIRM" else { return } // ✅ Flash only "CONFIRM"
+            
+            self.shouldFlashConfirm = true
+            self.scale = 1.2 // Start flash effect
+            
+            withAnimation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
+                self.scale = 1.0 // Shrink back
+            }
+        }
+    }
+  
+    
     func startCountdownTimer() {
         timer?.invalidate() // Stop any existing timer
         if currentQuestionIndex < randomQuestions.count {
@@ -124,7 +161,7 @@ class QuizState: ObservableObject {
         mistakes += 1
         wrongSoundEffect?.play()
         answerStatusMessage = "SORRY, YOUR TIME IS UP!"
-        questionTextColor = Color(hue: 1.0, saturation: 0.984, brightness: 0.699)
+        questionTextColor = Color(red: 84/255, green: 8/255, blue: 4/255)
         buttonText = "NEXT"
         isAnswered = true
 
@@ -199,7 +236,7 @@ class QuizState: ObservableObject {
         answerStatusMessage = "YEP, YOU'RE RIGHT"
         answerIsCorrect = true
         selectedIncorrectAnswer = false
-        questionTextColor = Color(hue: 0.315, saturation: 0.953, brightness: 0.335) // Green for correct
+        questionTextColor = Color(red: 40/255, green: 54/255, blue: 24/255) // ✅ Hex #283618
         print("Correct answer handled. Text color updated to green.")
     }
     
@@ -211,7 +248,7 @@ class QuizState: ObservableObject {
         answerIsCorrect = false
         selectedIncorrectAnswer = true
         shouldFlashCorrectAnswer = true
-        questionTextColor =  Color(hue: 1.0, saturation: 0.984, brightness: 0.699) // Dark red for both
+        questionTextColor =  Color(red: 84/255, green: 8/255, blue: 4/255) // Dark red for both
         print("Mistake count updated to \(mistakes). Timeout: \(isTimeout). Text color updated to dark red.")
     }
    

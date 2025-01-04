@@ -1,1102 +1,1302 @@
-[
-    {
-        "Question Number": "1",
-        "Category": "Africa",
-        "Question": "What is the indigenous name of Lake Victoria?",
-        "Options": {
-            "A": "Nyanza",
-            "B": "Yamambou",
-            "C": "Kivi"
-        },
-        "Correct Answer": "NYANZA"
-    },
-    {
-        "Question Number": "10",
-        "Category": "Africa",
-        "Question": "Which Nigerian city's airport has recently been renamed after the late Chief Obafemi Jeremiah Ayenyi Awolowo?",
-        "Options": {
-            "A": "Lagos",
-            "B": "Calabar",
-            "C": "Port harcourt"
-        },
-        "Correct Answer": "PORT HARCOURT"
-    },
-    {
-        "Question Number": "100",
-        "Category": "Africa",
-        "Question": "Who proclaimed himself Emperor of the Central African Republic on December 4, 1976?",
-        "Options": {
-            "A": "Jean bedel bokassa",
-            "B": "Mobutu sese seko",
-            "C": "Idi amin dada"
-        },
-        "Correct Answer": "JEAN BEDEL BOKASSA"
-    },
-    {
-        "Question Number": "11",
-        "Category": "Africa",
-        "Question": "Which river conforms most of the border between Zimbabwe and South Africa?",
-        "Options": {
-            "A": "Zambezi",
-            "B": "Limpopo",
-            "C": "Orange"
-        },
-        "Correct Answer": "LIMPOPO"
-    },
-    {
-        "Question Number": "12",
-        "Category": "Africa",
-        "Question": "Which central African capital was founded in 1900 and called Fort Lamy until 1973?",
-        "Options": {
-            "A": "N'djamena",
-            "B": "Brazaville",
-            "C": "Bangui"
-        },
-        "Correct Answer": "N'DJAMENA"
-    },
-    {
-        "Question Number": "13",
-        "Category": "Africa",
-        "Question": "What young and charismatic military man became the Head of State of Guinea through a coup d'etat in October 2021?",
-        "Options": {
-            "A": "Colonel assimi goita",
-            "B": "Captain ibrahim traore",
-            "C": "Colonel mamady doumbouya"
-        },
-        "Correct Answer": "COLONEL MAMADY DOUMBOUYA"
-    },
-    {
-        "Question Number": "14",
-        "Category": "Africa",
-        "Question": "What is the main ethnic group in Senegal, comprising 43 percent of the population?",
-        "Options": {
-            "A": "Fula",
-            "B": "Wolof",
-            "C": "Mandinka"
-        },
-        "Correct Answer": "WOLOF"
-    },
-    {
-        "Question Number": "15",
-        "Category": "Africa",
-        "Question": "In 1992, Captain Valentine Strasser became the youngest ruler in Africa by taking power in which country?",
-        "Options": {
-            "A": "Sierra leone",
-            "B": "Liberia",
-            "C": "Gambia"
-        },
-        "Correct Answer": "SIERRA LEONE"
-    },
-    {
-        "Question Number": "16",
-        "Category": "Africa",
-        "Question": "In 1960, he became the first African to win the Nobel Peace Prize.",
-        "Options": {
-            "A": "Oliver thambo",
-            "B": "Albert luthuli",
-            "C": "Nelson mandela"
-        },
-        "Correct Answer": "OLIVER THAMBO"
-    },
-    {
-        "Question Number": "17",
-        "Category": "Africa",
-        "Question": "After Douala and Yaound\u00e9, which is the third most populous city in Cameroon?",
-        "Options": {
-            "A": "Bafoussam",
-            "B": "Garoua",
-            "C": "Bamenda"
-        },
-        "Correct Answer": "GAROUA"
-    },
-    {
-        "Question Number": "18",
-        "Category": "Africa",
-        "Question": "Which Franco-algerian philosopher, playwright, journalist, and author received the Nobel Prize of Literature in 1957?",
-        "Options": {
-            "A": "Albert camus",
-            "B": "Aime cesaire",
-            "C": "Mohammed sabila"
-        },
-        "Correct Answer": "ALBERT CAMUS"
-    },
-    {
-        "Question Number": "19",
-        "Category": "Africa",
-        "Question": "Between 1966 and 1980, he served as the first president of Botswana.",
-        "Options": {
-            "A": "Seretse khama",
-            "B": "Ian khama",
-            "C": "Quett masire"
-        },
-        "Correct Answer": "SERETSE KHAMA"
-    },
-    {
-        "Question Number": "2",
-        "Category": "Africa",
-        "Question": "Which Egyptian city houses one of the world's largest water dams?",
-        "Options": {
-            "A": "Luxor",
-            "B": "Aswan",
-            "C": "Alexandria"
-        },
-        "Correct Answer": "ASWAN"
-    },
-    {
-        "Question Number": "20",
-        "Category": "Africa",
-        "Question": "His Majesty King Mswati III is the current monarch of Eswatini (Swaziland). To which dynasty does he belong?",
-        "Options": {
-            "A": "Shobuza",
-            "B": "Mtetwa",
-            "C": "Dlamini"
-        },
-        "Correct Answer": "DLAMINI"
-    },
-    {
-        "Question Number": "21",
-        "Category": "Africa",
-        "Question": "Apollo Milton Obote was Prime Minister and then President of which country on two occasions?",
-        "Options": {
-            "A": "Tanzania",
-            "B": "Kenia",
-            "C": "Uganda"
-        },
-        "Correct Answer": "UGANDA"
-    },
-    {
-        "Question Number": "22",
-        "Category": "Africa",
-        "Question": "Which Nigerian artist is considered the pioneer of the afrobeat genre?",
-        "Options": {
-            "A": "Femi kuti",
-            "B": "Fela kuti",
-            "C": "2face idibia"
-        },
-        "Correct Answer": "FELA KUTI"
-    },
-    {
-        "Question Number": "23",
-        "Category": "Africa",
-        "Question": "On which Basque La Liga team do the Williams brothers, Inaki & Nico, play?",
-        "Options": {
-            "A": "Athletic de Bilbao",
-            "B": "Real Sociedad",
-            "C": "Atletico de Madrid"
-        },
-        "Correct Answer": "ATHLETIC DE BILBAO"
-    },
-    {
-        "Question Number": "24",
-        "Category": "Africa",
-        "Question": "Antoine Christophe Agbepa Mumba, from Kisangani, DRC, is one of the most successful African artists, better known by the stagename...",
-        "Options": {
-            "A": "Papa wemba",
-            "B": "Fali ipupa",
-            "C": "Koffi olomide"
-        },
-        "Correct Answer": "KOFFI OLOMIDE"
-    },
-    {
-        "Question Number": "25",
-        "Category": "Africa",
-        "Question": "Born in Bamako in 1995, Vanity Fair magazine described her in 2019 as \"the most influential French artist in the world.\"",
-        "Options": {
-            "A": "Nej",
-            "B": "Aya nakamura",
-            "C": "Marwa loud"
-        },
-        "Correct Answer": "AYA NAKAMURA"
-    },
-    {
-        "Question Number": "26",
-        "Category": "Africa",
-        "Question": "Although it took him a long time to get there, who is the current occupant of Aso Villa?",
-        "Options": {
-            "A": "Bola ahmed tinubu",
-            "B": "Cyril ramaphosa",
-            "C": "Joseph bokai"
-        },
-        "Correct Answer": "BOLA AHMED TINUBU"
-    },
-    {
-        "Question Number": "27",
-        "Category": "Africa",
-        "Question": "Which famous music duo consists of \"obumneme Ali a.k.a. \"smash\" and Nwachukwu Ozioko a.k.a. \"vast\"?",
-        "Options": {
-            "A": "P. square",
-            "B": "Bracket",
-            "C": "Mafikizolo"
-        },
-        "Correct Answer": "BRACKET"
-    },
-    {
-        "Question Number": "28",
-        "Category": "Africa",
-        "Question": "In which southern African country would you place the famous Okavango Delta?",
-        "Options": {
-            "A": "Namibia",
-            "B": "South africa",
-            "C": "Botswana"
-        },
-        "Correct Answer": "BOTSWANA"
-    },
-    {
-        "Question Number": "29",
-        "Category": "Africa",
-        "Question": "Which businessman and statesman is considered the mastermind behind \"fran\u00e7afrique\"?",
-        "Options": {
-            "A": "Georges pompidou",
-            "B": "Robert denard",
-            "C": "Jacques foccart"
-        },
-        "Correct Answer": "JACQUES FOCCART"
-    },
-    {
-        "Question Number": "3",
-        "Category": "Africa",
-        "Question": "In terms of land area, which country is larger?",
-        "Options": {
-            "A": "Cabo verde",
-            "B": "Comoros",
-            "C": "Mauritius"
-        },
-        "Correct Answer": "CAPE VERDE"
-    },
-    {
-        "Question Number": "30",
-        "Category": "Africa",
-        "Question": "Which women's garment, worn across the continent, originates from Douala, Cameroon?",
-        "Options": {
-            "A": "Kaba ngondo",
-            "B": "Lapa",
-            "C": "Popo"
-        },
-        "Correct Answer": "KABA NGONDO"
-    },
-    {
-        "Question Number": "31",
-        "Category": "Africa",
-        "Question": "Nadia Nakai is a rapper half from South Africa, half from Zimbabwe, who was dating which South African rapper?",
-        "Options": {
-            "A": "Hip hop pantsula",
-            "B": "Aka",
-            "C": "Naked dj"
-        },
-        "Correct Answer": "AKA"
-    },
-    {
-        "Question Number": "32",
-        "Category": "Africa",
-        "Question": "In 1993, this businessman won Nigeria's first democratic elections but he was imprisoned instead.",
-        "Options": {
-            "A": "Olosegun obasanjo",
-            "B": "Ibrahim badamasi babangida",
-            "C": "Mko abiola"
-        },
-        "Correct Answer": "MKO ABIOLA"
-    },
-    {
-        "Question Number": "33",
-        "Category": "Africa",
-        "Question": "Tippu Tip was an extraordinarily wealthy and powerful 19th-century slave trader from...",
-        "Options": {
-            "A": "Mali",
-            "B": "Zanzibar",
-            "C": "Senegambia"
-        },
-        "Correct Answer": "ZANZIBAR"
-    },
-    {
-        "Question Number": "34",
-        "Category": "Africa",
-        "Question": "This ruler of the Mali Empire is considered one of the richest men in history.",
-        "Options": {
-            "A": "Mansa mousa",
-            "B": "Ndudi umaru",
-            "C": "Sanusi lamido sanusi"
-        },
-        "Correct Answer": "MANSA MOUSA"
-    },
-    {
-        "Question Number": "35",
-        "Category": "Africa",
-        "Question": "This neighborhood in Nairobi, Kenya, is the largest slum in Africa and possibly the world.",
-        "Options": {
-            "A": "Kibera",
-            "B": "Khayelitsha",
-            "C": "Dharavi"
-        },
-        "Correct Answer": "KIBERA"
-    },
-    {
-        "Question Number": "36",
-        "Category": "Africa",
-        "Question": "Which Cameroonian artist had an international hit titled \"You Must Calculer\" in 1987?",
-        "Options": {
-            "A": "Lapiro de mbanga",
-            "B": "Prince eyango",
-            "C": "Sam fan thomas"
-        },
-        "Correct Answer": "PRINCE EYANGO"
-    },
-    {
-        "Question Number": "37",
-        "Category": "Africa",
-        "Question": "Which organization is fighting for the independence of Western Sahara from Morocco?",
-        "Options": {
-            "A": "Salafist group",
-            "B": "Muslim brotherhood",
-            "C": "Polisario front"
-        },
-        "Correct Answer": "POLISARIO FRONT"
-    },
-    {
-        "Question Number": "38",
-        "Category": "Africa",
-        "Question": "Which senegalese-italian influencer is one of the biggest celebrities to emerge from Tiktok?",
-        "Options": {
-            "A": "Khabi lame",
-            "B": "Sadio mane",
-            "C": "Youssou ndour"
-        },
-        "Correct Answer": "KHABI LAME"
-    },
-    {
-        "Question Number": "39",
-        "Category": "Africa",
-        "Question": "Basirou Diomaye Fay\u00e9 became Africa's youngest President by winning elections in which country?",
-        "Options": {
-            "A": "Mali",
-            "B": "Conakry",
-            "C": "Senegal"
-        },
-        "Correct Answer": "SENEGAL"
-    },
-    {
-        "Question Number": "4",
-        "Category": "Africa",
-        "Question": "Which of these countries has a larger population?",
-        "Options": {
-            "A": "Tanzania",
-            "B": "Ghana",
-            "C": "Cameroon"
-        },
-        "Correct Answer": "TANZANIA"
-    },
-    {
-        "Question Number": "40",
-        "Category": "Africa",
-        "Question": "Which island located between Madagascar and Mauritius, with its capital in Saint-dennis, is a French department?",
-        "Options": {
-            "A": "Mayotte",
-            "B": "Reunion",
-            "C": "St. helena"
-        },
-        "Correct Answer": "REUNION"
-    },
-    {
-        "Question Number": "41",
-        "Category": "Africa",
-        "Question": "In 1996, she became the first African person to win a Grammy Award.",
-        "Options": {
-            "A": "Miriam makeba",
-            "B": "Youssou n'dour",
-            "C": "Cesaria evora"
-        },
-        "Correct Answer": "MIRIAM MAKEBA"
-    },
-    {
-        "Question Number": "42",
-        "Category": "Africa",
-        "Question": "Which president of Nigeria was deposed in 1975 while attending the African Union Summit in Kampala?",
-        "Options": {
-            "A": "Johnson aguiyi-ironsi",
-            "B": "Yakubu gowon",
-            "C": "Murtala mohammed"
-        },
-        "Correct Answer": "YAKUBU GOWON"
-    },
-    {
-        "Question Number": "43",
-        "Category": "Africa",
-        "Question": "In which city is the Nsimalen International Airport located?",
-        "Options": {
-            "A": "Yaounde",
-            "B": "Douala",
-            "C": "Libreville"
-        },
-        "Correct Answer": "YAOUNDE"
-    },
-    {
-        "Question Number": "44",
-        "Category": "Africa",
-        "Question": "Beyond being an influencer with half a million followers, Tunde Onakoya is an extraordinary...",
-        "Options": {
-            "A": "Master chef",
-            "B": "Fashion designer",
-            "C": "Chess player"
-        },
-        "Correct Answer": "CHESS PLAYER"
-    },
-    {
-        "Question Number": "45",
-        "Category": "Africa",
-        "Question": "Which of these cities is not an African capital?",
-        "Options": {
-            "A": "Niamey",
-            "B": "Mbabane",
-            "C": "Johannesburg"
-        },
-        "Correct Answer": "JOHANNESBURG"
-    },
-    {
-        "Question Number": "46",
-        "Category": "Africa",
-        "Question": "In which country is the 4th of February International Airport located?",
-        "Options": {
-            "A": "Mozambique",
-            "B": "Cabo verde",
-            "C": "Angola"
-        },
-        "Correct Answer": "ANGOLA"
-    },
-    {
-        "Question Number": "47",
-        "Category": "Africa",
-        "Question": "Which radical political party was founded by Julius Malema in South Africa?",
-        "Options": {
-            "A": "Umkhonto we sizwe",
-            "B": "Inkatha freedom party",
-            "C": "Economic freedom fighters"
-        },
-        "Correct Answer": "ECONOMIC FREEDOM FIGHTERS"
-    },
-    {
-        "Question Number": "48",
-        "Category": "Africa",
-        "Question": "Who is the current president of the African Football Confederation?",
-        "Options": {
-            "A": "Samuel etoo",
-            "B": "Patrice motsepe",
-            "C": "Issa hayatou"
-        },
-        "Correct Answer": "PATRICE MOTSEPE"
-    },
-    {
-        "Question Number": "49",
-        "Category": "Africa",
-        "Question": "Besides Kofi Annan, which other African statesman has served as Secretary-general of the UN?",
-        "Options": {
-            "A": "Boutros boutros ghali",
-            "B": "Diallo telli boubacar",
-            "C": "Nelson mandela"
-        },
-        "Correct Answer": "BOUTROS BOUTROS GHALI"
-    },
-    {
-        "Question Number": "5",
-        "Category": "Africa",
-        "Question": "What is the second most populous country on the continent?",
-        "Options": {
-            "A": "Egypt",
-            "B": "South africa",
-            "C": "Ethiopia"
-        },
-        "Correct Answer": "ETHIOPIA"
-    },
-    {
-        "Question Number": "50",
-        "Category": "Africa",
-        "Question": "According to the 2024 ranking, who is the second richest man in Africa after Aliko Dangote?",
-        "Options": {
-            "A": "Nassef sawiris",
-            "B": "Nicky oppenheimer",
-            "C": "Johann ruppert"
-        },
-        "Correct Answer": "JOHANN RUPPERT"
-    },
-    {
-        "Question Number": "51",
-        "Category": "Africa",
-        "Question": "Which African city is known as \"the Mother City\"?",
-        "Options": {
-            "A": "Agadir, morocco",
-            "B": "Cape town, south africa",
-            "C": "Addis ababa, ethiopia"
-        },
-        "Correct Answer": "CAPE TOWN, SOUTH AFRICA"
-    },
-    {
-        "Question Number": "52",
-        "Category": "Africa",
-        "Question": "Ouham, Lobaye and Kemo are three of the twenty prefectures of which country?",
-        "Options": {
-            "A": "CENTRAL AFRICAN REPUBLIC",
-            "B": "TCHAD",
-            "C": "GABON"
-        },
-        "Correct Answer": "CENTRAL AFRICAN REPUBLIC"
-    },
-    {
-        "Question Number": "53",
-        "Category": "Africa",
-        "Question": "In which island nation is the picturesque Avenue of the Baobabs located?",
-        "Options": {
-            "A": "Cabo verde",
-            "B": "Seychelles",
-            "C": "Madagascar"
-        },
-        "Correct Answer": "MADAGASCAR"
-    },
-    {
-        "Question Number": "54",
-        "Category": "Africa",
-        "Question": "What is the highest peak in Africa?",
-        "Options": {
-            "A": "Atlas Mountain",
-            "B": "Table Mountain",
-            "C": "Mount Kilimanjaro"
-        },
-        "Correct Answer": "MOUNT KILIMANJARO"
-    },
-    {
-        "Question Number": "55",
-        "Category": "Africa",
-        "Question": "Which geological structure in East Africa is slowly splitting the continent in two?",
-        "Options": {
-            "A": "The great rift valley",
-            "B": "The sahara desert",
-            "C": "The swahili coast"
-        },
-        "Correct Answer": "THE GREAT RIFT VALLEY"
-    },
-    {
-        "Question Number": "56",
-        "Category": "Africa",
-        "Question": "Which of these is not part of the African Great Lakes system?",
-        "Options": {
-            "A": "Lake baikal",
-            "B": "Lake turkana",
-            "C": "Lake kivu"
-        },
-        "Correct Answer": "LAKE BAIKAL"
-    },
-    {
-        "Question Number": "57",
-        "Category": "Africa",
-        "Question": "Which on these is one of Lake Victoria's indigenous names?",
-        "Options": {
-            "A": "Nyanza",
-            "B": "Uhuru",
-            "C": "Tanganyika"
-        },
-        "Correct Answer": "NYANZA"
-    },
-    {
-        "Question Number": "58",
-        "Category": "Africa",
-        "Question": "Which African country is known as \"the Land of a Thousand Hills\" for obvious reasons?",
-        "Options": {
-            "A": "Lesotho",
-            "B": "Rwanda",
-            "C": "Eritrea"
-        },
-        "Correct Answer": "RWANDA"
-    },
-    {
-        "Question Number": "59",
-        "Category": "Africa",
-        "Question": "In which southern country is the Pula the official currency?",
-        "Options": {
-            "A": "Zimbabwe",
-            "B": "Malawi",
-            "C": "Botswana"
-        },
-        "Correct Answer": "BOTSWANA"
-    },
-    {
-        "Question Number": "6",
-        "Category": "Africa",
-        "Question": "In its native language, the name of this country means \"land of the upright men.\"",
-        "Options": {
-            "A": "Mauritania",
-            "B": "Burkina faso",
-            "C": "Senegal"
-        },
-        "Correct Answer": "BURKINA FASO"
-    },
-    {
-        "Question Number": "60",
-        "Category": "Africa",
-        "Question": "What is the name of the crown prince of Morocco?",
-        "Options": {
-            "A": "Moulay hassan",
-            "B": "Moulay rachid",
-            "C": "Moulay ismail"
-        },
-        "Correct Answer": "MOULAY HASSAN"
-    },
-    {
-        "Question Number": "61",
-        "Category": "Africa",
-        "Question": "What fearsome armed group was founded by the elusive Joseph Kony in Uganda in 1987?",
-        "Options": {
-            "A": "Lord's resistance army",
-            "B": "M-23",
-            "C": "Al-shabaab"
-        },
-        "Correct Answer": "LORD'S RESISTANCE ARMY"
-    },
-    {
-        "Question Number": "62",
-        "Category": "Africa",
-        "Question": "Which infamous Sierra Leonean warlord founded and led the barbaric Revolutionary United Front (RUF)?",
-        "Options": {
-            "A": "Sam bockarie (general mosquito)",
-            "B": "Foday sankoh",
-            "C": "Johnny paul koroma"
-        },
-        "Correct Answer": "FODAY SANKOH"
-    },
-    {
-        "Question Number": "63",
-        "Category": "Africa",
-        "Question": "Which is the largest football stadium in Africa?",
-        "Options": {
-            "A": "Stade des martyrs (kinshasa)",
-            "B": "Soccer city/fnb stadium (johannesburg)",
-            "C": "Stade mohamed V (casablanca)"
-        },
-        "Correct Answer": "SOCCER CITY/FNB STADIUM (JOHANNESBURG)"
-    },
-    {
-        "Question Number": "64",
-        "Category": "Africa",
-        "Question": "Which Afrobeat superstar recently married a woman named Chioma?",
-        "Options": {
-            "A": "Burna boy",
-            "B": "Davido",
-            "C": "Rema"
-        },
-        "Correct Answer": "DAVIDO"
-    },
-    {
-        "Question Number": "65",
-        "Category": "Africa",
-        "Question": "\"born in Lagos\" is a 2020 album by one Ayodeji Ibrahim Balogun, alias...",
-        "Options": {
-            "A": "Omah lay",
-            "B": "Wizkid",
-            "C": "Oxlade"
-        },
-        "Correct Answer": "WIZKID"
-    },
-    {
-        "Question Number": "66",
-        "Category": "Africa",
-        "Question": "Which Beninese actor played the acclaimed role of Solomon Vandy in Blood Diamond (2006)?",
-        "Options": {
-            "A": "Chiwetel ejiofor",
-            "B": "Djimon honsou",
-            "C": "Idris elba"
-        },
-        "Correct Answer": "DJIMON HONSOU"
-    },
-    {
-        "Question Number": "67",
-        "Category": "Africa",
-        "Question": "What is the most universal literary work of Nigerian writer Chinua Achebe?",
-        "Options": {
-            "A": "Things fall apart",
-            "B": "Cry, the beloved country",
-            "C": "Long walk to freedom"
-        },
-        "Correct Answer": "THINGS FALL APART"
-    },
-    {
-        "Question Number": "68",
-        "Category": "Africa",
-        "Question": "Chimamanda Ngozi Adichie is internationally recognized for being a great...",
-        "Options": {
-            "A": "Actress",
-            "B": "Writer",
-            "C": "Athlete"
-        },
-        "Correct Answer": "WRITER"
-    },
-    {
-        "Question Number": "69",
-        "Category": "Africa",
-        "Question": "Which of these Guineas is not part of our continent?",
-        "Options": {
-            "A": "Bissau",
-            "B": "Papua",
-            "C": "Conakry"
-        },
-        "Correct Answer": "PAPUA"
-    },
-    {
-        "Question Number": "7",
-        "Category": "Africa",
-        "Question": "Sylvanus Olympio was the first president of which country?",
-        "Options": {
-            "A": "Togo",
-            "B": "Niger",
-            "C": "Benin"
-        },
-        "Correct Answer": "TOGO"
-    },
-    {
-        "Question Number": "70",
-        "Category": "Africa",
-        "Question": "Which influential British magnate from the late 19th century gave his name to two southern African countries?",
-        "Options": {
-            "A": "David livingstone",
-            "B": "Cecil J. rhodes",
-            "C": "Lord lugard"
-        },
-        "Correct Answer": "CECIL J. RHODES"
-    },
-    {
-        "Question Number": "71",
-        "Category": "Africa",
-        "Question": "What current state, with its capital at Lilongwe, was formerly known as Nyasaland?",
-        "Options": {
-            "A": "Malawi",
-            "B": "Zambia",
-            "C": "Burundi"
-        },
-        "Correct Answer": "MALAWI"
-    },
-    {
-        "Question Number": "72",
-        "Category": "Africa",
-        "Question": "Coup\u00e9 Bibamba (1998) is one of the most popular hits by which celebrated Congolese artist?",
-        "Options": {
-            "A": "Papa wemba",
-            "B": "General defao",
-            "C": "Awilo longomba"
-        },
-        "Correct Answer": "AWILO LONGOMBA"
-    },
-    {
-        "Question Number": "73",
-        "Category": "Africa",
-        "Question": "Which 2002 song by Magic System is one of Africa's biggest international hits?",
-        "Options": {
-            "A": "Wakalome",
-            "B": "Premier gaou",
-            "C": "Jerusalema"
-        },
-        "Correct Answer": "PREMIER GAOU"
-    },
-    {
-        "Question Number": "74",
-        "Category": "Africa",
-        "Question": "In which country is the political landscape still dominated by the zanu-pf?",
-        "Options": {
-            "A": "Zaire",
-            "B": "Zimbabwe",
-            "C": "Zambia"
-        },
-        "Correct Answer": "ZIMBABWE"
-    },
-    {
-        "Question Number": "75",
-        "Category": "Africa",
-        "Question": "What do we call Zaire these days?",
-        "Options": {
-            "A": "Republic of congo",
-            "B": "Democratic republic of congo",
-            "C": "Central african republic"
-        },
-        "Correct Answer": "DEMOCRATIC REPUBLIC OF CONGO"
-    },
-    {
-        "Question Number": "76",
-        "Category": "Africa",
-        "Question": "The Gio, Mano, Kru, Mende, and Krahn, among other ethnic groups live here",
-        "Options": {
-            "A": "Liberia",
-            "B": "Kenya",
-            "C": "Sudan"
-        },
-        "Correct Answer": "LIBERIA"
-    },
-    {
-        "Question Number": "77",
-        "Category": "Africa",
-        "Question": "Where did the Mau Mau uprising occur between 1952 and 1960?",
-        "Options": {
-            "A": "Kenya",
-            "B": "Tanzania",
-            "C": "Algeria"
-        },
-        "Correct Answer": "KENYA"
-    },
-    {
-        "Question Number": "78",
-        "Category": "Africa",
-        "Question": "Nuno Vieira, Jose Mario Vaz & Umaro Sisocco Embalo have been Presidents of ...",
-        "Options": {
-            "A": "Mozambique",
-            "B": "Guinea bissau",
-            "C": "Sao tome & principe"
-        },
-        "Correct Answer": "GUINEA BISSAU"
-    },
-    {
-        "Question Number": "79",
-        "Category": "Africa",
-        "Question": "Benghazi, Sirte, and Misrata are major cities in which now failed state?",
-        "Options": {
-            "A": "Somalia",
-            "B": "Libya",
-            "C": "South sudan"
-        },
-        "Correct Answer": "LIBYA"
-    },
-    {
-        "Question Number": "8",
-        "Category": "Africa",
-        "Question": "Which famous maximum-security prison is located in Apapa, Lagos State, Nigeria?",
-        "Options": {
-            "A": "Robben island",
-            "B": "Kirikiri",
-            "C": "Kamiti"
-        },
-        "Correct Answer": "KIRIKIRI"
-    },
-    {
-        "Question Number": "80",
-        "Category": "Africa",
-        "Question": "Ahmadou Ahidjo was the first president of which Francophone country?",
-        "Options": {
-            "A": "Gabon",
-            "B": "Cameroon",
-            "C": "Mali"
-        },
-        "Correct Answer": "CAMEROON"
-    },
-    {
-        "Question Number": "81",
-        "Category": "Africa",
-        "Question": "Where is the popular clothing item known as Kabba Ngondo originally from?",
-        "Options": {
-            "A": "Douala, cameroon",
-            "B": "Calabar, nigeria",
-            "C": "Libreville, gabon"
-        },
-        "Correct Answer": "DOUALA, CAMEROON"
-    },
-    {
-        "Question Number": "82",
-        "Category": "Africa",
-        "Question": "In which country is the Darfur region located?",
-        "Options": {
-            "A": "Sudan",
-            "B": "South sudan",
-            "C": "Egypt"
-        },
-        "Correct Answer": "SUDAN"
-    },
-    {
-        "Question Number": "83",
-        "Category": "Africa",
-        "Question": "Who won the 2024 edition of the African Cup of Nations?",
-        "Options": {
-            "A": "Nigeria",
-            "B": "Senegal",
-            "C": "Cote d'ivoire"
-        },
-        "Correct Answer": "COTE D'IVOIRE"
-    },
-    {
-        "Question Number": "84",
-        "Category": "Africa",
-        "Question": "David Motsamayi is an alias used by which famous figure in African history?",
-        "Options": {
-            "A": "Steven biko",
-            "B": "Nelson mandela",
-            "C": "Patrice lumumba"
-        },
-        "Correct Answer": "NELSON MANDELA"
-    },
-    {
-        "Question Number": "85",
-        "Category": "Africa",
-        "Question": "Which English-speaking region of Cameroon is waging a war of independence against the Government?",
-        "Options": {
-            "A": "Tigray",
-            "B": "Ambazonia",
-            "C": "Biafra"
-        },
-        "Correct Answer": "AMBAZONIA"
-    },
-    {
-        "Question Number": "86",
-        "Category": "Africa",
-        "Question": "During which years did the Nigerian Civil War take place?",
-        "Options": {
-            "A": "1960-1963",
-            "B": "1964-1967",
-            "C": "1967-1970"
-        },
-        "Correct Answer": "1967-1970"
-    },
-    {
-        "Question Number": "87",
-        "Category": "Africa",
-        "Question": "Which body of water separates Africa from Europe?",
-        "Options": {
-            "A": "The strait of gibraltar",
-            "B": "The suez canal",
-            "C": "The strait of bab-el-mandeb"
-        },
-        "Correct Answer": "THE STRAIT OF GIBRALTAR"
-    },
-    {
-        "Question Number": "88",
-        "Category": "Africa",
-        "Question": "What is the largest supermarket chain in Africa?",
-        "Options": {
-            "A": "Spar",
-            "B": "Shoprite",
-            "C": "Checkers"
-        },
-        "Correct Answer": "SHOPRITE"
-    },
-    {
-        "Question Number": "89",
-        "Category": "Africa",
-        "Question": "After the Nile, what is the second-longest river on the continent?",
-        "Options": {
-            "A": "Congo",
-            "B": "Niger",
-            "C": "Zambezi"
-        },
-        "Correct Answer": "CONGO"
-    },
-    {
-        "Question Number": "9",
-        "Category": "Africa",
-        "Question": "Which general and son of his is considered a likely successor to Museveni in the presidency of Uganda?",
-        "Options": {
-            "A": "Muhoozi kainerugaba",
-            "B": "Robert kyagulanyi ssentamu",
-            "C": "Joseph kabuleta kiiza"
-        },
-        "Correct Answer": "MUHOOZI KAINERUGABA"
-    },
-    {
-        "Question Number": "90",
-        "Category": "Africa",
-        "Question": "Kilwa Kisiwani is an ancient civilization that flourished in what is now...",
-        "Options": {
-            "A": "Kenya",
-            "B": "Mozambique",
-            "C": "Tanzania"
-        },
-        "Correct Answer": "TANZANIA"
-    },
-    {
-        "Question Number": "91",
-        "Category": "Africa",
-        "Question": "In which country would you find the cities of Thi\u00e9s, Thouba, and Rufisque?",
-        "Options": {
-            "A": "Cote d'ivoire",
-            "B": "Senegal",
-            "C": "Mali"
-        },
-        "Correct Answer": "SENEGAL"
-    },
-    {
-        "Question Number": "92",
-        "Category": "Africa",
-        "Question": "Which father of independence was affectionately nicknamed \"the Old Man\"?",
-        "Options": {
-            "A": "Leopold sedhar sengor",
-            "B": "F\u00e9lix houphou\u00ebt-boigny",
-            "C": "Sekou toure"
-        },
-        "Correct Answer": "F\u00c9LIX HOUPHOU\u00cbT-BOIGNY"
-    },
-    {
-        "Question Number": "93",
-        "Category": "Africa",
-        "Question": "In which country did Julius Nyerere implement his African socialism called \"ujamaa\"?",
-        "Options": {
-            "A": "Tanzania",
-            "B": "Uganda",
-            "C": "Kenya"
-        },
-        "Correct Answer": "TANZANIA"
-    },
-    {
-        "Question Number": "94",
-        "Category": "Africa",
-        "Question": "In which African capital was an American helicopter famously shot down in 1993?",
-        "Options": {
-            "A": "Tripoli, libya",
-            "B": "Kinshasa, drc",
-            "C": "Mogadishu, somalia"
-        },
-        "Correct Answer": "MOGADISHU, SOMALIA"
-    },
-    {
-        "Question Number": "95",
-        "Category": "Africa",
-        "Question": "Whom did Charles Taylor tried to woo with blood diamonds at a peace conference in 1997?",
-        "Options": {
-            "A": "tyra banks",
-            "B": "naomi campbell",
-            "C": "iman"
-        },
-        "Correct Answer": "NAOMI CAMPBELL"
-    },
-    {
-        "Question Number": "96",
-        "Category": "Africa",
-        "Question": "Ahmed Ben Bella was a rebel leader who later became the first president of ...",
-        "Options": {
-            "A": "Tunisia",
-            "B": "Algeria",
-            "C": "Morocco"
-        },
-        "Correct Answer": "ALGERIA"
-    },
-    {
-        "Question Number": "97",
-        "Category": "Africa",
-        "Question": "Which two Spanish cities are located on continental African soil?",
-        "Options": {
-            "A": "Alsace & lorraine",
-            "B": "Ceuta and melilla",
-            "C": "Tenerife & algeciras"
-        },
-        "Correct Answer": "CEUTA AND MELILLA"
-    },
-    {
-        "Question Number": "98",
-        "Category": "Africa",
-        "Question": "Who is the tallest African player to have played in the nba?",
-        "Options": {
-            "A": "Dikembe mutombo",
-            "B": "Hakeem olajuwon",
-            "C": "Manute bol"
-        },
-        "Correct Answer": "MANUTE BOL"
-    },
-    {
-        "Question Number": "99",
-        "Category": "Africa",
-        "Question": "Who was the first woman elected as head of state in Africa?",
-        "Options": {
-            "A": "Joyce banda",
-            "B": "Ellen johnson sirleaf",
-            "C": "Winnie mandela"
-        },
-        "Correct Answer": "ELLEN JOHNSON SIRLEAF"
+{
+    "question1": {
+        "question": "Where would you find Walvis Bay?",
+        "number": 1,
+        "answer": "NAMIBIA",
+        "createdAt": "2024-10-09T04:01:17.196000+00:00",
+        "options": {
+            "a": "NAMIBIA",
+            "b": "GHANA",
+            "c": "SOUTH AFRICA"
+        },
+        "category": "AFRICA",
+        "explanation": "Walvis Bay is Namibia’s only deep-sea harbor, crucial for trade and marine industries. It was under South African control until 1994."
+    },
+    "question2": {
+        "question": "Which Egyptian city houses one of the world's largest water dams?",
+        "number": 2,
+        "answer": "ASWAN",
+        "createdAt": "2024-10-09T04:01:17.198000+00:00",
+        "options": {
+            "a": "LUXOR",
+            "b": "ASWAN",
+            "c": "ALEXANDRIA"
+        },
+        "category": "AFRICA",
+        "explanation": "The Aswan High Dam, completed in 1970, is one of the largest embankment dams in the world and significantly controls the Nile River’s flow."
+    },
+    "question3": {
+        "question": "In terms of land area, which country is larger?",
+        "number": 3,
+        "answer": "CAPE VERT",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "CAPE VERT",
+            "b": "COMOROS",
+            "c": "MAURITIUS"
+        },
+        "category": "AFRICA",
+        "explanation": "Cape Verde has a land area of 4,033 km², making it larger than Comoros (2,235 km²) and Mauritius (2,040 km²). The island nation is located off the west coast of Africa."
+    },
+    "question4": {
+        "question": "Which country has a larger population?",
+        "number": 4,
+        "answer": "TANZANIA",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "TANZANIA",
+            "b": "GHANA",
+            "c": "CAMEROON"
+        },
+        "category": "AFRICA",
+        "explanation": "Tanzania has a population of over 67 million (2024), making it significantly larger than Ghana (33 million) and Cameroon (28 million). It is one of Africa’s fastest-growing economies and home to Mount Kilimanjaro and the Serengeti National Park."
+    },
+    "question5": {
+        "question": "Which is the second most populated country on the continent?",
+        "number": 5,
+        "answer": "ETHIOPIA",
+        "createdAt": "2024-10-09T04:01:17.140000+00:00",
+        "options": {
+            "a": "EGYPT",
+            "b": "SOUTH AFRICA",
+            "c": "ETHIOPIA"
+        },
+        "category": "AFRICA",
+        "explanation": "Ethiopia is Africa’s second most populous country, with over 120 million people (2024), after Nigeria. It is unique for being the only African country that was never colonized and is the birthplace of the ancient Axumite Empire."
+    },
+    "question6": {
+        "question": "In its native language, the name of this country means \"land of the upright men.\"",
+        "number": 6,
+        "answer": "BURKINA FASO",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "MAURITANIA",
+            "b": "BURKINA FASO",
+            "c": "SENEGAL"
+        },
+        "category": "AFRICA",
+        "explanation": "The name “Burkina Faso” means “Land of the Upright Men” in the native Mossi and Dyula languages. It was renamed from Upper Volta in 1984 by President Thomas Sankara, reflecting the country’s values of dignity and integrity."
+    },
+    "question7": {
+        "question": "Sylvanus Olympio was the first president of which country?",
+        "number": 7,
+        "answer": "TOGO",
+        "createdAt": "2024-10-09T04:01:17.204000+00:00",
+        "options": {
+            "a": "TOGO",
+            "b": "NIGER",
+            "c": "BENIN"
+        },
+        "category": "AFRICA",
+        "explanation": "Sylvanus Olympio became Togo’s first president after gaining independence from France in 1960. He played a key role in shaping the young nation but was tragically assassinated in a coup in 1963."
+    },
+    "question8": {
+        "question": "Which famous maximum-security prison is located in Apapa, Lagos State, Nigeria?",
+        "number": 8,
+        "answer": "KIRIKIRI",
+        "createdAt": "2024-10-09T04:01:17.233000+00:00",
+        "options": {
+            "a": "ROBBEN ISLAND",
+            "b": "KIRIKIRI",
+            "c": "KAMITI"
+        },
+        "category": "AFRICA",
+        "explanation": "Kirikiri Maximum Security Prison is Nigeria’s most notorious prison, located in Apapa, Lagos State. It has housed high-profile political prisoners, military officers, and criminals. Known for its overcrowded conditions, it is one of Nigeria’s most infamous detention centers."
+    },
+    "question9": {
+        "question": "Which general and son of his, is considered a likely successor to President Museveni in Uganda?",
+        "number": 9,
+        "answer": "MUHOOZI KAINERUGABA",
+        "createdAt": "2024-10-09T04:01:17.231000+00:00",
+        "options": {
+            "a": "MUHOOZI KAINERUGABA",
+            "b": "ROBERT KYAGULANYI SSENTAMU",
+            "c": "JOSEPH KABULETA KIIZA"
+        },
+        "category": "AFRICA",
+        "explanation": "Muhoozi Kainerugaba is a high-ranking Ugandan military officer and the son of President Yoweri Museveni. He has served as the commander of the Special Forces Command and is seen as a potential successor to his father."
+    },
+    "question10": {
+        "question": "Which Nigerian city's airport has recently been renamed in honor of the late Chief Obafemi Jeremiah Ayenyi Awolowo?",
+        "number": 10,
+        "answer": "PORT HARCOURT",
+        "createdAt": "2024-10-09T04:01:17.205000+00:00",
+        "options": {
+            "a": "LAGOS",
+            "b": "CALABAR",
+            "c": "PORT HARCOURT"
+        },
+        "category": "AFRICA",
+        "explanation": "Port Harcourt is a major city in southern Nigeria, known for its oil industry and as one of Nigeria’s largest ports. It plays a crucial role in the country’s economy and international trade."
+    },
+    "question11": {
+        "question": "Which river forms a large part of the border between Zimbabwe and South Africa?",
+        "number": 11,
+        "answer": "LIMPOPO",
+        "createdAt": "2024-10-09T04:01:17.201000+00:00",
+        "options": {
+            "a": "ZAMBEZI",
+            "b": "LIMPOPO",
+            "c": "ORANGE"
+        },
+        "category": "AFRICA",
+        "explanation": "The Limpopo River is one of Africa’s longest rivers, stretching about 1,750 km (1,087 miles). It flows through four countries and forms part of the border between South Africa and Zimbabwe."
+    },
+    "question12": {
+        "question": "Which Central African capital was founded in 1900 and called Fort Lamy until 1973?",
+        "number": 12,
+        "answer": "N'DJAMENA",
+        "createdAt": "2024-10-09T04:01:17.196000+00:00",
+        "options": {
+            "a": "N'DJAMENA",
+            "b": "BRAZAVILLE",
+            "c": "BANGUI"
+        },
+        "category": "AFRICA",
+        "explanation": "N’Djamena is the capital and largest city of Chad, located near the Cameroon border. It serves as Chad’s economic and administrative center and was originally named Fort-Lamy during French colonial rule."
+    },
+    "question13": {
+        "question": "Which young and charismatic military man became the Head of State of Guinea through a coup d'état in October 2021?",
+        "number": 13,
+        "answer": "COLONEL MAMADY DOUMBOUYA",
+        "createdAt": "2024-10-09T04:01:17.201000+00:00",
+        "options": {
+            "a": "COLONEL ASSIMI GOITA",
+            "b": "CAPTAIN IBRAHIM TRAORE",
+            "c": "COLONEL MAMADY DOUMBOUYA"
+        },
+        "category": "AFRICA",
+        "explanation": "Colonel Mamady Doumbouya led the 2021 coup that removed President Alpha Condé in Guinea. He later became the country’s interim president and promised a return to civilian rule."
+    },
+    "question14": {
+        "question": "What is the main ethnic group in Senegal, comprising 43 percent of the population?",
+        "number": 14,
+        "answer": "WOLOF",
+        "createdAt": "2024-10-09T04:01:17.194000+00:00",
+        "options": {
+            "a": "FULA",
+            "b": "WOLOF",
+            "c": "MANDINKA"
+        },
+        "category": "AFRICA",
+        "explanation": "Wolof is the most widely spoken language in Senegal and serves as a lingua franca. It is also spoken in Gambia and Mauritania and is an essential part of Senegalese culture."
+    },
+    "question15": {
+        "question": "In 1992, Captain Valentine Strasser became the youngest ruler in Africa by taking power in which country?",
+        "number": 15,
+        "answer": "SIERRA LEONE",
+        "createdAt": "2024-10-09T04:01:17.194000+00:00",
+        "options": {
+            "a": "SIERRA LEONE",
+            "b": "LIBERIA",
+            "c": "GAMBIA"
+        },
+        "category": "AFRICA",
+        "explanation": "In 1992, Captain Valentine Strasser, at the age of 25, became Africa’s youngest leader when he took power in Sierra Leone through a military coup against then President Joseph Saidu Momoh."
+    },
+    "question16": {
+        "question": "In 1960, he became the first African to win the Nobel Peace Prize.",
+        "number": 16,
+        "answer": "ALBERT LUTHULI",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "OLIVER THAMBO",
+            "b": "ALBERT LUTHULI",
+            "c": "NELSON MANDELA"
+        },
+        "category": "AFRICA",
+        "explanation": "Albert Luthuli was the president of the African National Congress (ANC) and the first African to receive the Nobel Peace Prize in 1960 for his nonviolent resistance against apartheid in South Africa. He played a crucial role in organizing peaceful protests and advocating for racial equality."
+    },
+    "question17": {
+        "question": "After Douala and Yaoundé, which is the third most populous city in Cameroon?",
+        "number": 17,
+        "answer": "GAROUA",
+        "createdAt": "2024-10-09T04:01:17.198000+00:00",
+        "options": {
+            "a": "BAFOUSSAM",
+            "b": "GAROUA",
+            "c": "BAMENDA"
+        },
+        "category": "AFRICA",
+        "explanation": "Garoua is Cameroon’s third-largest city, an important transport hub, and known for its cotton and fishing industries."
+    },
+    "question18": {
+        "question": "Which Franco-Algerian philosopher, playwright, journalist, and author received the Nobel Prize in Literature in 1957?",
+        "number": 18,
+        "answer": "ALBERT CAMUS",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "ALBERT CAMUS",
+            "b": "AIME CESAIRE",
+            "c": "MOHAMMED SABILA"
+        },
+        "category": "AFRICA",
+        "explanation": "Albert Camus, a French-Algerian writer, was a leading figure in existentialist philosophy and won the Nobel Prize for Literature in 1957."
+    },
+    "question19": {
+        "question": "Between 1966 and 1980, he served as the first president of Botswana.",
+        "number": 19,
+        "answer": "SERETSE KHAMA",
+        "createdAt": "2024-10-09T04:01:17.204000+00:00",
+        "options": {
+            "a": "SERETSE KHAMA",
+            "b": "IAN KHAMA",
+            "c": "QUETT MASIRE"
+        },
+        "category": "AFRICA",
+        "explanation": "Seretse Khama led Botswana to independence in 1966 and was instrumental in developing the country’s economy and democratic governance."
+    },
+    "question20": {
+        "question": "His Majesty King Mswati III is the current monarch of Eswatini (Swaziland). To which dynasty does he belong?",
+        "number": 20,
+        "answer": "DLAMINI",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "SHOBUZA",
+            "b": "MTETWA",
+            "c": "DLAMINI"
+        },
+        "category": "AFRICA",
+        "explanation": "The Dlamini dynasty has ruled Eswatini (Swaziland) for centuries, with King Mswati III being the latest monarch in the lineage. He ascended to the throne in 1986 at the age of 18, succeeding his father King Sobhuza II who died four years earlier."
+    },
+    "question21": {
+        "question": "Apollo Milton Obote was Prime Minister and then President of which country on two occasions?",
+        "number": 21,
+        "answer": "UGANDA",
+        "createdAt": "2024-10-09T04:01:17.197000+00:00",
+        "options": {
+            "a": "TANZANIA",
+            "b": "KENIA",
+            "c": "UGANDA"
+        },
+        "category": "AFRICA",
+        "explanation": "Apollo Milton Obote led Uganda to independence from Britain in 1962 and served as Prime Minister and later as President."
+    },
+    "question22": {
+        "question": "Which Nigerian artist is considered the pioneer of the afrobeat genre?",
+        "number": 22,
+        "answer": "FELA KUTI",
+        "createdAt": "2024-10-09T04:01:17.196000+00:00",
+        "options": {
+            "a": "FEMI KUTI",
+            "b": "FELA KUTI",
+            "c": "2FACE IDIBIA"
+        },
+        "category": "AFRICA",
+        "explanation": "Fela Kuti, a Nigerian musician, pioneered the Afrobeat genre, blending African rhythms with jazz and funk while using his music to challenge political oppression."
+    },
+    "question23": {
+        "question": "\"Harambee\" -meaning working together- is the official motto of which country?",
+        "number": 23,
+        "answer": "KENYA",
+        "createdAt": "2024-10-09T04:01:17.197000+00:00",
+        "options": {
+            "a": "MALAWI",
+            "b": "KENYA",
+            "c": "ZIMBABWE"
+        },
+        "category": "AFRICA",
+        "explanation": "‘Harambee’ is Kenya’s official motto, meaning ‘all pull together’ in Swahili, symbolizing unity and collective effort."
+    },
+    "question24": {
+        "question": "Antoine Christophe Agbepa Mumba, is one of the most prolific and successful African artists, better known by the stage name...",
+        "number": 24,
+        "answer": "KOFFI OLOMIDE",
+        "createdAt": "2024-10-09T04:01:17.198000+00:00",
+        "options": {
+            "a": "PAPA WEMBA",
+            "b": "FALI IPUPA",
+            "c": "KOFFI OLOMIDE"
+        },
+        "category": "AFRICA",
+        "explanation": "Koffi Olomide is a Congolese soukous singer, dancer, producer, and composer. He is one of Africa’s most influential and prolific musicians, known for his rumba music and the creation of the “Tcha Tcho” genre. “Loi” and “Ultimatum” are two of his biggest hits."
+    },
+    "question25": {
+        "question": "Born in Bamako (1995), Vanity Fair magazine described her in 2019 as \"the most influential French artist in the world.\"",
+        "number": 25,
+        "answer": "AYA NAKAMURA",
+        "createdAt": "2024-10-09T04:01:17.201000+00:00",
+        "options": {
+            "a": "NEJ",
+            "b": "AYA NAKAMURA",
+            "c": "MARWA LOUD"
+        },
+        "category": "AFRICA",
+        "explanation": "Aya Nakamura, a Malian-born French singer, is a global Afro-pop and R&B sensation. She became internationally famous with her hit song “Djadja,” which topped charts in several countries."
+    },
+    "question26": {
+        "question": "Although it took him a long time to get there, who is the current occupant of Aso Villa?",
+        "number": 26,
+        "answer": "BOLA AHMED TINUBU",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "BOLA AHMED TINUBU",
+            "b": "CYRIL RAMAPHOSA",
+            "c": "JOSEPH BOKAI"
+        },
+        "category": "AFRICA",
+        "explanation": "Bola Ahmed Tinubu was elected as Nigeria’s president in 2023. A former governor of Lagos State, he played a major role in shaping Nigeria’s modern political landscape and economic policies. He’s affectionally called “Jagaban”, a Hausa word for “leader of warriors” or “chief”."
+    },
+    "question27": {
+        "question": "Which famous music duo consists of \"Obumneme Ali a.k.a. \"Smash\" and Nwachukwu Ozioko a.k.a. \"Vast\"?",
+        "number": 27,
+        "answer": "BRACKET",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "P. SQUARE",
+            "b": "BRACKET",
+            "c": "MAFIKIZOLO"
+        },
+        "category": "AFRICA",
+        "explanation": "Bracket is a Nigerian music duo known for hit songs like “Yori Yori” and “Ada Owerri.” They gained popularity for their unique blend of Afrobeat and R&B."
+    },
+    "question28": {
+        "question": "In which southern African country would you locate the famous Okavango Delta?",
+        "number": 28,
+        "answer": "BOTSWANA",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "NAMIBIA",
+            "b": "SOUTH AFRICA",
+            "c": "BOTSWANA"
+        },
+        "category": "AFRICA",
+        "explanation": "The Okavango Delta in Botswana is one of the world’s largest inland deltas, a UNESCO World Heritage site, and home to diverse wildlife, including elephants, lions, and hippos."
+    },
+    "question29": {
+        "question": "Which businessman and statesman is considered the mastermind behind \"FrançAfrique\"?",
+        "number": 29,
+        "answer": "JACQUES FOCCART",
+        "createdAt": "2024-10-09T04:01:17.196000+00:00",
+        "options": {
+            "a": "GEORGES POMPIDOU",
+            "b": "ROBERT DENARD",
+            "c": "JACQUES FOCCART"
+        },
+        "category": "AFRICA",
+        "explanation": "Jacques Foccart was a key adviser to French presidents on African affairs and the architect of “FrançAfrique,” a policy ensuring France’s continued influence in former African colonies."
+    },
+    "question30": {
+        "question": "Which women's garment, worn across the continent, originates from Douala, Cameroon?",
+        "number": 30,
+        "answer": "KABA NGONDO",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "KABA NGONDO",
+            "b": "KANDORA",
+            "c": "DASHIKI"
+        },
+        "category": "AFRICA",
+        "explanation": "The Kaba Ngondo is a traditional Cameroonian dress worn by women, particularly among the Sawa people. The name is said to come from the expression \"cover it all\" pronounced by Helene Saker, wife of the missionary Alfred Saker. Outraged by the nudity of her husband's maids, she ordered that they be covered with a garment, hence the name \"COVER\", which is translated into the local language as \"kaba\"."
+    },
+    "question31": {
+        "question": "Nadia Nakai is a rapper half from South Africa, half from Zimbabwe who was dating which superstar?",
+        "number": 31,
+        "answer": "AKA",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "HIP HOP PANTSULA",
+            "b": "AKA",
+            "c": "NAKED DJ"
+        },
+        "category": "AFRICA",
+        "explanation": "Nadia Nakai, a South African-Zimbabwean rapper, was in a relationship with AKA, a legendary South African rapper, until his tragic assassination in 2023."
+    },
+    "question32": {
+        "question": "In 1993, this businessman won Nigeria's first democratic elections, but the military regime of Sani Abacha imprisoned him.",
+        "number": 32,
+        "answer": "MKO ABIOLA",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "OLOSEGUN OBASANJO",
+            "b": "IBRAHIM BADAMASI BABANGIDA",
+            "c": "MKO ABIOLA"
+        },
+        "category": "AFRICA",
+        "explanation": "MKO Abiola won Nigeria’s 1993 presidential elections, but the result was annulled by the military government. He was later imprisoned by General Sani Abacha and died in custody in 1998 under mysterious circumstances."
+    },
+    "question33": {
+        "question": "Tippu Tip was an extraordinarily wealthy and powerful 19th-century slave trader originally from...",
+        "number": 33,
+        "answer": "ZANZIBAR",
+        "createdAt": "2024-10-09T04:01:17.213000+00:00",
+        "options": {
+            "a": "MALI",
+            "b": "ZANZIBAR",
+            "c": "SENEGAMBIA"
+        },
+        "category": "AFRICA",
+        "explanation": "Tippu Tip was a Zanzibari merchant and slave trader who controlled vast territories in East Africa. He worked closely with European colonialists and built an empire through ivory and the slave trade."
+    },
+    "question34": {
+        "question": "This ruler of the Mali Empire is considered one of the richest men in history.",
+        "number": 34,
+        "answer": "MANSA MOUSA",
+        "createdAt": "2024-10-09T04:01:17.206000+00:00",
+        "options": {
+            "a": "MANSA MOUSA",
+            "b": "NDUDI UMARU",
+            "c": "SANUSI LAMIDO SANUSI"
+        },
+        "category": "AFRICA",
+        "explanation": "Mansa Musa (1280–1337) was the emperor of the Mali Empire and is considered one of the wealthiest individuals in history. His pilgrimage to Mecca in 1324 showcased his immense wealth, as he distributed gold and built mosques along the way."
+    },
+    "question35": {
+        "question": "This neighborhood in Nairobi, Kenya, is the largest slum in Africa and possibly the world.",
+        "number": 35,
+        "answer": "KIBERA",
+        "createdAt": "2024-10-09T04:01:17.201000+00:00",
+        "options": {
+            "a": "KIBERA",
+            "b": "KHAYELITSHA",
+            "c": "DHARAVI"
+        },
+        "category": "AFRICA",
+        "explanation": "Kibera, located in Nairobi, Kenya, is the largest urban slum in Africa. It has a high population density, with some estimates placing it above the million residents struggling with inadequate infrastructure, but it is also a vibrant community known for its entrepreneurial spirit."
+    },
+    "question36": {
+        "question": "Which Cameroonian artist had an international hit titled \"You must calculer\" in 1987?",
+        "number": 36,
+        "answer": "PRINCE EYANGO",
+        "createdAt": "2024-10-09T04:01:17.198000+00:00",
+        "options": {
+            "a": "LAPIRO DE MBANGA",
+            "b": "PRINCE EYANGO",
+            "c": "SAM FAN THOMAS"
+        },
+        "category": "AFRICA",
+        "explanation": "Prince Eyango is a legendary Cameroonian Makossa artist. His 1987 hit “You Must Calculer” gained international recognition and helped popularize Cameroonian music across Africa and beyond."
+    },
+    "question37": {
+        "question": "Which organization is fighting for the independence of Western Sahara against Morocco?",
+        "number": 37,
+        "answer": "POLISARIO FRONT",
+        "createdAt": "2024-10-09T04:01:17.203000+00:00",
+        "options": {
+            "a": "SALAFIST GROUP",
+            "b": "MUSLIM BROTHERHOOD",
+            "c": "POLISARIO FRONT"
+        },
+        "category": "AFRICA",
+        "explanation": "The Polisario Front is a nationalist movement seeking independence for Western Sahara from Moroccan rule. It has been engaged in a long-standing conflict with Morocco and operates from refugee camps in Algeria."
+    },
+    "question38": {
+        "question": "Which Senegalese born influencer is one of the biggest celebrities to emerge from TikTok?",
+        "number": 38,
+        "answer": "KHABI LAME",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "KHABI LAME",
+            "b": "SADIO MANE",
+            "c": "YOUSSOU NDOUR"
+        },
+        "category": "AFRICA",
+        "explanation": "Khaby Lame, originally from Senegal and now based in Italy, became one of the most-followed TikTok influencers by creating humorous videos that mock overcomplicated life hacks with simple solutions."
+    },
+    "question39": {
+        "question": "Basirou Diomaye Fayé has become Africa's youngest president by winning elections in which country?",
+        "number": 39,
+        "answer": "SENEGAL",
+        "createdAt": "2024-10-09T04:01:17.197000+00:00",
+        "options": {
+            "a": "MALI",
+            "b": "CONAKRY",
+            "c": "SENEGAL"
+        },
+        "category": "AFRICA",
+        "explanation": "Bassirou Diomaye Faye was elected President of Senegal in 2024, making him Africa’s youngest sitting president. His victory was seen as a major political shift for Senegal."
+    },
+    "question40": {
+        "question": "Which island located between Madagascar and Mauritius in the Indian Ocean, with its capital at Saint-Dennis, is a French department?",
+        "number": 40,
+        "answer": "REUNION",
+        "createdAt": "2024-10-09T04:01:17.201000+00:00",
+        "options": {
+            "a": "MAYOTTE",
+            "b": "REUNION",
+            "c": "ST. HELENA"
+        },
+        "category": "AFRICA",
+        "explanation": "Réunion is a French overseas department located in the Indian Ocean. It has a diverse population, a strong economy tied to France, and stunning volcanic landscapes."
+    },
+    "question41": {
+        "question": "In 1996, she became the first African person to win a Grammy Award.",
+        "number": 41,
+        "answer": "MIRIAM MAKEBA",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "MIRIAM MAKEBA",
+            "b": "YOUSSOU N'DOUR",
+            "c": "CESARIA EVORA"
+        },
+        "category": "AFRICA",
+        "explanation": "Miriam Makeba, known as “Mama Africa,” won a Grammy in 1996 for her collaboration with Harry Belafonte on the album An Evening with Belafonte/Makeba. She was a leading figure in the anti-apartheid movement."
+    },
+    "question42": {
+        "question": "Which Nigerian military ruler was deposed in 1975 while attending the African Union Summit in Kampala?",
+        "number": 42,
+        "answer": "YAKUBU GOWON",
+        "createdAt": "2024-10-09T04:01:17.203000+00:00",
+        "options": {
+            "a": "JOHNSON AGUIYI-IRONSI",
+            "b": "YAKUBU GOWON",
+            "c": "MURTALA MOHAMMED"
+        },
+        "category": "AFRICA",
+        "explanation": "Gowon became Nigeria’s leader on August 1, 1966, following the assassination of General Aguiyi-Ironsi in a counter-coup led by northern officers. At just 31 years old, he became Nigeria’s youngest head of state. He led Nigeria during the Biafra War (Nigerian Civil War, 1967–1970)."
+    },
+    "question43": {
+        "question": "Which city is served by the Nsimalen International Airport?",
+        "number": 43,
+        "answer": "YAOUNDE",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "YAOUNDE",
+            "b": "DOUALA",
+            "c": "LIBREVILLE"
+        },
+        "category": "AFRICA",
+        "explanation": "Nsimalen International Airport serves Yaoundé, the capital of Cameroon. It is one of the country’s two major international airports, alongside Douala International Airport."
+    },
+    "question44": {
+        "question": "In addition to being an influencer with half a million followers, Tunde Onakoya is an extraordinary...",
+        "number": 44,
+        "answer": "CHESS PLAYER",
+        "createdAt": "2024-10-09T04:01:17.119000+00:00",
+        "options": {
+            "a": "MASTER CHEF",
+            "b": "FASHION DESIGNER",
+            "c": "CHESS PLAYER"
+        },
+        "category": "AFRICA",
+        "explanation": "Tunde Onakoya is a Nigerian chess champion and coach who promotes education and chess as a tool for empowering underprivileged children."
+    },
+    "question45": {
+        "question": "Which of these cities is NOT an African capital?",
+        "number": 45,
+        "answer": "JOHANNESBURG",
+        "createdAt": "2024-10-09T04:01:17.138000+00:00",
+        "options": {
+            "a": "NIAMEY",
+            "b": "MBABANE",
+            "c": "JOHANNESBURG"
+        },
+        "category": "AFRICA",
+        "explanation": "Johannesburg, despite being South Africa’s largest city and economic hub, is not the capital. Pretoria serves as the administrative capital, while Cape Town is the legislative capital and Bloemfontein serves as the seat of the judiciary branch."
+    },
+    "question46": {
+        "question": "What’s the name of the recently inaugurated state of the art airport in Luanda, Angola?",
+        "number": 46,
+        "answer": "DR. AGOSTINHO NETO INTERNATIONAL AIRPORT",
+        "createdAt": "2024-10-09T04:01:17.138000+00:00",
+        "options": {
+            "a": "4 DE FEVREIRO INTERNATIONAL AIRPORT",
+            "b": "EDUARDO DOS SANTOS INTERNATIONAL AIRPORT",
+            "c": "DR. AGOSTINHO NETO INTERNATIONAL AIRPORT"
+        },
+        "category": "AFRICA",
+        "explanation": "Dr. Antonio Agostinho Neto International Airport, informally Novo Aeroporto Internacional de Luanda, is an international airport serving the capital of Angola, Luanda. It was inaugurated in 2023 and is located in the municipality of Bom Jesus in Icolo e Bengo Province, 40 km south-east of the Luanda city center."
+    },
+    "question47": {
+        "question": "Which radical political party was founded and is led by Julius Malema in South Africa?",
+        "number": 47,
+        "answer": "ECONOMIC FREEDOM FIGHTERS",
+        "createdAt": "2024-10-09T04:01:17.149000+00:00",
+        "options": {
+            "a": "UMKHONTO WE SIZWE",
+            "b": "INKATHA FREEDOM PARTY",
+            "c": "ECONOMIC FREEDOM FIGHTERS"
+        },
+        "category": "AFRICA",
+        "explanation": "The Economic Freedom Fighters (EFF) is a left-wing political party in South Africa founded by Julius Malema in 2013. It advocates for land expropriation, nationalization of mines, and economic transformation."
+    },
+    "question48": {
+        "question": "Who is the current president of the African Football Confederation (2024)?",
+        "number": 48,
+        "answer": "PATRICE MOTSEPE",
+        "createdAt": "2024-10-09T04:01:17.214000+00:00",
+        "options": {
+            "a": "SAMUEL ETOO",
+            "b": "PATRICE MOTSEPE",
+            "c": "ISSA HAYATOU"
+        },
+        "category": "AFRICA",
+        "explanation": "Patrice Motsepe, a South African businessman, became the CAF president in 2021. He is a billionaire and owner of the South African football club Mamelodi Sundowns."
+    },
+    "question49": {
+        "question": "Besides Kofi Annan, which other African has served as Secretary-General of the UN?",
+        "number": 49,
+        "answer": "BOUTROS BOUTROS GHALI",
+        "createdAt": "2024-10-09T04:01:17.137000+00:00",
+        "options": {
+            "a": "BOUTROS BOUTROS GHALI",
+            "b": "DIALLO TELLI BOUBACAR",
+            "c": "NELSON MANDELA"
+        },
+        "category": "AFRICA",
+        "explanation": "Boutros Boutros-Ghali was an Egyptian diplomat who served as the 6th Secretary-General of the United Nations from 1992 to 1996. He was the first African and first Arab to hold the position."
+    },
+    "question50": {
+        "question": "According to the 2024 ranking, who is the second richest man in Africa after Aliko Dangote?",
+        "number": 50,
+        "answer": "JOHANN RUPPERT",
+        "createdAt": "2024-10-09T04:01:17.139000+00:00",
+        "options": {
+            "a": "NASSEF SAWIRIS",
+            "b": "NICKY OPPENHEIMER",
+            "c": "JOHANN RUPPERT"
+        },
+        "category": "AFRICA",
+        "explanation": "Johann Rupert, a South African billionaire, is the chairman of Richemont, the company behind luxury brands like Cartier and Montblanc. He is Africa’s second-richest person after Aliko Dangote. His net worth has experienced growth lately, reaching approximately $17 billion in early 2025."
+    },
+    "question51": {
+        "question": "Which African city is nicknamed \"The Mother City\"?",
+        "number": 51,
+        "answer": "CAPE TOWN, SOUTH AFRICA",
+        "createdAt": "2024-10-09T04:01:17.193000+00:00",
+        "options": {
+            "a": "AGADIR, MOROCCO",
+            "b": "CAPE TOWN, SOUTH AFRICA",
+            "c": "ADDIS ABABA, ETHIOPIA"
+        },
+        "category": "AFRICA",
+        "explanation": "Cape Town is known as “The Mother City” because it was the first European settlement in South Africa, founded in 1652 by the Dutch East India Company as a supply station. The nickname also comes from a humorous 1930s newspaper article suggesting that Cape Town had “too much mothering and not enough fathering.”"
+    },
+    "question52": {
+        "question": "To whom did a Ugandan journalist famously asked \"why are you gay\" to in a viral 2012 interview?",
+        "number": 52,
+        "answer": "PEPE JULIAN ONZIEMA",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "PEPE JULIAN ONZIEMA",
+            "b": "PASTOR MARTIN SHEMPA",
+            "c": "SIMON KAGGWA NJALA"
+        },
+        "category": "AFRICA",
+        "explanation": "Pepe Julian Onziema, a Ugandan LGBTQ+ activist, was asked “Why are you gay?” in a viral 2012 interview with journalist Simon Kaggwa Njala on NTV Uganda. The clip became an internet meme still widely distributed today."
+    },
+    "question53": {
+        "question": "In which island country is the picturesque Avenue of the Baobabs located?",
+        "number": 53,
+        "answer": "MADAGASCAR",
+        "createdAt": "2024-10-09T04:01:17.196000+00:00",
+        "options": {
+            "a": "CABO VERDE",
+            "b": "SEYCHELLES",
+            "c": "MADAGASCAR"
+        },
+        "category": "AFRICA",
+        "explanation": "The Avenue of the Baobabs is a famous natural wonder in Madagascar. The massive, ancient baobab trees create a breathtaking landscape, making it one of the country’s most photographed locations."
+    },
+    "question54": {
+        "question": "What is the highest peak in Africa?",
+        "number": 54,
+        "answer": "KILIMANJARO",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "ATLAS",
+            "b": "TABLE MOUNTAIN",
+            "c": "KILIMANJARO"
+        },
+        "category": "AFRICA",
+        "explanation": "Mount Kilimanjaro, at 5,895 meters (19,341 feet), is Africa’s highest peak. Located in Tanzania, it is a dormant volcano and a popular destination for climbers worldwide."
+    },
+    "question55": {
+        "question": "Which geological structure in East Africa is slowly splitting the continent in two?",
+        "number": 55,
+        "answer": "THE GREAT RIFT VALLEY",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "THE GREAT RIFT VALLEY",
+            "b": "THE SAHARA DESERT",
+            "c": "THE SWAHILI COAST"
+        },
+        "category": "AFRICA",
+        "explanation": "The Great Rift Valley is a tectonic plate boundary stretching from the Middle East to Mozambique. It is gradually splitting the African continent into two separate landmasses.😬😬😬"
+    },
+    "question56": {
+        "question": "Which of these is not part of the African Great Lakes system?",
+        "number": 56,
+        "answer": "LAKE BAIKAL",
+        "createdAt": "2024-10-09T04:01:17.197000+00:00",
+        "options": {
+            "a": "LAKE BAIKAL",
+            "b": "LAKE TURKANA",
+            "c": "LAKE KIVU"
+        },
+        "category": "AFRICA",
+        "explanation": "Lake Baikal is in Russia and is the world’s deepest freshwater lake. It is not part of Africa’s Great Lakes system, which includes lakes Victoria, Tanganyika, and Malawi."
+    },
+    "question57": {
+        "question": "Which of these names do the locals commonly use when referring to Lake Victoria?",
+        "number": 57,
+        "answer": "NYANZA",
+        "createdAt": "2024-10-09T04:01:17.218000+00:00",
+        "options": {
+            "a": "NYANZA",
+            "b": "UHURU",
+            "c": "TANGANYIKA"
+        },
+        "category": "AFRICA",
+        "explanation": "Nyanza is a traditional name for Lake Victoria, commonly used by communities around the lake in Kenya, Tanzania, and Uganda."
+    },
+    "question58": {
+        "question": "Which African country is known as \"The Land of a Thousand Hills\" for obvious reasons?",
+        "number": 58,
+        "answer": "RWANDA",
+        "createdAt": "2024-10-09T04:01:17.204000+00:00",
+        "options": {
+            "a": "LESOTHO",
+            "b": "RWANDA",
+            "c": "ERITREA"
+        },
+        "category": "AFRICA",
+        "explanation": "Rwanda is called “The Land of a Thousand Hills” because of its hilly terrain. The country is covered with rolling landscapes and is known for its beautiful scenery and gorilla tourism."
+    },
+    "question59": {
+        "question": "In which southern country is the pula the official currency?",
+        "number": 59,
+        "answer": "BOTSWANA",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "ZIMBABWE",
+            "b": "MALAWI",
+            "c": "BOTSWANA"
+        },
+        "category": "AFRICA",
+        "explanation": "The Botswana pula (BWP) is the official currency of Botswana. “Pula” means “rain” in Setswana, symbolizing the importance of water in the country’s economy."
+    },
+    "question60": {
+        "question": "What is the name of the crown prince of Morocco?",
+        "number": 60,
+        "answer": "MOULAY HASSAN",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "MOULAY HASSAN",
+            "b": "MOULAY RACHID",
+            "c": "MOULAY ISMAIL"
+        },
+        "category": "AFRICA",
+        "explanation": "Moulay Hassan is the Crown Prince of Morocco, the eldest son of King Mohammed VI. He is expected to be the future monarch of Morocco."
+    },
+    "question61": {
+        "question": "What fearsome armed group was founded by the elusive Joseph Kony in Uganda in 1987?",
+        "number": 61,
+        "answer": "LORD'S RESISTANCE ARMY",
+        "createdAt": "2024-10-09T04:01:17.200000+00:00",
+        "options": {
+            "a": "LORD'S RESISTANCE ARMY",
+            "b": "M-23",
+            "c": "AL-SHABAAB"
+        },
+        "category": "AFRICA",
+        "explanation": "The Lord’s Resistance Army (LRA) is a Ugandan rebel group founded by Joseph Kony in 1987. It is responsible for numerous human rights abuses, including child abductions, massacres, and displacement of civilians."
+    },
+    "question62": {
+        "question": "Which infamous Sierra Leonean warlord founded and led the barbaric Revolutionary United Front (RUF)?",
+        "number": 62,
+        "answer": "FODAY SANKOH",
+        "createdAt": "2024-10-09T04:01:17.203000+00:00",
+        "options": {
+            "a": "SAM BOCKARIE (GENERAL MOSQUITO)",
+            "b": "FODAY SANKOH",
+            "c": "JOHNNY PAUL KOROMA"
+        },
+        "category": "AFRICA",
+        "explanation": "Foday Sankoh was the founder and leader of the Revolutionary United Front (RUF), a rebel group that waged a brutal civil war in Sierra Leone from 1991 to 2002, known for its use of child soldiers and blood diamond smuggling."
+    },
+    "question63": {
+        "question": "What is the largest football stadium in Africa?",
+        "number": 63,
+        "answer": "SOCCER CITY/FNB STADIUM (JOHANNESBURG)",
+        "createdAt": "2024-10-09T04:01:17.205000+00:00",
+        "options": {
+            "a": "STADE DES MARTYRS (KINSHASA)",
+            "b": "SOCCER CITY/FNB STADIUM (JOHANNESBURG)",
+            "c": "STADE MOHAMED V (CASABLANCA)"
+        },
+        "category": "AFRICA",
+        "explanation": "Soccer City, also known as FNB Stadium in Johannesburg, South Africa, is the largest stadium in Africa, with a capacity of 94,736. It hosted the 2010 FIFA World Cup final between Spain and Netherlands."
+    },
+    "question64": {
+        "question": "Which Afrobeat superstar recently married a woman named Chioma?",
+        "number": 64,
+        "answer": "DAVIDO",
+        "createdAt": "2024-10-09T04:01:17.199000+00:00",
+        "options": {
+            "a": "BURNA BOY",
+            "b": "DAVIDO",
+            "c": "REMA"
+        },
+        "category": "AFRICA",
+        "explanation": "“Chioma My Lover” is a reference to Davido’s song “Assurance” (2018), which he dedicated to Chioma Rowland, his longtime partner and now wife. Davido & Chioma met in 2015 while attending Babcock University. They welcomed their first child, Ifeanyi, in 2019 who tragically passing away in 2022."
+    },
+    "question65": {
+        "question": "\"Born in Lagos\" is a 2020 album by one Ayodeji Ibrahim Balogun, alias...",
+        "number": 65,
+        "answer": "WIZKID",
+        "createdAt": "2024-10-09T04:01:17.202000+00:00",
+        "options": {
+            "a": "OMAH LAY",
+            "b": "WIZKID",
+            "c": "OXLADE"
+        },
+        "category": "AFRICA",
+        "explanation": "Wizkid, whose real name is Ayodeji Ibrahim Balogun, released the album Made in Lagos in 2020. It gained international success, especially with the hit song “Essence.”"
+    },
+    "question66": {
+        "question": "Which Beninese actor played the acclaimed role of Solomon Vandy in Blood Diamond (2006)?",
+        "number": 66,
+        "answer": "DJIMON HONSOU",
+        "createdAt": "2024-10-09T04:01:17.211000+00:00",
+        "options": {
+            "a": "CHIWETEL EJIOFOR",
+            "b": "DJIMON HONSOU",
+            "c": "IDRIS ELBA"
+        },
+        "category": "AFRICA",
+        "explanation": "Djimon Hounsou, a Beninese-American actor, played Solomon Vandy in Blood Diamond. He has also starred in Amistad, Gladiator, Guardians of the Galaxy, and Shazam!. Despite his impressive curriculum he has recently complained about financial struggles, hinting at systemic racism in Hollywood. In 2019 he launched the Djimon Hounsou Foundation, aiming to reconnect the African diaspora with their roots and address the historical wounds of slavery."
+    },
+    "question67": {
+        "question": "What is the most universally known literary work of Nigerian writer Chinua Achebe?",
+        "number": 67,
+        "answer": "THINGS FALL APART",
+        "createdAt": "2024-10-09T04:01:17.204000+00:00",
+        "options": {
+            "a": "THINGS FALL APART",
+            "b": "CRY, THE BELOVED COUNTRY",
+            "c": "LONG WALK TO FREEDOM"
+        },
+        "category": "AFRICA",
+        "explanation": "Published in 1958, Things Fall Apart by Chinua Achebe is one of Africa’s most celebrated novels. It tells the story of Okonkwo, a powerful Igbo warrior whose life is disrupted by colonial rule and the spread of Christianity. The book explores themes of tradition vs. change, masculinity, and cultural disintegration under colonialism. It is considered a defining work in African literature."
+    },
+    "question68": {
+        "question": "Chimamanda Ngozi Adichie is internationally recognized for being a great...",
+        "number": 68,
+        "answer": "WRITER",
+        "createdAt": "2024-10-09T04:01:17.203000+00:00",
+        "options": {
+            "a": "ACTRESS",
+            "b": "WRITER",
+            "c": "ATHLETE"
+        },
+        "category": "AFRICA",
+        "explanation": "Chimamanda Ngozi Adichie is a renowned Nigerian author and public speaker known for Half of a Yellow Sun, Americanah, and her TED Talk We Should All Be Feminists. She’s regularly cited as one of Africa’s most influential women."
+    },
+    "question69": {
+        "question": "Which of these Guineas is not one of our own?",
+        "number": 69,
+        "answer": "PAPUA",
+        "createdAt": "2024-10-09T04:01:17.203000+00:00",
+        "options": {
+            "a": "BISSAU",
+            "b": "PAPUA",
+            "c": "CONAKRY"
+        },
+        "category": "AFRICA",
+        "explanation": "Papua New Guinea is an island country in the Pacific Ocean, not part of Africa. Guinea, Guinea-Bissau, and Equatorial Guinea are proudly African nations."
+    },
+    "question70": {
+        "question": "Which influential British magnate from the late 19th century gave his name to two southern African countries?",
+        "number": 70,
+        "answer": "CECIL J. RHODES",
+        "createdAt": "2024-10-09T04:01:17.228000+00:00",
+        "options": {
+            "a": "DAVID LIVINGSTONE",
+            "b": "CECIL J. RHODES",
+            "c": "LORD LUGARD"
+        },
+        "category": "AFRICA",
+        "explanation": "Cecil Rhodes was a British imperialist whose name inspired the former territories of Northern and Southern Rhodesia, now Zambia and Zimbabwe."
+    },
+    "question71": {
+        "question": "What contemporary state, with its capital at Lilongwe, was formerly known as Nyasaland?",
+        "number": 71,
+        "answer": "MALAWI",
+        "createdAt": "2024-10-09T04:01:17.227000+00:00",
+        "options": {
+            "a": "MALAWI",
+            "b": "ZAMBIA",
+            "c": "BURUNDI"
+        },
+        "category": "AFRICA",
+        "explanation": "Malawi was formerly known as Nyasaland under British colonial rule before gaining independence in 1964. Lilongwe is the capital city."
+    },
+    "question72": {
+        "question": "Coupé Bibamba (1998) is one of the most popular hits by which celebrated Congolese artist?",
+        "number": 72,
+        "answer": "AWILO LONGOMBA",
+        "createdAt": "2024-10-09T04:01:17.232000+00:00",
+        "options": {
+            "a": "PAPA WEMBA",
+            "b": "GENERAL DEFAO",
+            "c": "AWILO LONGOMBA"
+        },
+        "category": "AFRICA",
+        "explanation": "Awilo Longomba is a Congolese musician, one of the greatest, known for his energetic soukous and makossa music, with Coupé Bibamba being one of his biggest international hits. He’s the self-proclaimed “propriétaire de tout les dossier”, though no one really knows what dossiers he’s talking about."
+    },
+    "question73": {
+        "question": "Which 2002 song by Magic System is one of the most famous African songs of all times?",
+        "number": 73,
+        "answer": "PREMIER GAOU",
+        "createdAt": "2024-10-09T04:01:17.226000+00:00",
+        "options": {
+            "a": "WAKALOME",
+            "b": "PREMIER GAOU",
+            "c": "JERUSALEMA"
+        },
+        "category": "AFRICA",
+        "explanation": "Premier Gaou by Magic System is one of the most famous Ivorian and African songs, popularizing zouglou music worldwide."
+    },
+    "question74": {
+        "question": "In which country is the political landscape dominated by the ZANU-PF party?",
+        "number": 74,
+        "answer": "ZIMBABWE",
+        "createdAt": "2024-10-09T04:01:17.238000+00:00",
+        "options": {
+            "a": "ZAIRE",
+            "b": "ZIMBABWE",
+            "c": "ZAMBIA"
+        },
+        "category": "AFRICA",
+        "explanation": "The Zimbabwe African National Union - Patriotic Front (ZANU-PF) has been the ruling party of Zimbabwe since independence in 1980."
+    },
+    "question75": {
+        "question": "What do we call Zaire nowadays?",
+        "number": 75,
+        "answer": "DEMOCRATIC REPUBLIC OF CONGO",
+        "createdAt": "2024-10-09T04:01:17.228000+00:00",
+        "options": {
+            "a": "REPUBLIC OF CONGO",
+            "b": "DEMOCRATIC REPUBLIC OF CONGO",
+            "c": "CENTRAL AFRICAN REPUBLIC"
+        },
+        "category": "AFRICA",
+        "explanation": "Zaire was the name of the Democratic Republic of Congo from 1971 to 1997 during Mobutu Sese Seko’s rule. The name “Zaire” originates from a Portuguese misinterpretation of a Kikongo phrase: “nzadi o nzere,” which means “the river that swallows all rivers.” This phrase was used by local communities to describe the Congo River. Portuguese explorers in the 15th century shortened it to “Zaire."
+    },
+    "question76": {
+        "question": "Which country is home to the Gio, Mano, Kru, Mende, and Krahn ethnic groups, among others?",
+        "number": 76,
+        "answer": "LIBERIA",
+        "createdAt": "2024-10-09T04:01:17.227000+00:00",
+        "options": {
+            "a": "LIBERIA",
+            "b": "KENYA",
+            "c": "SUDAN"
+        },
+        "category": "AFRICA",
+        "explanation": "Liberia is home to various ethnic groups, including the Gio, Mano, Kru, Mende, and Krahn peoples."
+    },
+    "question77": {
+        "question": "With which other name is the Land and Freedom Movement that started in Kenya in 1952 mostly known as?",
+        "number": 77,
+        "answer": "THE MAU MAU UPRISING",
+        "createdAt": "2024-10-09T04:01:17.230000+00:00",
+        "options": {
+            "a": "THE MASAI REVOLUTION",
+            "b": "THE MAU MAU UPRISING",
+            "c": "THE KIKUYU REVOLT"
+        },
+        "category": "AFRICA",
+        "explanation": "The Mau Mau Uprising was a Kenyan anti-colonial rebellion against British rule, primarily led by the Kikuyu people."
+    },
+    "question78": {
+        "question": "Nuno Vieira, Jose Mario Vaz & Umaro Sisocco Embalo have been Presidents of ...",
+        "number": 78,
+        "answer": "GUINEA BISSAU",
+        "createdAt": "2024-10-09T04:01:17.230000+00:00",
+        "options": {
+            "a": "MOZAMBIQUE",
+            "b": "GUINEA BISSAU",
+            "c": "SAO TOME & PRINCIPE"
+        },
+        "category": "AFRICA",
+        "explanation": "Guinea-Bissau has experienced frequent coups, assassinations, and military takeovers since gaining independence in 1974 under Luís Severino de Almeida Cabral, its first President."
+    },
+    "question79": {
+        "question": "Benghazi, Sirte, and Misrata are major cities in which now failed state?",
+        "number": 79,
+        "answer": "LIBYA",
+        "createdAt": "2024-10-09T04:01:17.231000+00:00",
+        "options": {
+            "a": "SOMALIA",
+            "b": "LIBYA",
+            "c": "SOUTH SUDAN"
+        },
+        "category": "AFRICA",
+        "explanation": "Libya has been in turmoil since the fall of Muammar Gaddafi in 2011, leading to a fragile state with ongoing conflict. Tripoli is the capital."
+    },
+    "question80": {
+        "question": "Ahmadou Ahidjo was the first president of which Francophone country?",
+        "number": 80,
+        "answer": "CAMEROON",
+        "createdAt": "2024-10-09T04:01:17.230000+00:00",
+        "options": {
+            "a": "GABON",
+            "b": "CAMEROON",
+            "c": "MALI"
+        },
+        "category": "AFRICA",
+        "explanation": "Ahmadou Ahidjo was Cameroon’s first president, ruling from 1960 to 1982 after leading the country to independence from France."
+    },
+    "question81": {
+        "question": "Somalian actor Barkhad Abdi rose to fame for his debut role as a pirate in which 2013 movie?",
+        "number": 81,
+        "answer": "CAPTAIN PHILLIPS",
+        "createdAt": "2024-10-09T04:01:17.230000+00:00",
+        "options": {
+            "a": "CAPTAIN PHILLIPS",
+            "b": "PIRATES OF SOMALIA",
+            "c": "PIRATES OF THE CARIBBEAN"
+        },
+        "category": "AFRICA",
+        "explanation": "Barkhad Abdi starred in Captain Phillips alongside Tom Hanks, earning critical acclaim for his role as a Somali pirate."
+    },
+    "question82": {
+        "question": "In which country is the Darfur region located?",
+        "number": 82,
+        "answer": "SUDAN",
+        "createdAt": "2024-10-09T04:01:17.225000+00:00",
+        "options": {
+            "a": "SUDAN",
+            "b": "SOUTH SUDAN",
+            "c": "EGYPT"
+        },
+        "category": "AFRICA",
+        "explanation": "Darfur is a region in western Sudan that has experienced prolonged conflict and humanitarian crises since 2003."
+    },
+    "question83": {
+        "question": "Who won the 2024 edition of the Africa Cup of Nations?",
+        "number": 83,
+        "answer": "COTE D'IVOIRE",
+        "createdAt": "2024-10-09T04:01:17.227000+00:00",
+        "options": {
+            "a": "NIGERIA",
+            "b": "SENEGAL",
+            "c": "COTE D'IVOIRE"
+        },
+        "category": "AFRICA",
+        "explanation": "Côte d’Ivoire won the 2024 AFCON, adding to its previous victories in 1992 and 2015. The host team recovered well after a shocking 4-0 defeat against Equatorial Guinea in the group stage."
+    },
+    "question84": {
+        "question": "David Motsamayi is an alias used by which famous figure in African history?",
+        "number": 84,
+        "answer": "NELSON MANDELA",
+        "createdAt": "2024-10-09T04:01:17.232000+00:00",
+        "options": {
+            "a": "STEVEN BIKO",
+            "b": "NELSON MANDELA",
+            "c": "PATRICE LUMUMBA"
+        },
+        "category": "AFRICA",
+        "explanation": "Nelson Mandela used the alias “David Motsamayi” while secretly traveling outside South Africa to gain international support against apartheid."
+    },
+    "question85": {
+        "question": "Which English-speaking region of Cameroon is trying to break away from the country?",
+        "number": 85,
+        "answer": "AMBAZONIA",
+        "createdAt": "2024-10-09T04:01:17.235000+00:00",
+        "options": {
+            "a": "TIGRAY",
+            "b": "AMBAZONIA",
+            "c": "BIAFRA"
+        },
+        "category": "AFRICA",
+        "explanation": "Ambazonia refers to the self-proclaimed independent state of Cameroon’s Anglophone regions, where separatists have been fighting for independence."
+    },
+    "question86": {
+        "question": "During which years did the Nigerian Civil War, also known as the Biafra War, take place?",
+        "number": 86,
+        "answer": "1967-1970",
+        "createdAt": "2024-10-09T04:01:17.231000+00:00",
+        "options": {
+            "a": "1960-1963",
+            "b": "1964-1967",
+            "c": "1967-1970"
+        },
+        "category": "AFRICA",
+        "explanation": "The Nigerian Civil War (1967-1970) was fought between the Nigerian government and the secessionist Republic of Biafra, leading to mass casualties and starvation."
+    },
+    "question87": {
+        "question": "Which narrow body of water serves as the main passage between Africa and Europe?",
+        "number": 87,
+        "answer": "THE STRAIT OF GIBRALTAR",
+        "createdAt": "2024-10-09T04:01:17.233000+00:00",
+        "options": {
+            "a": "THE STRAIT OF GIBRALTAR",
+            "b": "THE SUEZ CANAL",
+            "c": "THE STRAIT OF BAB-EL-MANDEB"
+        },
+        "category": "AFRICA",
+        "explanation": "The Strait of Gibraltar is a narrow waterway between Spain and Morocco, connecting the Atlantic Ocean to the Mediterranean Sea. At its narrowest point it spans a mere 14 kilometers (8.7 miles)."
+    },
+    "question88": {
+        "question": "What is the largest supermarket chain in Africa?",
+        "number": 88,
+        "answer": "SHOPRITE",
+        "createdAt": "2024-10-09T04:01:17.226000+00:00",
+        "options": {
+            "a": "SAFARI",
+            "b": "SHOPRITE",
+            "c": "MTN"
+        },
+        "category": "AFRICA",
+        "explanation": "Shoprite is Africa’s largest supermarket chain, headquartered in South Africa, with operations in over 15 countries."
+    },
+    "question89": {
+        "question": "What is the second-longest river on the continent?",
+        "number": 89,
+        "answer": "CONGO",
+        "createdAt": "2024-10-09T04:01:17.234000+00:00",
+        "options": {
+            "a": "CONGO",
+            "b": "NIGER",
+            "c": "ZAMBEZI"
+        },
+        "category": "AFRICA",
+        "explanation": "The Congo River is the second-longest river in Africa after the Nile, stretching about 4,700 km (2,920 miles). It is also the world’s deepest river and an essential trade route in Central Africa."
+    },
+    "question90": {
+        "question": "Kilwa Kisiwani is an ancient civilization that flourished in what is now...",
+        "number": 90,
+        "answer": "TANZANIA",
+        "createdAt": "2024-10-09T04:01:17.232000+00:00",
+        "options": {
+            "a": "KENYA",
+            "b": "MOZAMBIQUE",
+            "c": "TANZANIA"
+        },
+        "category": "AFRICA",
+        "explanation": "Kilwa Kisiwani was a powerful Swahili trading city-state in present-day Tanzania. It was a key center of Indian Ocean trade, dealing in gold, ivory, and slaves during the medieval period."
+    },
+    "question91": {
+        "question": "In which country would you find the cities of Thiés, Thouba, and Rufisque?",
+        "number": 91,
+        "answer": "SENEGAL",
+        "createdAt": "2024-10-09T04:01:17.232000+00:00",
+        "options": {
+            "a": "COTE D'IVOIRE",
+            "b": "SENEGAL",
+            "c": "MALI"
+        },
+        "category": "AFRICA",
+        "explanation": "Thiès, Touba, and Rufisque are all major cities in Senegal. Touba is a religious city, home to the Mouride Brotherhood, while Thiès is an industrial hub and Rufisque is part of the Dakar metropolitan area."
+    },
+    "question92": {
+        "question": "Which father of independence was affectionately nicknamed \"Le Vié\" (The Old Man)?",
+        "number": 92,
+        "answer": "FÉLIX HOUPHOUËT-BOIGNY",
+        "createdAt": "2024-10-09T04:01:17.231000+00:00",
+        "options": {
+            "a": "LEOPOLD SEDHAR SENGOR",
+            "b": "FÉLIX HOUPHOUËT-BOIGNY",
+            "c": "SEKOU TOURE"
+        },
+        "category": "AFRICA",
+        "explanation": "Félix Houphouët-Boigny was Côte d’Ivoire’s first president and ruled for over three decades. He was known as “Le Vieux” (The Old Man) for his wisdom and leadership in West African politics."
+    },
+    "question93": {
+        "question": "In which country did Julius Nyerere implement his African socialism vision \"ujamaa\"?",
+        "number": 93,
+        "answer": "TANZANIA",
+        "createdAt": "2024-10-09T04:01:17.235000+00:00",
+        "options": {
+            "a": "TANZANIA",
+            "b": "UGANDA",
+            "c": "KENYA"
+        },
+        "category": "AFRICA",
+        "explanation": "Julius Nyerere, Tanzania’s first president, introduced Ujamaa (“familyhood”), an African socialism model focused on self-reliance, rural development, and communal farming."
+    },
+    "question94": {
+        "question": "In which African capital was an American helicopter famously shot down in 1993?",
+        "number": 94,
+        "answer": "MOGADISHU, SOMALIA",
+        "createdAt": "2024-10-09T04:01:17.235000+00:00",
+        "options": {
+            "a": "TRIPOLI, LIBYA",
+            "b": "KINSHASA, DRC",
+            "c": "MOGADISHU, SOMALIA"
+        },
+        "category": "AFRICA",
+        "explanation": "The Black Hawk Down incident occurred in Mogadishu, Somalia, in October 1993, when U.S. forces clashed with Somali militias, leading to a failed military operation and global attention on Somalia’s civil war."
+    },
+    "question95": {
+        "question": "Which supermodel did Charles Taylor allegedly try to woo with blood diamonds during a Peace Conference in 1997?",
+        "number": 95,
+        "answer": "NAOMI CAMPBELL",
+        "createdAt": "2024-10-09T04:01:17.235000+00:00",
+        "options": {
+            "a": "TYRA BANKS",
+            "b": "NAOMI CAMPBELL",
+            "c": "IMAN"
+        },
+        "category": "AFRICA",
+        "explanation": "Naomi Campbell testified in 2010 that she had received “dirty-looking stones” from Charles Taylor, former Liberian president, who was accused of funding war crimes using blood diamonds."
+    },
+    "question96": {
+        "question": "Ahmed Ben Bella was a rebel leader who later became the first president of ...",
+        "number": 96,
+        "answer": "ALGERIA",
+        "createdAt": "2024-10-09T04:01:17.239000+00:00",
+        "options": {
+            "a": "TUNISIA",
+            "b": "ALGERIA",
+            "c": "MOROCCO"
+        },
+        "category": "AFRICA",
+        "explanation": "Ahmed Ben Bella was a leader of Algeria’s war for independence and became the country’s first president after gaining independence from France in 1962."
+    },
+    "question97": {
+        "question": "Which two Spanish cities are located on continental African soil?",
+        "number": 97,
+        "answer": "CEUTA AND MELILLA",
+        "createdAt": "2024-10-09T04:01:17.236000+00:00",
+        "options": {
+            "a": "ALSACE & LORRAINE",
+            "b": "CEUTA AND MELILLA",
+            "c": "TENERIFE & ALGECIRAS"
+        },
+        "category": "AFRICA",
+        "explanation": "Ceuta and Melilla are two Spanish autonomous cities located on the northern coast of Africa, bordering Morocco. They have been Spanish territories for centuries."
+    },
+    "question98": {
+        "question": "Who is the tallest African player to have played in the NBA?",
+        "number": 98,
+        "answer": "MANUTE BOL",
+        "createdAt": "2024-10-09T04:01:17.238000+00:00",
+        "options": {
+            "a": "DIKEMBE MUTOMBO",
+            "b": "HAKEEM OLAJUWON",
+            "c": "MANUTE BOL"
+        },
+        "category": "AFRICA",
+        "explanation": "Manute Bol, a Sudanese-born basketball player, was the tallest player in NBA history at 7 feet 7 inches (231 cm). He was known for his exceptional shot-blocking ability."
+    },
+    "question99": {
+        "question": "Who was the first woman elected Head of State in Africa?",
+        "number": 99,
+        "answer": "ELLEN JOHNSON SIRLEAF",
+        "createdAt": "2024-10-09T04:01:17.247000+00:00",
+        "options": {
+            "a": "JOYCE BANDA",
+            "b": "ELLEN JOHNSON SIRLEAF",
+            "c": "WINNIE MANDELA"
+        },
+        "category": "AFRICA",
+        "explanation": "Ellen Johnson Sirleaf became Liberia's president in 2006, making her Africa's first elected female head of state. She was awarded the Nobel Peace Prize in 2011."
+    },
+    "question100": {
+        "question": "Who proclaimed himself Emperor of the Central African Republic on December 4, 1976?",
+        "number": 100,
+        "answer": "JEAN BEDEL BOKASSA",
+        "createdAt": "2024-10-09T04:01:17.196000+00:00",
+        "options": {
+            "a": "JEAN BEDEL BOKASSA",
+            "b": "MOBUTU SESE SEKO",
+            "c": "IDI AMIN DADA"
+        },
+        "category": "AFRICA",
+        "explanation": "Jean-Bédel Bokassa, the ruler of the Central African Republic, declared himself Emperor Bokassa I in a lavish coronation ceremony in 1976, modeled after Napoleon Bonaparte’s own."
     }
-]
+}

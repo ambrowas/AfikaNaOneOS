@@ -65,9 +65,9 @@ struct InputFieldsView: View {
             HStack(spacing: 16) {
                 VStack(alignment: .leading, spacing: 5) {
                     // Flashing "Country" Label
-                    Text("Country:")
+                    Text("Nationality:")
                         .font(.headline)
-                        .foregroundColor(isFlashing ? .red : .white)
+                        .foregroundColor(isFlashing ? Color(red: 84/255, green: 8/255, blue: 4/255) : .white)
                         .fixedSize()
                         .onAppear {
                             withAnimation(Animation.linear(duration: 0.5).repeatForever(autoreverses: true)) {
