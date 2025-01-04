@@ -350,7 +350,7 @@ import FirebaseStorage
                 case .showManyMistakesAlert:
                     return Alert(
                         title: Text("WATCH OUT"),
-                        message: Text("You're on your fourth error. One more and you're done."),
+                        message: Text("Fourth error. One more and you're done."),
                         dismissButton: .default(Text("OK")) {
                             viewModel.isAlertBeingDisplayed = false
                         }

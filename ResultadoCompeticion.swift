@@ -1,8 +1,7 @@
 import SwiftUI
 import FirebaseAuth
 
-
-
+// MARK: - ResultadoCompeticion
 struct ResultadoCompeticion: View {
     @StateObject var userViewModel = UserViewModel()
     @State private var isButtonDisabled = false
@@ -10,12 +9,10 @@ struct ResultadoCompeticion: View {
     @State private var showCodigo = false
     let userId: String
     @Environment(\.presentationMode) var presentationMode
-    @State private var goToMenuModoCompeticion: Bool = false
     @State private var goToMenuPrincipal: Bool = false
     @State private var goToClasificacion: Bool = false
     @State private var isButtonCoolingDown = false
-    @State private var hasPlayedWarningSound = false // Track if sound has been played
-    
+    @State private var isPlayingSound = false // Tracks if sound is actively playing
     
     enum ActiveAlert: Identifiable {
         case minimoCobro, esperaNecesaria, confirmarSalida
@@ -33,15 +30,11 @@ struct ResultadoCompeticion: View {
     }
     
     private func initiateCooldown() {
-        // Indicate the button is in its cooldown period.
         isButtonCoolingDown = true
-        
-        // Schedule the end of the cooldown period.
         DispatchQueue.main.asyncAfter(deadline: .now() + 180) {
             self.isButtonCoolingDown = false
         }
     }
-    
     
     var body: some View {
         ZStack {
@@ -50,9 +43,8 @@ struct ResultadoCompeticion: View {
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
-            // Main Content
             VStack(spacing: 10) {
-                // Trivial Logo
+                // Logo
                 Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -64,13 +56,13 @@ struct ResultadoCompeticion: View {
                     .textCase(.uppercase)
                     .foregroundColor(.white)
                     .font(.subheadline)
-                    .font(.system(size: 14, weight: .bold)) // Explicitly set size and weight
+                    .font(.system(size: 20, weight: .bold))
                     .padding(.top, -20)
                 
                 // Data List
                 List {
-                    TextRowView(title: "CORRECT ANS.", value: "\(userViewModel.currentGameAciertos)")
-                    TextRowView(title: "WRONG ANS.", value: "\(userViewModel.currentGameFallos)")
+                    TextRowView(title: "CORRECT ANSWERS", value: "\(userViewModel.currentGameAciertos)")
+                    TextRowView(title: "INCORRECT ANSWERS", value: "\(userViewModel.currentGameFallos)")
                     TextRowView(title: "SCORE", value: "\(userViewModel.currentGamePuntuacion)")
                     TextRowView(title: "CASH", value: "\(userViewModel.currentGamePuntuacion) AFROS")
                     TextRowView(title: "GLOBAL RANKING", value: "\(userViewModel.positionInLeaderboard)")
@@ -89,27 +81,7 @@ struct ResultadoCompeticion: View {
                 
                 // Buttons
                 VStack(spacing: 10) {
-                    Button(action: {
-                        // Check if the button is actively cooling down.
-                        if isButtonCoolingDown {
-                            // If it's cooling down, trigger the alert and do nothing else.
-                            activeAlert = .esperaNecesaria
-                        } else {
-                            // If it's not cooling down, proceed with the GENERAR COBRO action.
-                            SoundManager.shared.playTransitionSound()
-                            
-                            // Check the user's points.
-                            if userViewModel.currentGamePuntuacion >= 2500 {
-                                showCodigo = true
-                            } else {
-                                // If user doesn't have enough points, show the appropriate alert.
-                                activeAlert = .minimoCobro
-                            }
-                            
-                            // Initiate the cooldown period.
-                            initiateCooldown()
-                        }
-                    }) {
+                    Button(action: handleCashOutButton) {
                         Text("CASH OUT")
                             .font(.headline)
                             .foregroundColor(.black)
@@ -124,20 +96,10 @@ struct ResultadoCompeticion: View {
                     }
                     .disabled(isButtonDisabled)
                     .fullScreenCover(isPresented: $showCodigo) {
-                        // Present the full-screen cover view to display the QR code or cobro details
-                        // Make sure to define this view or replace with the correct view you have for QR/cobro
                         CodigoQR()
                     }
                     
-                    // CLASIFICACION Button
-                    Button(action: {
-                        if Auth.auth().currentUser != nil {
-                            SoundManager.shared.playTransitionSound()
-                            goToClasificacion = true
-                        } else {
-                            // Handle unauthenticated user case
-                        }
-                    }) {
+                    Button(action: handleLeaderboardButton) {
                         Text("LEADERBOARD")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -153,12 +115,8 @@ struct ResultadoCompeticion: View {
                     .fullScreenCover(isPresented: $goToClasificacion) {
                         ClasificacionView(userId: Auth.auth().currentUser?.uid ?? "")
                     }
-                    // MENU PRINCIPAL Button
-                    Button(action: {
-                        SoundManager.shared.playTransitionSound()
-                        activeAlert = .confirmarSalida
-                        
-                    }) {
+                    
+                    Button(action: handleMainMenuButton) {
                         Text("MAIN MENU")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -174,75 +132,16 @@ struct ResultadoCompeticion: View {
                     .fullScreenCover(isPresented: $goToMenuPrincipal) {
                         MenuPrincipal(player: .constant(nil))
                     }
-                    
                 }
                 
                 // Alerts
                 .alert(item: $activeAlert) { alertType in
-                    // Play the warning sound once when the alert is triggered
-                    if !hasPlayedWarningSound {
-                        playWarningSoundOnce()
-                    }
-                    
-                    // Handle different alert types
-                    switch alertType {
-                    case .minimoCobro:
-                        return Alert(
-                            title: Text(""),
-                            message: Text("2500 AFROS CASH OUT MINIMUM"),
-                            dismissButton: .default(Text("OK")) {
-                                resetWarningSoundState() // Reset state after dismissing the alert
-                            }
-                        )
-                    case .esperaNecesaria:
-                        playWarningSoundOnce() // Play the warning sound
-                        return Alert(
-                            title: Text(""),
-                            message: Text("This code has already been processed."),
-                            dismissButton: .default(Text("OK")) {
-                                resetWarningSoundState() // Reset state after dismissing the alert
-                            }
-                        )
-                    case .confirmarSalida:
-                        return Alert(
-                            title: Text("CONFIRM EXIT"),
-                            message: Text("Yo, you out??"),
-                            primaryButton: .cancel(Text("NOPE")) {
-                                resetWarningSoundState() // Reset state if the user cancels
-                            },
-                            secondaryButton: .destructive(Text("YEP")) {
-                                goToMenuPrincipal = true // Navigate to the main menu
-                                SoundManager.shared.playTransitionSound()
-                                resetWarningSoundState() // Reset state after confirming the action
-                            }
-                        )
-                    }
-                    
-                    func playWarningSoundOnce() {
-                        DispatchQueue.main.async {
-                            if !hasPlayedWarningSound {
-                                SoundManager.shared.playWarningSound()
-                                hasPlayedWarningSound = true
-                            }
-                        }
-                    }
-                    
-                    func resetWarningSoundState() {
-                        DispatchQueue.main.async {
-                            hasPlayedWarningSound = false
-                        }
-                    }
+                    handleAlert(alertType)
                 }
                 .onAppear {
                     userViewModel.fetchUserData { result in
-                        DispatchQueue.main.async {
-                            switch result {
-                            case .success(): break
-                                // If necessary, perform any actions following a successful data fetch.
-                            case .failure(let error):
-                                // Handle and/or display the error to the user.
-                               print("Error while fetching user data: \(error.localizedDescription)")
-                            }
+                        if case .failure(let error) = result {
+                            print("Error fetching user data: \(error.localizedDescription)")
                         }
                     }
                 }
@@ -250,35 +149,97 @@ struct ResultadoCompeticion: View {
         }
     }
     
+    
+    // MARK: - Button Handlers
+    private func handleCashOutButton() {
+        if isButtonCoolingDown {
+            SoundManager.shared.playWarningSound()
+            activeAlert = .esperaNecesaria
+        } else {
+            SoundManager.shared.playWarningSound()
+            if userViewModel.currentGamePuntuacion >= 2500 {
+                showCodigo = true
+            } else {
+                activeAlert = .minimoCobro
+            }
+            initiateCooldown()
+        }
+    }
+    
+    private func handleLeaderboardButton() {
+        SoundManager.shared.playTransitionSound()
+        goToClasificacion = true
+    }
+    
+    private func handleMainMenuButton() {
+        SoundManager.shared.playWarningSound()
+        activeAlert = .confirmarSalida
+    }
+    
+    
+    // MARK: - Alert Handlers
+    private func handleAlert(_ alertType: ActiveAlert) -> Alert {
+        switch alertType {
+        case .minimoCobro:
+            // playWarningSound()
+            return Alert(
+                title: Text(""),
+                message: Text("2500 AFROS CASH OUT MINIMUM"),
+                dismissButton: .default(Text("OK")) {
+                    SoundManager.shared.playTransitionSound()
+                }
+            )
+        case .esperaNecesaria:
+            //playWarningSound()
+            return Alert(
+                title: Text(""),
+                message: Text("This code has already been processed."),
+                dismissButton: .default(Text("OK")) {
+                    SoundManager.shared.playTransitionSound()
+                }
+            )
+        case .confirmarSalida:
+            // playWarningSound()
+            return Alert(
+                title: Text("CONFIRM EXIT"),
+                message: Text("Yo, you out??"),
+                primaryButton: .cancel(Text("NOPE")) {
+                    SoundManager.shared.playTransitionSound()
+                },
+                secondaryButton: .destructive(Text("YEP")) {
+                    SoundManager.shared.playTransitionSound()
+                    goToMenuPrincipal = true
+                }
+            )
+        }
+    }
+    
+    // MARK: - Sound Management
+    
+    
     // Helper View for Text Rows
     struct TextRowView: View {
-        var title: String
-        var value: String
+        let title: String
+        let value: String
         
         var body: some View {
             HStack {
                 Text(title)
-                    .font(.subheadline) // Smaller font for title
-                    .foregroundColor(Color.black)
-                    .frame(maxWidth: .infinity, alignment: .leading) // Align text to the leading edge
-                    .lineLimit(1) // Ensure title is in a single line
-                    .padding(.vertical, 4) // Adjust padding for smaller content
-                
-                
-                Spacer() // Use a spacer to push content to opposite ends
+                    .font(.headline)
+                    .lineLimit(nil) // Allow text to wrap to multiple lines
+                    .multilineTextAlignment(.leading) // Align text to the left
+                    .minimumScaleFactor(0.7) // Scale text if space is tight
+                    .frame(maxWidth: .infinity, alignment: .leading) // Take up available space
                 
                 Text(value)
-                    .font(.subheadline) // Smaller font for value
-                    .foregroundColor(Color.blue)
-                    .frame(maxWidth: .infinity, alignment: .trailing) // Align text to the trailing edge
-                    .padding(.vertical, 4) // Adjust padding for smaller content
+                    .font(.subheadline)
+                    .lineLimit(1) // Restrict value to one line
+                    .minimumScaleFactor(0.7) // Scale down text if needed
+                    .frame(maxWidth: .infinity, alignment: .trailing) // Align text to the right
             }
+            .padding(.vertical, 4) // Add vertical padding between rows
         }
     }
-    
-    
-    
-    
     
     
     struct ResultadoCompeticion_Previews: PreviewProvider {

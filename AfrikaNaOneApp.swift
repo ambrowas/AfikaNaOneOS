@@ -23,7 +23,7 @@ struct AfrikaNaOneApp: App {
 
         #if DEBUG
         //
-        testDatabaseAccess()
+        //testDatabaseAccess()
         #endif
 
         let appearance = UINavigationBarAppearance()
@@ -37,16 +37,7 @@ struct AfrikaNaOneApp: App {
         return input.components(separatedBy: invalidCharacters).joined(separator: "")
     }
 
-    func testDatabaseAccess() {
-        let databaseRef = Database.database().reference()
-        databaseRef.child("test").setValue("Hello, Firebase!") { error, _ in
-            if let error = error {
-                print("Error writing to database: \(error.localizedDescription)")
-            } else {
-                print("Database access is configured correctly")
-            }
-        }
-    }
+   
 
     var body: some Scene {
         WindowGroup {

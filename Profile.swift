@@ -25,7 +25,7 @@ struct Profile: View {
             VStack(spacing: 10) {
                 // Profile Image Section
                 profileImageSection
-                    .padding(.top, 240)
+                    .padding(.top, 280)
                     .padding(.bottom, -80)
                     .onTapGesture {
                         isImagePickerDisplayed = true
@@ -56,8 +56,10 @@ struct Profile: View {
                 )
             }
             .sheet(isPresented: $profileViewModel.showReauthenticationCard) {
-                ReauthenticationCard { email, password in
+                ReauthenticationDialog { email, password in
                     profileViewModel.performReauthentication(email: email, password: password)
+                } onCancel: {
+                    profileViewModel.showReauthenticationCard = false // Dismiss the dialog
                 }
             }
             .alert(item: $profileViewModel.alertType, content: alertContent)
@@ -74,7 +76,7 @@ struct Profile: View {
                 // Profile image is set
                 Image(uiImage: profileImage)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 200)
                     .clipped()
                     .border(Color.black, width: 3)
@@ -84,19 +86,22 @@ struct Profile: View {
                 Image(systemName: "person.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 150)
+                    .frame(width: 250, height: 200)
+                    .clipped()
                     .foregroundColor(.gray)
                     .overlay(
                         Text("Profile Picture")
                             .font(.subheadline)
                             .foregroundColor(.black)
+                            .padding()
                     )
-                    .scaleEffect(placeholderScale)
+                    .scaleEffect(placeholderScale) // Add grow-shrink effect
                     .animation(
                         Animation.easeInOut(duration: 1.0)
                             .repeatForever(autoreverses: true),
                         value: placeholderScale
                     )
+                    .border(Color(hue: 1.0, saturation: 0.984, brightness: 0.699), width: 3)
                     .onAppear {
                         placeholderScale = 1.1 // Start the grow effect
                     }
@@ -152,25 +157,41 @@ struct Profile: View {
                     .font(.largeTitle)
                     .bold()
             )
-            .position(x: 300, y: -60)
+            .position(x: 320, y: -60)
     }
     
     // MARK: - Details ScrollView
     private var detailsScrollView: some View {
         ScrollView {
-            VStack(spacing: 8) {
-                TextRowView(title: "NAME:", content: profileViewModel.fullname.uppercased())
-                TextRowView(title: "EMAIL:", content: profileViewModel.email.uppercased())
-                TextRowView(title: "TELEPHONE:", content: profileViewModel.telefono.uppercased())
-                TextRowView(title: "CITY:", content: profileViewModel.ciudad.uppercased())
-                TextRowView(title: "COUNTRY:", content: profileViewModel.pais.uppercased())
-                TextRowView(title: "RECORD:", content: "\(profileViewModel.highestScore)".uppercased())
-                TextRowView(title: "TOTAL SCORE:", content: "\(profileViewModel.accumulatedPuntuacion)".uppercased())
-                TextRowView(title: "TOTAL CORRECT ANSWERS:", content: "\(profileViewModel.accumulatedAciertos)".uppercased())
-                TextRowView(title: "TOTAL INCORRECT ANSWERS:", content: "\(profileViewModel.accumulatedFallos)".uppercased())
+            VStack(spacing: 0) { // Set spacing to 0 to tightly fit dividers
+                UpdatedTextRowView(title: "NAME:", value: profileViewModel.fullname.uppercased())
+                Divider()
+                UpdatedTextRowView(title: "EMAIL:", value: profileViewModel.email.uppercased())
+                Divider()
+                UpdatedTextRowView(title: "TELEPHONE:", value: profileViewModel.telefono.uppercased())
+                Divider()
+                UpdatedTextRowView(title: "CITY:", value: profileViewModel.ciudad.uppercased())
+                Divider()
+                UpdatedTextRowView(title: "COUNTRY:", value: profileViewModel.pais.uppercased())
+                Divider()
+                UpdatedTextRowView(title: "RECORD:", value: "\(profileViewModel.highestScore)".uppercased())
+                Divider()
+                UpdatedTextRowView(title: "TOTAL SCORE:", value: "\(profileViewModel.accumulatedPuntuacion)".uppercased())
+                Divider()
+                UpdatedTextRowView(title: "TOTAL CORRECT ANSWERS:", value: "\(profileViewModel.accumulatedAciertos)".uppercased())
+                Divider()
+                UpdatedTextRowView(title: "TOTAL INCORRECT ANSWERS:", value: "\(profileViewModel.accumulatedFallos)".uppercased())
             }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.black, lineWidth: 3)
+            )
         }
-        .frame(width: 300, height: 300)
+        .frame(width: 350, height: 400)
+        .environment(\.colorScheme, .light)
     }
     
     // MARK: - Action Buttons
@@ -185,7 +206,7 @@ struct Profile: View {
                     showAlert = true
                 }
             }) {
-                Text("VOLVER")
+                Text("RETURN")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -199,7 +220,7 @@ struct Profile: View {
                 profileViewModel.alertType = .deleteConfirmation
                 showAlert = true
             }) {
-                Text("BORRAR USUARIO")
+                Text("DELETE USER")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
@@ -231,7 +252,8 @@ struct Profile: View {
                 title: Text("USER DELETED"),
                 message: Text("Account will be erased within 48 hours."),
                 dismissButton: .default(Text("OK")) {
-                    showMenuPrincipalView = true
+                    SoundManager.shared.playTransitionSound()
+                    showMenuModoCompeticion = true
                 }
             )
         case .deletionFailure(let errorMessage):
@@ -269,9 +291,10 @@ struct Profile: View {
             )
         case .reauthenticateRequired:
             return Alert(
-                title: Text("Reauthentication Required"),
+                title: Text(""),
                 message: Text("Please log in again to proceed with the deletion."),
                 dismissButton: .default(Text("OK")) {
+                    SoundManager.shared.playTransitionSound()
                     self.profileViewModel.showReauthenticationCard = true
                 }
             )
@@ -284,79 +307,96 @@ struct Profile: View {
         let content: String
         
         var body: some View {
-            HStack {
+            HStack(alignment: .top) {
                 Text(title)
                     .font(.subheadline)
                     .bold()
-                    .foregroundColor(.black)
-                Spacer()
+                    .foregroundColor(.black) // Ensure black text color
+                    .frame(maxWidth: 100, alignment: .leading) // Set a max width for the title
+                    .fixedSize(horizontal: false, vertical: true) // Allow wrapping for long titles
+                
                 Text(content)
-                    .font(.system(size: 16))
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+                    .font(.system(size: 16)) // Set font size
+                    .foregroundColor(.black) // Ensure black text color
+                    .multilineTextAlignment(.leading) // Align content to the left
+                    .fixedSize(horizontal: false, vertical: true) // Allow wrapping for long content
             }
-            .padding(.horizontal)
-            .frame(maxWidth: .infinity)
+            .padding(.horizontal) // Add horizontal padding
+            .frame(maxWidth: .infinity, alignment: .leading) // Stretch the row to fill the container
         }
     }
-    struct ReauthenticationCard: View {
-        @Environment(\.presentationMode) var presentationMode
+    // MARK: - Reauthentication
+    struct ReauthenticationDialog: View {
         var onAuthenticate: (String, String) -> Void
+        var onCancel: () -> Void
         
         @State private var email: String = ""
         @State private var password: String = ""
         @State private var errorMessage: String = ""
         
         var body: some View {
-            VStack(spacing: 20) {
-                Text("Reauthenticate")
-                    .font(.headline)
+            ZStack {
+                // Background Image
+                Image("neon")
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all) // Ensures the image covers the entire screen
                 
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                if !errorMessage.isEmpty {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .font(.caption)
-                }
-                
-                HStack {
-                    Button("Cancel") {
-                        SoundManager.shared.playTransitionSound()
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .foregroundColor(.red)
+                // Foreground Content
+                VStack(spacing: 20) {
+                    Text("Reauthenticate")
+                        .font(.headline)
+                        .padding(.bottom, 10)
                     
-                    Button("Authenticate") {
-                        if email.isEmpty || password.isEmpty {
-                            SoundManager.shared.playWarningSound()
-                            errorMessage = "Both fields are required."
-                        } else {
-                            onAuthenticate(email, password)
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                    TextField("Email", text: $email)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                    
+                    SecureField("Password", text: $password)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                    
+                    if !errorMessage.isEmpty {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                            .padding(.horizontal)
                     }
-                    .foregroundColor(.blue)
+                    
+                    HStack {
+                        Button("Cancel") {
+                            SoundManager.shared.playTransitionSound()
+                            onCancel()
+                        }
+                        .foregroundColor(.red)
+                        .padding()
+                        
+                        Button("Authenticate") {
+                            if email.isEmpty || password.isEmpty {
+                                SoundManager.shared.playWarningSound()
+                                errorMessage = "Both fields are required."
+                            } else {
+                                onAuthenticate(email, password)
+                            }
+                        }
+                        .foregroundColor(.blue)
+                        .padding()
+                    }
                 }
+                .padding()
+                .frame(width: 300) // Adjust size of the dialog
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 10)
             }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            .padding()
         }
     }
-    
     // MARK: - Preview
     struct Profile_Previews: PreviewProvider {
         static var previews: some View {
             Profile(profileViewModel: ProfileViewModel.mock)
                 .previewLayout(.sizeThatFits)
+                .background(Color.gray)
         }
     }
 }

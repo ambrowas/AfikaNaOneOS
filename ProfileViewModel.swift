@@ -4,22 +4,23 @@ import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
 
+
 extension ProfileViewModel {
     static var mock: ProfileViewModel {
         let mockViewModel = ProfileViewModel()
         mockViewModel.fullname = "John Doe"
-        mockViewModel.email = "johndoe@example.com"
-        mockViewModel.telefono = "+1234567890"
+        mockViewModel.email = "john.doe@example.com"
+        mockViewModel.telefono = "+123456789"
         mockViewModel.ciudad = "New York"
         mockViewModel.pais = "USA"
-        mockViewModel.highestScore = 10000
+        mockViewModel.highestScore = 100
+        mockViewModel.accumulatedPuntuacion = 500
+        mockViewModel.accumulatedAciertos = 50
+        mockViewModel.accumulatedFallos = 5
+        mockViewModel.flagUrl = nil // Avoid loading external resources
         mockViewModel.positionInLeaderboard = 1
-        mockViewModel.accumulatedPuntuacion = 50000
-        mockViewModel.accumulatedAciertos = 250
-        mockViewModel.accumulatedFallos = 50
         return mockViewModel
     }
-    
 }
 
 class ProfileViewModel: ObservableObject {
@@ -52,6 +53,7 @@ class ProfileViewModel: ObservableObject {
     @Published var userId: String = ""
     @Published var userData: UserData = UserData() // Replace `UserData` with the correct type
     @Published var showReauthenticationCard: Bool = false
+    @State private var showMenuModoCompeticion = false
     
     
     
@@ -85,9 +87,6 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    
-    
-    
     private var ref = Database.database().reference()
     private var storageRef = Storage.storage().reference(forURL: "gs://afrikanaone.firebasestorage.app")
     
@@ -105,32 +104,27 @@ class ProfileViewModel: ObservableObject {
     
     
     
-    
-    
     func fetchProfileImage(url: String) {
         guard let url = URL(string: url) else {
             print("Invalid URL")
+            DispatchQueue.main.async {
+                self.profileFetchStatus = .failure("Invalid URL")
+            }
             return
         }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
             if let error = error {
-                print("Failed to fetch the profile image with error: \(error.localizedDescription)")
+                print("Failed to fetch the profile image: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     self.profileFetchStatus = .failure("Failed to fetch the profile image")
                 }
                 return
             }
             
-            guard let data = data else {
-                print("Failed to fetch data")
-                DispatchQueue.main.async {
-                    self.profileFetchStatus = .failure("Failed to fetch data")
-                }
-                return
-            }
-            
-            guard let image = UIImage(data: data) else {
+            guard let data = data, let image = UIImage(data: data) else {
                 print("Failed to convert data to image")
                 DispatchQueue.main.async {
                     self.profileFetchStatus = .failure("Failed to convert data to image")
@@ -138,12 +132,37 @@ class ProfileViewModel: ObservableObject {
                 return
             }
             
+            // Resize the image to fit
+            let resizedImage = self.resizeImageToFit(image: image, targetSize: CGSize(width: 250, height: 200))
+            
             DispatchQueue.main.async {
-                self.profileImage = image
+                self.profileImage = resizedImage
                 self.profileFetchStatus = .success
-                print("Successfully fetched and set the profile image")
+                print("Successfully fetched and resized the profile image")
             }
         }.resume()
+    }
+    
+    
+    
+    private func resizeImageToFit(image: UIImage, targetSize: CGSize) -> UIImage {
+        let originalSize = image.size
+        
+        // Calculate the aspect ratio to fit the image within the target size
+        let widthRatio = targetSize.width / originalSize.width
+        let heightRatio = targetSize.height / originalSize.height
+        let scaleFactor = min(widthRatio, heightRatio)
+        
+        let newSize = CGSize(width: originalSize.width * scaleFactor, height: originalSize.height * scaleFactor)
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        // Create a graphics context for resizing
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: rect)
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return resizedImage ?? image
     }
     
     
@@ -193,21 +212,103 @@ class ProfileViewModel: ObservableObject {
     }
     
     
-    func deleteUser(completion: @escaping (Bool) -> Void) {
+    func deleteUserAndNotify() {
+        guard let user = Auth.auth().currentUser else {
+            self.alertType = .deletionFailure("User not authenticated.")
+            playWarningSound()
+            return
+        }
+
+        // Step 1: Delete user data from Realtime Database first
+        self.deleteUserData { [weak self] success in
+            guard let self = self else { return }
+
+            if success {
+                print("User data deleted successfully. Proceeding to delete Firebase Authentication account.")
+                
+                user.delete { error in
+                    if let error = error as NSError? {
+                        print("Error deleting user: \(error.localizedDescription)")
+                        self.playWarningSound()
+                        
+                        if error.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                            print("Reauthentication required.")
+                            DispatchQueue.main.async {
+                                self.alertType = .reauthenticateRequired
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.alertType = .deletionFailure("An error occurred: \(error.localizedDescription)")
+                            }
+                        }
+                    } else {
+                        // User account deleted successfully
+                        print("User account deleted successfully.")
+                        DispatchQueue.main.async {
+                            self.alertType = .deletionSuccess
+                            self.playMagicalSound() // Play magical sound for success
+                            self.showMenuModoCompeticion = true // Navigate to Menu Principal
+                        }
+                    }
+                }
+            } else {
+                print("Failed to delete user data. Aborting account deletion.")
+                DispatchQueue.main.async {
+                    self.alertType = .deletionFailure("Failed to delete user data from the database.")
+                    self.playWarningSound()
+                }
+            }
+        }
+    }
+
+    
+    private func deleteUserData(completion: @escaping (Bool) -> Void) {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("Error: User ID not found.")
+            playWarningSound()
             completion(false)
             return
         }
 
         let userRef = Database.database().reference().child("user").child(userID)
-        userRef.removeValue { error, _ in
+        userRef.observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else {
+                print("No user data found to delete.")
+                completion(true) // No data to delete, considered successful
+                return
+            }
+
+            // Backup user data for rollback
+            let backupData = snapshot.value
+
+            userRef.removeValue { error, _ in
+                if let error = error {
+                    print("Error deleting user data: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    print("User data deleted successfully.")
+                    self.backupDataForRollback[userID] = backupData // Store backup
+                    self.logDeletedUser(userFullName: self.fullname, email: self.email)
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    private func restoreUserData(userID: String, completion: @escaping (Bool) -> Void) {
+        guard let backupData = self.backupDataForRollback[userID] else {
+            print("No backup data available for rollback.")
+            completion(false)
+            return
+        }
+
+        let userRef = Database.database().reference().child("user").child(userID)
+        userRef.setValue(backupData) { error, _ in
             if let error = error {
-                print("Error deleting user data: \(error.localizedDescription)")
+                print("Error restoring user data: \(error.localizedDescription)")
                 completion(false)
             } else {
-                print("User data deleted successfully.")
-                self.logDeletedUser(userFullName: self.fullname, email: self.email)
+                print("User data restored successfully.")
                 completion(true)
             }
         }
@@ -216,28 +317,28 @@ class ProfileViewModel: ObservableObject {
     func performReauthentication(email: String, password: String) {
         guard let user = Auth.auth().currentUser else {
             self.alertType = .deletionFailure("User not authenticated.")
+            playWarningSound()
             return
         }
-
+        
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         user.reauthenticate(with: credential) { [weak self] result, error in
             guard let self = self else { return }
-
+            
             if let error = error {
-                // Handle reauthentication failure
                 print("Reauthentication failed: \(error.localizedDescription)")
                 self.alertType = .deletionFailure("Reauthentication failed. Please check your credentials.")
+                self.playWarningSound() // Play warning sound for failure
             } else {
-                // Reauthentication successful, proceed with deletion
-                print("Reauthentication successful.")
-                print("Retrying user deletion after reauthentication.") // Debug log
+                print("Reauthentication successful. Proceeding with deletion.")
                 self.alertType = nil
                 self.showReauthenticationCard = false
+                
+                // Proceed to delete user and notify
                 self.deleteUserAndNotify()
             }
         }
     }
-    
     
     private func logDeletedUser(userFullName: String, email: String) {
         let deletedUsersRef = Database.database().reference().child("deleted_users").childByAutoId()
@@ -259,40 +360,18 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func deleteUserAndNotify() {
-        guard let user = Auth.auth().currentUser else {
-            self.alertType = .deletionFailure("User not authenticated.")
-            return
-        }
+    private var backupDataForRollback: [String: Any] = [:]
 
-        user.delete { error in
-            if let error = error as NSError? {
-                print("Error deleting user: \(error.localizedDescription)")
-                if error.code == AuthErrorCode.requiresRecentLogin.rawValue {
-                    // Reauthentication required
-                    print("Reauthentication required.")
-                    DispatchQueue.main.async {
-                        self.alertType = .reauthenticateRequired
-                    }
-                } else {
-                    // Handle other errors
-                    DispatchQueue.main.async {
-                        self.alertType = .deletionFailure("An error occurred: \(error.localizedDescription)")
-                    }
-                }
-            } else {
-                // User deleted successfully, proceed to delete data
-                print("User account deleted successfully.")
-                self.deleteUser { success in
-                    DispatchQueue.main.async {
-                        if success {
-                            self.alertType = .deletionSuccess
-                        } else {
-                            self.alertType = .deletionFailure("Failed to delete user data from the database.")
-                        }
-                    }
-                }
-            }
-        }
+    // MARK: - Sound Manager Integration
+    private func playWarningSound() {
+        SoundManager.shared.playWarningSound()
+    }
+
+    private func playMagicalSound() {
+        SoundManager.shared.playMagicalSound()
+    }
+
+    private func playTransitionSound() {
+        SoundManager.shared.playTransitionSound()
     }
 }
