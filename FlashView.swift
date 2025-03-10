@@ -19,6 +19,7 @@ struct FlashView: View {
     @State private var randomProverb: String = ""
     @State private var showProverb = false
     @State private var isFlashing = false // Add this state variable at the top of your view
+  
 
     enum NavigationDestination {
         case none

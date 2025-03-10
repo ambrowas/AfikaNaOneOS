@@ -138,12 +138,17 @@ struct MenuPrincipal: View {
                    let results = json["results"] as? [[String: Any]],
                    let appStoreInfo = results.first,
                    let latestVersion = appStoreInfo["version"] as? String,
-                   let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-                   currentVersion.compare(latestVersion, options: .numeric) == .orderedAscending {
+                   let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
                     
-                    DispatchQueue.main.async {
-                        self.updateAlertMessage = "Kindly upgrade to the latest version"
-                        self.showingUpdateAlert = true
+                    // Print both versions for debugging
+                    print("App Store version: \(latestVersion)")
+                    print("Current version: \(currentVersion)")
+                    
+                    if currentVersion.compare(latestVersion, options: .numeric) == .orderedAscending {
+                        DispatchQueue.main.async {
+                            self.updateAlertMessage = "Kindly upgrade to the latest version"
+                            self.showingUpdateAlert = true
+                        }
                     }
                 }
             } catch {

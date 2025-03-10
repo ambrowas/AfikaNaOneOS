@@ -91,7 +91,6 @@
 		7567C81E2D065C52005EA62F /* average.png in Resources */ = {isa = PBXBuildFile; fileRef = 7567C80B2D0659DD005EA62F /* average.png */; };
 		7567C8252D065C60005EA62F /* countdown.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75521FE02CFED18700B167A3 /* countdown.wav */; };
 		7567C82D2D06AB8E005EA62F /* FirebaseImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7567C82C2D06AB7D005EA62F /* FirebaseImageView.swift */; };
-		756B2D4F2D7B9E41004E45CC /* logoelebi.png in Resources */ = {isa = PBXBuildFile; fileRef = 756B2D4E2D7B9E41004E45CC /* logoelebi.png */; };
 		756B2D512D7BBC7C004E45CC /* logoelebi.png in Resources */ = {isa = PBXBuildFile; fileRef = 756B2D502D7BBC7C004E45CC /* logoelebi.png */; };
 		756B2D572D7E68BB004E45CC /* gama.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 756B2D552D7E68BB004E45CC /* gama.mp3 */; };
 		756B2D582D7E68BB004E45CC /* alpha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 756B2D522D7E68BB004E45CC /* alpha.mp3 */; };
@@ -102,9 +101,9 @@
 		757505192D278856000139C4 /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 757505182D278856000139C4 /* right.wav */; };
 		7575051A2D278856000139C4 /* notright.wav in Resources */ = {isa = PBXBuildFile; fileRef = 757505172D278856000139C4 /* notright.wav */; };
 		7575051E2D279895000139C4 /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7575051D2D279895000139C4 /* gameover.mp3 */; };
-		75CA3D762D778CE700F81868 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 756428D22D0D2D5400B9DE76 /* GoogleService-Info.plist */; };
 		75CA95062D77F4AA00F81868 /* quiz_questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 75CA95052D77F4AA00F81868 /* quiz_questions.json */; };
 		75CA95082D79445600F81868 /* LevelMesagges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA95072D79443700F81868 /* LevelMesagges.swift */; };
+		75E9D2032DA216F8007DBE22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 756428D22D0D2D5400B9DE76 /* GoogleService-Info.plist */; };
 		75F127D92D76B01D003E9D4C /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75F127D82D76B01D003E9D4C /* PermanentMarker-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -9206,17 +9205,16 @@
 				756B2D5D2D7E8170004E45CC /* epsilon.mp3 in Resources */,
 				751CFF462D2387D200A4AA0A /* swoosh.wav in Resources */,
 				756B2D512D7BBC7C004E45CC /* logoelebi.png in Resources */,
-				756B2D4F2D7B9E41004E45CC /* logoelebi.png in Resources */,
 				756B2D572D7E68BB004E45CC /* gama.mp3 in Resources */,
 				756B2D582D7E68BB004E45CC /* alpha.mp3 in Resources */,
 				756B2D5F2D7E84E2004E45CC /* delta.mp3 in Resources */,
 				756B2D5A2D7E68BB004E45CC /* beta.mp3 in Resources */,
 				756B2D5B2D7E68BB004E45CC /* kapa.mp3 in Resources */,
+				75E9D2032DA216F8007DBE22 /* GoogleService-Info.plist in Resources */,
 				751CFF222D237BA000A4AA0A /* magic.mp3 in Resources */,
 				7575051E2D279895000139C4 /* gameover.mp3 in Resources */,
 				751CFF232D237BA000A4AA0A /* warning.mp3 in Resources */,
 				75F127D92D76B01D003E9D4C /* PermanentMarker-Regular.ttf in Resources */,
-				75CA3D762D778CE700F81868 /* GoogleService-Info.plist in Resources */,
 				7567C81A2D065C3E005EA62F /* logo.png in Resources */,
 				7567C8182D065C34005EA62F /* whatsapp.png in Resources */,
 			);
@@ -9440,6 +9438,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -9470,16 +9469,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = NO;
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 				XROS_DEPLOYMENT_TARGET = 2.1;
 			};
 			name = Debug;
@@ -9489,6 +9489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = AfrikaNaOne/AfrikaNaOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -9518,16 +9519,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IniciativasElebi.AfrikaNaOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = NO;
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 				XROS_DEPLOYMENT_TARGET = 2.1;
 			};
 			name = Release;

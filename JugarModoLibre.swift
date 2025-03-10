@@ -135,6 +135,8 @@ struct JugarModoLibre: View {
                         .rotationEffect(.degrees(quizState.shouldTiltFinish && quizState.buttonText == "FINISH" ? quizState.finishButtonTiltAngle : 0)) // ✅ Tilt only FINISH
                         .animation(quizState.shouldFlashConfirm && quizState.buttonText == "CONFIRM" ? Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true) : nil, value: quizState.shouldFlashConfirm)
                 }
+                
+                
                               .padding(.top, -120)
                               .fullScreenCover(isPresented: $isShowingResultadoView) {
                                   ResultadoView(aciertos: quizState.score, puntuacion: quizState.totalScore, errores: quizState.mistakes)

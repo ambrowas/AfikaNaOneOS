@@ -42,6 +42,7 @@ struct CodigoQR: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isGuardarButtonDisabled = false
     @State private var cooldownTimer: Timer?
+    @State private var shouldNavigateToMenuPrincipal = false
     
     var body: some View {
         ZStack {
@@ -65,8 +66,10 @@ struct CodigoQR: View {
                     .fontWeight(.bold)
                 
                 VStack(spacing: 10) {
-                    Button(action:
-                            guardarButtonPressed) {
+                    Button(action: {
+                        SoundManager.shared.playTransitionSound() // ✅ Play sound first
+                        guardarButtonPressed() // ✅ Then perform the save action
+                    }) {
                         Text("SAVE")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -80,36 +83,30 @@ struct CodigoQR: View {
                             )
                     }
                     
-                    Button {
-                        SoundManager.shared.playTransitionSound()
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("RETURN")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 300, height: 55)
-                            .background(Color(red: 121/255, green: 125/255, blue: 98/255)) // Olive Green
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 3)
-                            )
-                    }
                 }
             }
             .onAppear {
                 setupQRCodeData()
             }
             .alert(isPresented: $isShowingAlert) {
-                Alert(title: Text(""),
-                      message: Text(alertMessage),
-                      dismissButton: .default(Text("OK")))
-            }
-        }
-    }
+                            Alert(
+                                title: Text(""),
+                                message: Text(alertMessage),
+                                dismissButton: .default(Text("OK")) {
+                                    if alertMessage == "QRCode saved. Go get your money." {
+                                        SoundManager.shared.playTransitionSound()
+                                        shouldNavigateToMenuPrincipal = true // ✅ Trigger navigation
+                                    }
+                                }
+                            )
+                        }
+                        .fullScreenCover(isPresented: $shouldNavigateToMenuPrincipal) {
+                            MenuPrincipal(player: .constant(nil)) // ✅ Navigate to MenuPrincipal
+                        }
+                    }
+                }
     
-         func generateQRCodeKey() -> String {
+    func generateQRCodeKey() -> String {
         let allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let length = 18
         
@@ -124,61 +121,32 @@ struct CodigoQR: View {
         return randomKey
     }
             
-         func setupQRCodeData() {
+    func setupQRCodeData() {
         self.userViewModel.fetchUserData { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success():
-                    // Handle successful fetch and update relevant properties or UI here:
-                    // e.g., generate QR code based on fetched user data:
                     self.qrCodeKey = self.generateQRCodeKey()
                     self.qrData = self.generateQRCodeData()
+                    
+                    // ✅ Ensure sound plays once QR code is generated
+                    if self.qrData != nil {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            SoundManager.shared.playMagicalSound()
+                        }
+                    }
                 case .failure(let error):
-                    // Handle error - could be due to no user being logged in or an error fetching data
                     print("Error fetching user data: \(error.localizedDescription)")
-                    // Handle the error, possibly by updating the UI to reflect that the data could not be fetched
                 }
             }
         }
     }
     
-        func generateQRCodeData() -> Data? {
-            guard let userId = Auth.auth().currentUser?.uid else {
-                return nil
-            }
-            
-            let qrCodeData: [String: Any] = [
-                "base64QRCode": "iVBORw0KGgoAAAANSUhEUgAA",
-                "lastGamePuntuacion": userViewModel.currentGamePuntuacion,
-                "lastGameScore": userViewModel.currentGameAciertos,
-                "qrCodeKey": qrCodeKey,
-                "timestamp": generateCurrentTimestamp(),
-                "userId": userId,
-                "fullname": userViewModel.fullname,
-                "email": userViewModel.email
-            ]
-            
-            if let qrCodeDataString = try? JSONSerialization.data(withJSONObject: qrCodeData) {
-                return "\(qrCodeKey),\(String(data: qrCodeDataString, encoding: .utf8) ?? "")".data(using: .utf8)
-            } else {
-                return nil
-            }
-        }
-    func guardarButtonPressed() {
-        if isGuardarButtonDisabled {
-            // Play warning sound and show alert if the button is disabled
-            SoundManager.shared.playWarningSound()
-            isShowingAlert = true
-            alertMessage = "This code has already been saved."
-            return
-        }
-        
+    func generateQRCodeData() -> Data? {
         guard let userId = Auth.auth().currentUser?.uid else {
-            print("Error: No user ID found.")
-            return
+            return nil
         }
         
-        // Prepare the QR code data to be saved
         let qrCodeData: [String: Any] = [
             "base64QRCode": "iVBORw0KGgoAAAANSUhEUgAA",
             "lastGamePuntuacion": userViewModel.currentGamePuntuacion,
@@ -190,22 +158,50 @@ struct CodigoQR: View {
             "email": userViewModel.email
         ]
         
-        // Save the QR code data to the Firebase database
+        if let qrCodeDataString = try? JSONSerialization.data(withJSONObject: qrCodeData) {
+            return "\(qrCodeKey),\(String(data: qrCodeDataString, encoding: .utf8) ?? "")".data(using: .utf8)
+        } else {
+            return nil
+        }
+    }
+    
+    
+    
+    func guardarButtonPressed() {
+        if isGuardarButtonDisabled {
+            SoundManager.shared.playWarningSound()
+            isShowingAlert = true
+            alertMessage = "This code has already been saved."
+            return
+        }
+        
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Error: No user ID found.")
+            return
+        }
+        
+        let qrCodeData: [String: Any] = [
+            "base64QRCode": "iVBORw0KGgoAAAANSUhEUgAA",
+            "lastGamePuntuacion": userViewModel.currentGamePuntuacion,
+            "lastGameScore": userViewModel.currentGameAciertos,
+            "qrCodeKey": qrCodeKey,
+            "timestamp": generateCurrentTimestamp(),
+            "userId": userId,
+            "fullname": userViewModel.fullname,
+            "email": userViewModel.email
+        ]
+        
         let ref = Database.database().reference(withPath: "qrCodes").child(userId)
         ref.setValue(qrCodeData) { error, _ in
             if error == nil {
-                // Play magical sound and show success alert
                 SoundManager.shared.playMagicalSound()
-                isShowingAlert = true
                 alertMessage = "QRCode saved. Go get your money."
             } else {
-                // Play warning sound and show error alert
                 SoundManager.shared.playWarningSound()
-                isShowingAlert = true
                 alertMessage = "Error while saving QR Code. Try again."
             }
             
-            // Start the cooldown timer irrespective of the outcome
+            isShowingAlert = true
             startCooldown()
         }
     }

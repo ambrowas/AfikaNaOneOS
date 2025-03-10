@@ -227,29 +227,51 @@ class QuizState: ObservableObject {
     func playCountdownSound() {
         countdownSound?.play()
     }
+    
+    func getRandomAnswerMessage(isCorrect: Bool) -> String {
+        let correctMessages = [
+            "SPOT ON! YOU NAILED IT!",
+            "BULLSEYE! WELL DONE!",
+            "EXACTLY! YOU’RE ON FIRE!",
+            "PERFECT! THAT’S THE RIGHT ONE!",
+            "BAM! YOU GOT IT!"
+        ]
+        
+        let incorrectMessages = [
+            "OOPS! THAT'S NOT IT!",
+            "WRONG GUESS! TRY AGAIN NEXT TIME!",
+            "CLOSE, BUT NOT QUITE!",
+            "NOPE! BETTER LUCK NEXT TIME!",
+            "UH-OH! THAT’S A MISS!"
+        ]
+        
+        return isCorrect ? correctMessages.randomElement() ?? "YEP, YOU'RE RIGHT" :
+                           incorrectMessages.randomElement() ?? "NOPE, THAT'S NOT IT"
+    }
+    
    
+    func handleIncorrectAnswer(isTimeout: Bool = false) {
+        mistakes += 1
+        wrongSoundEffect?.play()
+        print("Played incorrect sound.") // Debugging log
+        answerStatusMessage = getRandomAnswerMessage(isCorrect: false) // 🔀 Use random incorrect message
+        answerIsCorrect = false
+        selectedIncorrectAnswer = true
+        shouldFlashCorrectAnswer = true
+        questionTextColor = Color(red: 84/255, green: 8/255, blue: 4/255) // Dark red for both
+        print("Mistake count updated to \(mistakes). Timeout: \(isTimeout). Text color updated to dark red.")
+    }
+
     private func handleCorrectAnswer() {
         score += 1
         totalScore += 500
         rightSoundEffect?.play()
         print("Played correct sound.") // Debugging log
-        answerStatusMessage = "YEP, YOU'RE RIGHT"
+        answerStatusMessage = getRandomAnswerMessage(isCorrect: true) // 🔀 Use random correct message
         answerIsCorrect = true
         selectedIncorrectAnswer = false
         questionTextColor = Color(red: 40/255, green: 54/255, blue: 24/255) // ✅ Hex #283618
         print("Correct answer handled. Text color updated to green.")
-    }
-    
-    func handleIncorrectAnswer(isTimeout: Bool = false) {
-        mistakes += 1
-        wrongSoundEffect?.play()
-        print("Played incorrect sound.") // Debugging log
-        answerStatusMessage = isTimeout ? "SORRY, YOUR TIME IS UP!" : "NOPE, THAT'S NOT IT"
-        answerIsCorrect = false
-        selectedIncorrectAnswer = true
-        shouldFlashCorrectAnswer = true
-        questionTextColor =  Color(red: 84/255, green: 8/255, blue: 4/255) // Dark red for both
-        print("Mistake count updated to \(mistakes). Timeout: \(isTimeout). Text color updated to dark red.")
     }
    
     func penalizeForLeavingApp() {
